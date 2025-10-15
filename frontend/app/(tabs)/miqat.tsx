@@ -318,6 +318,11 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: COLORS.gold,
   },
+  makkahCard: {
+    borderWidth: 2,
+    borderColor: COLORS.primary,
+    backgroundColor: '#F5FFF5',
+  },
   badgeContainer: {
     marginBottom: SPACING.sm,
   },
