@@ -116,6 +116,29 @@ export default function SettingsScreen() {
           </View>
         </View>
 
+        {/* Donate Section */}
+        <View style={styles.section}>
+          <Text style={[styles.sectionTitle, { fontSize: fonts.lg }]}>{t('support_app')}</Text>
+          
+          <View style={styles.donateCard}>
+            <Ionicons name="heart" size={32} color={COLORS.error} />
+            <Text style={[styles.donateMessage, { fontSize: fonts.md }]}>
+              {t('donate_message')}
+            </Text>
+            <TouchableOpacity
+              style={styles.donateButton}
+              onPress={() => {
+                Linking.openURL('https://www.paypal.com/paypalme/WalkingInTunisia');
+              }}
+            >
+              <Ionicons name="logo-paypal" size={20} color={COLORS.textLight} />
+              <Text style={[styles.donateButtonText, { fontSize: fonts.md }]}>
+                {t('donate_via_paypal')}
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+
         {/* Reset Progress */}
         <View style={styles.section}>
           <TouchableOpacity
