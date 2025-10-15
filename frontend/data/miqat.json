@@ -1,5 +1,22 @@
 [
   {
+    "id": "masjid_aisha",
+    "name": {
+      "ar": "مسجد عائشة (التنعيم)",
+      "en": "Masjid Aisha (Taneem)",
+      "fr": "Mosquée Aisha (Taneem)"
+    },
+    "lat": 21.4504088,
+    "lng": 39.8107655,
+    "notes": {
+      "ar": "ميقات أهل مكة أو من هم داخل حدود الحرم - الأقرب والأكثر استخداماً",
+      "en": "Miqat for people already in Makkah or inside Haram boundaries - Closest and most commonly used",
+      "fr": "Miqat pour les personnes déjà à La Mecque ou à l'intérieur des limites du Haram - Le plus proche et le plus utilisé"
+    },
+    "phone": "+966 12 572 2288",
+    "isForMakkah": true
+  },
+  {
     "id": "dhu_al_hulayfah",
     "name": {
       "ar": "ذو الحليفة (أبيار علي)",
