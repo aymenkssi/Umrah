@@ -159,6 +159,12 @@ const translations: Record<Language, Record<string, string>> = {
     error: 'Error',
     try_again: 'Try Again',
     no_results: 'No Results',
+    donate: 'Donate',
+    support_app: 'Support This App',
+    donate_message: 'Help us maintain and improve this free app for pilgrims worldwide.',
+    donate_via_paypal: 'Donate via PayPal',
+    thank_you: 'Thank You!',
+    for_makkah_residents: 'For Makkah Residents',
   },
   fr: {
     app_name: 'Compagnon de la \'Omra',
