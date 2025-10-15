@@ -1,0 +1,82 @@
+[
+  {
+    "id": "dhu_al_hulayfah",
+    "name": {
+      "ar": "ذو الحليفة (أبيار علي)",
+      "en": "Dhu al-Hulayfah (Abyar Ali)",
+      "fr": "Dhou al-Houlaïfa (Abyar Ali)"
+    },
+    "lat": 24.4137172,
+    "lng": 39.5424318,
+    "notes": {
+      "ar": "ميقات أهل المدينة ومن مرَّ عليها",
+      "en": "Miqat for people of Madinah or coming via Madinah",
+      "fr": "Miqat pour les pèlerins de Médine ou y passant"
+    },
+    "phone": "+966 14 846 7777"
+  },
+  {
+    "id": "al_juhfah",
+    "name": {
+      "ar": "الجُحفة (قرب رابغ)",
+      "en": "Al-Juhfah (near Rabigh)",
+      "fr": "Al-Jouhfa (près de Rabigh)"
+    },
+    "lat": 22.705485,
+    "lng": 39.146863,
+    "notes": {
+      "ar": "ميقات أهل الشام ومَن يمرُّ به",
+      "en": "Miqat for pilgrims arriving from the Levant",
+      "fr": "Miqat pour les pèlerins venant du Levant"
+    },
+    "phone": "+966 12 422 0000"
+  },
+  {
+    "id": "qarn_al_manazil",
+    "name": {
+      "ar": "قرن المنازل (السيل الكبير)",
+      "en": "Qarn al-Manazil (As-Sayl al-Kabir)",
+      "fr": "Qarn al-Manazil (As-Sayl al-Kabir)"
+    },
+    "lat": 21.63349,
+    "lng": 40.42751,
+    "notes": {
+      "ar": "ميقات أهل نجد والشرق",
+      "en": "Miqat for Najd and eastern routes",
+      "fr": "Miqat pour Najd et l'est"
+    },
+    "phone": "+966 12 527 7777"
+  },
+  {
+    "id": "yalamlam",
+    "name": {
+      "ar": "يلملم (السعدية)",
+      "en": "Yalamlam (As-Sa'diyyah)",
+      "fr": "Yalamlam (As-Sa'diyyah)"
+    },
+    "lat": 20.517861,
+    "lng": 39.870222,
+    "notes": {
+      "ar": "ميقات أهل اليمن والجنوب",
+      "en": "Miqat for pilgrims from Yemen/south",
+      "fr": "Miqat pour les pèlerins du sud (Yémen)"
+    },
+    "phone": "+966 17 232 0000"
+  },
+  {
+    "id": "dhat_irq",
+    "name": {
+      "ar": "ذات عِرق",
+      "en": "Dhat 'Irq",
+      "fr": "Dhat 'Irq"
+    },
+    "lat": 21.9299639,
+    "lng": 40.4254972,
+    "notes": {
+      "ar": "ميقات أهل العراق ومن على طريقهم",
+      "en": "Miqat for Iraq route",
+      "fr": "Miqat pour l'Irak et ses routes"
+    },
+    "phone": "+966 12 527 8888"
+  }
+]
