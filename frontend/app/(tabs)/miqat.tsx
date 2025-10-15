@@ -109,8 +109,50 @@ export default function MiqatScreen() {
           </View>
         ) : (
           <>
+            {/* Makkah Residents Special Card */}
+            {miqatList.find(m => m.isForMakkah) && (
+              <View style={[styles.card, styles.makkahCard]}>
+                <View style={styles.badgeContainer}>
+                  <View style={[styles.badge, { backgroundColor: '#FFF9E6' }]}>
+                    <Ionicons name="home" size={16} color={COLORS.primary} />
+                    <Text style={[styles.badgeText, { fontSize: fonts.sm, color: COLORS.primary }]}>
+                      {t('for_makkah_residents')}
+                    </Text>
+                  </View>
+                </View>
+                <Text style={[styles.nearestTitle, { fontSize: fonts.xl }]}>
+                  {miqatList.find(m => m.isForMakkah)?.name[language]}
+                </Text>
+                <Text style={[styles.notesText, { fontSize: fonts.sm }]}>
+                  {miqatList.find(m => m.isForMakkah)?.notes[language]}
+                </Text>
+                <View style={styles.actionsRow}>
+                  <TouchableOpacity
+                    style={[styles.actionButton, styles.navigateButton]}
+                    onPress={() => handleNavigate(miqatList.find(m => m.isForMakkah))}
+                  >
+                    <Ionicons name="navigate" size={20} color={COLORS.textLight} />
+                    <Text style={[styles.actionButtonText, { fontSize: fonts.md }]}>
+                      {t('navigate')}
+                    </Text>
+                  </TouchableOpacity>
+                  {miqatList.find(m => m.isForMakkah)?.phone && (
+                    <TouchableOpacity
+                      style={[styles.actionButton, styles.callButton]}
+                      onPress={() => handleCall(miqatList.find(m => m.isForMakkah).phone)}
+                    >
+                      <Ionicons name="call" size={20} color={COLORS.text} />
+                      <Text style={[styles.actionButtonText, { fontSize: fonts.md, color: COLORS.text }]}>
+                        {t('call')}
+                      </Text>
+                    </TouchableOpacity>
+                  )}
+                </View>
+              </View>
+            )}
+
             {/* Nearest Miqat Card */}
-            {nearestMiqat && location && (
+            {nearestMiqat && location && !nearestMiqat.isForMakkah && (
               <View style={[styles.card, styles.nearestCard]}>
                 <View style={styles.badgeContainer}>
                   <View style={styles.badge}>
