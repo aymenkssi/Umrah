@@ -295,4 +295,34 @@ const styles = StyleSheet.create({
   versionText: {
     color: COLORS.textSecondary,
   },
+  donateCard: {
+    backgroundColor: COLORS.surface,
+    borderRadius: BORDER_RADIUS.lg,
+    padding: SPACING.lg,
+    alignItems: 'center',
+    ...SHADOWS.medium,
+    borderWidth: 2,
+    borderColor: COLORS.gold,
+  },
+  donateMessage: {
+    color: COLORS.text,
+    textAlign: 'center',
+    marginVertical: SPACING.md,
+    lineHeight: 22,
+  },
+  donateButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#0070BA',
+    paddingVertical: SPACING.md,
+    paddingHorizontal: SPACING.lg,
+    borderRadius: BORDER_RADIUS.md,
+    marginTop: SPACING.sm,
+  },
+  donateButtonText: {
+    color: COLORS.textLight,
+    fontWeight: '600',
+    marginLeft: SPACING.sm,
+  },
 });
