@@ -244,6 +244,12 @@ const translations: Record<Language, Record<string, string>> = {
     error: 'Erreur',
     try_again: 'Réessayer',
     no_results: 'Aucun Résultat',
+    donate: 'Faire un Don',
+    support_app: 'Soutenir Cette Application',
+    donate_message: 'Aidez-nous à maintenir et améliorer cette application gratuite pour les pèlerins du monde entier.',
+    donate_via_paypal: 'Faire un don via PayPal',
+    thank_you: 'Merci!',
+    for_makkah_residents: 'Pour les résidents de La Mecque',
   },
 };
 
