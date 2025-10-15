@@ -86,6 +86,12 @@ const translations: Record<Language, Record<string, string>> = {
     error: 'خطأ',
     try_again: 'حاول مرة أخرى',
     no_results: 'لا توجد نتائج',
+    donate: 'تبرع',
+    support_app: 'ادعم هذا التطبيق',
+    donate_message: 'ساعدنا في الحفاظ على هذا التطبيق المجاني وتحسينه للحجاج في جميع أنحاء العالم.',
+    donate_via_paypal: 'تبرع عبر PayPal',
+    thank_you: 'شكراً لك!',
+    for_makkah_residents: 'لأهل مكة',
   },
   en: {
     app_name: 'Umrah Companion',
