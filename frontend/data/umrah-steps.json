@@ -76,24 +76,36 @@
       "fr": "Tawaf"
     },
     "summary": {
-      "ar": "طُف سبعة أشواط حول الكعبة مبتدئًا من الحجر الأسود، مستلِمًا إن تيسر دون أذى.",
-      "en": "Make seven circuits around the Kaaba starting at the Black Stone; touch/gesture if possible without harm.",
-      "fr": "Effectuez sept tours autour de la Kaaba en commençant à la Pierre Noire; touchez/faites signe si possible sans nuisance."
+      "ar": "طُف سبعة أشواط مبتدئًا من الحجر الأسود، مستلِمًا إن تيسر دون أذى.",
+      "en": "Make seven circuits starting at the Black Stone; touch/gesture if possible without harm.",
+      "fr": "Sept tours à partir de la Pierre Noire; toucher/faire signe si possible sans nuisance."
     },
     "details": {
-      "ar": "الطواف سبعة أشواط حول الكعبة، تبدأ من الحجر الأسود وتنتهي به. يُستحب استلام الحجر الأسود وتقبيله إن أمكن دون أذى، وإلا فالإشارة إليه. يجعل البيت عن يساره. يُستحب الرمل (الإسراع في المشي) في الأشواط الثلاثة الأولى للرجال. يستلم الركن اليماني إن تيسر. لا يوجد دعاء مخصص لكل شوط، بل يدعو بما شاء.",
-      "en": "Tawaf consists of seven circuits around the Kaaba, starting and ending at the Black Stone. It is recommended to touch and kiss the Black Stone if possible without causing harm, otherwise gesture toward it. Keep the House on your left. Men are recommended to walk briskly (ramal) in the first three circuits. Touch the Yemeni Corner if easy to do so. There is no specific du'a for each circuit; supplicate as you wish.",
-      "fr": "Le Tawaf consiste en sept tours autour de la Kaaba, commençant et se terminant à la Pierre Noire. Il est recommandé de toucher et embrasser la Pierre Noire si possible sans causer de tort, sinon faire un geste vers elle. Gardez la Maison sur votre gauche. Les hommes sont recommandés de marcher rapidement (ramal) dans les trois premiers tours. Touchez le Coin Yéménite si c'est facile. Il n'y a pas d'invocation spécifique pour chaque tour; invoquez comme vous le souhaitez."
+      "ar": "الطواف سبعة أشواط حول الكعبة، تبدأ من الحجر الأسود وتنتهي به. يُستحب استلام الحجر الأسود وتقبيله إن أمكن دون أذى، وإلا فالإشارة إليه. يجعل البيت عن يساره. يُستحب الرمل (الإسراع في المشي) في الأشواط الثلاثة الأولى للرجال مع الاضطباع (جعل وسط الرداء تحت الإبط الأيمن وطرفيه على الكتف الأيسر). يستلم الركن اليماني إن تيسر دون مزاحمة. لا يوجد دعاء مخصص لكل شوط، فإنما جُعل الطواف لإقامة ذكر الله.",
+      "en": "Tawaf consists of seven circuits around the Kaaba, starting and ending at the Black Stone. It is recommended to touch and kiss the Black Stone if possible without causing harm, otherwise gesture toward it. Keep the House on your left. Men are recommended to walk briskly (ramal) in the first three circuits with idtiba' (placing the middle of the rida under the right armpit with both ends over the left shoulder). Touch the Yemeni Corner if easy without crowding. There is no specific du'a for each circuit; Tawaf is made for establishing the remembrance of Allah.",
+      "fr": "Le Tawaf consiste en sept tours autour de la Kaaba, commençant et se terminant à la Pierre Noire. Il est recommandé de toucher et embrasser la Pierre Noire si possible sans causer de tort, sinon faire un geste vers elle. Gardez la Maison sur votre gauche. Les hommes sont recommandés de marcher rapidement (ramal) dans les trois premiers tours avec idtiba' (placer le milieu du rida sous l'aisselle droite avec les deux extrémités sur l'épaule gauche). Touchez le Coin Yéménite si c'est facile sans bousculade. Il n'y a pas d'invocation spécifique pour chaque tour; le Tawaf est fait pour établir le rappel d'Allah."
     },
     "dua": {
-      "ar": "لا دعاء مخصوص ثابت لكل شوط؛ ادعُ بما شئت. بين الركنين: رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ",
-      "en": "No fixed du'ā per circuit; supplicate as you wish. Between the corners: Rabbana atina fid-dunya hasanatan wa fil-akhirati hasanatan wa qina 'adhaban-nar",
-      "fr": "Pas d'invocation fixe par tour; invoquez comme vous le souhaitez. Entre les coins: Rabbana atina fid-dunya hasanatan wa fil-akhirati hasanatan wa qina 'adhaban-nar"
+      "ar": "بسم الله والله أكبر. بين الركنين: رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ",
+      "en": "Bismillah, Allahu Akbar. Between the corners: Rabbana atina fid-dunya hasanatan wa fil-akhirati hasanatan wa qina 'adhaban-nar",
+      "fr": "Bismillah, Allahu Akbar. Entre les coins: Rabbana atina fid-dunya hasanatan wa fil-akhirati hasanatan wa qina 'adhaban-nar"
     },
+    "additionalDuas": [
+      {
+        "ar": "عند دخول المسجد الحرام: بسم الله والصلاة والسلام على رسول الله، اللهم اغفر لي ذنوبي، وافتح لي أبواب رحمتك",
+        "en": "Upon entering the Haram: Bismillah, peace and blessings upon the Messenger of Allah. O Allah, forgive my sins and open for me the doors of Your mercy",
+        "fr": "En entrant dans le Haram: Bismillah, paix et bénédictions sur le Messager d'Allah. Ô Allah, pardonne mes péchés et ouvre-moi les portes de Ta miséricorde"
+      },
+      {
+        "ar": "بعد الطواف عند مقام إبراهيم: وَاتَّخِذُوا مِن مَّقَامِ إِبْرَاهِيمَ مُصَلًّى",
+        "en": "After Tawaf at Maqam Ibrahim: And take the standing place of Ibrahim as a place of prayer",
+        "fr": "Après le Tawaf à Maqam Ibrahim: Et prenez la station d'Ibrahim comme lieu de prière"
+      }
+    ],
     "notes": {
-      "ar": "الطهارة شرط لصحة الطواف. يُصلى ركعتان خلف مقام إبراهيم بعد الطواف.",
-      "en": "Ritual purity is a condition for valid Tawaf. Pray two rak'ahs behind Maqam Ibrahim after Tawaf.",
-      "fr": "La pureté rituelle est une condition pour un Tawaf valide. Priez deux rak'ahs derrière Maqam Ibrahim après le Tawaf."
+      "ar": "الطهارة شرط لصحة الطواف. يُصلى ركعتان خلف مقام إبراهيم بعد الطواف (يقرأ في الأولى الكافرون وفي الثانية الإخلاص). يُسن الشرب من ماء زمزم والدعاء عنده.",
+      "en": "Ritual purity is a condition for valid Tawaf. Pray two rak'ahs behind Maqam Ibrahim after Tawaf (recite Al-Kafirun in the first and Al-Ikhlas in the second). It is Sunnah to drink Zamzam water and make du'a.",
+      "fr": "La pureté rituelle est une condition pour un Tawaf valide. Priez deux rak'ahs derrière Maqam Ibrahim après le Tawaf (récitez Al-Kafirun dans la première et Al-Ikhlas dans la seconde). C'est Sunnah de boire l'eau de Zamzam et de faire du'a."
     },
     "icon": "ellipse-outline"
   },
