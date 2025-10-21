@@ -1,0 +1,142 @@
+[
+  {
+    "id": "protection",
+    "category": {
+      "ar": "أدعية الحفظ والعافية",
+      "en": "Protection & Well-being",
+      "fr": "Protection et bien-être"
+    },
+    "duas": [
+      {
+        "arabic": "اللهم إني أسألك العفو والعافية في ديني ودنياي وأهلي ومالي. اللهم استر عوراتي، وآمن روعاتي، اللهم احفظني من بين يدي ومن خلفي، وعن يميني وعن شمالي ومن فوقي، وأعوذ بعظمتك أن أُغتال من تحتي",
+        "transliteration": "Allahumma inni as'aluka al-'afwa wal-'afiyah fi dini wa dunyaya wa ahli wa mali. Allahumma ustur 'awrati, wa amin raw'ati. Allahumma ihfathni min bayni yadayya wa min khalfi, wa 'an yamini wa 'an shimali wa min fawqi, wa a'udhu bi 'adhamatika an ughtala min tahti",
+        "translation": {
+          "en": "O Allah, I ask You for pardon and well-being in my religion, worldly affairs, family and wealth. O Allah, conceal my faults, calm my fears. O Allah, protect me from in front and behind, from my right and left, and from above. I seek refuge in Your Greatness from being struck down from beneath me",
+          "fr": "Ô Allah, je Te demande le pardon et le bien-être dans ma religion, mes affaires mondaines, ma famille et mes biens. Ô Allah, cache mes défauts, calme mes peurs. Ô Allah, protège-moi de devant et de derrière, de ma droite et de ma gauche, et d'en haut. Je cherche refuge dans Ta Grandeur contre le fait d'être frappé par en dessous"
+        }
+      },
+      {
+        "arabic": "اللهم عافني في بدني، اللهم عافني في سمعي، اللهم عافني في بصري. لا إله إلا أنت",
+        "transliteration": "Allahumma 'afini fi badani, Allahumma 'afini fi sam'i, Allahumma 'afini fi basari. La ilaha illa anta",
+        "translation": {
+          "en": "O Allah, grant me well-being in my body. O Allah, grant me well-being in my hearing. O Allah, grant me well-being in my sight. There is no god but You",
+          "fr": "Ô Allah, accorde-moi le bien-être dans mon corps. Ô Allah, accorde-moi le bien-être dans mon ouïe. Ô Allah, accorde-moi le bien-être dans ma vue. Il n'y a de dieu que Toi"
+        }
+      }
+    ]
+  },
+  {
+    "id": "forgiveness",
+    "category": {
+      "ar": "أدعية المغفرة والتوبة",
+      "en": "Forgiveness & Repentance",
+      "fr": "Pardon et Repentir"
+    },
+    "duas": [
+      {
+        "arabic": "اللهم أنت ربي لا إله إلا أنت خلقتني، وأنا عبدك وأنا على عهدك ووعدك ما استطعت، أعوذ بك من شر ما صنعت، أبوء لك بنعمتك علي، وأبوء بذنبي، فاغفر لي، إنه لا يغفر الذنوب إلا أنت",
+        "transliteration": "Allahumma anta rabbi la ilaha illa anta khalaqtani, wa ana 'abduka wa ana 'ala 'ahdika wa wa'dika mastata'tu, a'udhu bika min sharri ma sana'tu, abu'u laka bi ni'matika 'alayya, wa abu'u bi dhanbi, faghfir li, innahu la yaghfiru adh-dhunuba illa anta",
+        "translation": {
+          "en": "O Allah, You are my Lord, there is no god but You. You created me and I am Your servant. I try my best to keep my covenant with You. I seek refuge in You from the evil of what I have done. I acknowledge Your blessings upon me and I acknowledge my sins. Forgive me, for no one forgives sins except You",
+          "fr": "Ô Allah, Tu es mon Seigneur, il n'y a de dieu que Toi. Tu m'as créé et je suis Ton serviteur. Je fais de mon mieux pour tenir mon alliance avec Toi. Je cherche refuge auprès de Toi contre le mal de ce que j'ai fait. Je reconnais Tes bienfaits sur moi et je reconnais mes péchés. Pardonne-moi, car nul ne pardonne les péchés sauf Toi"
+        }
+      }
+    ]
+  },
+  {
+    "id": "guidance",
+    "category": {
+      "ar": "أدعية الهداية والصلاح",
+      "en": "Guidance & Righteousness",
+      "fr": "Guidance et Droiture"
+    },
+    "duas": [
+      {
+        "arabic": "اللهم اهدني لأحسن الأعمال والأخلاق لا يهدي لأحسنها إلا أنت، واصرف عني سيئها لا يصرف عني سيئها إلا أنت",
+        "transliteration": "Allahumma ihdini li-ahsani al-a'mali wal-akhlaq la yahdi li-ahsaniha illa anta, wasrif 'anni sayyi'aha la yasrifu 'anni sayyi'aha illa anta",
+        "translation": {
+          "en": "O Allah, guide me to the best of deeds and manners, none can guide to them except You. Turn away from me the worst of them, none can turn them away except You",
+          "fr": "Ô Allah, guide-moi vers les meilleures actions et mœurs, nul ne peut y guider sauf Toi. Écarte de moi les pires d'entre elles, nul ne peut les écarter sauf Toi"
+        }
+      },
+      {
+        "arabic": "اللهم آت نفسي تقواها، وزكها أنت خير من زكاها، أنت وليها ومولاها",
+        "transliteration": "Allahumma ati nafsi taqwaha, wa zakkiha anta khayru man zakkaha, anta waliyyuha wa mawlaha",
+        "translation": {
+          "en": "O Allah, grant my soul its piety and purify it, for You are the Best Purifier. You are its Guardian and Master",
+          "fr": "Ô Allah, accorde à mon âme sa piété et purifie-la, car Tu es le Meilleur Purificateur. Tu es son Gardien et Maître"
+        }
+      }
+    ]
+  },
+  {
+    "id": "provision",
+    "category": {
+      "ar": "أدعية الرزق والبركة",
+      "en": "Provision & Blessings",
+      "fr": "Subsistance et Bénédictions"
+    },
+    "duas": [
+      {
+        "arabic": "اللهم أصلح لي ديني الذي هو عصمة أمري، وأصلح لي دنياي التي فيها معاشي، وأصلح لي آخرتي التي إليها معادي، واجعل الحياة زيادة لي في كل خير، واجعل الموت راحة لي من كل شر",
+        "transliteration": "Allahumma aslih li dini alladhi huwa 'ismatu amri, wa aslih li dunyaya allati fiha ma'ashi, wa aslih li akhirati allati ilayha ma'adi, waj'al al-hayata ziyadatan li fi kulli khayr, waj'al al-mawta rahatan li min kulli sharr",
+        "translation": {
+          "en": "O Allah, rectify my religion which is the safeguard of my affairs. Rectify my worldly life in which is my livelihood. Rectify my Hereafter to which is my return. Make life an increase for me in all good, and make death a relief for me from all evil",
+          "fr": "Ô Allah, rectifie ma religion qui est la sauvegarde de mes affaires. Rectifie ma vie mondaine dans laquelle est ma subsistance. Rectifie mon Au-delà vers lequel est mon retour. Fais de la vie une augmentation pour moi dans tout bien, et fais de la mort un soulagement pour moi de tout mal"
+        }
+      }
+    ]
+  },
+  {
+    "id": "steadfastness",
+    "category": {
+      "ar": "أدعية الثبات والعزيمة",
+      "en": "Steadfastness & Determination",
+      "fr": "Fermeté et Détermination"
+    },
+    "duas": [
+      {
+        "arabic": "اللهم إني أسألك الثبات في الأمر، والعزيمة على الرشد، وأسألك شكر نعمتك وحسن عبادتك، وأسألك قلباً سليماً، ولساناً صادقاً",
+        "transliteration": "Allahumma inni as'aluka ath-thabata fi al-amr, wal-'azimata 'ala ar-rushd, wa as'aluka shukra ni'matika wa husna 'ibadatika, wa as'aluka qalban saliman, wa lisanan sadiqan",
+        "translation": {
+          "en": "O Allah, I ask You for steadfastness in affairs, determination in guidance. I ask You for gratitude for Your blessings and excellence in Your worship. I ask You for a sound heart and a truthful tongue",
+          "fr": "Ô Allah, je Te demande la fermeté dans les affaires, la détermination dans la guidance. Je Te demande la gratitude pour Tes bienfaits et l'excellence dans Ton adoration. Je Te demande un cœur sain et une langue véridique"
+        }
+      },
+      {
+        "arabic": "اللهم مقلِّب القلوب، ثبت قلبي على دينك",
+        "transliteration": "Allahumma muqallib al-qulub, thabbit qalbi 'ala dinika",
+        "translation": {
+          "en": "O Allah, Turner of hearts, make my heart firm upon Your religion",
+          "fr": "Ô Allah, Celui qui retourne les cœurs, affermis mon cœur sur Ta religion"
+        }
+      }
+    ]
+  },
+  {
+    "id": "jannah",
+    "category": {
+      "ar": "أدعية الجنة والنجاة",
+      "en": "Paradise & Salvation",
+      "fr": "Paradis et Salut"
+    },
+    "duas": [
+      {
+        "arabic": "اللهم إني أسألك الفوز يوم القضاء، وعيش السعداء، ومنزل الشهداء، ومرافقة الأنبياء، والنصر على الأعداء",
+        "transliteration": "Allahumma inni as'aluka al-fawza yawma al-qada', wa 'aysha as-su'ada', wa manzila ash-shuhada', wa murafaqata al-anbiya', wan-nasra 'ala al-a'da'",
+        "translation": {
+          "en": "O Allah, I ask You for success on the Day of Judgment, the life of the happy, the station of martyrs, the companionship of prophets, and victory over enemies",
+          "fr": "Ô Allah, je Te demande le succès au Jour du Jugement, la vie des heureux, la station des martyrs, la compagnie des prophètes, et la victoire sur les ennemis"
+        }
+      },
+      {
+        "arabic": "اللهم إني أسألك موجبات رحمتك، وعزائم مغفرتك، والغنيمة من كل بر، والسلامة من كل شر، والفوز بالجنة، والنجاة من النار",
+        "transliteration": "Allahumma inni as'aluka mujibati rahmatik, wa 'aza'ima maghfiratik, wal-ghanimata min kulli birr, was-salamata min kulli sharr, wal-fawza bil-jannah, wan-najata mina an-nar",
+        "translation": {
+          "en": "O Allah, I ask You for that which necessitates Your mercy, and that which will ascertain Your forgiveness, benefit from every good deed, safety from every sin, success in attaining Paradise and salvation from the Fire",
+          "fr": "Ô Allah, je Te demande ce qui nécessite Ta miséricorde, ce qui assurera Ton pardon, le bénéfice de toute bonne action, la sécurité de tout péché, le succès d'atteindre le Paradis et le salut du Feu"
+        }
+      }
+    ]
+  }
+]
