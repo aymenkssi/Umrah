@@ -13,19 +13,26 @@
       "fr": "Ghusl et parfum avant l'ihram (hommes, pas sur le vêtement), porter l'ihram et avoir l'intention."
     },
     "details": {
-      "ar": "الإحرام هو نية الدخول في النُسك. يُستحب الاغتسال والتطيب قبل الإحرام للرجال (في البدن لا في الثوب). يرتدي الرجل إزاراً ورداءً أبيضين، والمرأة تلبس ما شاءت من الثياب الساترة. بعد الإحرام تحرم الأمور المحظورة كالطيب وتقليم الأظافر والجماع.",
-      "en": "Ihram is the intention to enter the state of consecration. It is recommended to perform ghusl and apply fragrance (for men, on the body not the garment). Men wear two white unstitched cloths (izar and rida), women wear modest covering clothes. After ihram, certain acts become prohibited including perfume, nail clipping, and intercourse.",
-      "fr": "L'Ihram est l'intention d'entrer dans l'état de sacralisation. Il est recommandé de faire le ghusl et d'appliquer du parfum (pour les hommes, sur le corps pas sur le vêtement). Les hommes portent deux draps blancs non cousus, les femmes des vêtements modestes et couvrants. Après l'ihram, certains actes deviennent interdits dont le parfum, se couper les ongles et les rapports intimes."
+      "ar": "الإحرام هو نية الدخول في النُسك. يُستحب الاغتسال والتطيب قبل الإحرام للرجال (في البدن لا في الثوب). يرتدي الرجل إزاراً ورداءً أبيضين، والمرأة تلبس ما شاءت من الثياب الساترة. بعد الإحرام تحرم الأمور المحظورة كالطيب وتقليم الأظافر والجماع. يُصلي المحرم ركعتين بعد الاغتسال إن لم يكن وقت فريضة.",
+      "en": "Ihram is the intention to enter the state of consecration. It is recommended to perform ghusl and apply fragrance (for men, on the body not the garment). Men wear two white unstitched cloths (izar and rida), women wear modest covering clothes. After ihram, certain acts become prohibited including perfume, nail clipping, and intercourse. The person in ihram may pray two rak'ahs after ghusl if it's not prayer time.",
+      "fr": "L'Ihram est l'intention d'entrer dans l'état de sacralisation. Il est recommandé de faire le ghusl et d'appliquer du parfum (pour les hommes, sur le corps pas sur le vêtement). Les hommes portent deux draps blancs non cousus, les femmes des vêtements modestes et couvrants. Après l'ihram, certains actes deviennent interdits dont le parfum, se couper les ongles et les rapports intimes. La personne en ihram peut prier deux rak'ahs après le ghusl si ce n'est pas l'heure de prière."
     },
     "dua": {
       "ar": "لَبَّيْكَ عُمْرَةً",
       "en": "Labbayka 'Umrah",
       "fr": "Labbayka 'Umrah"
     },
+    "additionalDuas": [
+      {
+        "ar": "اللهم إيماناً بك، وتصديقاً بكتابك، ووفاءً بعهدك، واتباعاً لسُنة نبيك محمد صلى الله عليه وسلم",
+        "en": "O Allah, with faith in You, belief in Your Book, fulfillment of Your covenant, and following the Sunnah of Your Prophet Muhammad ﷺ",
+        "fr": "Ô Allah, avec foi en Toi, croyance en Ton Livre, accomplissement de Ton alliance, et suivant la Sunnah de Ton Prophète Muhammad ﷺ"
+      }
+    ],
     "notes": {
-      "ar": "يُستحب رفع الصوت بالتلبية بعد عقد النية (للرجال).",
-      "en": "It is recommended to recite Talbiyah aloud after forming intention (for men).",
-      "fr": "Il est recommandé de réciter la Talbiyah à voix haute après l'intention (pour les hommes)."
+      "ar": "يُستحب رفع الصوت بالتلبية بعد عقد النية (للرجال). المرأة تقولها بقدر ما يسمع من بجوارها فقط.",
+      "en": "It is recommended to recite Talbiyah aloud after forming intention (for men). Women recite it quietly, audible only to those nearby.",
+      "fr": "Il est recommandé de réciter la Talbiyah à voix haute après l'intention (pour les hommes). Les femmes la récitent doucement, audible seulement pour ceux à proximité."
     },
     "icon": "person-outline"
   },
