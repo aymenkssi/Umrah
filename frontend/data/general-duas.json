@@ -1,5 +1,119 @@
 [
   {
+    "id": "comprehensive",
+    "category": {
+      "ar": "الأدعية العامة للحاج أو المعتمر",
+      "en": "General Supplications for Pilgrims",
+      "fr": "Supplications générales pour les pèlerins"
+    },
+    "duas": [
+      {
+        "arabic": "اللهم إني أسألك العفو والعافية في ديني ودنياي وأهلي ومالي. اللهم استر عوراتي، وآمن روعاتي، اللهم احفظني من بين يدي ومن خلفي، وعن يميني وعن شمالي ومن فوقي، وأعوذ بعظمتك أن أُغتال من تحتي",
+        "transliteration": "Allahumma inni as'aluka al-'afwa wal-'afiyah fi dini wa dunyaya wa ahli wa mali. Allahumma ustur 'awrati, wa amin raw'ati. Allahumma ihfathni min bayni yadayya wa min khalfi, wa 'an yamini wa 'an shimali wa min fawqi, wa a'udhu bi 'adhamatika an ughtala min tahti",
+        "translation": {
+          "en": "O Allah, I ask You for pardon and well-being in my religion, my worldly affairs, my family and my wealth. O Allah, conceal my faults and calm my fears. O Allah, protect me from in front and behind, from my right and left and from above, and I seek refuge in Your Greatness from being struck down from beneath me",
+          "fr": "Ô Allah, je Te demande le pardon et le bien-être dans ma religion, mes affaires mondaines, ma famille et mes biens. Ô Allah, cache mes défauts et calme mes peurs. Ô Allah, protège-moi de devant et de derrière, de ma droite et de ma gauche et d'en haut, et je cherche refuge dans Ta Grandeur contre le fait d'être frappé par en dessous"
+        }
+      },
+      {
+        "arabic": "اللهم عافني في بدني، اللهم عافني في سمعي، اللهم عافني في بصري. لا إله إلا أنت. اللهم إني أعوذ بك من الكفر والفقر ومن عذاب القبر، لا إله إلا أنت",
+        "transliteration": "Allahumma 'afini fi badani, Allahumma 'afini fi sam'i, Allahumma 'afini fi basari. La ilaha illa anta. Allahumma inni a'udhu bika min al-kufri wal-faqri wa min 'adhab al-qabr, la ilaha illa anta",
+        "translation": {
+          "en": "O Allah, grant me well-being in my body. O Allah, grant me well-being in my hearing. O Allah, grant me well-being in my sight. There is no god but You. O Allah, I seek refuge in You from disbelief, poverty and the punishment of the grave. There is no god but You",
+          "fr": "Ô Allah, accorde-moi le bien-être dans mon corps. Ô Allah, accorde-moi le bien-être dans mon ouïe. Ô Allah, accorde-moi le bien-être dans ma vue. Il n'y a de dieu que Toi. Ô Allah, je cherche refuge auprès de Toi contre la mécréance, la pauvreté et le châtiment de la tombe. Il n'y a de dieu que Toi"
+        }
+      },
+      {
+        "arabic": "اللهم إني أعوذ بك من الهم والحزن وأعوذ بك من العجز والكسل ومن البخل والجبن وأعوذ بك من غلبة الدين، وقهر الرجال",
+        "transliteration": "Allahumma inni a'udhu bika min al-hammi wal-hazan wa a'udhu bika min al-'ajzi wal-kasal wa min al-bukhl wal-jubn wa a'udhu bika min ghalabat ad-dayn wa qahr ar-rijal",
+        "translation": {
+          "en": "O Allah, I seek refuge in You from worry and grief. I seek refuge in You from weakness and laziness, from stinginess and cowardice, and from being overcome by debt and overpowered by men",
+          "fr": "Ô Allah, je cherche refuge auprès de Toi contre l'anxiété et le chagrin. Je cherche refuge auprès de Toi contre la faiblesse et la paresse, l'avarice et la lâcheté, et d'être submergé par les dettes et dominé par les hommes"
+        }
+      },
+      {
+        "arabic": "اللهم اجعل أول هذا اليوم صلاحا وأوسطه فلاحا، وآخره نجاحا، وأسألك خيري الدنيا والآخرة يا أرحم الراحمين",
+        "transliteration": "Allahumma ij'al awwala hadha al-yawm salahan wa awsatahu falahan, wa akhirahu najahan, wa as'aluka khayri ad-dunya wal-akhira ya arham ar-rahimin",
+        "translation": {
+          "en": "O Allah, make the beginning of this day righteousness, its middle prosperity, and its end success. I ask You for the best of this world and the Hereafter, O Most Merciful of the merciful",
+          "fr": "Ô Allah, fais du début de ce jour droiture, de son milieu prospérité, et de sa fin succès. Je Te demande le meilleur de ce monde et de l'Au-delà, Ô le Plus Miséricordieux des miséricordieux"
+        }
+      },
+      {
+        "arabic": "اللهم إني أسألك الرضى بعد القضاء، وبرد العيش بعد الموت، ولذة النظر إلى وجهك الكريم، والشوق إلى لقائك، في غير ضراء مضرة ولا فتنة مضلة",
+        "transliteration": "Allahumma inni as'aluka ar-rida ba'd al-qada', wa bard al-'aysh ba'd al-mawt, wa ladhdhata an-nadhar ila wajhika al-karim, wash-shawq ila liqa'ik, fi ghayri darra'a mudirra wa la fitna mudillah",
+        "translation": {
+          "en": "O Allah, I ask You for contentment after Your decree, the coolness of life after death, the pleasure of looking at Your Noble Face, and the longing to meet You, without harmful adversity or misleading trial",
+          "fr": "Ô Allah, je Te demande la satisfaction après Ton décret, la fraîcheur de la vie après la mort, le plaisir de contempler Ton Noble Visage, et l'aspiration à Te rencontrer, sans adversité nuisible ni épreuve égarante"
+        }
+      },
+      {
+        "arabic": "اللهم إني أعوذ بك أن أرد إلى أرذل العمر",
+        "transliteration": "Allahumma inni a'udhu bika an uradda ila ardhal al-'umr",
+        "translation": {
+          "en": "O Allah, I seek refuge in You from being returned to the worst stage of life",
+          "fr": "Ô Allah, je cherche refuge auprès de Toi contre le fait d'être ramené au pire stade de la vie"
+        }
+      },
+      {
+        "arabic": "اللهم أصلح لي ديني ووسع لي في داري وبارك لي في رزقي",
+        "transliteration": "Allahumma aslih li dini wa wassi' li fi dari wa barik li fi rizqi",
+        "translation": {
+          "en": "O Allah, rectify my religion, expand my dwelling, and bless my provision",
+          "fr": "Ô Allah, rectifie ma religion, élargis ma demeure et bénis ma subsistance"
+        }
+      },
+      {
+        "arabic": "اللهم إني أعوذ بك من القسوة والغفلة والذلة والمسكنة وأعوذ بك من الكفر والفسوق والشقاق والسمعة والرياء. وأعوذ بك من الصمم والبكم والجذام وسيئ الأسقام",
+        "transliteration": "Allahumma inni a'udhu bika min al-qaswah wal-ghaflah wadh-dhillah wal-maskanah wa a'udhu bika min al-kufr wal-fusuq wash-shiqaq was-sum'ah war-riya'. Wa a'udhu bika min as-samam wal-bakam wal-judham wa sayyi' al-asqam",
+        "translation": {
+          "en": "O Allah, I seek refuge in You from hardness of heart, heedlessness, humiliation and poverty. I seek refuge in You from disbelief, wickedness, discord, showing off and hypocrisy. And I seek refuge in You from deafness, muteness, leprosy and evil diseases",
+          "fr": "Ô Allah, je cherche refuge auprès de Toi contre la dureté du cœur, l'insouciance, l'humiliation et la pauvreté. Je cherche refuge auprès de Toi contre la mécréance, la perversité, la discorde, l'ostentation et l'hypocrisie. Et je cherche refuge auprès de Toi contre la surdité, le mutisme, la lèpre et les mauvaises maladies"
+        }
+      },
+      {
+        "arabic": "اللهم إني أعوذ بك من علم لا ينفع، وقلب لا يخشع، ونفس لا تشبع، ودعوة لا يستجاب لها",
+        "transliteration": "Allahumma inni a'udhu bika min 'ilm la yanfa', wa qalb la yakhsha', wa nafs la tashba', wa da'wah la yustajab laha",
+        "translation": {
+          "en": "O Allah, I seek refuge in You from knowledge that does not benefit, a heart that does not humble itself, a soul that is never satisfied, and a supplication that is not answered",
+          "fr": "Ô Allah, je cherche refuge auprès de Toi contre la connaissance qui ne profite pas, un cœur qui ne s'humilie pas, une âme qui n'est jamais satisfaite, et une invocation qui n'est pas exaucée"
+        }
+      },
+      {
+        "arabic": "اللهم إني أعوذ بك من شر ما عملت، ومن شر ما لم أعمل، وأعوذ بك من شر ما علمت، ومن شر ما لم أعلم",
+        "transliteration": "Allahumma inni a'udhu bika min sharri ma 'amiltu, wa min sharri ma lam a'mal, wa a'udhu bika min sharri ma 'alimtu, wa min sharri ma lam a'lam",
+        "translation": {
+          "en": "O Allah, I seek refuge in You from the evil of what I have done and the evil of what I have not done, and I seek refuge in You from the evil of what I know and the evil of what I do not know",
+          "fr": "Ô Allah, je cherche refuge auprès de Toi contre le mal de ce que j'ai fait et le mal de ce que je n'ai pas fait, et je cherche refuge auprès de Toi contre le mal de ce que je sais et le mal de ce que je ne sais pas"
+        }
+      },
+      {
+        "arabic": "اللهم إني أعوذ بك من زوال نعمتك وتحول عافيتك وفجاءة نقمتك وجميع سخطك",
+        "transliteration": "Allahumma inni a'udhu bika min zawal ni'matik wa tahawwul 'afiyatik wa faja'ah niqmatik wa jami' sakhatik",
+        "translation": {
+          "en": "O Allah, I seek refuge in You from the removal of Your blessings, the change of Your well-being, the suddenness of Your punishment, and all of Your wrath",
+          "fr": "Ô Allah, je cherche refuge auprès de Toi contre la disparition de Tes bienfaits, le changement de Ton bien-être, la soudaineté de Ta punition, et toute Ta colère"
+        }
+      },
+      {
+        "arabic": "اللهم إني أعوذ بك من الهدم والتردي ومن الغرق والحرق والهرم، وأعوذ بك من أن يتخبطني الشيطان عند الموت، وأعوذ بك من أن أموت لديغا",
+        "transliteration": "Allahumma inni a'udhu bika min al-hadm wat-taraddi wa min al-gharaq wal-haraq wal-haram, wa a'udhu bika an yatakhabatani ash-shaytan 'ind al-mawt, wa a'udhu bika an amuta ladigh",
+        "translation": {
+          "en": "O Allah, I seek refuge in You from collapse and falling, from drowning, burning and old age. I seek refuge in You from Satan confusing me at the time of death, and from dying from a venomous sting",
+          "fr": "Ô Allah, je cherche refuge auprès de Toi contre l'effondrement et la chute, contre la noyade, la brûlure et la vieillesse. Je cherche refuge auprès de Toi contre Satan me troublant au moment de la mort, et contre la mort par piqûre venimeuse"
+        }
+      },
+      {
+        "arabic": "اللهم إني أعوذ بك من منكرات الأخلاق والأعمال والأهواء والأدواء، وأعوذ بك من غلبة الدين، وقهر العدو، وشماتة الأعداء",
+        "transliteration": "Allahumma inni a'udhu bika min munkarat al-akhlaq wal-a'mal wal-ahwa' wad-diwa', wa a'udhu bika min ghalabat ad-dayn wa qahr al-'aduww wa shamatat al-a'da'",
+        "translation": {
+          "en": "O Allah, I seek refuge in You from evil character, deeds, desires and diseases. I seek refuge in You from being overcome by debt, oppression by enemies, and the gloating of adversaries",
+          "fr": "Ô Allah, je cherche refuge auprès de Toi contre le mauvais caractère, les mauvaises actions, les désirs mauvais et les maladies. Je cherche refuge auprès de Toi contre les dettes accablantes, l'oppression des ennemis et la jubilation des adversaires"
+        }
+      }
+    ]
+  },
+  {
     "id": "protection",
     "category": {
       "ar": "أدعية الحفظ والعافية",
