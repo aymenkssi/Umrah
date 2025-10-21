@@ -5,7 +5,7 @@ import { useLanguage } from '../../contexts/LanguageContext';
 import { COLORS } from '../../constants/theme';
 
 export default function TabsLayout() {
-  const { t, isRTL } = useLanguage();
+  const { t, isRTL, language } = useLanguage();
 
   return (
     <Tabs
