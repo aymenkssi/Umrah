@@ -123,19 +123,26 @@
       "fr": "Effectuez sept parcours entre Ṣafā et Marwah, en commençant par Ṣafā et en terminant à Marwah."
     },
     "details": {
-      "ar": "السعي سبعة أشواط بين الصفا والمروة، يبدأ من الصفا وينتهي بالمروة. الذهاب من الصفا للمروة شوط، والرجوع شوط آخر. يُستحب الصعود على الصفا والمروة والدعاء عليهما مستقبل القبلة. يُسرع الرجل بين العلَمين الأخضرين (الهرولة)، أما المرأة فتمشي بشكل عادي. يدعو بما شاء أثناء السعي.",
-      "en": "Sa'i consists of seven laps between Safa and Marwah, starting at Safa and ending at Marwah. Going from Safa to Marwah is one lap, returning is another. It is recommended to ascend Safa and Marwah and supplicate while facing the Qibla. Men walk briskly between the green markers (jogging), while women walk normally. Supplicate as you wish during Sa'i.",
-      "fr": "Le Sa'i consiste en sept parcours entre Safa et Marwah, commençant à Safa et se terminant à Marwah. Aller de Safa à Marwah est un parcours, le retour en est un autre. Il est recommandé de monter sur Safa et Marwah et d'invoquer en faisant face à la Qibla. Les hommes marchent rapidement entre les marqueurs verts (jogging), tandis que les femmes marchent normalement. Invoquez comme vous le souhaitez pendant le Sa'i."
+      "ar": "السعي سبعة أشواط بين الصفا والمروة، يبدأ من الصفا وينتهي بالمروة. الذهاب من الصفا للمروة شوط، والرجوع من المروة إلى الصفا شوط آخر. يُستحب الصعود على الصفا والمروة والدعاء عليهما مستقبل القبلة، ويرفع يديه كرفعهما في الدعاء. يُسرع الرجل بين العلَمين الأخضرين (الهرولة)، أما المرأة فتمشي بشكل عادي. يدعو بما شاء أثناء السعي فإنما جُعل السعي لإقامة ذكر الله.",
+      "en": "Sa'i consists of seven laps between Safa and Marwah, starting at Safa and ending at Marwah. Going from Safa to Marwah is one lap, returning is another. It is recommended to ascend Safa and Marwah and supplicate while facing the Qibla, raising hands as in du'a. Men walk briskly between the green markers (jogging), while women walk normally. Supplicate as you wish during Sa'i, as it is made for establishing the remembrance of Allah.",
+      "fr": "Le Sa'i consiste en sept parcours entre Safa et Marwah, commençant à Safa et se terminant à Marwah. Aller de Safa à Marwah est un parcours, le retour en est un autre. Il est recommandé de monter sur Safa et Marwah et d'invoquer en faisant face à la Qibla, levant les mains comme dans le du'a. Les hommes marchent rapidement entre les marqueurs verts (jogging), tandis que les femmes marchent normalement. Invoquez comme vous le souhaitez pendant le Sa'i, car il est fait pour établir le rappel d'Allah."
     },
     "dua": {
-      "ar": "عند الصفا والمروة: إِنَّ الصَّفَا وَالْمَرْوَةَ مِن شَعَائِرِ اللَّهِ. أبدأ بما بدأ الله به. ثم التكبير والدعاء.",
-      "en": "At Safa and Marwah: Inna as-Safa wal-Marwata min sha'a'irillah (Indeed Safa and Marwah are among the signs of Allah). I begin with what Allah began with. Then takbir and supplications.",
-      "fr": "À Safa et Marwah : Inna as-Safa wal-Marwata min sha'a'irillah (En vérité, Safa et Marwah sont parmi les signes d'Allah). Je commence par ce par quoi Allah a commencé. Puis takbir et invocations."
+      "ar": "عند الصفا والمروة: إِنَّ الصَّفَا وَالْمَرْوَةَ مِن شَعَائِرِ اللَّهِ. أَبْدَأُ بِمَا بَدَأَ اللهُ بِهِ. لَا إِلَهَ إِلَّا اللهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ. لَا إِلَهَ إِلَّا اللهُ وَحْدَهُ، أَنْجَزَ وَعْدَهُ، وَنَصَرَ عَبْدَهُ، وَهَزَمَ الْأَحْزَابَ وَحْدَهُ",
+      "en": "At Safa and Marwah: Indeed Safa and Marwah are among the signs of Allah. I begin with what Allah began with. There is no god but Allah alone, with no partner. His is the dominion and His is the praise, and He has power over all things. There is no god but Allah alone, He fulfilled His promise, aided His servant, and defeated the confederates alone",
+      "fr": "À Safa et Marwah : En vérité, Safa et Marwah sont parmi les signes d'Allah. Je commence par ce par quoi Allah a commencé. Il n'y a de dieu qu'Allah seul, sans associé. À Lui la royauté et à Lui la louange, et Il a pouvoir sur toute chose. Il n'y a de dieu qu'Allah seul, Il a accompli Sa promesse, secouru Son serviteur et vaincu les coalisés seul"
     },
+    "additionalDuas": [
+      {
+        "ar": "اللهم اجعله حجاً مبروراً وسعياً مشكوراً وذنباً مغفوراً",
+        "en": "O Allah, make it an accepted Hajj, an appreciated Sa'i, and forgiven sins",
+        "fr": "Ô Allah, fais-en un Hajj accepté, un Sa'i apprécié et des péchés pardonnés"
+      }
+    ],
     "notes": {
-      "ar": "الطهارة ليست شرطاً للسعي لكنها مستحبة. يجوز السعي في الدور العلوي.",
-      "en": "Ritual purity is not a condition for Sa'i but is recommended. Sa'i may be performed on the upper level.",
-      "fr": "La pureté rituelle n'est pas une condition pour le Sa'i mais est recommandée. Le Sa'i peut être effectué au niveau supérieur."
+      "ar": "الطهارة ليست شرطاً للسعي لكنها مستحبة. يجوز السعي في الدور العلوي. يُكرر الذكر والدعاء ثلاث مرات على الصفا والمروة.",
+      "en": "Ritual purity is not a condition for Sa'i but is recommended. Sa'i may be performed on the upper level. Repeat the dhikr and du'a three times on Safa and Marwah.",
+      "fr": "La pureté rituelle n'est pas une condition pour le Sa'i mais est recommandée. Le Sa'i peut être effectué au niveau supérieur. Répétez le dhikr et le du'a trois fois sur Safa et Marwah."
     },
     "icon": "swap-horizontal-outline"
   },
