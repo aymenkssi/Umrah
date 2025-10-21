@@ -242,19 +242,35 @@
     },
     "duas": [
       {
-        "arabic": "اللهم إني أسألك الثبات في الأمر، والعزيمة على الرشد، وأسألك شكر نعمتك وحسن عبادتك، وأسألك قلباً سليماً، ولساناً صادقاً",
-        "transliteration": "Allahumma inni as'aluka ath-thabata fi al-amr, wal-'azimata 'ala ar-rushd, wa as'aluka shukra ni'matika wa husna 'ibadatika, wa as'aluka qalban saliman, wa lisanan sadiqan",
+        "arabic": "اللهم إني أسألك الثبات في الأمر، والعزيمة على الرشد، أسألك شكر نعمتك وحسن عبادتك، وأسألك قلباً سليماً، ولساناً صادقاً، وأسألك من خير ما تعلم، وأعوذ بك من شر ما تعلم، وأستغفرك مما تعلم، وأنت علام الغيوب",
+        "transliteration": "Allahumma inni as'aluka ath-thabata fi al-amr, wal-'azimata 'ala ar-rushd, as'aluka shukra ni'matika wa husna 'ibadatika, wa as'aluka qalban saliman, wa lisanan sadiqan, wa as'aluka min khayri ma ta'lam, wa a'udhu bika min sharri ma ta'lam, wa astaghfiruka mimma ta'lam, wa anta 'allam al-ghuyub",
         "translation": {
-          "en": "O Allah, I ask You for steadfastness in affairs, determination in guidance. I ask You for gratitude for Your blessings and excellence in Your worship. I ask You for a sound heart and a truthful tongue",
-          "fr": "Ô Allah, je Te demande la fermeté dans les affaires, la détermination dans la guidance. Je Te demande la gratitude pour Tes bienfaits et l'excellence dans Ton adoration. Je Te demande un cœur sain et une langue véridique"
+          "en": "O Allah, I ask You for steadfastness in affairs, determination in guidance. I ask You for gratitude for Your blessings and excellence in Your worship. I ask You for a sound heart and a truthful tongue. I ask You for the best of what You know, seek refuge in You from the evil of what You know, and seek Your forgiveness for what You know. You are the Knower of the unseen",
+          "fr": "Ô Allah, je Te demande la fermeté dans les affaires, la détermination dans la guidance. Je Te demande la gratitude pour Tes bienfaits et l'excellence dans Ton adoration. Je Te demande un cœur sain et une langue véridique. Je Te demande le meilleur de ce que Tu sais, cherche refuge auprès de Toi contre le mal de ce que Tu sais, et Te demande pardon pour ce que Tu sais. Tu es le Connaisseur de l'invisible"
         }
       },
       {
-        "arabic": "اللهم مقلِّب القلوب، ثبت قلبي على دينك",
-        "transliteration": "Allahumma muqallib al-qulub, thabbit qalbi 'ala dinika",
+        "arabic": "اللهم مقلِّب القلوب، ثبت قلبي على دينك. اللهم مصرِّف القلوب والأبصار، صرِّف قلوبنا على طاعتك",
+        "transliteration": "Allahumma muqallib al-qulub, thabbit qalbi 'ala dinika. Allahumma musarrif al-qulub wal-absar, sarrif qulubana 'ala ta'atik",
         "translation": {
-          "en": "O Allah, Turner of hearts, make my heart firm upon Your religion",
-          "fr": "Ô Allah, Celui qui retourne les cœurs, affermis mon cœur sur Ta religion"
+          "en": "O Allah, Turner of hearts, make my heart firm upon Your religion. O Allah, Controller of hearts and eyes, turn our hearts to Your obedience",
+          "fr": "Ô Allah, Celui qui retourne les cœurs, affermis mon cœur sur Ta religion. Ô Allah, Contrôleur des cœurs et des yeux, tourne nos cœurs vers Ton obéissance"
+        }
+      },
+      {
+        "arabic": "اللهم ألهمني رشدي، وقني شر نفسي. اللهم إني أسألك فعل الخيرات وترك المنكرات، وحب المساكين، وأن تغفر لي وترحمني، وإذا أردت بعبادك فتنة، فتوفني إليك منها غير مفتون",
+        "transliteration": "Allahumma alhimni rushdi, wa qini sharra nafsi. Allahumma inni as'aluka fi'l al-khayrat wa tark al-munkarat, wa hubb al-masakin, wa an taghfir li wa tarhamani, wa idha aradta bi-'ibadik fitnah, fa-tawaffani ilayka minha ghayra maftun",
+        "translation": {
+          "en": "O Allah, inspire me with guidance and protect me from the evil of my soul. O Allah, I ask You to enable me to do good deeds, avoid evil, love the poor, forgive me and have mercy on me. And if You intend a trial for Your servants, take me to You without being tried",
+          "fr": "Ô Allah, inspire-moi la guidance et protège-moi du mal de mon âme. Ô Allah, je Te demande de me permettre de faire de bonnes actions, d'éviter le mal, d'aimer les pauvres, de me pardonner et d'avoir pitié de moi. Et si Tu as l'intention d'une épreuve pour Tes serviteurs, prends-moi à Toi sans être éprouvé"
+        }
+      },
+      {
+        "arabic": "اللهم إني أسألك حبك، وحب من يحبك، وحب كل عمل يقربني إلى حبك",
+        "transliteration": "Allahumma inni as'aluka hubbak, wa hubba man yuhibbuk, wa hubba kulli 'amal yuqarribuni ila hubbik",
+        "translation": {
+          "en": "O Allah, I ask You for Your love, the love of those who love You, and the love of every action that brings me closer to Your love",
+          "fr": "Ô Allah, je Te demande Ton amour, l'amour de ceux qui T'aiment, et l'amour de toute action qui me rapproche de Ton amour"
         }
       }
     ]
