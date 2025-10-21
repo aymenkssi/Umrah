@@ -73,6 +73,15 @@ export default function TabsLayout() {
         }}
       />
       <Tabs.Screen
+        name="duas"
+        options={{
+          title: language === 'ar' ? 'الأدعية' : language === 'fr' ? 'Invocations' : 'Du\'a',
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="heart" size={size} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
         name="settings"
         options={{
           title: t('settings'),
