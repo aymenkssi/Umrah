@@ -1,6 +1,15 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import React, {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+  ReactNode,
+} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { I18nManager } from 'react-native';
+import { getLocales } from 'expo-localization';
+import { Platform } from 'react-native';
 
 export type Language = 'ar' | 'en' | 'fr';
 
@@ -13,7 +22,7 @@ interface LanguageContextType {
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
-const translations: Record<Language, Record<string, string>> = {
+export const translations: Record<Language, Record<string, string>> = {
   ar: {
     app_name: 'رفيق العمرة',
     home: 'الرئيسية',
@@ -92,6 +101,31 @@ const translations: Record<Language, Record<string, string>> = {
     donate_via_paypal: 'تبرع عبر PayPal',
     thank_you: 'شكراً لك!',
     for_makkah_residents: 'لأهل مكة',
+    duas: 'الأدعية',
+    duas_count: 'دعاء',
+    tap_for_details: 'اضغط للتفاصيل',
+    dua_details: 'تفاصيل الدعاء',
+    arabic_text: 'الدعاء بالعربية',
+    transliteration: 'النطق',
+    translation: 'الترجمة',
+    dua: 'الدعاء',
+    additional_duas: 'أدعية أخرى',
+    success: 'تم',
+    progress_reset_done: 'تمت إعادة تعيين التقدم بنجاح.',
+    prayer_times_error: 'تعذّر حساب أوقات الصلاة.',
+    qibla_error: 'تعذّر تحديد اتجاه القبلة.',
+    location_required_qibla: 'يُرجى تمكين خدمات الموقع لتحديد اتجاه القبلة.',
+    calculation_method: 'طريقة الحساب',
+    method_umm_al_qura: 'أم القرى (مكة المكرمة)',
+    method_mwl: 'رابطة العالم الإسلامي',
+    now: 'الآن',
+    compass_accuracy_low: 'دقة البوصلة منخفضة: حرّك الهاتف على شكل رقم 8 لمعايرتها.',
+    today: 'اليوم',
+    search_miqat: 'ابحث عن ميقات',
+    tab_guide: 'الدليل',
+    tab_prayers: 'الصلاة',
+    tab_settings: 'الإعدادات',
+    tab_duas: 'الأدعية',
   },
   en: {
     app_name: 'Umrah Companion',
@@ -171,6 +205,31 @@ const translations: Record<Language, Record<string, string>> = {
     donate_via_paypal: 'Donate via PayPal',
     thank_you: 'Thank You!',
     for_makkah_residents: 'For Makkah Residents',
+    duas: 'Du\'a',
+    duas_count: 'supplications',
+    tap_for_details: 'Tap for details',
+    dua_details: 'Details',
+    arabic_text: 'Arabic',
+    transliteration: 'Transliteration',
+    translation: 'Translation',
+    dua: 'Du\'a',
+    additional_duas: 'Other du\'as',
+    success: 'Done',
+    progress_reset_done: 'Progress has been reset.',
+    prayer_times_error: 'Could not calculate prayer times.',
+    qibla_error: 'Could not determine the Qibla direction.',
+    location_required_qibla: 'Please enable location services to find the Qibla direction.',
+    calculation_method: 'Calculation method',
+    method_umm_al_qura: 'Umm al-Qura (Makkah)',
+    method_mwl: 'Muslim World League',
+    now: 'Now',
+    compass_accuracy_low: 'Low compass accuracy: move your phone in a figure 8 to calibrate.',
+    today: 'Today',
+    search_miqat: 'Search a Miqat',
+    tab_guide: 'Guide',
+    tab_prayers: 'Prayers',
+    tab_settings: 'Settings',
+    tab_duas: "Du'a",
   },
   fr: {
     app_name: 'Compagnon de la \'Omra',
@@ -250,11 +309,61 @@ const translations: Record<Language, Record<string, string>> = {
     donate_via_paypal: 'Faire un don via PayPal',
     thank_you: 'Merci!',
     for_makkah_residents: 'Pour les résidents de La Mecque',
+    duas: 'Invocations',
+    duas_count: 'invocations',
+    tap_for_details: 'Appuyez pour les détails',
+    dua_details: 'Détails',
+    arabic_text: 'En arabe',
+    transliteration: 'Translittération',
+    translation: 'Traduction',
+    dua: 'Du\'a',
+    additional_duas: 'Autres invocations',
+    success: 'Terminé',
+    progress_reset_done: 'Votre progression a été réinitialisée.',
+    prayer_times_error: 'Impossible de calculer les horaires de prière.',
+    qibla_error: 'Impossible de déterminer la direction de la Qibla.',
+    location_required_qibla: 'Veuillez activer la localisation pour trouver la direction de la Qibla.',
+    calculation_method: 'Méthode de calcul',
+    method_umm_al_qura: 'Umm al-Qura (La Mecque)',
+    method_mwl: 'Ligue islamique mondiale',
+    now: 'Maintenant',
+    compass_accuracy_low: 'Précision de la boussole faible : bougez le téléphone en forme de 8 pour l\'étalonner.',
+    today: 'Aujourd\'hui',
+    search_miqat: 'Rechercher un Miqat',
+    tab_guide: 'Guide',
+    tab_prayers: 'Prières',
+    tab_settings: 'Réglages',
+    tab_duas: "Du'a",
   },
 };
 
+const SUPPORTED_LANGUAGES: Language[] = ['ar', 'en', 'fr'];
+
+const isLanguage = (value: unknown): value is Language =>
+  typeof value === 'string' && (SUPPORTED_LANGUAGES as string[]).includes(value);
+
+/**
+ * Pick the first device language the app supports, falling back to Arabic.
+ */
+const getDeviceLanguage = (): Language => {
+  try {
+    for (const locale of getLocales()) {
+      if (isLanguage(locale.languageCode)) {
+        return locale.languageCode;
+      }
+    }
+  } catch (error) {
+    console.error('Error reading device locale:', error);
+  }
+  return 'ar';
+};
+
 export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [language, setLanguageState] = useState<Language>('ar');
+  // On web the pages are pre-rendered, so start from a fixed language and apply the
+  // browser language after hydration to avoid a server/client mismatch.
+  const [language, setLanguageState] = useState<Language>(() =>
+    Platform.OS === 'web' ? 'ar' : getDeviceLanguage()
+  );
 
   useEffect(() => {
     loadLanguage();
@@ -263,42 +372,36 @@ export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }
   const loadLanguage = async () => {
     try {
       const savedLanguage = await AsyncStorage.getItem('app_language');
-      if (savedLanguage && (savedLanguage === 'ar' || savedLanguage === 'en' || savedLanguage === 'fr')) {
-        setLanguageState(savedLanguage as Language);
+      if (isLanguage(savedLanguage)) {
+        setLanguageState(savedLanguage);
+      } else if (Platform.OS === 'web') {
+        setLanguageState(getDeviceLanguage());
       }
     } catch (error) {
       console.error('Error loading language:', error);
     }
   };
 
-  const setLanguage = async (lang: Language) => {
+  const setLanguage = useCallback(async (lang: Language) => {
+    setLanguageState(lang);
     try {
       await AsyncStorage.setItem('app_language', lang);
-      setLanguageState(lang);
-      
-      // Note: RTL layout change requires app restart
-      // For production, you'd handle this more gracefully
-      const shouldBeRTL = lang === 'ar';
-      if (I18nManager.isRTL !== shouldBeRTL) {
-        // I18nManager.forceRTL(shouldBeRTL);
-        // Would need app restart here
-      }
     } catch (error) {
       console.error('Error saving language:', error);
     }
-  };
+  }, []);
 
-  const t = (key: string): string => {
-    return translations[language][key] || key;
-  };
-
-  const isRTL = language === 'ar';
-
-  return (
-    <LanguageContext.Provider value={{ language, setLanguage, t, isRTL }}>
-      {children}
-    </LanguageContext.Provider>
+  const t = useCallback(
+    (key: string): string => translations[language][key] ?? translations.en[key] ?? key,
+    [language]
   );
+
+  const value = useMemo(
+    () => ({ language, setLanguage, t, isRTL: language === 'ar' }),
+    [language, setLanguage, t]
+  );
+
+  return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>;
 };
 
 export const useLanguage = () => {

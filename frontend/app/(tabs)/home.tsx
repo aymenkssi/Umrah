@@ -5,7 +5,6 @@ import {
   StyleSheet,
   ScrollView,
   TouchableOpacity,
-  Dimensions,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { router } from 'expo-router';
@@ -14,15 +13,19 @@ import { useLanguage } from '../../contexts/LanguageContext';
 import { useSettings } from '../../contexts/SettingsContext';
 import { COLORS, SPACING, BORDER_RADIUS, SHADOWS, FONT_SIZES } from '../../constants/theme';
 import { IslamicPattern, IslamicBorder } from '../../components/IslamicPattern';
+import umrahSteps from '../../data/umrah-steps.json';
 
-const { width } = Dimensions.get('window');
+const TOTAL_STEPS = umrahSteps.length;
+const STEP_IDS = new Set(umrahSteps.map((step) => step.id));
 
 export default function HomeScreen() {
-  const { t, language, isRTL } = useLanguage();
+  const { t, isRTL } = useLanguage();
   const { fontSize, completedSteps } = useSettings();
   const fonts = FONT_SIZES[fontSize];
 
-  const progressPercentage = (completedSteps.length / 6) * 100;
+  // Ignore ids of steps that may have been removed from the guide since they were saved.
+  const doneCount = completedSteps.filter((id) => STEP_IDS.has(id)).length;
+  const progressPercentage = Math.min(100, (doneCount / TOTAL_STEPS) * 100);
 
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
@@ -46,7 +49,7 @@ export default function HomeScreen() {
         </View>
 
         {/* Progress Card */}
-        {completedSteps.length > 0 && (
+        {doneCount > 0 && (
           <View style={[styles.card, styles.progressCard]}>
             <View style={styles.cardHeader}>
               <Ionicons name="checkmark-circle" size={24} color={COLORS.primary} />
@@ -56,7 +59,7 @@ export default function HomeScreen() {
               <View style={[styles.progressBar, { width: `${progressPercentage}%` }]} />
             </View>
             <Text style={[styles.progressText, { fontSize: fonts.sm }]}>
-              {completedSteps.length} / 6 {t('step_completed')}
+              {doneCount} / {TOTAL_STEPS} {t('step_completed')}
             </Text>
           </View>
         )}
@@ -120,6 +123,17 @@ export default function HomeScreen() {
             </Text>
           </TouchableOpacity>
         </View>
+
+        <TouchableOpacity
+          style={styles.wideFeatureCard}
+          onPress={() => router.push('/duas')}
+          activeOpacity={0.8}
+        >
+          <View style={[styles.featureIcon, styles.wideFeatureIcon, { backgroundColor: COLORS.primaryDark }]}>
+            <Ionicons name="heart" size={28} color={COLORS.textLight} />
+          </View>
+          <Text style={[styles.featureTitle, { fontSize: fonts.md }]}>{t('duas')}</Text>
+        </TouchableOpacity>
 
         {/* Disclaimer */}
         <View style={styles.disclaimerCard}>
@@ -257,6 +271,20 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     color: COLORS.text,
     textAlign: 'center',
+  },
+  wideFeatureCard: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: COLORS.surface,
+    borderRadius: BORDER_RADIUS.lg,
+    padding: SPACING.md,
+    marginHorizontal: SPACING.md,
+    marginTop: SPACING.md,
+    ...SHADOWS.small,
+  },
+  wideFeatureIcon: {
+    marginBottom: 0,
+    marginRight: SPACING.md,
   },
   disclaimerCard: {
     flexDirection: 'row',

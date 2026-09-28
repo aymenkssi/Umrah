@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import {
   View,
   Text,
@@ -12,84 +12,95 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
-import * as Location from 'expo-location';
-import { useLanguage } from '../../contexts/LanguageContext';
+import { useLanguage, Language } from '../../contexts/LanguageContext';
 import { useSettings } from '../../contexts/SettingsContext';
 import { COLORS, SPACING, BORDER_RADIUS, SHADOWS, FONT_SIZES } from '../../constants/theme';
 import { calculateDistance } from '../../utils/calculations';
+import { getCurrentCoords } from '../../utils/location';
 import miqatData from '../../data/miqat.json';
+
+type LocalizedText = Record<Language, string>;
+
+interface Miqat {
+  id: string;
+  name: LocalizedText;
+  notes: LocalizedText;
+  lat: number;
+  lng: number;
+  phone?: string;
+  isForMakkah?: boolean;
+  distance: number | null;
+}
+
+// Lower-case and strip Latin accents and Arabic harakat so searches ignore them.
+const normalizeSearch = (value: string) =>
+  value
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f\u064B-\u065F\u0670]/g, '')
+    .toLowerCase()
+    .trim();
 
 export default function MiqatScreen() {
   const { t, language } = useLanguage();
   const { fontSize } = useSettings();
   const fonts = FONT_SIZES[fontSize];
 
-  const [location, setLocation] = useState<any>(null);
-  const [loading, setLoading] = useState(false);
+  const [hasLocation, setHasLocation] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
-  const [miqatList, setMiqatList] = useState<any[]>([]);
+  const [miqatList, setMiqatList] = useState<Miqat[]>(() =>
+    (miqatData as Omit<Miqat, 'distance'>[]).map((m) => ({ ...m, distance: null }))
+  );
 
-  useEffect(() => {
-    requestLocationPermission();
-  }, []);
-
-  const requestLocationPermission = async () => {
-    try {
-      const { status } = await Location.requestForegroundPermissionsAsync();
-      if (status === 'granted') {
-        getLocation();
-      } else {
-        Alert.alert(t('permission_denied'), t('permission_denied_desc'));
-        calculateDistancesWithoutLocation();
-      }
-    } catch (error) {
-      console.error('Error requesting location:', error);
-      calculateDistancesWithoutLocation();
-    }
-  };
-
-  const getLocation = async () => {
+  const loadDistances = useCallback(async () => {
     setLoading(true);
     try {
-      const loc = await Location.getCurrentPositionAsync({});
-      setLocation(loc);
-      calculateDistances(loc.coords.latitude, loc.coords.longitude);
+      const coords = await getCurrentCoords();
+      if (!coords) {
+        Alert.alert(t('permission_denied'), t('permission_denied_desc'));
+        return;
+      }
+      const withDistance = (miqatData as Omit<Miqat, 'distance'>[])
+        .map((miqat) => ({
+          ...miqat,
+          distance: calculateDistance(coords.latitude, coords.longitude, miqat.lat, miqat.lng),
+        }))
+        .sort((a, b) => a.distance - b.distance);
+      setMiqatList(withDistance);
+      setHasLocation(true);
     } catch (error) {
       console.error('Error getting location:', error);
-      calculateDistancesWithoutLocation();
     } finally {
       setLoading(false);
     }
-  };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  const calculateDistances = (lat: number, lng: number) => {
-    const miqatsWithDistance = miqatData.map((miqat) => ({
-      ...miqat,
-      distance: calculateDistance(lat, lng, miqat.lat, miqat.lng),
-    }));
-    
-    miqatsWithDistance.sort((a, b) => a.distance - b.distance);
-    setMiqatList(miqatsWithDistance);
-  };
+  useEffect(() => {
+    loadDistances();
+  }, [loadDistances]);
 
-  const calculateDistancesWithoutLocation = () => {
-    setMiqatList(miqatData.map(m => ({ ...m, distance: null })));
-  };
-
-  const handleNavigate = (miqat: any) => {
-    const url = `https://www.google.com/maps/dir/?api=1&destination=${miqat.lat},${miqat.lng}&destination_place_id=${miqat.name[language]}`;
-    Linking.openURL(url);
+  const handleNavigate = (miqat: Miqat) => {
+    const url = `https://www.google.com/maps/dir/?api=1&destination=${miqat.lat},${miqat.lng}`;
+    Linking.openURL(url).catch((error) => console.error('Error opening maps:', error));
   };
 
   const handleCall = (phone: string) => {
-    Linking.openURL(`tel:${phone}`);
+    Linking.openURL(`tel:${phone.replace(/\s+/g, '')}`).catch((error) =>
+      console.error('Error opening dialer:', error)
+    );
   };
 
-  const filteredMiqats = miqatList.filter((miqat) =>
-    miqat.name[language].toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const query = normalizeSearch(searchQuery);
+  const filteredMiqats = query
+    ? miqatList.filter((miqat) =>
+        Object.values(miqat.name).some((name) => normalizeSearch(name).includes(query))
+      )
+    : miqatList;
 
-  const nearestMiqat = filteredMiqats[0];
+  const makkahMiqat = miqatList.find((m) => m.isForMakkah);
+  // Nearest of the five main mawaqit, independent of the search box.
+  const nearestMiqat = hasLocation ? miqatList.find((m) => !m.isForMakkah) : undefined;
 
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
@@ -110,7 +121,7 @@ export default function MiqatScreen() {
         ) : (
           <>
             {/* Makkah Residents Special Card */}
-            {miqatList.find(m => m.isForMakkah) && (
+            {makkahMiqat && (
               <View style={[styles.card, styles.makkahCard]}>
                 <View style={styles.badgeContainer}>
                   <View style={[styles.badge, { backgroundColor: '#FFF9E6' }]}>
@@ -121,25 +132,25 @@ export default function MiqatScreen() {
                   </View>
                 </View>
                 <Text style={[styles.nearestTitle, { fontSize: fonts.xl }]}>
-                  {miqatList.find(m => m.isForMakkah)?.name[language]}
+                  {makkahMiqat.name[language]}
                 </Text>
                 <Text style={[styles.notesText, { fontSize: fonts.sm }]}>
-                  {miqatList.find(m => m.isForMakkah)?.notes[language]}
+                  {makkahMiqat.notes[language]}
                 </Text>
                 <View style={styles.actionsRow}>
                   <TouchableOpacity
                     style={[styles.actionButton, styles.navigateButton]}
-                    onPress={() => handleNavigate(miqatList.find(m => m.isForMakkah))}
+                    onPress={() => handleNavigate(makkahMiqat)}
                   >
                     <Ionicons name="navigate" size={20} color={COLORS.textLight} />
                     <Text style={[styles.actionButtonText, { fontSize: fonts.md }]}>
                       {t('navigate')}
                     </Text>
                   </TouchableOpacity>
-                  {miqatList.find(m => m.isForMakkah)?.phone && (
+                  {makkahMiqat.phone && (
                     <TouchableOpacity
                       style={[styles.actionButton, styles.callButton]}
-                      onPress={() => handleCall(miqatList.find(m => m.isForMakkah).phone)}
+                      onPress={() => handleCall(makkahMiqat.phone!)}
                     >
                       <Ionicons name="call" size={20} color={COLORS.text} />
                       <Text style={[styles.actionButtonText, { fontSize: fonts.md, color: COLORS.text }]}>
@@ -152,7 +163,7 @@ export default function MiqatScreen() {
             )}
 
             {/* Nearest Miqat Card */}
-            {nearestMiqat && location && !nearestMiqat.isForMakkah && (
+            {nearestMiqat && (
               <View style={[styles.card, styles.nearestCard]}>
                 <View style={styles.badgeContainer}>
                   <View style={styles.badge}>
@@ -194,7 +205,7 @@ export default function MiqatScreen() {
                   {nearestMiqat.phone && (
                     <TouchableOpacity
                       style={[styles.actionButton, styles.callButton]}
-                      onPress={() => handleCall(nearestMiqat.phone)}
+                      onPress={() => handleCall(nearestMiqat.phone!)}
                     >
                       <Ionicons name="call" size={20} color={COLORS.text} />
                       <Text style={[styles.actionButtonText, { fontSize: fonts.md, color: COLORS.text }]}>
@@ -211,7 +222,7 @@ export default function MiqatScreen() {
               <Ionicons name="search" size={20} color={COLORS.textSecondary} />
               <TextInput
                 style={[styles.searchInput, { fontSize: fonts.md }]}
-                placeholder={t('search')}
+                placeholder={t('search_miqat')}
                 value={searchQuery}
                 onChangeText={setSearchQuery}
                 placeholderTextColor={COLORS.textSecondary}
@@ -254,7 +265,7 @@ export default function MiqatScreen() {
                   {miqat.phone && (
                     <TouchableOpacity
                       style={styles.iconButton}
-                      onPress={() => handleCall(miqat.phone)}
+                      onPress={() => handleCall(miqat.phone!)}
                     >
                       <Ionicons name="call" size={24} color={COLORS.goldDark} />
                     </TouchableOpacity>

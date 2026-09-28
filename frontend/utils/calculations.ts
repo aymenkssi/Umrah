@@ -82,14 +82,23 @@ function toDegrees(radians: number): number {
 }
 
 /**
- * Format time remaining until next prayer
+ * Format time remaining until next prayer, e.g. "2h 05m" or "12m".
  */
 export function formatTimeRemaining(milliseconds: number): string {
-  const hours = Math.floor(milliseconds / (1000 * 60 * 60));
-  const minutes = Math.floor((milliseconds % (1000 * 60 * 60)) / (1000 * 60));
-  
+  const totalMinutes = Math.max(0, Math.ceil(milliseconds / (1000 * 60)));
+  const hours = Math.floor(totalMinutes / 60);
+  const minutes = totalMinutes % 60;
+
   if (hours > 0) {
-    return `${hours}h ${minutes}m`;
+    return `${hours}h ${String(minutes).padStart(2, '0')}m`;
   }
   return `${minutes}m`;
+}
+
+/**
+ * Smallest signed difference between two angles, in the range (-180, 180].
+ */
+export function normalizeAngle(angle: number): number {
+  const wrapped = ((angle % 360) + 360) % 360;
+  return wrapped > 180 ? wrapped - 360 : wrapped;
 }

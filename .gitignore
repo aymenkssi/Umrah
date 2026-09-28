@@ -77,11 +77,13 @@ agenthub/agents/youtube/db
 .cache/
 
 # Mobile development
-android-sdk/ -e 
+android-sdk/
+
 # Environment files
+.env
 *.env
 *.env.*
--e 
-# Environment files
-*.env
-*.env.*
+
+# Metro bundler cache (never commit)
+.metro-cache/
+!.env.example

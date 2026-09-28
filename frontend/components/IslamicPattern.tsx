@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
-import Svg, { Path, G, Rect } from 'react-native-svg';
+import { View, StyleSheet, StyleProp, ViewStyle } from 'react-native';
+import Svg, { Path, G } from 'react-native-svg';
 import { COLORS } from '../constants/theme';
 
 interface IslamicPatternProps {
@@ -48,7 +48,7 @@ export const IslamicPattern: React.FC<IslamicPatternProps> = ({
 };
 
 interface IslamicBorderProps {
-  style?: any;
+  style?: StyleProp<ViewStyle>;
 }
 
 export const IslamicBorder: React.FC<IslamicBorderProps> = ({ style }) => {

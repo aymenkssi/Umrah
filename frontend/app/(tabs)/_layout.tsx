@@ -1,11 +1,14 @@
 import React from 'react';
 import { Tabs } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { COLORS } from '../../constants/theme';
 
 export default function TabsLayout() {
-  const { t, isRTL, language } = useLanguage();
+  const { t } = useLanguage();
+  // Keep the tab bar above the Android navigation bar / iOS home indicator.
+  const insets = useSafeAreaInsets();
 
   return (
     <Tabs
@@ -17,12 +20,12 @@ export default function TabsLayout() {
           backgroundColor: COLORS.surface,
           borderTopColor: COLORS.border,
           borderTopWidth: 1,
-          height: 60,
-          paddingBottom: 8,
-          paddingTop: 8,
+          height: 64 + insets.bottom,
+          paddingBottom: 8 + insets.bottom,
+          paddingTop: 6,
         },
         tabBarLabelStyle: {
-          fontSize: 12,
+          fontSize: 10,
           fontWeight: '600',
         },
       }}
@@ -39,7 +42,7 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="guide"
         options={{
-          title: t('guide'),
+          title: t('tab_guide'),
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="book" size={size} color={color} />
           ),
@@ -57,7 +60,7 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="prayer-times"
         options={{
-          title: t('prayer_times'),
+          title: t('tab_prayers'),
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="time" size={size} color={color} />
           ),
@@ -75,7 +78,7 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="duas"
         options={{
-          title: language === 'ar' ? 'الأدعية' : language === 'fr' ? 'Invocations' : 'Du\'a',
+          title: t('tab_duas'),
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="heart" size={size} color={color} />
           ),
@@ -84,7 +87,7 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="settings"
         options={{
-          title: t('settings'),
+          title: t('tab_settings'),
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="settings" size={size} color={color} />
           ),

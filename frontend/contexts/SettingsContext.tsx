@@ -1,7 +1,17 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import React, {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+  ReactNode,
+} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export type FontSize = 'small' | 'medium' | 'large';
+
+const FONT_SIZE_VALUES: FontSize[] = ['small', 'medium', 'large'];
 
 interface SettingsContextType {
   fontSize: FontSize;
@@ -15,10 +25,26 @@ interface SettingsContextType {
 
 const SettingsContext = createContext<SettingsContextType | undefined>(undefined);
 
+const parseSteps = (raw: string | null): string[] => {
+  if (!raw) return [];
+  try {
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed.filter((id) => typeof id === 'string') : [];
+  } catch {
+    return [];
+  }
+};
+
+const persist = (key: string, value: string) =>
+  AsyncStorage.setItem(key, value).catch((error) =>
+    console.error(`Error saving ${key}:`, error)
+  );
+
 export const SettingsProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [fontSize, setFontSizeState] = useState<FontSize>('medium');
   const [completedSteps, setCompletedSteps] = useState<string[]>([]);
   const [detailedView, setDetailedView] = useState<boolean>(false);
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     loadSettings();
@@ -32,74 +58,66 @@ export const SettingsProvider: React.FC<{ children: ReactNode }> = ({ children }
         AsyncStorage.getItem('detailed_view'),
       ]);
 
-      if (savedFontSize && ['small', 'medium', 'large'].includes(savedFontSize)) {
+      if (savedFontSize && (FONT_SIZE_VALUES as string[]).includes(savedFontSize)) {
         setFontSizeState(savedFontSize as FontSize);
       }
 
-      if (savedSteps) {
-        setCompletedSteps(JSON.parse(savedSteps));
-      }
+      setCompletedSteps(parseSteps(savedSteps));
 
       if (savedView) {
         setDetailedView(savedView === 'true');
       }
     } catch (error) {
       console.error('Error loading settings:', error);
+    } finally {
+      setLoaded(true);
     }
   };
 
-  const setFontSize = async (size: FontSize) => {
-    try {
-      await AsyncStorage.setItem('font_size', size);
-      setFontSizeState(size);
-    } catch (error) {
-      console.error('Error saving font size:', error);
-    }
-  };
+  const setFontSize = useCallback(async (size: FontSize) => {
+    setFontSizeState(size);
+    await persist('font_size', size);
+  }, []);
 
-  const toggleStepCompletion = async (stepId: string) => {
-    try {
-      const newCompletedSteps = completedSteps.includes(stepId)
-        ? completedSteps.filter(id => id !== stepId)
-        : [...completedSteps, stepId];
-      
-      await AsyncStorage.setItem('completed_steps', JSON.stringify(newCompletedSteps));
-      setCompletedSteps(newCompletedSteps);
-    } catch (error) {
-      console.error('Error toggling step completion:', error);
-    }
-  };
+  // Functional updates so that quick successive taps never work on stale state.
+  const toggleStepCompletion = useCallback(async (stepId: string) => {
+    setCompletedSteps((current) =>
+      current.includes(stepId) ? current.filter((id) => id !== stepId) : [...current, stepId]
+    );
+  }, []);
 
-  const resetProgress = async () => {
-    try {
-      await AsyncStorage.setItem('completed_steps', JSON.stringify([]));
-      setCompletedSteps([]);
-    } catch (error) {
-      console.error('Error resetting progress:', error);
-    }
-  };
+  const resetProgress = useCallback(async () => {
+    setCompletedSteps([]);
+  }, []);
 
-  const toggleView = () => {
-    const newView = !detailedView;
-    setDetailedView(newView);
-    AsyncStorage.setItem('detailed_view', String(newView));
-  };
+  const toggleView = useCallback(() => {
+    setDetailedView((current) => !current);
+  }, []);
 
-  return (
-    <SettingsContext.Provider
-      value={{
-        fontSize,
-        setFontSize,
-        completedSteps,
-        toggleStepCompletion,
-        resetProgress,
-        detailedView,
-        toggleView,
-      }}
-    >
-      {children}
-    </SettingsContext.Provider>
+  // Persist progress and view mode once the saved values have been loaded,
+  // so the initial defaults never overwrite what is stored on the device.
+  useEffect(() => {
+    if (loaded) persist('completed_steps', JSON.stringify(completedSteps));
+  }, [loaded, completedSteps]);
+
+  useEffect(() => {
+    if (loaded) persist('detailed_view', String(detailedView));
+  }, [loaded, detailedView]);
+
+  const value = useMemo(
+    () => ({
+      fontSize,
+      setFontSize,
+      completedSteps,
+      toggleStepCompletion,
+      resetProgress,
+      detailedView,
+      toggleView,
+    }),
+    [fontSize, setFontSize, completedSteps, toggleStepCompletion, resetProgress, detailedView, toggleView]
   );
+
+  return <SettingsContext.Provider value={value}>{children}</SettingsContext.Provider>;
 };
 
 export const useSettings = () => {

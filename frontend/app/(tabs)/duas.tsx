@@ -55,7 +55,7 @@ export default function DuasScreen() {
     <SafeAreaView style={styles.container} edges={['top']}>
       <View style={styles.header}>
         <Text style={[styles.headerTitle, { fontSize: fonts.xxl }]}>
-          {language === 'ar' ? 'الأدعية' : language === 'fr' ? 'Invocations' : 'Supplications'}
+          {t('duas')}
         </Text>
       </View>
 
@@ -91,7 +91,7 @@ export default function DuasScreen() {
                 {category.category[language]}
               </Text>
               <Text style={[styles.categoryCount, { fontSize: fonts.sm }]}>
-                {category.duas.length} {language === 'ar' ? 'دعاء' : language === 'fr' ? 'invocations' : 'supplications'}
+                {category.duas.length} {t('duas_count')}
               </Text>
             </View>
             <Ionicons name="chevron-forward" size={24} color={COLORS.textSecondary} />
@@ -135,7 +135,7 @@ export default function DuasScreen() {
                 <View style={styles.duaFooter}>
                   <Ionicons name="eye" size={16} color={COLORS.primary} />
                   <Text style={[styles.viewMore, { fontSize: fonts.sm }]}>
-                    {language === 'ar' ? 'اضغط للتفاصيل' : language === 'fr' ? 'Appuyez pour les détails' : 'Tap for details'}
+                    {t('tap_for_details')}
                   </Text>
                 </View>
               </TouchableOpacity>
@@ -156,7 +156,7 @@ export default function DuasScreen() {
               <Ionicons name="close" size={28} color={COLORS.text} />
             </TouchableOpacity>
             <Text style={[styles.modalTitle, { fontSize: fonts.lg }]}>
-              {language === 'ar' ? 'تفاصيل الدعاء' : language === 'fr' ? 'Détails' : 'Details'}
+              {t('dua_details')}
             </Text>
             <View style={{ width: 28 }} />
           </View>
@@ -167,7 +167,7 @@ export default function DuasScreen() {
               <View style={styles.sectionHeader}>
                 <Ionicons name="book" size={20} color={COLORS.primary} />
                 <Text style={[styles.sectionTitle, { fontSize: fonts.md }]}>
-                  {language === 'ar' ? 'الدعاء بالعربية' : language === 'fr' ? 'En arabe' : 'Arabic'}
+                  {t('arabic_text')}
                 </Text>
               </View>
               <Text style={[styles.duaArabicLarge, { fontSize: fonts.xxl }]}>
@@ -181,7 +181,7 @@ export default function DuasScreen() {
                 <View style={styles.sectionHeader}>
                   <Ionicons name="text" size={20} color={COLORS.goldDark} />
                   <Text style={[styles.sectionTitle, { fontSize: fonts.md }]}>
-                    {language === 'ar' ? 'النطق' : language === 'fr' ? 'Translittération' : 'Transliteration'}
+                    {t('transliteration')}
                   </Text>
                 </View>
                 <Text style={[styles.duaTranslitLarge, { fontSize: fonts.lg }]}>
@@ -191,16 +191,17 @@ export default function DuasScreen() {
             )}
 
             {/* Translation */}
-            {selectedDua?.translation && (
+            {/* The Arabic text is already shown above, so no translation in Arabic mode */}
+            {selectedDua?.translation && language !== 'ar' && (
               <View style={styles.duaSection}>
                 <View style={styles.sectionHeader}>
                   <Ionicons name="language" size={20} color={COLORS.success} />
                   <Text style={[styles.sectionTitle, { fontSize: fonts.md }]}>
-                    {language === 'ar' ? 'الترجمة' : language === 'fr' ? 'Traduction' : 'Translation'}
+                    {t('translation')}
                   </Text>
                 </View>
                 <Text style={[styles.duaTranslation, { fontSize: fonts.md }]}>
-                  {selectedDua.translation[language === 'ar' ? 'en' : language]}
+                  {selectedDua.translation[language]}
                 </Text>
               </View>
             )}
