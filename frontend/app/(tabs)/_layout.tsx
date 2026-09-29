@@ -42,7 +42,7 @@ export default function TabsLayout() {
           paddingTop: 6,
         },
         tabBarLabelStyle: {
-          fontSize: 10,
+          fontSize: 11,
           fontWeight: '600',
         },
       }}
@@ -68,6 +68,8 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="miqat"
         options={{
+          // Reached from the home screen; hidden from the tab bar to keep 5 tabs.
+          href: null,
           title: t('miqat'),
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="location" size={size} color={color} />
@@ -95,6 +97,7 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="duas"
         options={{
+          href: null,
           title: t('tab_duas'),
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="heart" size={size} color={color} />

@@ -22,6 +22,8 @@ interface NotificationsContextType {
   updateSettings: (next: NotificationSettings) => Promise<boolean>;
   /** Latest device position, used to compute the reminder times. */
   setCoords: (coords: Coords) => void;
+  /** Last known position (saved), or null: lets other screens show prayer times without asking for GPS. */
+  coords: Coords | null;
 }
 
 const NotificationsContext = createContext<NotificationsContextType | undefined>(undefined);
@@ -92,8 +94,8 @@ export const NotificationsProvider: React.FC<{ children: ReactNode }> = ({ child
   }, [loaded, coords, settings, language, t]);
 
   const value = useMemo(
-    () => ({ supported: notificationsSupported, settings, updateSettings, setCoords }),
-    [settings, updateSettings, setCoords]
+    () => ({ supported: notificationsSupported, settings, updateSettings, setCoords, coords }),
+    [settings, updateSettings, setCoords, coords]
   );
 
   return <NotificationsContext.Provider value={value}>{children}</NotificationsContext.Provider>;

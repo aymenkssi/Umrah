@@ -1,153 +1,153 @@
-import React from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  ScrollView,
-  TouchableOpacity,
-} from 'react-native';
+import React, { useEffect, useMemo, useState } from 'react';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { router } from 'expo-router';
+import { router, Href } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { useSettings } from '../../contexts/SettingsContext';
+import { usePrayerNotifications } from '../../contexts/NotificationsContext';
 import { SPACING, BORDER_RADIUS, SHADOWS, FONT_SIZES, Palette } from '../../constants/theme';
 import { AdBanner } from '../../components/AdBanner';
 import { AppMessages } from '../../components/AppMessages';
-import { IslamicPattern, IslamicBorder } from '../../components/IslamicPattern';
+import { IslamicPattern } from '../../components/IslamicPattern';
 import umrahSteps from '../../data/umrah-steps.json';
 import { useTheme, useThemedStyles } from '../../contexts/ThemeContext';
+import { computePrayerTimes, getNextPrayer } from '../../utils/prayer';
+import { formatTimeRemaining } from '../../utils/calculations';
 
-const TOTAL_STEPS = umrahSteps.length;
-const STEP_IDS = new Set(umrahSteps.map((step) => step.id));
+const STEPS = [...umrahSteps].sort((a, b) => a.order - b.order);
+const STEP_IDS = new Set(STEPS.map((step) => step.id));
+
+type Tile = { key: string; icon: keyof typeof Ionicons.glyphMap; label: string; href: Href; gold?: boolean };
 
 export default function HomeScreen() {
   const { colors } = useTheme();
   const styles = useThemedStyles(makeStyles);
-  const { t, isRTL } = useLanguage();
+  const { t, language, isRTL } = useLanguage();
   const { fontSize, completedSteps } = useSettings();
+  const { coords } = usePrayerNotifications();
   const fonts = FONT_SIZES[fontSize];
+  const align = { textAlign: isRTL ? ('right' as const) : ('left' as const) };
+
+  const [now, setNow] = useState(new Date());
+  useEffect(() => {
+    const timer = setInterval(() => setNow(new Date()), 60 * 1000);
+    return () => clearInterval(timer);
+  }, []);
+
+  // Next prayer from the last known position: no location prompt on the home screen.
+  const dayKey = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
+  const nextPrayer = useMemo(() => {
+    if (!coords) return null;
+    const day = new Date(dayKey);
+    const tomorrow = new Date(dayKey);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    const today = computePrayerTimes(coords.latitude, coords.longitude, day).times;
+    const next = computePrayerTimes(coords.latitude, coords.longitude, tomorrow).times;
+    return { today, tomorrowFajr: next.fajr };
+  }, [coords, dayKey]);
+  const upcoming = nextPrayer ? getNextPrayer(nextPrayer.today, nextPrayer.tomorrowFajr, now) : null;
 
   // Ignore ids of steps that may have been removed from the guide since they were saved.
   const doneCount = completedSteps.filter((id) => STEP_IDS.has(id)).length;
-  const progressPercentage = Math.min(100, (doneCount / TOTAL_STEPS) * 100);
+  const percent = Math.min(100, (doneCount / STEPS.length) * 100);
+  const nextStep = STEPS.find((s) => !completedSteps.includes(s.id));
+
+  const locale = language === 'ar' ? 'ar-SA' : language === 'fr' ? 'fr-FR' : 'en-GB';
+  const formatTime = (date: Date) =>
+    date.toLocaleTimeString(locale, { hour: '2-digit', minute: '2-digit', hour12: false });
+
+  const tiles: Tile[] = [
+    { key: 'guide', icon: 'book', label: t('tab_guide'), href: '/guide' },
+    { key: 'counter', icon: 'repeat', label: t('counter_short'), href: '/counter', gold: true },
+    { key: 'prayers', icon: 'time', label: t('tab_prayers'), href: '/prayer-times' },
+    { key: 'qibla', icon: 'compass', label: t('qibla'), href: '/qibla', gold: true },
+    { key: 'miqat', icon: 'location', label: t('miqat'), href: '/miqat' },
+    { key: 'duas', icon: 'heart', label: t('duas'), href: '/duas', gold: true },
+    { key: 'places', icon: 'map', label: t('places'), href: '/places' },
+    { key: 'checklist', icon: 'checkbox', label: t('checklist_short'), href: '/checklist', gold: true },
+  ];
 
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
-      <ScrollView
-        style={styles.scrollView}
-        contentContainerStyle={styles.scrollContent}
-        showsVerticalScrollIndicator={false}
-      >
-        {/* Header with Islamic Pattern */}
-        <View style={styles.header}>
-          <View style={styles.patternContainer}>
-            <IslamicPattern width={150} height={150} opacity={0.15} />
+      <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
+        {/* Hero */}
+        <View style={styles.hero}>
+          <View style={[styles.pattern, isRTL ? { left: -30 } : { right: -30 }]}>
+            <IslamicPattern width={170} height={170} opacity={0.18} />
           </View>
-          <Text style={[styles.title, { fontSize: fonts.xxxl, textAlign: isRTL ? 'right' : 'left' }]}>
-            {t('welcome_title')}
-          </Text>
-          <Text style={[styles.subtitle, { fontSize: fonts.md, textAlign: isRTL ? 'right' : 'left' }]}>
-            {t('welcome_subtitle')}
-          </Text>
-          <IslamicBorder style={{ marginTop: SPACING.lg }} />
+          <Text style={[styles.greeting, { fontSize: fonts.sm }, align]}>{t('peace_greeting')}</Text>
+          <Text style={[styles.title, { fontSize: fonts.xxl }, align]}>{t('welcome_title')}</Text>
+
+          <TouchableOpacity
+            style={styles.prayerPill}
+            onPress={() => router.push('/prayer-times')}
+            activeOpacity={0.85}
+            accessibilityRole="button"
+          >
+            <Ionicons name="time-outline" size={20} color={colors.onGold} />
+            {upcoming ? (
+              <Text style={[styles.prayerPillText, { fontSize: fonts.md }]}>
+                {t(upcoming.name)} · {formatTime(upcoming.time)} ·{' '}
+                {formatTimeRemaining(upcoming.time.getTime() - now.getTime())}
+              </Text>
+            ) : (
+              <Text style={[styles.prayerPillText, { fontSize: fonts.md }]}>{t('see_prayer_times')}</Text>
+            )}
+            <Ionicons name={isRTL ? 'chevron-back' : 'chevron-forward'} size={18} color={colors.onGold} />
+          </TouchableOpacity>
         </View>
 
         <AppMessages />
 
-        {/* Progress Card */}
-        {doneCount > 0 && (
-          <View style={[styles.card, styles.progressCard]}>
-            <View style={styles.cardHeader}>
-              <Ionicons name="checkmark-circle" size={24} color={colors.primary} />
-              <Text style={[styles.cardTitle, { fontSize: fonts.lg }]}>{t('progress')}</Text>
+        {/* Guide progress */}
+        <TouchableOpacity style={styles.guideCard} onPress={() => router.push('/guide')} activeOpacity={0.85}>
+          <View style={styles.guideHeader}>
+            <View style={styles.guideIcon}>
+              <Ionicons name={nextStep ? 'walk' : 'checkmark-done'} size={24} color={colors.textLight} />
             </View>
-            <View style={styles.progressBarContainer}>
-              <View style={[styles.progressBar, { width: `${progressPercentage}%` }]} />
+            <View style={styles.guideBody}>
+              <Text style={[styles.guideLabel, { fontSize: fonts.xs }, align]}>
+                {doneCount === 0 ? t('start_here') : nextStep ? t('next_step') : t('progress')}
+              </Text>
+              <Text style={[styles.guideTitle, { fontSize: fonts.lg }, align]}>
+                {nextStep ? nextStep.title[language as 'ar' | 'en' | 'fr'] : t('all_steps_done')}
+              </Text>
             </View>
-            <Text style={[styles.progressText, { fontSize: fonts.sm }]}>
-              {doneCount} / {TOTAL_STEPS} {t('step_completed')}
-            </Text>
+            <Ionicons name={isRTL ? 'chevron-back' : 'chevron-forward'} size={22} color={colors.textSecondary} />
           </View>
-        )}
-
-        {/* Main Action Cards */}
-        <View style={styles.cardsContainer}>
-          <TouchableOpacity
-            style={[styles.actionCard, styles.primaryCard]}
-            onPress={() => router.push('/guide')}
-            activeOpacity={0.8}
-          >
-            <View style={styles.actionCardIcon}>
-              <Ionicons name="book" size={32} color={colors.textLight} />
-            </View>
-            <Text style={[styles.actionCardTitle, { fontSize: fonts.xl }]}>
-              {t('start_guide')}
-            </Text>
-            <Ionicons name="arrow-forward" size={20} color={colors.textLight} />
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={[styles.actionCard, styles.secondaryCard]}
-            onPress={() => router.push('/miqat')}
-            activeOpacity={0.8}
-          >
-            <View style={[styles.actionCardIcon, { backgroundColor: 'rgba(0, 0, 0, 0.12)' }]}>
-              <Ionicons name="location" size={32} color={colors.onGold} />
-            </View>
-            <Text style={[styles.actionCardTitle, { fontSize: fonts.xl, color: colors.onGold }]}>
-              {t('find_miqat')}
-            </Text>
-            <Ionicons name="arrow-forward" size={20} color={colors.onGold} />
-          </TouchableOpacity>
-        </View>
-
-        {/* Feature Cards Grid */}
-        <View style={styles.featuresGrid}>
-          <TouchableOpacity
-            style={styles.featureCard}
-            onPress={() => router.push('/prayer-times')}
-            activeOpacity={0.8}
-          >
-            <View style={[styles.featureIcon, { backgroundColor: colors.primaryLight }]}>
-              <Ionicons name="time" size={28} color={colors.textLight} />
-            </View>
-            <Text style={[styles.featureTitle, { fontSize: fonts.md }]}>
-              {t('view_prayer_times')}
-            </Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={styles.featureCard}
-            onPress={() => router.push('/qibla')}
-            activeOpacity={0.8}
-          >
-            <View style={[styles.featureIcon, { backgroundColor: colors.gold }]}>
-              <Ionicons name="compass" size={28} color={colors.onGold} />
-            </View>
-            <Text style={[styles.featureTitle, { fontSize: fonts.md }]}>
-              {t('find_qibla')}
-            </Text>
-          </TouchableOpacity>
-        </View>
-
-        <TouchableOpacity
-          style={styles.wideFeatureCard}
-          onPress={() => router.push('/duas')}
-          activeOpacity={0.8}
-        >
-          <View style={[styles.featureIcon, styles.wideFeatureIcon, { backgroundColor: colors.primaryDark }]}>
-            <Ionicons name="heart" size={28} color={colors.textLight} />
+          <View style={styles.progressTrack}>
+            <View style={[styles.progressFill, { width: `${percent}%` }]} />
           </View>
-          <Text style={[styles.featureTitle, { fontSize: fonts.md }]}>{t('duas')}</Text>
+          <Text style={[styles.progressText, { fontSize: fonts.xs }, align]}>
+            {doneCount} / {STEPS.length} {t('step_completed')}
+          </Text>
         </TouchableOpacity>
 
-        {/* Disclaimer */}
-        <View style={styles.disclaimerCard}>
-          <Ionicons name="information-circle-outline" size={20} color={colors.primary} />
-          <Text style={[styles.disclaimerText, { fontSize: fonts.sm }]}>
-            {t('disclaimer_desc')}
-          </Text>
+        {/* All features */}
+        <Text style={[styles.sectionTitle, { fontSize: fonts.lg }, align]}>{t('explore')}</Text>
+        <View style={styles.grid}>
+          {tiles.map((tile) => (
+            <TouchableOpacity
+              key={tile.key}
+              style={styles.tile}
+              onPress={() => router.push(tile.href)}
+              activeOpacity={0.8}
+              accessibilityRole="button"
+            >
+              <View style={[styles.tileIcon, { backgroundColor: tile.gold ? colors.gold : colors.primary }]}>
+                <Ionicons name={tile.icon} size={24} color={tile.gold ? colors.onGold : colors.textLight} />
+              </View>
+              <Text style={[styles.tileLabel, { fontSize: fonts.sm }]} numberOfLines={2}>
+                {tile.label}
+              </Text>
+            </TouchableOpacity>
+          ))}
+        </View>
+
+        <View style={styles.disclaimer}>
+          <Ionicons name="information-circle-outline" size={18} color={colors.textSecondary} />
+          <Text style={[styles.disclaimerText, { fontSize: fonts.xs }, align]}>{t('disclaimer_desc')}</Text>
         </View>
       </ScrollView>
       <AdBanner />
@@ -157,158 +157,87 @@ export default function HomeScreen() {
 
 const makeStyles = (c: Palette) =>
   StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: c.background,
-  },
-  scrollView: {
-    flex: 1,
-  },
-  scrollContent: {
-    paddingBottom: SPACING.xl,
-  },
-  header: {
-    backgroundColor: c.primary,
-    padding: SPACING.xl,
-    paddingTop: SPACING.lg,
-    position: 'relative',
-    overflow: 'hidden',
-  },
-  patternContainer: {
-    position: 'absolute',
-    right: -30,
-    top: -20,
-  },
-  title: {
-    fontWeight: 'bold',
-    color: c.textLight,
-    marginBottom: SPACING.sm,
-  },
-  subtitle: {
-    color: c.onPrimaryMuted,
-  },
-  card: {
-    backgroundColor: c.surface,
-    borderRadius: BORDER_RADIUS.lg,
-    padding: SPACING.lg,
-    margin: SPACING.md,
-    ...SHADOWS.small,
-  },
-  progressCard: {
-    marginTop: SPACING.md,
-  },
-  cardHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: SPACING.md,
-  },
-  cardTitle: {
-    fontWeight: '600',
-    color: c.text,
-    marginLeft: SPACING.sm,
-  },
-  progressBarContainer: {
-    height: 8,
-    backgroundColor: c.surfaceAlt,
-    borderRadius: BORDER_RADIUS.round,
-    overflow: 'hidden',
-    marginBottom: SPACING.sm,
-  },
-  progressBar: {
-    height: '100%',
-    backgroundColor: c.primary,
-  },
-  progressText: {
-    color: c.textSecondary,
-    textAlign: 'center',
-  },
-  cardsContainer: {
-    paddingHorizontal: SPACING.md,
-    marginTop: SPACING.md,
-  },
-  actionCard: {
-    borderRadius: BORDER_RADIUS.lg,
-    padding: SPACING.lg,
-    marginBottom: SPACING.md,
-    flexDirection: 'row',
-    alignItems: 'center',
-    ...SHADOWS.medium,
-  },
-  primaryCard: {
-    backgroundColor: c.primary,
-  },
-  secondaryCard: {
-    backgroundColor: c.gold,
-  },
-  actionCardIcon: {
-    width: 48,
-    height: 48,
-    borderRadius: BORDER_RADIUS.md,
-    backgroundColor: c.primaryDark,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginRight: SPACING.md,
-  },
-  actionCardTitle: {
-    flex: 1,
-    fontWeight: 'bold',
-    color: c.textLight,
-  },
-  featuresGrid: {
-    flexDirection: 'row',
-    paddingHorizontal: SPACING.md,
-    gap: SPACING.md,
-    marginTop: SPACING.sm,
-  },
-  featureCard: {
-    flex: 1,
-    backgroundColor: c.surface,
-    borderRadius: BORDER_RADIUS.lg,
-    padding: SPACING.lg,
-    alignItems: 'center',
-    ...SHADOWS.small,
-  },
-  featureIcon: {
-    width: 56,
-    height: 56,
-    borderRadius: BORDER_RADIUS.round,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: SPACING.md,
-  },
-  featureTitle: {
-    fontWeight: '600',
-    color: c.text,
-    textAlign: 'center',
-  },
-  wideFeatureCard: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: c.surface,
-    borderRadius: BORDER_RADIUS.lg,
-    padding: SPACING.md,
-    marginHorizontal: SPACING.md,
-    marginTop: SPACING.md,
-    ...SHADOWS.small,
-  },
-  wideFeatureIcon: {
-    marginBottom: 0,
-    marginRight: SPACING.md,
-  },
-  disclaimerCard: {
-    flexDirection: 'row',
-    backgroundColor: c.surfaceAlt,
-    borderRadius: BORDER_RADIUS.md,
-    padding: SPACING.md,
-    margin: SPACING.md,
-    marginTop: SPACING.lg,
-    borderLeftWidth: 4,
-    borderLeftColor: c.primary,
-  },
-  disclaimerText: {
-    flex: 1,
-    color: c.textSecondary,
-    marginLeft: SPACING.sm,
-    lineHeight: 20,
-  },
-});
+    container: { flex: 1, backgroundColor: c.background },
+    scrollContent: { paddingBottom: SPACING.xl },
+    hero: {
+      backgroundColor: c.primary,
+      paddingHorizontal: SPACING.lg,
+      paddingTop: SPACING.lg,
+      paddingBottom: SPACING.xl,
+      borderBottomLeftRadius: BORDER_RADIUS.xl,
+      borderBottomRightRadius: BORDER_RADIUS.xl,
+      overflow: 'hidden',
+    },
+    pattern: { position: 'absolute', top: -20 },
+    greeting: { color: c.onPrimaryMuted, fontWeight: '600', letterSpacing: 0.5 },
+    title: { color: c.textLight, fontWeight: 'bold', marginTop: SPACING.xs },
+    prayerPill: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      alignSelf: 'flex-start',
+      gap: SPACING.sm,
+      backgroundColor: c.gold,
+      paddingVertical: SPACING.sm,
+      paddingHorizontal: SPACING.md,
+      borderRadius: BORDER_RADIUS.round,
+      marginTop: SPACING.lg,
+    },
+    prayerPillText: { color: c.onGold, fontWeight: '700' },
+    guideCard: {
+      backgroundColor: c.surface,
+      borderRadius: BORDER_RADIUS.lg,
+      padding: SPACING.md,
+      marginHorizontal: SPACING.md,
+      marginTop: SPACING.md,
+      borderWidth: 1,
+      borderColor: c.border,
+      ...SHADOWS.small,
+    },
+    guideHeader: { flexDirection: 'row', alignItems: 'center', gap: SPACING.md },
+    guideIcon: {
+      width: 48,
+      height: 48,
+      borderRadius: 24,
+      backgroundColor: c.primary,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    guideBody: { flex: 1 },
+    guideLabel: { color: c.primary, fontWeight: '700', textTransform: 'uppercase' },
+    guideTitle: { color: c.text, fontWeight: 'bold' },
+    progressTrack: { height: 8, borderRadius: 4, backgroundColor: c.surfaceAlt, overflow: 'hidden', marginTop: SPACING.md },
+    progressFill: { height: '100%', backgroundColor: c.primary, borderRadius: 4 },
+    progressText: { color: c.textSecondary, marginTop: SPACING.xs },
+    sectionTitle: { color: c.text, fontWeight: 'bold', marginTop: SPACING.lg, marginHorizontal: SPACING.md },
+    grid: {
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      paddingHorizontal: SPACING.md - SPACING.xs,
+      marginTop: SPACING.sm,
+    },
+    tile: {
+      width: '25%',
+      alignItems: 'center',
+      paddingVertical: SPACING.sm,
+      paddingHorizontal: SPACING.xs,
+    },
+    tileIcon: {
+      width: 56,
+      height: 56,
+      borderRadius: BORDER_RADIUS.lg,
+      alignItems: 'center',
+      justifyContent: 'center',
+      ...SHADOWS.small,
+    },
+    tileLabel: { color: c.text, fontWeight: '600', textAlign: 'center', marginTop: SPACING.xs },
+    disclaimer: {
+      flexDirection: 'row',
+      gap: SPACING.sm,
+      margin: SPACING.md,
+      marginTop: SPACING.lg,
+      padding: SPACING.md,
+      borderRadius: BORDER_RADIUS.md,
+      backgroundColor: c.surfaceAlt,
+    },
+    disclaimerText: { flex: 1, color: c.textSecondary, lineHeight: 18 },
+  });
