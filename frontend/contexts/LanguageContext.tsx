@@ -130,6 +130,10 @@ export const translations: Record<Language, Record<string, string>> = {
     privacy_policy: 'سياسة الخصوصية',
     analytics_title: 'إحصاءات مجهولة الهوية',
     analytics_desc: 'شارك عدد مرات الاستخدام والدولة والشاشات المفتوحة دون أي بيانات شخصية، لمساعدتنا على تحسين التطبيق. عند الإيقاف تُحذف بياناتك من خادمنا.',
+    theme: 'المظهر',
+    theme_system: 'تلقائي (حسب الهاتف)',
+    theme_light: 'فاتح',
+    theme_dark: 'داكن',
   },
   en: {
     app_name: 'Umrah Companion',
@@ -238,6 +242,10 @@ export const translations: Record<Language, Record<string, string>> = {
     privacy_policy: 'Privacy policy',
     analytics_title: 'Anonymous statistics',
     analytics_desc: 'Share usage counts, country and screens opened, with no personal data, to help us improve the app. Turning this off deletes your data from our server.',
+    theme: 'Appearance',
+    theme_system: 'Automatic (phone setting)',
+    theme_light: 'Light',
+    theme_dark: 'Dark',
   },
   fr: {
     app_name: 'Compagnon de la \'Omra',
@@ -346,6 +354,10 @@ export const translations: Record<Language, Record<string, string>> = {
     privacy_policy: 'Politique de confidentialité',
     analytics_title: 'Statistiques anonymes',
     analytics_desc: 'Partager le nombre d\'utilisations, le pays et les écrans ouverts, sans aucune donnée personnelle, pour nous aider à améliorer l\'application. La désactivation supprime vos données de notre serveur.',
+    theme: 'Apparence',
+    theme_system: 'Automatique (réglage du téléphone)',
+    theme_light: 'Clair',
+    theme_dark: 'Sombre',
   },
 };
 

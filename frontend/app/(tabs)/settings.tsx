@@ -17,12 +17,15 @@ import { useSettings, FontSize } from '../../contexts/SettingsContext';
 import { useAds } from '../../contexts/AdsContext';
 import { PRIVACY_POLICY_URL } from '../../constants/api';
 import { loadAnalyticsEnabled, setAnalyticsEnabled } from '../../utils/analytics';
-import { COLORS, SPACING, BORDER_RADIUS, SHADOWS, FONT_SIZES } from '../../constants/theme';
+import { SPACING, BORDER_RADIUS, SHADOWS, FONT_SIZES, Palette } from '../../constants/theme';
 import { AdBanner } from '../../components/AdBanner';
+import { useTheme, useThemedStyles, ThemePreference } from '../../contexts/ThemeContext';
 
 const APP_VERSION = Constants.expoConfig?.version ?? '1.0.0';
 
 export default function SettingsScreen() {
+  const { colors, preference, setPreference } = useTheme();
+  const styles = useThemedStyles(makeStyles);
   const { t, language, setLanguage } = useLanguage();
   const { fontSize, setFontSize, resetProgress } = useSettings();
   const { privacyOptionsRequired, showPrivacyOptions } = useAds();
@@ -98,7 +101,7 @@ export default function SettingsScreen() {
                   {lang === 'ar' ? 'العربية' : lang === 'en' ? 'English' : 'Français'}
                 </Text>
                 {language === lang && (
-                  <Ionicons name="checkmark-circle" size={20} color={COLORS.textLight} />
+                  <Ionicons name="checkmark-circle" size={20} color={colors.textLight} />
                 )}
               </TouchableOpacity>
             ))}
@@ -128,8 +131,38 @@ export default function SettingsScreen() {
                   {t(size)}
                 </Text>
                 {fontSize === size && (
-                  <Ionicons name="checkmark-circle" size={20} color={COLORS.textLight} />
+                  <Ionicons name="checkmark-circle" size={20} color={colors.textLight} />
                 )}
+              </TouchableOpacity>
+            ))}
+          </View>
+        </View>
+
+        {/* Appearance */}
+        <View style={styles.section}>
+          <Text style={[styles.sectionTitle, { fontSize: fonts.lg }]}>{t('theme')}</Text>
+          <View style={styles.optionsContainer}>
+            {(['system', 'light', 'dark'] as ThemePreference[]).map((option) => (
+              <TouchableOpacity
+                key={option}
+                style={[styles.optionButton, preference === option && styles.optionButtonActive]}
+                onPress={() => setPreference(option)}
+                accessibilityRole="radio"
+                accessibilityState={{ selected: preference === option }}
+              >
+                <View style={styles.optionLabel}>
+                  <Ionicons
+                    name={option === 'dark' ? 'moon' : option === 'light' ? 'sunny' : 'phone-portrait-outline'}
+                    size={18}
+                    color={preference === option ? colors.textLight : colors.primary}
+                  />
+                  <Text
+                    style={[styles.optionText, { fontSize: fonts.md }, preference === option && styles.optionTextActive]}
+                  >
+                    {t(`theme_${option}`)}
+                  </Text>
+                </View>
+                {preference === option && <Ionicons name="checkmark-circle" size={20} color={colors.textLight} />}
               </TouchableOpacity>
             ))}
           </View>
@@ -140,7 +173,7 @@ export default function SettingsScreen() {
           <Text style={[styles.sectionTitle, { fontSize: fonts.lg }]}>{t('support_app')}</Text>
           
           <View style={styles.donateCard}>
-            <Ionicons name="heart" size={32} color={COLORS.error} />
+            <Ionicons name="heart" size={32} color={colors.error} />
             <Text style={[styles.donateMessage, { fontSize: fonts.md }]}>
               {t('donate_message')}
             </Text>
@@ -152,7 +185,7 @@ export default function SettingsScreen() {
                 );
               }}
             >
-              <Ionicons name="logo-paypal" size={20} color={COLORS.textLight} />
+              <Ionicons name="logo-paypal" size={20} color={colors.textLight} />
               <Text style={[styles.donateButtonText, { fontSize: fonts.md }]}>
                 {t('donate_via_paypal')}
               </Text>
@@ -166,7 +199,7 @@ export default function SettingsScreen() {
             style={styles.dangerButton}
             onPress={handleResetProgress}
           >
-            <Ionicons name="refresh" size={20} color={COLORS.error} />
+            <Ionicons name="refresh" size={20} color={colors.error} />
             <Text style={[styles.dangerButtonText, { fontSize: fonts.md }]}>
               {t('reset_progress')}
             </Text>
@@ -179,7 +212,7 @@ export default function SettingsScreen() {
           
           <View style={styles.infoCard}>
             <View style={styles.infoRow}>
-              <Ionicons name="shield-checkmark-outline" size={20} color={COLORS.primary} />
+              <Ionicons name="shield-checkmark-outline" size={20} color={colors.primary} />
               <View style={styles.infoContent}>
                 <Text style={[styles.infoTitle, { fontSize: fonts.md }]}>{t('privacy')}</Text>
                 <Text style={[styles.infoText, { fontSize: fonts.sm }]}>
@@ -195,12 +228,12 @@ export default function SettingsScreen() {
                 )
               }
             >
-              <Ionicons name="document-text-outline" size={18} color={COLORS.primary} />
+              <Ionicons name="document-text-outline" size={18} color={colors.primary} />
               <Text style={[styles.linkButtonText, { fontSize: fonts.sm }]}>{t('privacy_policy')}</Text>
             </TouchableOpacity>
             {privacyOptionsRequired && (
               <TouchableOpacity style={styles.linkButton} onPress={showPrivacyOptions}>
-                <Ionicons name="options-outline" size={18} color={COLORS.primary} />
+                <Ionicons name="options-outline" size={18} color={colors.primary} />
                 <Text style={[styles.linkButtonText, { fontSize: fonts.sm }]}>
                   {t('ad_privacy_options')}
                 </Text>
@@ -214,8 +247,8 @@ export default function SettingsScreen() {
               <Switch
                 value={analyticsOn}
                 onValueChange={handleAnalyticsChange}
-                trackColor={{ true: COLORS.primaryLight, false: COLORS.border }}
-                thumbColor={analyticsOn ? COLORS.primary : COLORS.surfaceAlt}
+                trackColor={{ true: colors.primaryLight, false: colors.border }}
+                thumbColor={analyticsOn ? colors.primary : colors.surfaceAlt}
                 accessibilityLabel={t('analytics_title')}
               />
             </View>
@@ -223,7 +256,7 @@ export default function SettingsScreen() {
 
           <View style={styles.infoCard}>
             <View style={styles.infoRow}>
-              <Ionicons name="alert-circle-outline" size={20} color={COLORS.goldDark} />
+              <Ionicons name="alert-circle-outline" size={20} color={colors.goldDark} />
               <View style={styles.infoContent}>
                 <Text style={[styles.infoTitle, { fontSize: fonts.md }]}>{t('disclaimer')}</Text>
                 <Text style={[styles.infoText, { fontSize: fonts.sm }]}>
@@ -245,21 +278,22 @@ export default function SettingsScreen() {
   );
 }
 
-const styles = StyleSheet.create({
+const makeStyles = (c: Palette) =>
+  StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: COLORS.background,
+    backgroundColor: c.background,
   },
   header: {
-    backgroundColor: COLORS.surface,
+    backgroundColor: c.surface,
     paddingHorizontal: SPACING.lg,
     paddingVertical: SPACING.md,
     borderBottomWidth: 1,
-    borderBottomColor: COLORS.border,
+    borderBottomColor: c.border,
   },
   headerTitle: {
     fontWeight: 'bold',
-    color: COLORS.text,
+    color: c.text,
   },
   scrollView: {
     flex: 1,
@@ -273,7 +307,7 @@ const styles = StyleSheet.create({
   },
   sectionTitle: {
     fontWeight: 'bold',
-    color: COLORS.text,
+    color: c.text,
     marginBottom: SPACING.md,
     paddingHorizontal: SPACING.sm,
   },
@@ -285,41 +319,46 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     padding: SPACING.md,
-    backgroundColor: COLORS.surface,
+    backgroundColor: c.surface,
     borderRadius: BORDER_RADIUS.md,
     borderWidth: 2,
-    borderColor: COLORS.border,
+    borderColor: c.border,
     ...SHADOWS.small,
   },
   optionButtonActive: {
-    backgroundColor: COLORS.primary,
-    borderColor: COLORS.primary,
+    backgroundColor: c.primary,
+    borderColor: c.primary,
+  },
+  optionLabel: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: SPACING.sm,
   },
   optionText: {
     fontWeight: '600',
-    color: COLORS.text,
+    color: c.text,
   },
   optionTextActive: {
-    color: COLORS.textLight,
+    color: c.textLight,
   },
   dangerButton: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
     padding: SPACING.md,
-    backgroundColor: COLORS.surface,
+    backgroundColor: c.surface,
     borderRadius: BORDER_RADIUS.md,
     borderWidth: 2,
-    borderColor: COLORS.error,
+    borderColor: c.error,
     ...SHADOWS.small,
   },
   dangerButtonText: {
-    color: COLORS.error,
+    color: c.error,
     fontWeight: '600',
     marginLeft: SPACING.sm,
   },
   infoCard: {
-    backgroundColor: COLORS.surface,
+    backgroundColor: c.surface,
     borderRadius: BORDER_RADIUS.md,
     padding: SPACING.md,
     marginBottom: SPACING.md,
@@ -335,11 +374,11 @@ const styles = StyleSheet.create({
   },
   infoTitle: {
     fontWeight: '600',
-    color: COLORS.text,
+    color: c.text,
     marginBottom: SPACING.xs,
   },
   infoText: {
-    color: COLORS.textSecondary,
+    color: c.textSecondary,
     lineHeight: 20,
   },
   switchRow: {
@@ -348,7 +387,7 @@ const styles = StyleSheet.create({
     marginTop: SPACING.md,
     paddingTop: SPACING.md,
     borderTopWidth: 1,
-    borderTopColor: COLORS.border,
+    borderTopColor: c.border,
   },
   linkButton: {
     flexDirection: 'row',
@@ -359,7 +398,7 @@ const styles = StyleSheet.create({
     paddingVertical: SPACING.xs,
   },
   linkButtonText: {
-    color: COLORS.primary,
+    color: c.primary,
     fontWeight: '600',
     marginLeft: SPACING.xs,
   },
@@ -368,19 +407,19 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   versionText: {
-    color: COLORS.textSecondary,
+    color: c.textSecondary,
   },
   donateCard: {
-    backgroundColor: COLORS.surface,
+    backgroundColor: c.surface,
     borderRadius: BORDER_RADIUS.lg,
     padding: SPACING.lg,
     alignItems: 'center',
     ...SHADOWS.medium,
     borderWidth: 2,
-    borderColor: COLORS.gold,
+    borderColor: c.gold,
   },
   donateMessage: {
-    color: COLORS.text,
+    color: c.text,
     textAlign: 'center',
     marginVertical: SPACING.md,
     lineHeight: 22,
@@ -396,7 +435,7 @@ const styles = StyleSheet.create({
     marginTop: SPACING.sm,
   },
   donateButtonText: {
-    color: COLORS.textLight,
+    color: c.textLight,
     fontWeight: '600',
     marginLeft: SPACING.sm,
   },

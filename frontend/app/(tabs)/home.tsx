@@ -11,15 +11,18 @@ import { router } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { useSettings } from '../../contexts/SettingsContext';
-import { COLORS, SPACING, BORDER_RADIUS, SHADOWS, FONT_SIZES } from '../../constants/theme';
+import { SPACING, BORDER_RADIUS, SHADOWS, FONT_SIZES, Palette } from '../../constants/theme';
 import { AdBanner } from '../../components/AdBanner';
 import { IslamicPattern, IslamicBorder } from '../../components/IslamicPattern';
 import umrahSteps from '../../data/umrah-steps.json';
+import { useTheme, useThemedStyles } from '../../contexts/ThemeContext';
 
 const TOTAL_STEPS = umrahSteps.length;
 const STEP_IDS = new Set(umrahSteps.map((step) => step.id));
 
 export default function HomeScreen() {
+  const { colors } = useTheme();
+  const styles = useThemedStyles(makeStyles);
   const { t, isRTL } = useLanguage();
   const { fontSize, completedSteps } = useSettings();
   const fonts = FONT_SIZES[fontSize];
@@ -53,7 +56,7 @@ export default function HomeScreen() {
         {doneCount > 0 && (
           <View style={[styles.card, styles.progressCard]}>
             <View style={styles.cardHeader}>
-              <Ionicons name="checkmark-circle" size={24} color={COLORS.primary} />
+              <Ionicons name="checkmark-circle" size={24} color={colors.primary} />
               <Text style={[styles.cardTitle, { fontSize: fonts.lg }]}>{t('progress')}</Text>
             </View>
             <View style={styles.progressBarContainer}>
@@ -73,12 +76,12 @@ export default function HomeScreen() {
             activeOpacity={0.8}
           >
             <View style={styles.actionCardIcon}>
-              <Ionicons name="book" size={32} color={COLORS.textLight} />
+              <Ionicons name="book" size={32} color={colors.textLight} />
             </View>
             <Text style={[styles.actionCardTitle, { fontSize: fonts.xl }]}>
               {t('start_guide')}
             </Text>
-            <Ionicons name="arrow-forward" size={20} color={COLORS.textLight} />
+            <Ionicons name="arrow-forward" size={20} color={colors.textLight} />
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -86,13 +89,13 @@ export default function HomeScreen() {
             onPress={() => router.push('/miqat')}
             activeOpacity={0.8}
           >
-            <View style={[styles.actionCardIcon, { backgroundColor: COLORS.goldDark }]}>
-              <Ionicons name="location" size={32} color={COLORS.text} />
+            <View style={[styles.actionCardIcon, { backgroundColor: 'rgba(0, 0, 0, 0.12)' }]}>
+              <Ionicons name="location" size={32} color={colors.onGold} />
             </View>
-            <Text style={[styles.actionCardTitle, { fontSize: fonts.xl, color: COLORS.text }]}>
+            <Text style={[styles.actionCardTitle, { fontSize: fonts.xl, color: colors.onGold }]}>
               {t('find_miqat')}
             </Text>
-            <Ionicons name="arrow-forward" size={20} color={COLORS.text} />
+            <Ionicons name="arrow-forward" size={20} color={colors.onGold} />
           </TouchableOpacity>
         </View>
 
@@ -103,8 +106,8 @@ export default function HomeScreen() {
             onPress={() => router.push('/prayer-times')}
             activeOpacity={0.8}
           >
-            <View style={[styles.featureIcon, { backgroundColor: COLORS.primaryLight }]}>
-              <Ionicons name="time" size={28} color={COLORS.textLight} />
+            <View style={[styles.featureIcon, { backgroundColor: colors.primaryLight }]}>
+              <Ionicons name="time" size={28} color={colors.textLight} />
             </View>
             <Text style={[styles.featureTitle, { fontSize: fonts.md }]}>
               {t('view_prayer_times')}
@@ -116,8 +119,8 @@ export default function HomeScreen() {
             onPress={() => router.push('/qibla')}
             activeOpacity={0.8}
           >
-            <View style={[styles.featureIcon, { backgroundColor: COLORS.gold }]}>
-              <Ionicons name="compass" size={28} color={COLORS.text} />
+            <View style={[styles.featureIcon, { backgroundColor: colors.gold }]}>
+              <Ionicons name="compass" size={28} color={colors.onGold} />
             </View>
             <Text style={[styles.featureTitle, { fontSize: fonts.md }]}>
               {t('find_qibla')}
@@ -130,15 +133,15 @@ export default function HomeScreen() {
           onPress={() => router.push('/duas')}
           activeOpacity={0.8}
         >
-          <View style={[styles.featureIcon, styles.wideFeatureIcon, { backgroundColor: COLORS.primaryDark }]}>
-            <Ionicons name="heart" size={28} color={COLORS.textLight} />
+          <View style={[styles.featureIcon, styles.wideFeatureIcon, { backgroundColor: colors.primaryDark }]}>
+            <Ionicons name="heart" size={28} color={colors.textLight} />
           </View>
           <Text style={[styles.featureTitle, { fontSize: fonts.md }]}>{t('duas')}</Text>
         </TouchableOpacity>
 
         {/* Disclaimer */}
         <View style={styles.disclaimerCard}>
-          <Ionicons name="information-circle-outline" size={20} color={COLORS.primary} />
+          <Ionicons name="information-circle-outline" size={20} color={colors.primary} />
           <Text style={[styles.disclaimerText, { fontSize: fonts.sm }]}>
             {t('disclaimer_desc')}
           </Text>
@@ -149,10 +152,11 @@ export default function HomeScreen() {
   );
 }
 
-const styles = StyleSheet.create({
+const makeStyles = (c: Palette) =>
+  StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: COLORS.background,
+    backgroundColor: c.background,
   },
   scrollView: {
     flex: 1,
@@ -161,7 +165,7 @@ const styles = StyleSheet.create({
     paddingBottom: SPACING.xl,
   },
   header: {
-    backgroundColor: COLORS.primary,
+    backgroundColor: c.primary,
     padding: SPACING.xl,
     paddingTop: SPACING.lg,
     position: 'relative',
@@ -174,14 +178,14 @@ const styles = StyleSheet.create({
   },
   title: {
     fontWeight: 'bold',
-    color: COLORS.textLight,
+    color: c.textLight,
     marginBottom: SPACING.sm,
   },
   subtitle: {
-    color: COLORS.goldLight,
+    color: c.onPrimaryMuted,
   },
   card: {
-    backgroundColor: COLORS.surface,
+    backgroundColor: c.surface,
     borderRadius: BORDER_RADIUS.lg,
     padding: SPACING.lg,
     margin: SPACING.md,
@@ -197,22 +201,22 @@ const styles = StyleSheet.create({
   },
   cardTitle: {
     fontWeight: '600',
-    color: COLORS.text,
+    color: c.text,
     marginLeft: SPACING.sm,
   },
   progressBarContainer: {
     height: 8,
-    backgroundColor: COLORS.surfaceAlt,
+    backgroundColor: c.surfaceAlt,
     borderRadius: BORDER_RADIUS.round,
     overflow: 'hidden',
     marginBottom: SPACING.sm,
   },
   progressBar: {
     height: '100%',
-    backgroundColor: COLORS.primary,
+    backgroundColor: c.primary,
   },
   progressText: {
-    color: COLORS.textSecondary,
+    color: c.textSecondary,
     textAlign: 'center',
   },
   cardsContainer: {
@@ -228,16 +232,16 @@ const styles = StyleSheet.create({
     ...SHADOWS.medium,
   },
   primaryCard: {
-    backgroundColor: COLORS.primary,
+    backgroundColor: c.primary,
   },
   secondaryCard: {
-    backgroundColor: COLORS.gold,
+    backgroundColor: c.gold,
   },
   actionCardIcon: {
     width: 48,
     height: 48,
     borderRadius: BORDER_RADIUS.md,
-    backgroundColor: COLORS.primaryDark,
+    backgroundColor: c.primaryDark,
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: SPACING.md,
@@ -245,7 +249,7 @@ const styles = StyleSheet.create({
   actionCardTitle: {
     flex: 1,
     fontWeight: 'bold',
-    color: COLORS.textLight,
+    color: c.textLight,
   },
   featuresGrid: {
     flexDirection: 'row',
@@ -255,7 +259,7 @@ const styles = StyleSheet.create({
   },
   featureCard: {
     flex: 1,
-    backgroundColor: COLORS.surface,
+    backgroundColor: c.surface,
     borderRadius: BORDER_RADIUS.lg,
     padding: SPACING.lg,
     alignItems: 'center',
@@ -271,13 +275,13 @@ const styles = StyleSheet.create({
   },
   featureTitle: {
     fontWeight: '600',
-    color: COLORS.text,
+    color: c.text,
     textAlign: 'center',
   },
   wideFeatureCard: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: COLORS.surface,
+    backgroundColor: c.surface,
     borderRadius: BORDER_RADIUS.lg,
     padding: SPACING.md,
     marginHorizontal: SPACING.md,
@@ -290,17 +294,17 @@ const styles = StyleSheet.create({
   },
   disclaimerCard: {
     flexDirection: 'row',
-    backgroundColor: COLORS.surfaceAlt,
+    backgroundColor: c.surfaceAlt,
     borderRadius: BORDER_RADIUS.md,
     padding: SPACING.md,
     margin: SPACING.md,
     marginTop: SPACING.lg,
     borderLeftWidth: 4,
-    borderLeftColor: COLORS.primary,
+    borderLeftColor: c.primary,
   },
   disclaimerText: {
     flex: 1,
-    color: COLORS.textSecondary,
+    color: c.textSecondary,
     marginLeft: SPACING.sm,
     lineHeight: 20,
   },

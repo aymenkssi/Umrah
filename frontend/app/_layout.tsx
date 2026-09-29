@@ -1,23 +1,50 @@
 import React from 'react';
-import { Stack } from 'expo-router';
+import { Stack, ThemeProvider as NavigationThemeProvider, DarkTheme, DefaultTheme } from 'expo-router';
+import { StatusBar } from 'expo-status-bar';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { LanguageProvider } from '../contexts/LanguageContext';
 import { SettingsProvider } from '../contexts/SettingsContext';
 import { AdsProvider } from '../contexts/AdsContext';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { ThemeProvider, useTheme } from '../contexts/ThemeContext';
+
+function ThemedStack() {
+  const { colors, isDark } = useTheme();
+  const base = isDark ? DarkTheme : DefaultTheme;
+  // Navigation containers use the palette too, so no white flash between screens in dark mode.
+  const navigationTheme = {
+    ...base,
+    colors: {
+      ...base.colors,
+      primary: colors.primary,
+      background: colors.background,
+      card: colors.surface,
+      text: colors.text,
+      border: colors.border,
+    },
+  };
+  return (
+    <NavigationThemeProvider value={navigationTheme}>
+      <StatusBar style={isDark ? 'light' : 'dark'} />
+      <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: colors.background } }}>
+        <Stack.Screen name="index" />
+        <Stack.Screen name="(tabs)" />
+      </Stack>
+    </NavigationThemeProvider>
+  );
+}
 
 export default function RootLayout() {
   return (
     <SafeAreaProvider>
-      <LanguageProvider>
-        <SettingsProvider>
-          <AdsProvider>
-            <Stack screenOptions={{ headerShown: false }}>
-              <Stack.Screen name="index" />
-              <Stack.Screen name="(tabs)" />
-            </Stack>
-          </AdsProvider>
-        </SettingsProvider>
-      </LanguageProvider>
+      <ThemeProvider>
+        <LanguageProvider>
+          <SettingsProvider>
+            <AdsProvider>
+              <ThemedStack />
+            </AdsProvider>
+          </SettingsProvider>
+        </LanguageProvider>
+      </ThemeProvider>
     </SafeAreaProvider>
   );
 }

@@ -1,7 +1,8 @@
 import React from 'react';
 import { View, StyleSheet, StyleProp, ViewStyle } from 'react-native';
 import Svg, { Path, G } from 'react-native-svg';
-import { COLORS } from '../constants/theme';
+import { Palette } from '../constants/theme';
+import { useTheme, useThemedStyles } from '../contexts/ThemeContext';
 
 interface IslamicPatternProps {
   width?: number;
@@ -14,16 +15,18 @@ export const IslamicPattern: React.FC<IslamicPatternProps> = ({
   width = 200,
   height = 200,
   opacity = 0.1,
-  color = COLORS.gold,
+  color,
 }) => {
+  const { colors } = useTheme();
+  const fill = color ?? colors.gold;
   return (
     <Svg width={width} height={height} viewBox="0 0 100 100" style={{ opacity }}>
       <G>
         {/* Islamic geometric pattern - 8-pointed star */}
         <Path
           d="M50 10 L55 30 L75 25 L60 40 L75 55 L55 50 L50 70 L45 50 L25 55 L40 40 L25 25 L45 30 Z"
-          fill={color}
-          stroke={color}
+          fill={fill}
+          stroke={fill}
           strokeWidth="0.5"
         />
         
@@ -31,7 +34,7 @@ export const IslamicPattern: React.FC<IslamicPatternProps> = ({
         <Path
           d="M50 5 A45 45 0 1 0 50 95 A45 45 0 1 0 50 5"
           fill="none"
-          stroke={color}
+          stroke={fill}
           strokeWidth="0.5"
         />
         
@@ -39,7 +42,7 @@ export const IslamicPattern: React.FC<IslamicPatternProps> = ({
         <Path
           d="M50 20 L53 35 L65 32 L58 42 L65 52 L53 49 L50 64 L47 49 L35 52 L42 42 L35 32 L47 35 Z"
           fill="none"
-          stroke={color}
+          stroke={fill}
           strokeWidth="0.5"
         />
       </G>
@@ -52,6 +55,7 @@ interface IslamicBorderProps {
 }
 
 export const IslamicBorder: React.FC<IslamicBorderProps> = ({ style }) => {
+  const styles = useThemedStyles(makeStyles);
   return (
     <View style={[styles.borderContainer, style]}>
       <View style={styles.topBorder} />
@@ -60,7 +64,8 @@ export const IslamicBorder: React.FC<IslamicBorderProps> = ({ style }) => {
   );
 };
 
-const styles = StyleSheet.create({
+const makeStyles = (c: Palette) =>
+  StyleSheet.create({
   borderContainer: {
     width: '100%',
     height: 2,
@@ -72,7 +77,7 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     height: 1,
-    backgroundColor: COLORS.gold,
+    backgroundColor: c.gold,
   },
   bottomBorder: {
     position: 'absolute',
@@ -80,6 +85,6 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     height: 1,
-    backgroundColor: COLORS.primary,
+    backgroundColor: c.primary,
   },
 });

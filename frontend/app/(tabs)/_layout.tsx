@@ -3,10 +3,11 @@ import { Tabs, usePathname } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useLanguage } from '../../contexts/LanguageContext';
-import { COLORS } from '../../constants/theme';
 import { startSession, trackScreen } from '../../utils/analytics';
+import { useTheme } from '../../contexts/ThemeContext';
 
 export default function TabsLayout() {
+  const { colors } = useTheme();
   const { t, language } = useLanguage();
   const pathname = usePathname();
   const sessionStarted = useRef(false);
@@ -30,11 +31,11 @@ export default function TabsLayout() {
     <Tabs
       screenOptions={{
         headerShown: false,
-        tabBarActiveTintColor: COLORS.primary,
-        tabBarInactiveTintColor: COLORS.textSecondary,
+        tabBarActiveTintColor: colors.primary,
+        tabBarInactiveTintColor: colors.textSecondary,
         tabBarStyle: {
-          backgroundColor: COLORS.surface,
-          borderTopColor: COLORS.border,
+          backgroundColor: colors.surface,
+          borderTopColor: colors.border,
           borderTopWidth: 1,
           height: 64 + insets.bottom,
           paddingBottom: 8 + insets.bottom,

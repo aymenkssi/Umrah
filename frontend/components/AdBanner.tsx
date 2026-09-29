@@ -3,13 +3,15 @@ import { AppState, Platform, StyleSheet, View } from 'react-native';
 import type { BannerAd as BannerAdType } from 'react-native-google-mobile-ads';
 import { useAds } from '../contexts/AdsContext';
 import { getBannerAdUnitId } from '../utils/ads';
-import { COLORS } from '../constants/theme';
+import { Palette } from '../constants/theme';
+import { useThemedStyles } from '../contexts/ThemeContext';
 
 /**
  * Anchored adaptive AdMob banner, meant to sit at the bottom of a screen,
  * just above the tab bar. Renders nothing when ads are unavailable or not allowed.
  */
 export const AdBanner: React.FC = () => {
+  const styles = useThemedStyles(makeStyles);
   const { ads, canShowAds } = useAds();
   const [failed, setFailed] = useState(false);
   const bannerRef = useRef<BannerAdType | null>(null);
@@ -43,11 +45,12 @@ export const AdBanner: React.FC = () => {
   );
 };
 
-const styles = StyleSheet.create({
+const makeStyles = (c: Palette) =>
+  StyleSheet.create({
   container: {
     alignItems: 'center',
-    backgroundColor: COLORS.surface,
+    backgroundColor: c.surface,
     borderTopWidth: 1,
-    borderTopColor: COLORS.border,
+    borderTopColor: c.border,
   },
 });

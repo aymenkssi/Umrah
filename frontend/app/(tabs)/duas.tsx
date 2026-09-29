@@ -11,10 +11,13 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { useSettings } from '../../contexts/SettingsContext';
-import { COLORS, SPACING, BORDER_RADIUS, SHADOWS, FONT_SIZES } from '../../constants/theme';
+import { SPACING, BORDER_RADIUS, SHADOWS, FONT_SIZES, Palette } from '../../constants/theme';
 import duasData from '../../data/general-duas.json';
+import { useTheme, useThemedStyles } from '../../contexts/ThemeContext';
 
 export default function DuasScreen() {
+  const { colors } = useTheme();
+  const styles = useThemedStyles(makeStyles);
   const { t, language } = useLanguage();
   const { fontSize } = useSettings();
   const fonts = FONT_SIZES[fontSize];
@@ -33,13 +36,13 @@ export default function DuasScreen() {
   };
 
   const categoryColors: Record<string, string> = {
-    comprehensive: COLORS.primary,
+    comprehensive: colors.primary,
     protection: '#2196F3',
     forgiveness: '#9C27B0',
     guidance: '#FF9800',
     provision: '#4CAF50',
     steadfastness: '#F44336',
-    jannah: COLORS.gold,
+    jannah: colors.gold,
     prosperity: '#00BCD4',
   };
 
@@ -69,7 +72,7 @@ export default function DuasScreen() {
             key={category.id}
             style={[
               styles.categoryCard,
-              { borderLeftColor: categoryColors[category.id] || COLORS.primary },
+              { borderLeftColor: categoryColors[category.id] || colors.primary },
             ]}
             onPress={() => handleCategoryPress(category)}
             activeOpacity={0.7}
@@ -77,13 +80,13 @@ export default function DuasScreen() {
             <View
               style={[
                 styles.categoryIcon,
-                { backgroundColor: categoryColors[category.id] || COLORS.primary },
+                { backgroundColor: categoryColors[category.id] || colors.primary },
               ]}
             >
               <Ionicons
                 name={categoryIcons[category.id] as any}
                 size={28}
-                color={COLORS.textLight}
+                color={colors.textLight}
               />
             </View>
             <View style={styles.categoryContent}>
@@ -94,7 +97,7 @@ export default function DuasScreen() {
                 {category.duas.length} {t('duas_count')}
               </Text>
             </View>
-            <Ionicons name="chevron-forward" size={24} color={COLORS.textSecondary} />
+            <Ionicons name="chevron-forward" size={24} color={colors.textSecondary} />
           </TouchableOpacity>
         ))}
       </ScrollView>
@@ -108,7 +111,7 @@ export default function DuasScreen() {
         <SafeAreaView style={styles.modalContainer} edges={['top']}>
           <View style={styles.modalHeader}>
             <TouchableOpacity onPress={() => setSelectedCategory(null)}>
-              <Ionicons name="close" size={28} color={COLORS.text} />
+              <Ionicons name="close" size={28} color={colors.text} />
             </TouchableOpacity>
             <Text style={[styles.modalTitle, { fontSize: fonts.xl }]}>
               {selectedCategory?.category[language]}
@@ -133,7 +136,7 @@ export default function DuasScreen() {
                   </Text>
                 )}
                 <View style={styles.duaFooter}>
-                  <Ionicons name="eye" size={16} color={COLORS.primary} />
+                  <Ionicons name="eye" size={16} color={colors.primary} />
                   <Text style={[styles.viewMore, { fontSize: fonts.sm }]}>
                     {t('tap_for_details')}
                   </Text>
@@ -153,7 +156,7 @@ export default function DuasScreen() {
         <SafeAreaView style={styles.modalContainer} edges={['top']}>
           <View style={styles.modalHeader}>
             <TouchableOpacity onPress={() => setSelectedDua(null)}>
-              <Ionicons name="close" size={28} color={COLORS.text} />
+              <Ionicons name="close" size={28} color={colors.text} />
             </TouchableOpacity>
             <Text style={[styles.modalTitle, { fontSize: fonts.lg }]}>
               {t('dua_details')}
@@ -165,7 +168,7 @@ export default function DuasScreen() {
             {/* Arabic Text */}
             <View style={styles.duaSection}>
               <View style={styles.sectionHeader}>
-                <Ionicons name="book" size={20} color={COLORS.primary} />
+                <Ionicons name="book" size={20} color={colors.primary} />
                 <Text style={[styles.sectionTitle, { fontSize: fonts.md }]}>
                   {t('arabic_text')}
                 </Text>
@@ -179,7 +182,7 @@ export default function DuasScreen() {
             {selectedDua?.transliteration && (
               <View style={styles.duaSection}>
                 <View style={styles.sectionHeader}>
-                  <Ionicons name="text" size={20} color={COLORS.goldDark} />
+                  <Ionicons name="text" size={20} color={colors.goldDark} />
                   <Text style={[styles.sectionTitle, { fontSize: fonts.md }]}>
                     {t('transliteration')}
                   </Text>
@@ -195,7 +198,7 @@ export default function DuasScreen() {
             {selectedDua?.translation && language !== 'ar' && (
               <View style={styles.duaSection}>
                 <View style={styles.sectionHeader}>
-                  <Ionicons name="language" size={20} color={COLORS.success} />
+                  <Ionicons name="language" size={20} color={colors.success} />
                   <Text style={[styles.sectionTitle, { fontSize: fonts.md }]}>
                     {t('translation')}
                   </Text>
@@ -212,21 +215,22 @@ export default function DuasScreen() {
   );
 }
 
-const styles = StyleSheet.create({
+const makeStyles = (c: Palette) =>
+  StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: COLORS.background,
+    backgroundColor: c.background,
   },
   header: {
-    backgroundColor: COLORS.surface,
+    backgroundColor: c.surface,
     paddingHorizontal: SPACING.lg,
     paddingVertical: SPACING.md,
     borderBottomWidth: 1,
-    borderBottomColor: COLORS.border,
+    borderBottomColor: c.border,
   },
   headerTitle: {
     fontWeight: 'bold',
-    color: COLORS.text,
+    color: c.text,
   },
   scrollView: {
     flex: 1,
@@ -238,7 +242,7 @@ const styles = StyleSheet.create({
   categoryCard: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: COLORS.surface,
+    backgroundColor: c.surface,
     borderRadius: BORDER_RADIUS.lg,
     padding: SPACING.md,
     marginBottom: SPACING.md,
@@ -258,51 +262,51 @@ const styles = StyleSheet.create({
   },
   categoryTitle: {
     fontWeight: 'bold',
-    color: COLORS.text,
+    color: c.text,
     marginBottom: SPACING.xs,
   },
   categoryCount: {
-    color: COLORS.textSecondary,
+    color: c.textSecondary,
   },
   modalContainer: {
     flex: 1,
-    backgroundColor: COLORS.background,
+    backgroundColor: c.background,
   },
   modalHeader: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor: COLORS.surface,
+    backgroundColor: c.surface,
     paddingHorizontal: SPACING.lg,
     paddingVertical: SPACING.md,
     borderBottomWidth: 1,
-    borderBottomColor: COLORS.border,
+    borderBottomColor: c.border,
   },
   modalTitle: {
     fontWeight: 'bold',
-    color: COLORS.text,
+    color: c.text,
   },
   duasList: {
     flex: 1,
   },
   duaCard: {
-    backgroundColor: COLORS.surface,
+    backgroundColor: c.surface,
     borderRadius: BORDER_RADIUS.lg,
     padding: SPACING.lg,
     marginBottom: SPACING.md,
     borderLeftWidth: 3,
-    borderLeftColor: COLORS.primary,
+    borderLeftColor: c.primary,
     ...SHADOWS.small,
   },
   duaArabic: {
     fontWeight: '600',
-    color: COLORS.text,
+    color: c.text,
     lineHeight: 32,
     textAlign: 'right',
     marginBottom: SPACING.sm,
   },
   duaTranslit: {
-    color: COLORS.textSecondary,
+    color: c.textSecondary,
     fontStyle: 'italic',
     lineHeight: 20,
     marginBottom: SPACING.sm,
@@ -313,7 +317,7 @@ const styles = StyleSheet.create({
     marginTop: SPACING.xs,
   },
   viewMore: {
-    color: COLORS.primary,
+    color: c.primary,
     marginLeft: SPACING.xs,
     fontWeight: '600',
   },
@@ -330,22 +334,22 @@ const styles = StyleSheet.create({
   },
   sectionTitle: {
     fontWeight: '600',
-    color: COLORS.text,
+    color: c.text,
     marginLeft: SPACING.sm,
   },
   duaArabicLarge: {
     fontWeight: '600',
-    color: COLORS.text,
+    color: c.text,
     lineHeight: 40,
     textAlign: 'right',
   },
   duaTranslitLarge: {
-    color: COLORS.textSecondary,
+    color: c.textSecondary,
     fontStyle: 'italic',
     lineHeight: 28,
   },
   duaTranslation: {
-    color: COLORS.text,
+    color: c.text,
     lineHeight: 24,
   },
 });
