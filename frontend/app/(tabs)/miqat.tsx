@@ -15,6 +15,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useLanguage, Language } from '../../contexts/LanguageContext';
 import { useSettings } from '../../contexts/SettingsContext';
 import { COLORS, SPACING, BORDER_RADIUS, SHADOWS, FONT_SIZES } from '../../constants/theme';
+import { AdBanner } from '../../components/AdBanner';
 import { calculateDistance } from '../../utils/calculations';
 import { getCurrentCoords } from '../../utils/location';
 import miqatData from '../../data/miqat.json';
@@ -283,6 +284,7 @@ export default function MiqatScreen() {
           </>
         )}
       </ScrollView>
+      <AdBanner />
     </SafeAreaView>
   );
 }

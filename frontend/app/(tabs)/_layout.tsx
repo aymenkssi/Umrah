@@ -1,12 +1,28 @@
-import React from 'react';
-import { Tabs } from 'expo-router';
+import React, { useEffect, useRef } from 'react';
+import { Tabs, usePathname } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { COLORS } from '../../constants/theme';
+import { startSession, trackScreen } from '../../utils/analytics';
 
 export default function TabsLayout() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+  const pathname = usePathname();
+  const sessionStarted = useRef(false);
+
+  // One anonymous session per launch (the splash screen gives the saved language time to load).
+  useEffect(() => {
+    if (sessionStarted.current) return;
+    sessionStarted.current = true;
+    startSession(language);
+  }, [language]);
+
+  useEffect(() => {
+    const screen = pathname.replace(/^\//, '');
+    if (screen) trackScreen(screen);
+  }, [pathname]);
+
   // Keep the tab bar above the Android navigation bar / iOS home indicator.
   const insets = useSafeAreaInsets();
 

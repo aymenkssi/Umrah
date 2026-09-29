@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Umrah Companion Admin</title>
+<style>
+  :root {
+    color-scheme: light;
+    --bg: #f6f6f2; --panel: #ffffff; --panel2: #f0efe9; --line: #e2e0d8;
+    --text: #1c1b18; --muted: #5f5d55; --accent: #1b5e20; --on-accent: #ffffff;
+    --series-1: #1baf7a; --grid: #e7e5de; --err: #b3261e;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:where(:not([data-theme="light"])) {
+      color-scheme: dark;
+      --bg: #0f120f; --panel: #181c18; --panel2: #212621; --line: #2d332d;
+      --text: #f2f2ee; --muted: #b3b6ac; --accent: #7cc47f; --on-accent: #0f120f;
+      --series-1: #199e70; --grid: #262b26; --err: #ff8a80;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --bg: #0f120f; --panel: #181c18; --panel2: #212621; --line: #2d332d;
+    --text: #f2f2ee; --muted: #b3b6ac; --accent: #7cc47f; --on-accent: #0f120f;
+    --series-1: #199e70; --grid: #262b26; --err: #ff8a80;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 15px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; padding: 0 16px; }
+  main { max-width: 1180px; margin: 0 auto; padding: 24px 0 64px; }
+  header { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  h1 { font-size: 21px; margin: 0; } h1 span { color: var(--accent); }
+  h2 { font-size: 16px; margin: 0 0 4px; }
+  p.hint { color: var(--muted); margin: 0 0 12px; font-size: 13px; }
+  .panel { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 16px; }
+  button, select, input { font: inherit; }
+  button { font-weight: 600; border-radius: 8px; border: 1px solid var(--line); background: var(--panel2); color: var(--text); padding: 7px 12px; cursor: pointer; }
+  button.primary { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+  input, select { background: var(--panel2); color: var(--text); border: 1px solid var(--line); border-radius: 8px; padding: 7px 9px; }
+  input { width: 100%; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  label { display: block; font-size: 13px; color: var(--muted); }
+  .err { color: var(--err); } .muted { color: var(--muted); }
+  #login { max-width: 420px; margin: 14vh auto 0; }
+  #login form { display: grid; gap: 12px; margin-top: 12px; }
+  nav.tabs { display: flex; gap: 18px; margin: 18px 0 16px; border-bottom: 1px solid var(--line); overflow-x: auto; }
+  nav.tabs button { border: 0; border-bottom: 2px solid transparent; border-radius: 0; background: none; color: var(--muted); padding: 8px 2px; }
+  nav.tabs button[aria-selected=true] { color: var(--text); border-bottom-color: var(--accent); }
+  .toolbar { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-bottom: 16px; }
+  .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-bottom: 16px; }
+  .tile .label { color: var(--muted); font-size: 13px; }
+  .tile .value { font-size: 28px; font-weight: 700; font-variant-numeric: tabular-nums; line-height: 1.2; }
+  .tile .sub { color: var(--muted); font-size: 12px; }
+  .grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; margin-top: 16px; }
+  .chart-wrap { position: relative; }
+  svg text { fill: var(--muted); font-size: 11px; font-variant-numeric: tabular-nums; }
+  .tooltip { position: absolute; pointer-events: none; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 6px 10px; font-size: 13px; box-shadow: 0 4px 14px rgba(0,0,0,.12); white-space: nowrap; display: none; }
+  table { width: 100%; border-collapse: collapse; }
+  th, td { padding: 7px 6px; border-bottom: 1px solid var(--line); text-align: left; font-variant-numeric: tabular-nums; }
+  th { color: var(--muted); font-weight: 600; font-size: 13px; }
+  td.num, th.num { text-align: right; }
+  td.label { white-space: nowrap; }
+  .bar { height: 8px; border-radius: 4px; background: var(--series-1); min-width: 2px; }
+  .bar-cell { width: 40%; }
+  .scroll { max-height: 420px; overflow: auto; }
+  details summary { cursor: pointer; color: var(--muted); font-size: 13px; margin-top: 8px; }
+  .empty { color: var(--muted); padding: 12px 0; }
+</style>
+</head>
+<body>
+<main>
+  <section id="login" class="panel" hidden>
+    <h1>Umrah Companion <span>Admin</span></h1>
+    <form id="login-form">
+      <label>Jeton d'administration (ADMIN_TOKEN)
+        <input id="token" type="password" autocomplete="current-password" required minlength="16">
+      </label>
+      <button class="primary" type="submit">Se connecter</button>
+      <div id="login-status" class="err" role="alert"></div>
+    </form>
+  </section>
+
+  <section id="app" hidden>
+    <header>
+      <h1>Umrah Companion <span>Admin</span></h1>
+      <button id="logout" type="button">Se déconnecter</button>
+    </header>
+    <nav class="tabs" role="tablist">
+      <button role="tab" aria-selected="true" data-tab="stats">Statistiques</button>
+    </nav>
+
+    <div id="tab-stats">
+      <div class="toolbar">
+        <label>Période
+          <select id="days">
+            <option value="7">7 jours</option>
+            <option value="30" selected>30 jours</option>
+            <option value="90">90 jours</option>
+            <option value="365">1 an</option>
+          </select>
+        </label>
+        <button id="refresh" type="button">Actualiser</button>
+        <span id="status" class="muted" role="status"></span>
+      </div>
+
+      <div class="tiles" id="tiles"></div>
+
+      <div class="panel">
+        <h2>Installations actives par jour</h2>
+        <p class="hint">Installations ayant ouvert l'application au moins une fois dans la journée (UTC).</p>
+        <div class="chart-wrap" id="chart"></div>
+        <details>
+          <summary>Voir le tableau</summary>
+          <div class="scroll"><table id="daily-table"></table></div>
+        </details>
+      </div>
+
+      <div class="grid2">
+        <div class="panel">
+          <h2>Pays</h2>
+          <p class="hint" id="geo-hint"></p>
+          <div class="scroll"><table id="countries"></table></div>
+        </div>
+        <div class="panel">
+          <h2>Écrans consultés</h2>
+          <p class="hint">Nombre total d'ouvertures de chaque écran sur la période.</p>
+          <table id="screens"></table>
+        </div>
+        <div class="panel">
+          <h2>Langues</h2>
+          <table id="languages"></table>
+        </div>
+        <div class="panel">
+          <h2>Versions et plateformes</h2>
+          <table id="versions"></table>
+          <table id="platforms" style="margin-top:12px"></table>
+        </div>
+      </div>
+      <p class="muted" style="margin-top:24px;font-size:12px">Pays déduits de l'adresse IP avec <a href="https://db-ip.com" style="color:inherit">IP Geolocation by DB-IP</a> (CC BY 4.0). Aucune adresse IP n'est enregistrée.</p>
+    </div>
+  </section>
+</main>
+
+<script>
+(() => {
+  const $ = (id) => document.getElementById(id);
+  const KEY = 'umrah-admin-token';
+  const nf = new Intl.NumberFormat('fr-FR');
+  const regionNames = new Intl.DisplayNames(['fr'], { type: 'region' });
+  const LANGS = { ar: 'Arabe', fr: 'Français', en: 'Anglais' };
+  const SCREENS = { home: 'Accueil', guide: 'Guide', miqat: 'Miqat', 'prayer-times': 'Horaires', qibla: 'Qibla', duas: 'Invocations', settings: 'Réglages' };
+  const PLATFORMS = { android: 'Android', ios: 'iOS' };
+
+  let token = '';
+  try { token = sessionStorage.getItem(KEY) || ''; } catch { /* storage unavailable */ }
+
+  const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+  async function api(path) {
+    const res = await fetch(path, { headers: { Authorization: `Bearer ${token}` } });
+    if (res.status === 401) { logout('Jeton invalide.'); throw new Error('unauthorized'); }
+    if (!res.ok) throw new Error((await res.json().catch(() => ({}))).detail || `Erreur ${res.status}`);
+    return res.json();
+  }
+
+  function showApp(visible) { $('app').hidden = !visible; $('login').hidden = visible; }
+
+  function logout(message = '') {
+    token = '';
+    try { sessionStorage.removeItem(KEY); } catch { /* ignore */ }
+    showApp(false);
+    $('login-status').textContent = message;
+  }
+
+  $('login-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    token = $('token').value.trim();
+    $('login-status').textContent = '';
+    try {
+      await load();
+      try { sessionStorage.setItem(KEY, token); } catch { /* ignore */ }
+      $('token').value = '';
+    } catch (err) {
+      if (err.message !== 'unauthorized') $('login-status').textContent = err.message;
+    }
+  });
+  $('logout').addEventListener('click', () => logout());
+  $('refresh').addEventListener('click', () => load());
+  $('days').addEventListener('change', () => load());
+
+  function flag(code) {
+    if (!/^[A-Z]{2}$/.test(code)) return '🏳️';
+    return String.fromCodePoint(...[...code].map((c) => 0x1f1e6 + c.charCodeAt(0) - 65));
+  }
+  function countryName(code) {
+    if (!/^[A-Z]{2}$/.test(code)) return 'Inconnu';
+    try { return regionNames.of(code) || code; } catch { return code; }
+  }
+
+  function tiles(s) {
+    const i = s.installs;
+    const items = [
+      ['Installations', i.total, `+${nf.format(i.new_30d)} sur 30 jours`],
+      ['Actives aujourd\'hui', i.active_today, `+${nf.format(i.new_today)} nouvelles aujourd'hui`],
+      ['Actives 7 jours', i.active_7d, `+${nf.format(i.new_7d)} nouvelles`],
+      ['Actives 30 jours', i.active_30d, i.total ? `${Math.round((100 * i.active_30d) / i.total)} % des installations` : ''],
+      ['Ouvertures', i.sessions_period, `sur ${s.days} jours`],
+    ];
+    $('tiles').innerHTML = items.map(([label, value, sub]) =>
+      `<div class="panel tile"><div class="label">${esc(label)}</div><div class="value">${nf.format(value)}</div><div class="sub">${esc(sub)}</div></div>`).join('');
+  }
+
+  function barTable(el, headers, rows) {
+    if (!rows.length) { el.innerHTML = '<tr><td class="empty">Pas encore de données.</td></tr>'; return; }
+    const max = Math.max(...rows.map((r) => r.value), 1);
+    el.innerHTML = `<tr>${headers.map((h, k) => `<th class="${k ? 'num' : ''}">${esc(h)}</th>`).join('')}<th class="bar-cell"><span class="visually-hidden"></span></th></tr>` +
+      rows.map((r) => `<tr><td class="label">${r.label}</td>${r.cells.map((c) => `<td class="num">${nf.format(c)}</td>`).join('')}` +
+        `<td class="bar-cell"><div class="bar" style="width:${(100 * r.value) / max}%"></div></td></tr>`).join('');
+  }
+
+  function lineChart(daily) {
+    const wrap = $('chart');
+    const W = Math.max(wrap.clientWidth, 300), H = 240, m = { t: 12, r: 12, b: 26, l: 40 };
+    const iw = W - m.l - m.r, ih = H - m.t - m.b;
+    const max = Math.max(...daily.map((d) => d.active), 1);
+    // Round tick step: 1, 2 or 5 × 10^n, about 4 intervals.
+    const raw = max / 4, mag = Math.pow(10, Math.floor(Math.log10(raw || 1)));
+    const step = Math.max(1, [1, 2, 5, 10].map((f) => f * mag).find((v) => v >= raw) || 10 * mag);
+    const top = step * Math.ceil(max / step);
+    const x = (k) => m.l + (daily.length === 1 ? iw / 2 : (k * iw) / (daily.length - 1));
+    const y = (v) => m.t + ih - (v / top) * ih;
+    const pts = daily.map((d, k) => `${x(k).toFixed(1)},${y(d.active).toFixed(1)}`).join(' ');
+    let grid = '';
+    for (let v = 0; v <= top; v += step) {
+      grid += `<line x1="${m.l}" x2="${W - m.r}" y1="${y(v)}" y2="${y(v)}" stroke="var(--grid)" stroke-width="1"/>` +
+        `<text x="${m.l - 6}" y="${y(v) + 4}" text-anchor="end">${nf.format(v)}</text>`;
+    }
+    const every = Math.ceil(daily.length / 6);
+    const labels = daily.map((d, k) => (k % every === 0 || k === daily.length - 1)
+      ? `<text x="${x(k)}" y="${H - 6}" text-anchor="${k === daily.length - 1 ? 'end' : k === 0 ? 'start' : 'middle'}">${d.day.slice(8, 10)}/${d.day.slice(5, 7)}</text>` : '').join('');
+    wrap.innerHTML = `<svg width="${W}" height="${H}" role="img" aria-label="Installations actives par jour">
+      ${grid}${labels}
+      <polygon points="${x(0)},${y(0)} ${pts} ${x(daily.length - 1)},${y(0)}" fill="var(--series-1)" opacity="0.12"/>
+      <polyline points="${pts}" fill="none" stroke="var(--series-1)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+      <line id="cross" y1="${m.t}" y2="${m.t + ih}" stroke="var(--muted)" stroke-width="1" stroke-dasharray="3 3" visibility="hidden"/>
+      <circle id="dot" r="4.5" fill="var(--series-1)" stroke="var(--panel)" stroke-width="2" visibility="hidden"/>
+      <rect x="${m.l}" y="${m.t}" width="${iw}" height="${ih}" fill="transparent" id="hit"/>
+    </svg><div class="tooltip" id="tip"></div>`;
+    const tip = $('tip'), cross = $('cross'), dot = $('dot');
+    const hit = $('hit');
+    const hide = () => { tip.style.display = 'none'; cross.setAttribute('visibility', 'hidden'); dot.setAttribute('visibility', 'hidden'); };
+    hit.addEventListener('pointerleave', hide);
+    hit.addEventListener('pointermove', (e) => {
+      const rect = wrap.getBoundingClientRect();
+      const px = e.clientX - rect.left;
+      const k = Math.max(0, Math.min(daily.length - 1, Math.round(((px - m.l) / iw) * (daily.length - 1))));
+      const d = daily[k];
+      cross.setAttribute('x1', x(k)); cross.setAttribute('x2', x(k)); cross.setAttribute('visibility', 'visible');
+      dot.setAttribute('cx', x(k)); dot.setAttribute('cy', y(d.active)); dot.setAttribute('visibility', 'visible');
+      tip.innerHTML = `<strong>${new Date(d.day + 'T00:00:00Z').toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', timeZone: 'UTC' })}</strong><br>` +
+        `Actives : ${nf.format(d.active)}<br>Nouvelles : ${nf.format(d.new)}<br>Ouvertures : ${nf.format(d.sessions)}`;
+      tip.style.display = 'block';
+      const left = Math.min(x(k) + 12, W - tip.offsetWidth - 4);
+      tip.style.left = `${Math.max(4, left)}px`;
+      tip.style.top = `${Math.max(0, y(d.active) - tip.offsetHeight - 10)}px`;
+    });
+    $('daily-table').innerHTML = '<tr><th>Jour</th><th class="num">Actives</th><th class="num">Nouvelles</th><th class="num">Ouvertures</th></tr>' +
+      [...daily].reverse().map((d) => `<tr><td>${d.day}</td><td class="num">${nf.format(d.active)}</td><td class="num">${nf.format(d.new)}</td><td class="num">${nf.format(d.sessions)}</td></tr>`).join('');
+  }
+
+  let last = null;
+  async function load() {
+    $('status').textContent = 'Chargement…';
+    const s = await api(`/api/admin/stats?days=${$('days').value}`);
+    last = s;
+    showApp(true);
+    tiles(s);
+    lineChart(s.daily);
+    $('geo-hint').textContent = s.geoip
+      ? 'Installations par pays (déduit de l\'adresse IP) et actives sur 30 jours.'
+      : 'Base GeoIP absente : pays déduit de la région du téléphone. Lancez deploy/geoip-update.sh sur le serveur.';
+    barTable($('countries'), ['Pays', 'Installations', 'Actives 30 j'],
+      s.countries.map((c) => ({ label: `${flag(c.country)} ${esc(countryName(c.country))}`, cells: [c.installs, c.active_30d], value: c.installs })));
+    barTable($('screens'), ['Écran', 'Vues'],
+      s.screens.map((r) => ({ label: esc(SCREENS[r.screen] || r.screen), cells: [r.views], value: r.views })));
+    barTable($('languages'), ['Langue', 'Installations'],
+      s.languages.map((r) => ({ label: esc(LANGS[r.value] || r.value), cells: [r.installs], value: r.installs })));
+    barTable($('versions'), ['Version', 'Installations'],
+      s.versions.map((r) => ({ label: esc(r.value), cells: [r.installs], value: r.installs })));
+    barTable($('platforms'), ['Plateforme', 'Installations'],
+      s.platforms.map((r) => ({ label: esc(PLATFORMS[r.value] || r.value), cells: [r.installs], value: r.installs })));
+    $('status').textContent = `Mis à jour à ${new Date(s.generated_at).toLocaleTimeString('fr-FR')}`;
+  }
+
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => { if (last) lineChart(last.daily); }, 150);
+  });
+
+  if (token) {
+    load().catch((err) => { if (err.message !== 'unauthorized') { showApp(true); $('status').textContent = err.message; } });
+  } else {
+    showApp(false);
+  }
+})();
+</script>
+</body>
+</html>

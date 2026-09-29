@@ -12,7 +12,7 @@ en **arabe**, **français** et **anglais**.
 - **Invocations** : des du'as classées par thème (arabe, translittération, traduction).
 - **Réglages** : langue (par défaut celle du téléphone), taille du texte et réinitialisation de la progression.
 
-Aucune donnée personnelle n'est collectée : tout est stocké localement sur l'appareil.
+Aucun compte n'est nécessaire : la progression et les réglages restent sur l'appareil. Des bannières Google AdMob financent l'application (voir plus bas).
 
 ## Structure
 
@@ -23,7 +23,10 @@ frontend/   Application Expo (SDK 54, expo-router, TypeScript)
   data/         Étapes, miqats, invocations (JSON)
   utils/        Calculs (distance, Qibla, prières, localisation)
   __tests__/    Tests unitaires Jest
-backend/    API FastAPI + MongoDB (optionnelle, l'app fonctionne hors ligne)
+backend/    API FastAPI + MongoDB : statistiques anonymes, page d'admin, politique de confidentialité
+  site/         Pages publiques (accueil, /privacy, app-ads.txt)
+  admin.html    Administration (/admin)
+deploy/     Docker Compose + Traefik pour le VPS (voir deploy/README.md)
 tests/      Tests de l'API (pytest)
 ```
 
@@ -34,7 +37,7 @@ tests/      Tests de l'API (pytest)
 ```bash
 cd frontend
 yarn install
-yarn start          # puis scanner le QR code avec Expo Go
+yarn start          # Expo Go : l'app fonctionne, sans pub (voir plus bas)
 ```
 
 Vérifications :
@@ -54,7 +57,32 @@ uvicorn server:app --reload --app-dir backend
 pytest tests
 ```
 
-Variables d'environnement : `MONGO_URL`, `DB_NAME`, `CORS_ORIGINS` (liste séparée par des virgules).
+Variables d'environnement : `MONGO_URL`, `DB_NAME`, `ADMIN_TOKEN` (16 caractères minimum, active `/admin`).
+
+En production, le backend tourne sur **https://pelerinage.creationapp.academy**, sur le même VPS que Neon Strike : voir [deploy/README.md](deploy/README.md). L'application y envoie des statistiques anonymes (désactivables dans les Réglages), uniquement depuis les builds Android/iOS, jamais en développement.
+
+## Publicités (AdMob)
+
+Une bannière AdMob s'affiche en bas des écrans **Accueil, Miqat, Horaires et Réglages**. Elle n'apparaît jamais pendant les rites (Guide, Invocations, Qibla).
+Le formulaire de consentement de Google (UMP, obligatoire pour l'UE, le Royaume-Uni et la Suisse) s'affiche automatiquement quand il est requis. Les Réglages proposent ensuite un lien « Confidentialité des publicités ».
+
+Les identifiants **Android** réels sont configurés (package `com.aymen.umrahcompanion`). iOS affiche encore les **publicités de test de Google**, et les builds de développement aussi. Pour ajouter ou changer des identifiants :
+
+1. Sur [apps.admob.com](https://apps.admob.com), crée une app Android et une app iOS, puis un bloc d'annonces **Bannière** pour chacune.
+2. Dans `frontend/app.json` (plugin `react-native-google-mobile-ads`), remplace `androidAppId` et `iosAppId` (format `ca-app-pub-…~…`).
+3. Dans `frontend/constants/ads.ts`, renseigne `BANNER_AD_UNIT_IDS` (format `ca-app-pub-…/…`). Pour couper toutes les pubs, passe `ADS_ENABLED` à `false`.
+4. Dans AdMob > Confidentialité et messages, crée un message **RGPD** (et, pour iOS, un message **IDFA / ATT**).
+5. Sur le Play Console, déclare « Mon application contient des annonces ». Publie aussi un fichier `app-ads.txt` sur le site du développeur.
+
+Les pubs ne fonctionnent pas dans **Expo Go**, qui ne contient pas le module natif ; l'application tourne alors normalement, sans pub. Pour les voir, il faut un build :
+
+```bash
+cd frontend
+eas build --profile development --platform android   # build de test avec expo-dev-client
+yarn start --dev-client
+```
+
+Les builds de développement affichent toujours des pubs de test. Ne clique jamais sur tes propres pubs réelles, sinon le compte AdMob peut être suspendu.
 
 ## Publication
 
