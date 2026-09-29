@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Pressable, Alert, Platform, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
-import { router, useLocalSearchParams } from 'expo-router';
+import { useLocalSearchParams } from 'expo-router';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Haptics from 'expo-haptics';
 import { useKeepAwake } from 'expo-keep-awake';
@@ -10,6 +10,7 @@ import Svg, { Path } from 'react-native-svg';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useSettings } from '../contexts/SettingsContext';
 import { useTheme, useThemedStyles } from '../contexts/ThemeContext';
+import { SubScreenHeader } from '../components/SubScreenHeader';
 import { SPACING, BORDER_RADIUS, FONT_SIZES, SHADOWS, Palette } from '../constants/theme';
 import {
   RITUAL_GUIDE,
@@ -109,15 +110,14 @@ export default function CounterScreen() {
 
   return (
     <SafeAreaView style={styles.container} edges={['top', 'bottom']}>
-      <View style={styles.header}>
-        <TouchableOpacity onPress={() => router.back()} style={styles.backButton} accessibilityLabel={t('back')}>
-          <Ionicons name="arrow-back" size={24} color={colors.text} />
-        </TouchableOpacity>
-        <Text style={[styles.title, { fontSize: fonts.xl }]}>{t('counter')}</Text>
-        <TouchableOpacity onPress={reset} style={styles.backButton} accessibilityLabel={t('reset_counter')}>
-          <Ionicons name="refresh" size={22} color={colors.textSecondary} />
-        </TouchableOpacity>
-      </View>
+      <SubScreenHeader
+        title={t('counter')}
+        right={
+          <TouchableOpacity onPress={reset} accessibilityRole="button" accessibilityLabel={t('reset_counter')}>
+            <Ionicons name="refresh" size={22} color={colors.textSecondary} />
+          </TouchableOpacity>
+        }
+      />
 
       <ScrollView contentContainerStyle={styles.content}>
         <View style={styles.segmented} accessibilityRole="tablist">
@@ -199,18 +199,6 @@ export default function CounterScreen() {
 const makeStyles = (c: Palette) =>
   StyleSheet.create({
     container: { flex: 1, backgroundColor: c.background },
-    header: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-      paddingHorizontal: SPACING.sm,
-      paddingVertical: SPACING.sm,
-      backgroundColor: c.surface,
-      borderBottomWidth: 1,
-      borderBottomColor: c.border,
-    },
-    backButton: { width: 44, height: 44, alignItems: 'center', justifyContent: 'center' },
-    title: { fontWeight: 'bold', color: c.text },
     content: { padding: SPACING.md, alignItems: 'stretch', paddingBottom: SPACING.xxl },
     segmented: {
       flexDirection: 'row',
