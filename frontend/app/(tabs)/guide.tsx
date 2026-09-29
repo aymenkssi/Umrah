@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { router } from 'expo-router';
+import { router, useLocalSearchParams } from 'expo-router';
 import { DuaAudioButton } from '../../components/DuaAudioButton';
 import { stepDuaKey } from '../../utils/audioKeys';
 import { Ionicons } from '@expo/vector-icons';
@@ -15,10 +15,19 @@ import { useLanguage } from '../../contexts/LanguageContext';
 import { useSettings } from '../../contexts/SettingsContext';
 import { SPACING, BORDER_RADIUS, SHADOWS, FONT_SIZES, Palette } from '../../constants/theme';
 import umrahSteps from '../../data/umrah-steps.json';
+import hajjSteps from '../../data/hajj-steps.json';
 import { useTheme, useThemedStyles } from '../../contexts/ThemeContext';
 
-// Sorted once, without mutating the imported JSON module.
-const STEPS = [...umrahSteps].sort((a, b) => a.order - b.order);
+type Rite = 'umrah' | 'hajj';
+
+// Sorted once, without mutating the imported JSON modules.
+const STEPS: Record<Rite, any[]> = {
+  umrah: [...umrahSteps].sort((a, b) => a.order - b.order),
+  hajj: [...hajjSteps].sort((a, b) => a.order - b.order),
+};
+
+/** Steps that offer the Tawaf / Sa'i counter, and which counter opens. */
+const COUNTER_KIND: Record<string, 'tawaf' | 'sai'> = { tawaf: 'tawaf', sai: 'sai', hajj_ifadah: 'tawaf' };
 
 export default function GuideScreen() {
   const { colors } = useTheme();
@@ -26,6 +35,11 @@ export default function GuideScreen() {
   const { t, language } = useLanguage();
   const { fontSize, completedSteps, toggleStepCompletion, detailedView, toggleView } = useSettings();
   const fonts = FONT_SIZES[fontSize];
+  const params = useLocalSearchParams<{ rite?: string }>();
+  // The home screen can open the Hajj guide directly (/guide?rite=hajj): a new link wins over the last choice.
+  const [chosen, setChosen] = useState<{ rite: Rite; link?: string } | null>(null);
+  const rite: Rite =
+    chosen && chosen.link === params.rite ? chosen.rite : params.rite === 'hajj' ? 'hajj' : 'umrah';
   const [expandedStep, setExpandedStep] = useState<string | null>(null);
 
   const handleStepPress = (stepId: string) => {
@@ -36,6 +50,27 @@ export default function GuideScreen() {
     <SafeAreaView style={styles.container} edges={['top']}>
       <View style={styles.header}>
         <Text style={[styles.headerTitle, { fontSize: fonts.xxl }]}>{t('guide')}</Text>
+        <View style={styles.segmented} accessibilityRole="tablist">
+          {(['umrah', 'hajj'] as Rite[]).map((r) => {
+            const active = rite === r;
+            return (
+              <TouchableOpacity
+                key={r}
+                style={[styles.segment, active && styles.segmentActive]}
+                onPress={() => {
+                  setChosen({ rite: r, link: params.rite });
+                  setExpandedStep(null);
+                }}
+                accessibilityRole="tab"
+                accessibilityState={{ selected: active }}
+              >
+                <Text style={[styles.segmentText, { fontSize: fonts.md }, active && styles.segmentTextActive]}>
+                  {t(r)}
+                </Text>
+              </TouchableOpacity>
+            );
+          })}
+        </View>
         <View style={styles.headerActions}>
           <TouchableOpacity
             style={styles.viewToggle}
@@ -58,7 +93,7 @@ export default function GuideScreen() {
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}
       >
-        {STEPS.map((step: any) => {
+        {STEPS[rite].map((step: any) => {
             const isCompleted = completedSteps.includes(step.id);
             const isExpanded = expandedStep === step.id;
             const isSpecial = step.isSpecial;
@@ -91,6 +126,9 @@ export default function GuideScreen() {
                         )}
                       </View>
                       <View style={styles.stepTitleContainer}>
+                        {step.day && (
+                          <Text style={[styles.stepDay, { fontSize: fonts.xs }]}>{step.day[language]}</Text>
+                        )}
                         <Text style={[styles.stepTitle, { fontSize: fonts.lg }]}>
                           {step.title[language]}
                         </Text>
@@ -173,10 +211,10 @@ export default function GuideScreen() {
                   </View>
                 )}
 
-                {(step.id === 'tawaf' || step.id === 'sai') && (
+                {COUNTER_KIND[step.id] && (
                   <TouchableOpacity
                     style={styles.counterButton}
-                    onPress={() => router.push({ pathname: '/counter', params: { kind: step.id } })}
+                    onPress={() => router.push({ pathname: '/counter', params: { kind: COUNTER_KIND[step.id] } })}
                   >
                     <Ionicons name="repeat" size={20} color={colors.onGold} />
                     <Text style={[styles.counterButtonText, { fontSize: fonts.sm }]}>{t('open_counter')}</Text>
@@ -237,6 +275,34 @@ const makeStyles = (c: Palette) =>
     fontWeight: 'bold',
     color: c.text,
     marginBottom: SPACING.sm,
+  },
+  segmented: {
+    flexDirection: 'row',
+    backgroundColor: c.surfaceAlt,
+    borderRadius: BORDER_RADIUS.round,
+    padding: 4,
+    marginBottom: SPACING.sm,
+  },
+  segment: {
+    flex: 1,
+    paddingVertical: SPACING.sm,
+    borderRadius: BORDER_RADIUS.round,
+    alignItems: 'center',
+  },
+  segmentActive: {
+    backgroundColor: c.primary,
+  },
+  segmentText: {
+    color: c.text,
+    fontWeight: '600',
+  },
+  segmentTextActive: {
+    color: c.textLight,
+  },
+  stepDay: {
+    color: c.goldDark,
+    fontWeight: '700',
+    marginBottom: 2,
   },
   headerActions: {
     flexDirection: 'row',

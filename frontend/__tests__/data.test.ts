@@ -1,5 +1,6 @@
 import { translations } from '../contexts/LanguageContext';
 import umrahSteps from '../data/umrah-steps.json';
+import hajjSteps from '../data/hajj-steps.json';
 import miqatData from '../data/miqat.json';
 import generalDuas from '../data/general-duas.json';
 
@@ -23,26 +24,29 @@ describe('translations', () => {
   });
 });
 
-describe('umrah-steps.json', () => {
+describe.each([
+  ['umrah-steps.json', umrahSteps as any[], 15],
+  ['hajj-steps.json', hajjSteps as any[], 12],
+])('%s', (_name, steps, minDuas) => {
   it('has unique ids and consecutive order', () => {
-    const ids = umrahSteps.map((step) => step.id);
+    const ids = steps.map((step) => step.id);
     expect(new Set(ids).size).toBe(ids.length);
-    const orders = umrahSteps.map((step) => step.order).sort((a, b) => a - b);
+    const orders = steps.map((step) => step.order).sort((a, b) => a - b);
     expect(orders).toEqual(orders.map((_, i) => i + 1));
   });
 
   it('is translated in all languages', () => {
-    for (const step of umrahSteps as any[]) {
-      for (const field of ['title', 'summary', 'details', 'notes']) {
+    for (const step of steps) {
+      for (const field of ['title', 'summary', 'details', 'notes', 'day']) {
         if (step[field]) expectLocalized(step[field], `${step.id}.${field}`);
       }
     }
   });
 
   it('has complete du\'as with unique ids in each step', () => {
-    const total = (umrahSteps as any[]).reduce((sum, step) => sum + step.duas.length, 0);
-    expect(total).toBeGreaterThanOrEqual(15);
-    for (const step of umrahSteps as any[]) {
+    const total = steps.reduce((sum, step) => sum + step.duas.length, 0);
+    expect(total).toBeGreaterThanOrEqual(minDuas);
+    for (const step of steps) {
       const ids = step.duas.map((dua: any) => dua.id);
       expect(new Set(ids).size).toBe(ids.length);
       for (const dua of step.duas) {
@@ -56,6 +60,11 @@ describe('umrah-steps.json', () => {
       }
     }
   });
+});
+
+it('keeps Umrah and Hajj step ids distinct (completion and audio keys are shared)', () => {
+  const umrah = new Set(umrahSteps.map((step) => step.id));
+  expect(hajjSteps.filter((step) => umrah.has(step.id))).toEqual([]);
 });
 
 describe('miqat.json', () => {

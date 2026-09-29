@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
-<title>Umrah Companion Admin</title>
+<title>Umrah & Hajj Companion Admin</title>
 <style>
   :root {
     color-scheme: light;
@@ -94,7 +94,7 @@
 <body>
 <main>
   <section id="login" class="panel" hidden>
-    <h1>Umrah Companion <span>Admin</span></h1>
+    <h1>Umrah &amp; Hajj Companion <span>Admin</span></h1>
     <form id="login-form">
       <label>Jeton d'administration (ADMIN_TOKEN)
         <input id="token" type="password" autocomplete="current-password" required minlength="16">
@@ -106,7 +106,7 @@
 
   <section id="app" hidden>
     <header>
-      <h1>Umrah Companion <span>Admin</span></h1>
+      <h1>Umrah &amp; Hajj Companion <span>Admin</span></h1>
       <button id="logout" type="button">Se déconnecter</button>
     </header>
     <nav class="tabs" role="tablist">
@@ -174,6 +174,7 @@
             <select id="audio-filter">
               <option value="all">Toutes</option>
               <option value="guide">Guide de la 'Omra</option>
+              <option value="hajj">Guide du Hajj</option>
               <option value="duas">Page Invocations</option>
               <option value="missing">Sans enregistrement</option>
             </select>
@@ -279,7 +280,7 @@
     $('audio-summary').textContent = `${done} / ${audioItems.length} enregistrées`;
     let section = '';
     $('audio-list').innerHTML = rows.map((a) => {
-      const head = a.section !== section ? `<h3 class="audio-section">${esc(a.group === 'guide' ? 'Guide · ' : 'Invocations · ')}${esc(a.section)}</h3>` : '';
+      const head = a.section !== section ? `<h3 class="audio-section">${esc({ guide: 'Omra · ', hajj: 'Hajj · ' }[a.group] || 'Invocations · ')}${esc(a.section)}</h3>` : '';
       section = a.section;
       return `${head}<div class="audio-row">
         <div class="audio-text"><div class="arabic" dir="rtl">${esc(a.arabic)}</div><div class="muted">${esc(a.label)}</div>

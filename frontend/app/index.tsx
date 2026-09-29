@@ -24,9 +24,9 @@ export default function SplashScreen() {
       </View>
       
       <View style={styles.content}>
-        <Text style={styles.arabicTitle}>رفيق العمرة</Text>
-        <Text style={styles.englishTitle}>Umrah Companion</Text>
-        <Text style={styles.frenchTitle}>{"Compagnon de la 'Omra"}</Text>
+        <Text style={styles.arabicTitle}>رفيق العمرة والحج</Text>
+        <Text style={styles.englishTitle}>Umrah & Hajj Companion</Text>
+        <Text style={styles.frenchTitle}>Compagnon de la Omra et du Hajj</Text>
         
         <ActivityIndicator
           size="large"
@@ -55,8 +55,9 @@ const makeStyles = (c: Palette) =>
     zIndex: 1,
   },
   arabicTitle: {
-    fontSize: 42,
+    fontSize: 38,
     fontWeight: 'bold',
+    textAlign: 'center',
     color: c.textLight,
     marginBottom: SPACING.sm,
   },

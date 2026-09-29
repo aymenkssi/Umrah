@@ -108,7 +108,7 @@ export default function HomeScreen() {
             </View>
             <View style={styles.guideBody}>
               <Text style={[styles.guideLabel, { fontSize: fonts.xs }, align]}>
-                {doneCount === 0 ? t('start_here') : nextStep ? t('next_step') : t('progress')}
+                {t('umrah')} · {doneCount === 0 ? t('start_here') : nextStep ? t('next_step') : t('progress')}
               </Text>
               <Text style={[styles.guideTitle, { fontSize: fonts.lg }, align]}>
                 {nextStep ? nextStep.title[language as 'ar' | 'en' | 'fr'] : t('all_steps_done')}
@@ -122,6 +122,23 @@ export default function HomeScreen() {
           <Text style={[styles.progressText, { fontSize: fonts.xs }, align]}>
             {doneCount} / {STEPS.length} {t('step_completed')}
           </Text>
+        </TouchableOpacity>
+
+        {/* Hajj guide */}
+        <TouchableOpacity
+          style={styles.hajjCard}
+          onPress={() => router.push({ pathname: '/guide', params: { rite: 'hajj' } })}
+          activeOpacity={0.85}
+          accessibilityRole="button"
+        >
+          <View style={styles.hajjIcon}>
+            <Ionicons name="sunny" size={22} color={colors.onGold} />
+          </View>
+          <View style={styles.guideBody}>
+            <Text style={[styles.guideTitle, { fontSize: fonts.md }, align]}>{t('hajj_guide')}</Text>
+            <Text style={[styles.hajjDesc, { fontSize: fonts.xs }, align]}>{t('hajj_guide_desc')}</Text>
+          </View>
+          <Ionicons name={isRTL ? 'chevron-back' : 'chevron-forward'} size={22} color={colors.textSecondary} />
         </TouchableOpacity>
 
         {/* All features */}
@@ -193,6 +210,27 @@ const makeStyles = (c: Palette) =>
       borderColor: c.border,
       ...SHADOWS.small,
     },
+    hajjCard: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: SPACING.md,
+      backgroundColor: c.surface,
+      borderRadius: BORDER_RADIUS.lg,
+      borderWidth: 1,
+      borderColor: c.gold,
+      padding: SPACING.md,
+      marginHorizontal: SPACING.md,
+      marginTop: SPACING.sm,
+    },
+    hajjIcon: {
+      width: 40,
+      height: 40,
+      borderRadius: 20,
+      backgroundColor: c.gold,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    hajjDesc: { color: c.textSecondary, marginTop: 2 },
     guideHeader: { flexDirection: 'row', alignItems: 'center', gap: SPACING.md },
     guideIcon: {
       width: 48,
