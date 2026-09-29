@@ -1,0 +1,43 @@
+:root {
+  --bg: #fafaf7;
+  --panel: #ffffff;
+  --line: #e4e2da;
+  --text: #1c1b18;
+  --muted: #5f5d55;
+  --green: #1b5e20;
+  --gold: #a57900;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #111411;
+    --panel: #1a1e1a;
+    --line: #2b312b;
+    --text: #f2f2ee;
+    --muted: #b3b6ac;
+    --green: #7cc47f;
+    --gold: #e0b44a;
+    color-scheme: dark;
+  }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text); font: 17px/1.65 system-ui, -apple-system, "Segoe UI", Tahoma, sans-serif; padding: 0 16px; }
+main { max-width: 780px; margin: 0 auto; padding: 44px 0 64px; }
+h1 { font-size: clamp(2rem, 6vw, 3rem); line-height: 1.1; margin: 0 0 12px; color: var(--green); text-wrap: balance; }
+h2 { font-size: 1.35rem; margin: 36px 0 8px; color: var(--green); }
+h3 { font-size: 1.1rem; margin: 24px 0 6px; }
+a { color: var(--green); }
+a:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+.brand { display: flex; align-items: center; gap: 10px; font-size: 1.2rem; font-weight: 700; color: var(--text); text-decoration: none; margin-bottom: 36px; }
+.brand .ar { color: var(--gold); }
+.lead { color: var(--muted); font-size: 1.12rem; max-width: 62ch; }
+.card { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 18px 22px; margin-top: 24px; }
+.muted { color: var(--muted); font-size: 0.95rem; }
+nav.langs { display: flex; gap: 14px; flex-wrap: wrap; margin: 8px 0 8px; }
+section.lang { border-top: 1px solid var(--line); margin-top: 48px; padding-top: 8px; }
+section[dir="rtl"] { font-family: "Segoe UI", Tahoma, "Noto Naskh Arabic", sans-serif; }
+table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+th, td { text-align: start; padding: 9px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { color: var(--muted); font-weight: 600; }
+.table-wrap { overflow-x: auto; }
+footer { margin-top: 56px; color: var(--muted); font-size: 0.9rem; display: flex; gap: 20px; flex-wrap: wrap; }

@@ -23,7 +23,10 @@ frontend/   Application Expo (SDK 54, expo-router, TypeScript)
   data/         Étapes, miqats, invocations (JSON)
   utils/        Calculs (distance, Qibla, prières, localisation)
   __tests__/    Tests unitaires Jest
-backend/    API FastAPI + MongoDB (optionnelle, l'app fonctionne hors ligne)
+backend/    API FastAPI + MongoDB : statistiques anonymes, page d'admin, politique de confidentialité
+  site/         Pages publiques (accueil, /privacy, app-ads.txt)
+  admin.html    Administration (/admin)
+deploy/     Docker Compose + Traefik pour le VPS (voir deploy/README.md)
 tests/      Tests de l'API (pytest)
 ```
 
@@ -34,7 +37,7 @@ tests/      Tests de l'API (pytest)
 ```bash
 cd frontend
 yarn install
-yarn start          # puis scanner le QR code avec Expo Go
+yarn start          # Expo Go : l'app fonctionne, sans pub (voir plus bas)
 ```
 
 Vérifications :
@@ -54,7 +57,9 @@ uvicorn server:app --reload --app-dir backend
 pytest tests
 ```
 
-Variables d'environnement : `MONGO_URL`, `DB_NAME`, `CORS_ORIGINS` (liste séparée par des virgules).
+Variables d'environnement : `MONGO_URL`, `DB_NAME`, `ADMIN_TOKEN` (16 caractères minimum, active `/admin`).
+
+En production, le backend tourne sur **https://pelerinage.creationapp.academy**, sur le même VPS que Neon Strike : voir [deploy/README.md](deploy/README.md). L'application y envoie des statistiques anonymes (désactivables dans les Réglages), uniquement depuis les builds Android/iOS, jamais en développement.
 
 ## Publicités (AdMob)
 

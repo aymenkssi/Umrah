@@ -1,0 +1,65 @@
+# Umrah Companion backend on the VPS that already runs Traefik (same setup as Neon Strike):
+# API + admin page + website (privacy policy, app-ads.txt) on one domain, and MongoDB.
+# No published port: Traefik routes and certifies ${DOMAIN}. Usage: cp .env.example .env && edit it,
+# then `docker compose up -d --build`.
+name: umrah-companion
+
+services:
+  mongo:
+    image: mongo:7
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
+    volumes:
+      - mongo-data:/data/db
+      - ./backups:/backups
+    networks: [internal]
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  api:
+    build: ../backend
+    restart: unless-stopped
+    depends_on:
+      mongo:
+        condition: service_healthy
+    environment:
+      MONGO_URL: mongodb://${MONGO_USER}:${MONGO_PASSWORD}@mongo:27017/?authSource=admin
+      DB_NAME: umrah_companion
+      ADMIN_TOKEN: ${ADMIN_TOKEN}
+    volumes:
+      # Optional GeoIP database (./geoip-update.sh): country of users from their IP address.
+      - ./geoip:/app/geoip:ro
+    networks: [internal, traefik]
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8001/api/health')"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=${TRAEFIK_NETWORK}
+      - traefik.http.routers.umrah.rule=Host(`${DOMAIN}`)
+      - traefik.http.routers.umrah.entrypoints=${TRAEFIK_ENTRYPOINT}
+      - traefik.http.routers.umrah.tls=true
+      - traefik.http.routers.umrah.tls.certresolver=${TRAEFIK_CERTRESOLVER}
+      - traefik.http.routers.umrah.middlewares=umrah-headers,umrah-body-limit
+      - traefik.http.services.umrah.loadbalancer.server.port=8001
+      - traefik.http.middlewares.umrah-headers.headers.stsSeconds=31536000
+      - traefik.http.middlewares.umrah-headers.headers.contentTypeNosniff=true
+      - traefik.http.middlewares.umrah-body-limit.buffering.maxRequestBodyBytes=16384
+
+networks:
+  # MongoDB only lives here: never reachable from Traefik or the Internet.
+  internal:
+  # The network the Traefik container is attached to (see `docker network ls`).
+  traefik:
+    external: true
+    name: ${TRAEFIK_NETWORK}
+
+volumes:
+  mongo-data:

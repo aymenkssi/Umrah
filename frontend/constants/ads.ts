@@ -16,6 +16,3 @@ export const BANNER_AD_UNIT_IDS = {
 
 /** Set to false to turn every ad off without touching the screens. */
 export const ADS_ENABLED = true;
-
-/** Public privacy policy, linked from the Settings screen and required by AdMob / Google Play. */
-export const PRIVACY_POLICY_URL = 'https://github.com/aymenkssi/Privacy-policy/blob/main/index.html';

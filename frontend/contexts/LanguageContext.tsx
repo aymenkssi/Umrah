@@ -61,7 +61,7 @@ export const translations: Record<Language, Record<string, string>> = {
     large: 'كبير',
     about: 'حول',
     privacy: 'الخصوصية',
-    privacy_desc: 'لا يطلب هذا التطبيق أي حساب، وتقدّمك وإعداداتك محفوظة محلياً على جهازك. تُعرض إعلانات Google AdMob لتمويل التطبيق، وقد تستخدم معرّفات الجهاز وفق اختياراتك في الموافقة.',
+    privacy_desc: 'لا يطلب هذا التطبيق أي حساب، وتقدّمك وإعداداتك وموقعك تبقى على جهازك. تُرسل إحصاءات استخدام مجهولة الهوية (يمكن إيقافها أدناه)، وتُعرض إعلانات Google AdMob لتمويل التطبيق.',
     disclaimer: 'إخلاء المسؤولية',
     disclaimer_desc: 'هذا التطبيق دليل إرشادي فقط. يُرجى استشارة العلماء المحليين في أي أمر تشك فيه.',
     app_version: 'إصدار التطبيق',
@@ -128,6 +128,8 @@ export const translations: Record<Language, Record<string, string>> = {
     tab_duas: 'الأدعية',
     ad_privacy_options: 'خيارات خصوصية الإعلانات',
     privacy_policy: 'سياسة الخصوصية',
+    analytics_title: 'إحصاءات مجهولة الهوية',
+    analytics_desc: 'شارك عدد مرات الاستخدام والدولة والشاشات المفتوحة دون أي بيانات شخصية، لمساعدتنا على تحسين التطبيق. عند الإيقاف تُحذف بياناتك من خادمنا.',
   },
   en: {
     app_name: 'Umrah Companion',
@@ -167,7 +169,7 @@ export const translations: Record<Language, Record<string, string>> = {
     large: 'Large',
     about: 'About',
     privacy: 'Privacy',
-    privacy_desc: 'This app requires no account, and your progress and settings stay on your device. Google AdMob ads help fund the app and may use device identifiers according to your consent choices.',
+    privacy_desc: 'This app requires no account; your progress, settings and location stay on your device. Anonymous usage statistics are sent (you can turn them off below), and Google AdMob ads help fund the app.',
     disclaimer: 'Disclaimer',
     disclaimer_desc: 'This app is a guidance tool only. Please consult local scholars for any matter you are unsure about.',
     app_version: 'App Version',
@@ -234,6 +236,8 @@ export const translations: Record<Language, Record<string, string>> = {
     tab_duas: "Du'a",
     ad_privacy_options: 'Ad privacy options',
     privacy_policy: 'Privacy policy',
+    analytics_title: 'Anonymous statistics',
+    analytics_desc: 'Share usage counts, country and screens opened, with no personal data, to help us improve the app. Turning this off deletes your data from our server.',
   },
   fr: {
     app_name: 'Compagnon de la \'Omra',
@@ -273,7 +277,7 @@ export const translations: Record<Language, Record<string, string>> = {
     large: 'Grand',
     about: 'À Propos',
     privacy: 'Confidentialité',
-    privacy_desc: 'Cette application ne demande aucun compte, et votre progression et vos réglages restent sur votre appareil. Des publicités Google AdMob financent l\'application et peuvent utiliser des identifiants de l\'appareil selon vos choix de consentement.',
+    privacy_desc: 'Cette application ne demande aucun compte ; votre progression, vos réglages et votre position restent sur votre appareil. Des statistiques d\'utilisation anonymes sont envoyées (désactivables ci-dessous), et des publicités Google AdMob financent l\'application.',
     disclaimer: 'Avertissement',
     disclaimer_desc: 'Cette application n\'est qu\'un outil d\'orientation. Veuillez consulter les érudits locaux pour toute question dont vous n\'êtes pas sûr.',
     app_version: 'Version de l\'Application',
@@ -340,6 +344,8 @@ export const translations: Record<Language, Record<string, string>> = {
     tab_duas: "Du'a",
     ad_privacy_options: 'Confidentialité des publicités',
     privacy_policy: 'Politique de confidentialité',
+    analytics_title: 'Statistiques anonymes',
+    analytics_desc: 'Partager le nombre d\'utilisations, le pays et les écrans ouverts, sans aucune donnée personnelle, pour nous aider à améliorer l\'application. La désactivation supprime vos données de notre serveur.',
   },
 };
 
