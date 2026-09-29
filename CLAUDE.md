@@ -23,6 +23,6 @@ flake8 --max-line-length 110 backend tests && pytest tests
 
 ## Liens du développeur (réutilisables dans les autres projets)
 
-- Don PayPal : https://paypal.me/Devappli (constante `DONATION_URL` dans `frontend/constants/api.ts`)
+- Don PayPal : https://www.paypal.com/donate/?hosted_button_id=LW7K92GXSH38U (constante `DONATION_URL` dans `frontend/constants/api.ts`)
 - Compte AdMob (éditeur) : `pub-7488746561313974` — ligne app-ads.txt : `google.com, pub-7488746561313974, DIRECT, f08c47fec0942fa0`
 - Contact : aymenkssi@gmail.com
