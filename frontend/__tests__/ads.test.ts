@@ -13,3 +13,19 @@ describe('getBannerAdUnitId', () => {
     expect(getBannerAdUnitId(fakeAds)).toBe('test-banner');
   });
 });
+
+describe('app.json', () => {
+  it('keeps the root react-native-google-mobile-ads section in sync with the Expo plugin', () => {
+    // The library's Gradle script (android/app-json.gradle) crashes the Android build when
+    // this root section is missing, even though the Expo plugin is configured.
+    const appJson = require('../app.json');
+    const plugin = appJson.expo.plugins.find(
+      (p: unknown) => Array.isArray(p) && p[0] === 'react-native-google-mobile-ads'
+    )[1];
+    expect(appJson['react-native-google-mobile-ads']).toEqual({
+      android_app_id: plugin.androidAppId,
+      ios_app_id: plugin.iosAppId,
+      delay_app_measurement_init: plugin.delayAppMeasurementInit,
+    });
+  });
+});
