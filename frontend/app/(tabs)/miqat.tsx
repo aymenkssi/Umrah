@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import {
   View,
   Text,
@@ -14,11 +14,12 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { useLanguage, Language } from '../../contexts/LanguageContext';
 import { useSettings } from '../../contexts/SettingsContext';
-import { COLORS, SPACING, BORDER_RADIUS, SHADOWS, FONT_SIZES } from '../../constants/theme';
+import { SPACING, BORDER_RADIUS, SHADOWS, FONT_SIZES, Palette } from '../../constants/theme';
 import { AdBanner } from '../../components/AdBanner';
 import { calculateDistance } from '../../utils/calculations';
-import { getCurrentCoords } from '../../utils/location';
+import { useCoords } from '../../hooks/useCoords';
 import miqatData from '../../data/miqat.json';
+import { useTheme, useThemedStyles } from '../../contexts/ThemeContext';
 
 type LocalizedText = Record<Language, string>;
 
@@ -42,44 +43,32 @@ const normalizeSearch = (value: string) =>
     .trim();
 
 export default function MiqatScreen() {
+  const { colors } = useTheme();
+  const styles = useThemedStyles(makeStyles);
   const { t, language } = useLanguage();
   const { fontSize } = useSettings();
   const fonts = FONT_SIZES[fontSize];
 
-  const [hasLocation, setHasLocation] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const { status, coords } = useCoords();
   const [searchQuery, setSearchQuery] = useState('');
-  const [miqatList, setMiqatList] = useState<Miqat[]>(() =>
-    (miqatData as Omit<Miqat, 'distance'>[]).map((m) => ({ ...m, distance: null }))
-  );
+  const loading = status === 'loading';
+  const hasLocation = status === 'ready';
 
-  const loadDistances = useCallback(async () => {
-    setLoading(true);
-    try {
-      const coords = await getCurrentCoords();
-      if (!coords) {
-        Alert.alert(t('permission_denied'), t('permission_denied_desc'));
-        return;
-      }
-      const withDistance = (miqatData as Omit<Miqat, 'distance'>[])
-        .map((miqat) => ({
-          ...miqat,
-          distance: calculateDistance(coords.latitude, coords.longitude, miqat.lat, miqat.lng),
-        }))
-        .sort((a, b) => a.distance - b.distance);
-      setMiqatList(withDistance);
-      setHasLocation(true);
-    } catch (error) {
-      console.error('Error getting location:', error);
-    } finally {
-      setLoading(false);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const miqatList = useMemo<Miqat[]>(() => {
+    const all = miqatData as Omit<Miqat, 'distance'>[];
+    if (!coords) return all.map((m) => ({ ...m, distance: null }));
+    return all
+      .map((m) => ({ ...m, distance: calculateDistance(coords.latitude, coords.longitude, m.lat, m.lng) }))
+      .sort((a, b) => a.distance - b.distance);
+  }, [coords]);
 
+  const deniedShown = useRef(false);
   useEffect(() => {
-    loadDistances();
-  }, [loadDistances]);
+    if (status === 'denied' && !deniedShown.current) {
+      deniedShown.current = true;
+      Alert.alert(t('permission_denied'), t('permission_denied_desc'));
+    }
+  }, [status, t]);
 
   const handleNavigate = (miqat: Miqat) => {
     const url = `https://www.google.com/maps/dir/?api=1&destination=${miqat.lat},${miqat.lng}`;
@@ -116,7 +105,7 @@ export default function MiqatScreen() {
       >
         {loading ? (
           <View style={styles.loadingContainer}>
-            <ActivityIndicator size="large" color={COLORS.primary} />
+            <ActivityIndicator size="large" color={colors.primary} />
             <Text style={[styles.loadingText, { fontSize: fonts.md }]}>{t('loading')}</Text>
           </View>
         ) : (
@@ -125,9 +114,9 @@ export default function MiqatScreen() {
             {makkahMiqat && (
               <View style={[styles.card, styles.makkahCard]}>
                 <View style={styles.badgeContainer}>
-                  <View style={[styles.badge, { backgroundColor: '#FFF9E6' }]}>
-                    <Ionicons name="home" size={16} color={COLORS.primary} />
-                    <Text style={[styles.badgeText, { fontSize: fonts.sm, color: COLORS.primary }]}>
+                  <View style={[styles.badge, { backgroundColor: colors.goldBg }]}>
+                    <Ionicons name="home" size={16} color={colors.primary} />
+                    <Text style={[styles.badgeText, { fontSize: fonts.sm, color: colors.primary }]}>
                       {t('for_makkah_residents')}
                     </Text>
                   </View>
@@ -143,7 +132,7 @@ export default function MiqatScreen() {
                     style={[styles.actionButton, styles.navigateButton]}
                     onPress={() => handleNavigate(makkahMiqat)}
                   >
-                    <Ionicons name="navigate" size={20} color={COLORS.textLight} />
+                    <Ionicons name="navigate" size={20} color={colors.textLight} />
                     <Text style={[styles.actionButtonText, { fontSize: fonts.md }]}>
                       {t('navigate')}
                     </Text>
@@ -153,8 +142,8 @@ export default function MiqatScreen() {
                       style={[styles.actionButton, styles.callButton]}
                       onPress={() => handleCall(makkahMiqat.phone!)}
                     >
-                      <Ionicons name="call" size={20} color={COLORS.text} />
-                      <Text style={[styles.actionButtonText, { fontSize: fonts.md, color: COLORS.text }]}>
+                      <Ionicons name="call" size={20} color={colors.onGold} />
+                      <Text style={[styles.actionButtonText, { fontSize: fonts.md, color: colors.onGold }]}>
                         {t('call')}
                       </Text>
                     </TouchableOpacity>
@@ -168,7 +157,7 @@ export default function MiqatScreen() {
               <View style={[styles.card, styles.nearestCard]}>
                 <View style={styles.badgeContainer}>
                   <View style={styles.badge}>
-                    <Ionicons name="star" size={16} color={COLORS.gold} />
+                    <Ionicons name="star" size={16} color={colors.gold} />
                     <Text style={[styles.badgeText, { fontSize: fonts.sm }]}>
                       {t('nearest_miqat')}
                     </Text>
@@ -181,7 +170,7 @@ export default function MiqatScreen() {
 
                 {nearestMiqat.distance !== null && (
                   <View style={styles.distanceContainer}>
-                    <Ionicons name="navigate" size={20} color={COLORS.primary} />
+                    <Ionicons name="navigate" size={20} color={colors.primary} />
                     <Text style={[styles.distanceText, { fontSize: fonts.lg }]}>
                       {nearestMiqat.distance} {t('km')}
                     </Text>
@@ -197,7 +186,7 @@ export default function MiqatScreen() {
                     style={[styles.actionButton, styles.navigateButton]}
                     onPress={() => handleNavigate(nearestMiqat)}
                   >
-                    <Ionicons name="navigate" size={20} color={COLORS.textLight} />
+                    <Ionicons name="navigate" size={20} color={colors.textLight} />
                     <Text style={[styles.actionButtonText, { fontSize: fonts.md }]}>
                       {t('navigate')}
                     </Text>
@@ -208,8 +197,8 @@ export default function MiqatScreen() {
                       style={[styles.actionButton, styles.callButton]}
                       onPress={() => handleCall(nearestMiqat.phone!)}
                     >
-                      <Ionicons name="call" size={20} color={COLORS.text} />
-                      <Text style={[styles.actionButtonText, { fontSize: fonts.md, color: COLORS.text }]}>
+                      <Ionicons name="call" size={20} color={colors.onGold} />
+                      <Text style={[styles.actionButtonText, { fontSize: fonts.md, color: colors.onGold }]}>
                         {t('call')}
                       </Text>
                     </TouchableOpacity>
@@ -220,13 +209,13 @@ export default function MiqatScreen() {
 
             {/* Search */}
             <View style={styles.searchContainer}>
-              <Ionicons name="search" size={20} color={COLORS.textSecondary} />
+              <Ionicons name="search" size={20} color={colors.textSecondary} />
               <TextInput
                 style={[styles.searchInput, { fontSize: fonts.md }]}
                 placeholder={t('search_miqat')}
                 value={searchQuery}
                 onChangeText={setSearchQuery}
-                placeholderTextColor={COLORS.textSecondary}
+                placeholderTextColor={colors.textSecondary}
               />
             </View>
 
@@ -242,7 +231,7 @@ export default function MiqatScreen() {
                     </Text>
                     {miqat.distance !== null && (
                       <View style={styles.miqatDistance}>
-                        <Ionicons name="location" size={16} color={COLORS.primary} />
+                        <Ionicons name="location" size={16} color={colors.primary} />
                         <Text style={[styles.miqatDistanceText, { fontSize: fonts.sm }]}>
                           {miqat.distance} {t('km')}
                         </Text>
@@ -260,7 +249,7 @@ export default function MiqatScreen() {
                     style={styles.iconButton}
                     onPress={() => handleNavigate(miqat)}
                   >
-                    <Ionicons name="navigate" size={24} color={COLORS.primary} />
+                    <Ionicons name="navigate" size={24} color={colors.primary} />
                   </TouchableOpacity>
 
                   {miqat.phone && (
@@ -268,7 +257,7 @@ export default function MiqatScreen() {
                       style={styles.iconButton}
                       onPress={() => handleCall(miqat.phone!)}
                     >
-                      <Ionicons name="call" size={24} color={COLORS.goldDark} />
+                      <Ionicons name="call" size={24} color={colors.goldDark} />
                     </TouchableOpacity>
                   )}
                 </View>
@@ -277,7 +266,7 @@ export default function MiqatScreen() {
 
             {filteredMiqats.length === 0 && (
               <View style={styles.emptyState}>
-                <Ionicons name="search-outline" size={48} color={COLORS.textSecondary} />
+                <Ionicons name="search-outline" size={48} color={colors.textSecondary} />
                 <Text style={[styles.emptyText, { fontSize: fonts.md }]}>{t('no_results')}</Text>
               </View>
             )}
@@ -289,21 +278,22 @@ export default function MiqatScreen() {
   );
 }
 
-const styles = StyleSheet.create({
+const makeStyles = (c: Palette) =>
+  StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: COLORS.background,
+    backgroundColor: c.background,
   },
   header: {
-    backgroundColor: COLORS.surface,
+    backgroundColor: c.surface,
     paddingHorizontal: SPACING.lg,
     paddingVertical: SPACING.md,
     borderBottomWidth: 1,
-    borderBottomColor: COLORS.border,
+    borderBottomColor: c.border,
   },
   headerTitle: {
     fontWeight: 'bold',
-    color: COLORS.text,
+    color: c.text,
   },
   scrollView: {
     flex: 1,
@@ -318,10 +308,10 @@ const styles = StyleSheet.create({
   },
   loadingText: {
     marginTop: SPACING.md,
-    color: COLORS.textSecondary,
+    color: c.textSecondary,
   },
   card: {
-    backgroundColor: COLORS.surface,
+    backgroundColor: c.surface,
     borderRadius: BORDER_RADIUS.lg,
     padding: SPACING.lg,
     marginBottom: SPACING.md,
@@ -329,12 +319,12 @@ const styles = StyleSheet.create({
   },
   nearestCard: {
     borderWidth: 2,
-    borderColor: COLORS.gold,
+    borderColor: c.gold,
   },
   makkahCard: {
     borderWidth: 2,
-    borderColor: COLORS.primary,
-    backgroundColor: '#F5FFF5',
+    borderColor: c.primary,
+    backgroundColor: c.successBg,
   },
   badgeContainer: {
     marginBottom: SPACING.sm,
@@ -342,20 +332,20 @@ const styles = StyleSheet.create({
   badge: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#FFF9E6',
+    backgroundColor: c.goldBg,
     alignSelf: 'flex-start',
     paddingHorizontal: SPACING.sm,
     paddingVertical: SPACING.xs,
     borderRadius: BORDER_RADIUS.round,
   },
   badgeText: {
-    color: COLORS.goldDark,
+    color: c.goldDark,
     fontWeight: '600',
     marginLeft: SPACING.xs,
   },
   nearestTitle: {
     fontWeight: 'bold',
-    color: COLORS.text,
+    color: c.text,
     marginBottom: SPACING.sm,
   },
   distanceContainer: {
@@ -365,11 +355,11 @@ const styles = StyleSheet.create({
   },
   distanceText: {
     fontWeight: 'bold',
-    color: COLORS.primary,
+    color: c.primary,
     marginLeft: SPACING.xs,
   },
   notesText: {
-    color: COLORS.textSecondary,
+    color: c.textSecondary,
     lineHeight: 20,
     marginBottom: SPACING.md,
   },
@@ -386,20 +376,20 @@ const styles = StyleSheet.create({
     borderRadius: BORDER_RADIUS.md,
   },
   navigateButton: {
-    backgroundColor: COLORS.primary,
+    backgroundColor: c.primary,
   },
   callButton: {
-    backgroundColor: COLORS.gold,
+    backgroundColor: c.gold,
   },
   actionButtonText: {
     fontWeight: '600',
-    color: COLORS.textLight,
+    color: c.textLight,
     marginLeft: SPACING.xs,
   },
   searchContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: COLORS.surface,
+    backgroundColor: c.surface,
     borderRadius: BORDER_RADIUS.md,
     padding: SPACING.md,
     marginBottom: SPACING.md,
@@ -408,16 +398,16 @@ const styles = StyleSheet.create({
   searchInput: {
     flex: 1,
     marginLeft: SPACING.sm,
-    color: COLORS.text,
+    color: c.text,
   },
   sectionTitle: {
     fontWeight: 'bold',
-    color: COLORS.text,
+    color: c.text,
     marginBottom: SPACING.md,
     paddingHorizontal: SPACING.sm,
   },
   miqatCard: {
-    backgroundColor: COLORS.surface,
+    backgroundColor: c.surface,
     borderRadius: BORDER_RADIUS.lg,
     padding: SPACING.lg,
     marginBottom: SPACING.sm,
@@ -434,7 +424,7 @@ const styles = StyleSheet.create({
   },
   miqatName: {
     fontWeight: 'bold',
-    color: COLORS.text,
+    color: c.text,
     marginBottom: SPACING.xs,
   },
   miqatDistance: {
@@ -442,12 +432,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   miqatDistanceText: {
-    color: COLORS.primary,
+    color: c.primary,
     fontWeight: '600',
     marginLeft: SPACING.xs,
   },
   miqatNotes: {
-    color: COLORS.textSecondary,
+    color: c.textSecondary,
     lineHeight: 20,
     marginBottom: SPACING.md,
   },
@@ -459,7 +449,7 @@ const styles = StyleSheet.create({
     width: 44,
     height: 44,
     borderRadius: BORDER_RADIUS.round,
-    backgroundColor: COLORS.surfaceAlt,
+    backgroundColor: c.surfaceAlt,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -469,6 +459,6 @@ const styles = StyleSheet.create({
   },
   emptyText: {
     marginTop: SPACING.md,
-    color: COLORS.textSecondary,
+    color: c.textSecondary,
   },
 });

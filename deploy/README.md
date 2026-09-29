@@ -64,7 +64,7 @@ crontab -e                            # puis ajouter (mise à jour mensuelle) :
 ## 5. Sauvegardes
 
 ```bash
-./backup.sh     # crée backups/umrah-AAAA-MM-JJ_HHMM.gz (14 jours conservés)
+./backup.sh     # crée backups/umrah-AAAA-MM-JJ_HHMM.gz et umrah-media-….tar.gz (14 jours conservés)
 crontab -e      # puis ajouter :
 15 4 * * * cd /opt/apps/umrah-companion/deploy && ./backup.sh >> backups/backup.log 2>&1
 ```
@@ -92,6 +92,12 @@ Ouvrez **https://pelerinage.creationapp.academy/admin** et collez le `ADMIN_TOKE
 - la courbe des installations actives par jour, avec un tableau détaillé ;
 - les **pays** (installations et actives sur 30 jours), les écrans les plus consultés, les langues, les versions et les plateformes.
 
+L'onglet **Messages** publie des annonces sur l'accueil de l'application (affluence, horaires spéciaux, conseils) : titre et texte en français, anglais et/ou arabe, type, dates de début et de fin optionnelles. L'app les affiche dans la langue de l'utilisateur, les garde en cache hors ligne, et chaque utilisateur peut masquer un message (il réapparaît si vous le modifiez). Au plus 5 messages sont en ligne à la fois.
+
+L'onglet **Audio** liste les 45 invocations de l'application (guide et page Invocations). Pour chacune, envoyez un fichier MP3 ou M4A (5 Mo au plus), écoutez-le, remplacez-le ou supprimez-le. L'application affiche un bouton ▶ dès qu'un enregistrement existe, le télécharge une seule fois et le garde hors ligne. Les fichiers sont stockés dans le volume Docker `media` et sauvegardés par `backup.sh`. N'utilisez que des enregistrements dont vous avez les droits.
+
+> Si vous modifiez les invocations de l'application (textes ou ordre), régénérez la liste de l'onglet Audio avec `python backend/build_audio_catalog.py`. Un test échoue tant que ce n'est pas fait.
+
 D'autres onglets pourront s'ajouter (messages aux utilisateurs, contenu du guide…) : chaque fonctionnalité est un module Python de `backend/` avec ses routes `/api/admin/…` protégées par `require_admin`.
 
 ## Ce que fait l'API
@@ -101,7 +107,11 @@ D'autres onglets pourront s'ajouter (messages aux utilisateurs, contenu du guide
 | `POST /api/sessions` | Appelé à chaque lancement : identifiant d'installation aléatoire, langue, version, plateforme, région du téléphone. Pays déduit de l'IP (non stockée). |
 | `POST /api/events` | Écrans ouverts, comptés par jour et par écran, sans identifiant. |
 | `DELETE /api/installs/{id}` | L'utilisateur désactive les statistiques : ses données sont effacées. |
+| `GET /api/messages?lang=fr` | Messages en ligne pour l'accueil de l'app (5 au plus, dans la langue demandée, sinon anglais, sinon français). |
+| `GET /api/audio` · `GET /api/audio/files/{nom}` | Liste des enregistrements d'invocations et fichiers audio (mis en cache un an : le nom change à chaque nouveau fichier). |
 | `GET /api/admin/stats` | Statistiques de la page d'administration (jeton obligatoire). |
+| `GET /api/admin/audio` · `POST/DELETE /api/admin/audio/{clé}` | Onglet « Audio » : envoi d'un MP3/M4A (5 Mo au plus) par invocation. |
+| `GET/POST /api/admin/messages` · `PUT/DELETE /api/admin/messages/{id}` | Onglet « Messages » : annonces en 3 langues, type (information, conseil, alerte), dates de début et de fin. |
 | `GET /api/health` | Contrôle de santé (utilisé par Docker). |
 
 Limites : 600 requêtes par heure et par adresse IP, car beaucoup de pèlerins partagent la même IP (Wi-Fi du Haram, opérateurs mobiles) ; corps de requête limité à 16 Ko par Traefik. Les installations inactives depuis 24 mois sont supprimées automatiquement, comme l'annonce la politique de confidentialité.

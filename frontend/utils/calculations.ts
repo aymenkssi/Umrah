@@ -102,3 +102,29 @@ export function normalizeAngle(angle: number): number {
   const wrapped = ((angle % 360) + 360) % 360;
   return wrapped > 180 ? wrapped - 360 : wrapped;
 }
+
+/**
+ * Low-pass filter for compass headings that handles the 359° -> 0° wrap:
+ * `alpha` = weight of the new reading (0..1). Returns a value in [0, 360).
+ */
+export function smoothHeading(previous: number | null, next: number, alpha = 0.25): number {
+  if (previous === null) return ((next % 360) + 360) % 360;
+  const delta = normalizeAngle(next - previous);
+  return (((previous + alpha * delta) % 360) + 360) % 360;
+}
+
+export interface QiblaGuidance {
+  aligned: boolean;
+  /** Which way to turn the phone to face the Qibla. */
+  direction: 'left' | 'right' | null;
+  /** Remaining angle, in whole degrees. */
+  degrees: number;
+}
+
+/** How to turn the phone, given the Qibla bearing and the phone heading (degrees from north). */
+export function qiblaGuidance(qiblaBearing: number, heading: number, tolerance = 5): QiblaGuidance {
+  const delta = normalizeAngle(qiblaBearing - heading);
+  const degrees = Math.round(Math.abs(delta));
+  if (Math.abs(delta) <= tolerance) return { aligned: true, direction: null, degrees };
+  return { aligned: false, direction: delta > 0 ? 'right' : 'left', degrees };
+}

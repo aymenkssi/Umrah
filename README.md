@@ -17,7 +17,7 @@ Aucun compte n'est nécessaire : la progression et les réglages restent sur l'a
 ## Structure
 
 ```
-frontend/   Application Expo (SDK 54, expo-router, TypeScript)
+frontend/   Application Expo (SDK 57, expo-router, TypeScript)
   app/          Écrans (routage par fichiers)
   contexts/     Langue et réglages
   data/         Étapes, miqats, invocations (JSON)

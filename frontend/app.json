@@ -2,12 +2,11 @@
   "expo": {
     "name": "Umrah Companion",
     "slug": "umrah-companion",
-    "version": "1.1.0",
+    "version": "1.2.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "umrah-companion",
-    "userInterfaceStyle": "light",
-    "newArchEnabled": true,
+    "userInterfaceStyle": "automatic",
     "ios": {
       "bundleIdentifier": "com.aymen.umrahcompanion",
       "supportsTablet": true,
@@ -17,7 +16,7 @@
     },
     "android": {
       "package": "com.aymen.umrahcompanion",
-      "versionCode": 2,
+      "versionCode": 3,
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#2E7D32"
@@ -25,7 +24,14 @@
       "edgeToEdgeEnabled": true,
       "permissions": [
         "ACCESS_COARSE_LOCATION",
-        "ACCESS_FINE_LOCATION"
+        "ACCESS_FINE_LOCATION",
+        "android.permission.SCHEDULE_EXACT_ALARM"
+      ],
+      "blockedPermissions": [
+        "android.permission.SYSTEM_ALERT_WINDOW",
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE",
+        "android.permission.RECORD_AUDIO"
       ]
     },
     "web": {
@@ -60,6 +66,22 @@
           "iosAppId": "ca-app-pub-3940256099942544~1458002511",
           "delayAppMeasurementInit": true,
           "userTrackingUsageDescription": "Your data will be used to show you more relevant ads. Ads help keep Umrah Companion free."
+        }
+      ],
+      "expo-image",
+      "expo-status-bar",
+      [
+        "expo-notifications",
+        {
+          "color": "#0E6B4A"
+        }
+      ],
+      [
+        "expo-audio",
+        {
+          "microphonePermission": false,
+          "recordAudioAndroid": false,
+          "enableBackgroundPlayback": false
         }
       ]
     ],

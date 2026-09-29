@@ -34,6 +34,8 @@ services:
     volumes:
       # Optional GeoIP database (./geoip-update.sh): country of users from their IP address.
       - ./geoip:/app/geoip:ro
+      # Du'a recordings uploaded from the admin page.
+      - media:/app/media
     networks: [internal, traefik]
     healthcheck:
       test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8001/api/health')"]
@@ -52,6 +54,15 @@ services:
       - traefik.http.middlewares.umrah-headers.headers.stsSeconds=31536000
       - traefik.http.middlewares.umrah-headers.headers.contentTypeNosniff=true
       - traefik.http.middlewares.umrah-body-limit.buffering.maxRequestBodyBytes=16384
+      # Audio uploads from the admin page: same service, larger body limit (5 MB files).
+      - traefik.http.routers.umrah-upload.rule=Host(`${DOMAIN}`) && PathPrefix(`/api/admin/audio`)
+      - traefik.http.routers.umrah-upload.priority=100
+      - traefik.http.routers.umrah-upload.entrypoints=${TRAEFIK_ENTRYPOINT}
+      - traefik.http.routers.umrah-upload.tls=true
+      - traefik.http.routers.umrah-upload.tls.certresolver=${TRAEFIK_CERTRESOLVER}
+      - traefik.http.routers.umrah-upload.middlewares=umrah-headers,umrah-upload-limit
+      - traefik.http.routers.umrah-upload.service=umrah
+      - traefik.http.middlewares.umrah-upload-limit.buffering.maxRequestBodyBytes=6291456
 
 networks:
   # MongoDB only lives here: never reachable from Traefik or the Internet.
@@ -63,3 +74,4 @@ networks:
 
 volumes:
   mongo-data:
+  media:

@@ -3,10 +3,11 @@ import { Tabs, usePathname } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useLanguage } from '../../contexts/LanguageContext';
-import { COLORS } from '../../constants/theme';
 import { startSession, trackScreen } from '../../utils/analytics';
+import { useTheme } from '../../contexts/ThemeContext';
 
 export default function TabsLayout() {
+  const { colors } = useTheme();
   const { t, language } = useLanguage();
   const pathname = usePathname();
   const sessionStarted = useRef(false);
@@ -30,18 +31,18 @@ export default function TabsLayout() {
     <Tabs
       screenOptions={{
         headerShown: false,
-        tabBarActiveTintColor: COLORS.primary,
-        tabBarInactiveTintColor: COLORS.textSecondary,
+        tabBarActiveTintColor: colors.primary,
+        tabBarInactiveTintColor: colors.textSecondary,
         tabBarStyle: {
-          backgroundColor: COLORS.surface,
-          borderTopColor: COLORS.border,
+          backgroundColor: colors.surface,
+          borderTopColor: colors.border,
           borderTopWidth: 1,
           height: 64 + insets.bottom,
           paddingBottom: 8 + insets.bottom,
           paddingTop: 6,
         },
         tabBarLabelStyle: {
-          fontSize: 10,
+          fontSize: 11,
           fontWeight: '600',
         },
       }}
@@ -67,6 +68,8 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="miqat"
         options={{
+          // Reached from the home screen; hidden from the tab bar to keep 5 tabs.
+          href: null,
           title: t('miqat'),
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="location" size={size} color={color} />
@@ -94,6 +97,7 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="duas"
         options={{
+          href: null,
           title: t('tab_duas'),
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="heart" size={size} color={color} />

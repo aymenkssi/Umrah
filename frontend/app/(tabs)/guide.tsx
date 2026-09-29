@@ -7,16 +7,22 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { router } from 'expo-router';
+import { DuaAudioButton } from '../../components/DuaAudioButton';
+import { stepDuaKey, stepExtraDuaKey } from '../../utils/audioKeys';
 import { Ionicons } from '@expo/vector-icons';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { useSettings } from '../../contexts/SettingsContext';
-import { COLORS, SPACING, BORDER_RADIUS, SHADOWS, FONT_SIZES } from '../../constants/theme';
+import { SPACING, BORDER_RADIUS, SHADOWS, FONT_SIZES, Palette } from '../../constants/theme';
 import umrahSteps from '../../data/umrah-steps.json';
+import { useTheme, useThemedStyles } from '../../contexts/ThemeContext';
 
 // Sorted once, without mutating the imported JSON module.
 const STEPS = [...umrahSteps].sort((a, b) => a.order - b.order);
 
 export default function GuideScreen() {
+  const { colors } = useTheme();
+  const styles = useThemedStyles(makeStyles);
   const { t, language } = useLanguage();
   const { fontSize, completedSteps, toggleStepCompletion, detailedView, toggleView } = useSettings();
   const fonts = FONT_SIZES[fontSize];
@@ -38,7 +44,7 @@ export default function GuideScreen() {
             <Ionicons
               name={detailedView ? 'list' : 'list-circle'}
               size={24}
-              color={COLORS.primary}
+              color={colors.primary}
             />
             <Text style={[styles.viewToggleText, { fontSize: fonts.sm }]}>
               {detailedView ? t('compact_view') : t('detailed_view')}
@@ -79,7 +85,7 @@ export default function GuideScreen() {
                         ]}
                       >
                         {isCompleted ? (
-                          <Ionicons name="checkmark" size={18} color={COLORS.textLight} />
+                          <Ionicons name="checkmark" size={18} color={colors.textLight} />
                         ) : (
                           <Text style={styles.stepNumberText}>{step.order}</Text>
                         )}
@@ -93,7 +99,7 @@ export default function GuideScreen() {
                     <Ionicons
                       name={isExpanded ? 'chevron-up' : 'chevron-down'}
                       size={24}
-                      color={COLORS.textSecondary}
+                      color={colors.textSecondary}
                     />
                   </View>
 
@@ -118,19 +124,20 @@ export default function GuideScreen() {
                     {step.dua && (
                       <View style={styles.duaSection}>
                         <View style={styles.duaHeader}>
-                          <Ionicons name="book-outline" size={20} color={COLORS.primary} />
+                          <Ionicons name="book-outline" size={20} color={colors.primary} />
                           <Text style={[styles.duaLabel, { fontSize: fonts.sm }]}>{t('dua')}</Text>
                         </View>
                         <Text style={[styles.duaText, { fontSize: fonts.md }]}>
                           {step.dua[language]}
                         </Text>
+                        <DuaAudioButton audioKey={stepDuaKey(step.id)} />
                       </View>
                     )}
 
                     {step.additionalDuas?.length > 0 && (
                       <View style={styles.duaSection}>
                         <View style={styles.duaHeader}>
-                          <Ionicons name="bookmarks-outline" size={20} color={COLORS.primary} />
+                          <Ionicons name="bookmarks-outline" size={20} color={colors.primary} />
                           <Text style={[styles.duaLabel, { fontSize: fonts.sm }]}>
                             {t('additional_duas')}
                           </Text>
@@ -141,6 +148,7 @@ export default function GuideScreen() {
                               <Text style={[styles.duaArabic, { fontSize: fonts.lg }]}>{extra.ar}</Text>
                             )}
                             <Text style={[styles.duaText, { fontSize: fonts.md }]}>{extra[language]}</Text>
+                            <DuaAudioButton audioKey={stepExtraDuaKey(step.id, index)} />
                           </View>
                         ))}
                       </View>
@@ -149,7 +157,7 @@ export default function GuideScreen() {
                     {step.notes && (
                       <View style={styles.notesSection}>
                         <View style={styles.notesHeader}>
-                          <Ionicons name="information-circle-outline" size={18} color={COLORS.goldDark} />
+                          <Ionicons name="information-circle-outline" size={18} color={colors.goldDark} />
                           <Text style={[styles.notesLabel, { fontSize: fonts.sm }]}>
                             {t('notes')}:
                           </Text>
@@ -162,6 +170,16 @@ export default function GuideScreen() {
                   </View>
                 )}
 
+                {(step.id === 'tawaf' || step.id === 'sai') && (
+                  <TouchableOpacity
+                    style={styles.counterButton}
+                    onPress={() => router.push({ pathname: '/counter', params: { kind: step.id } })}
+                  >
+                    <Ionicons name="repeat" size={20} color={colors.onGold} />
+                    <Text style={[styles.counterButtonText, { fontSize: fonts.sm }]}>{t('open_counter')}</Text>
+                  </TouchableOpacity>
+                )}
+
                 <TouchableOpacity
                   style={[
                     styles.completeButton,
@@ -172,7 +190,7 @@ export default function GuideScreen() {
                   <Ionicons
                     name={isCompleted ? 'checkmark-circle' : 'checkmark-circle-outline'}
                     size={20}
-                    color={isCompleted ? COLORS.textLight : COLORS.primary}
+                    color={isCompleted ? colors.textLight : colors.primary}
                   />
                   <Text
                     style={[
@@ -189,7 +207,7 @@ export default function GuideScreen() {
           })}
 
         <View style={styles.disclaimerCard}>
-          <Ionicons name="alert-circle-outline" size={20} color={COLORS.primary} />
+          <Ionicons name="alert-circle-outline" size={20} color={colors.primary} />
           <Text style={[styles.disclaimerText, { fontSize: fonts.sm }]}>
             {t('disclaimer_desc')}
           </Text>
@@ -199,21 +217,22 @@ export default function GuideScreen() {
   );
 }
 
-const styles = StyleSheet.create({
+const makeStyles = (c: Palette) =>
+  StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: COLORS.background,
+    backgroundColor: c.background,
   },
   header: {
-    backgroundColor: COLORS.surface,
+    backgroundColor: c.surface,
     paddingHorizontal: SPACING.lg,
     paddingVertical: SPACING.md,
     borderBottomWidth: 1,
-    borderBottomColor: COLORS.border,
+    borderBottomColor: c.border,
   },
   headerTitle: {
     fontWeight: 'bold',
-    color: COLORS.text,
+    color: c.text,
     marginBottom: SPACING.sm,
   },
   headerActions: {
@@ -225,12 +244,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     padding: SPACING.sm,
-    backgroundColor: COLORS.surfaceAlt,
+    backgroundColor: c.surfaceAlt,
     borderRadius: BORDER_RADIUS.md,
   },
   viewToggleText: {
     marginLeft: SPACING.xs,
-    color: COLORS.primary,
+    color: c.primary,
     fontWeight: '600',
   },
   scrollView: {
@@ -241,17 +260,17 @@ const styles = StyleSheet.create({
     paddingBottom: SPACING.xl,
   },
   stepCard: {
-    backgroundColor: COLORS.surface,
+    backgroundColor: c.surface,
     borderRadius: BORDER_RADIUS.lg,
     padding: SPACING.lg,
     marginBottom: SPACING.md,
     ...SHADOWS.small,
     borderLeftWidth: 4,
-    borderLeftColor: COLORS.primary,
+    borderLeftColor: c.primary,
   },
   specialCard: {
-    borderLeftColor: COLORS.gold,
-    backgroundColor: '#FFFEF0',
+    borderLeftColor: c.gold,
+    backgroundColor: c.goldBg,
   },
   completedCard: {
     opacity: 0.8,
@@ -271,16 +290,16 @@ const styles = StyleSheet.create({
     width: 32,
     height: 32,
     borderRadius: BORDER_RADIUS.round,
-    backgroundColor: COLORS.primary,
+    backgroundColor: c.primary,
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: SPACING.sm,
   },
   stepNumberCompleted: {
-    backgroundColor: COLORS.success,
+    backgroundColor: c.success,
   },
   stepNumberText: {
-    color: COLORS.textLight,
+    color: c.textLight,
     fontWeight: 'bold',
   },
   stepTitleContainer: {
@@ -288,10 +307,10 @@ const styles = StyleSheet.create({
   },
   stepTitle: {
     fontWeight: 'bold',
-    color: COLORS.text,
+    color: c.text,
   },
   stepSummary: {
-    color: COLORS.textSecondary,
+    color: c.textSecondary,
     lineHeight: 22,
     marginBottom: SPACING.sm,
   },
@@ -299,17 +318,17 @@ const styles = StyleSheet.create({
     marginTop: SPACING.sm,
     paddingTop: SPACING.sm,
     borderTopWidth: 1,
-    borderTopColor: COLORS.border,
+    borderTopColor: c.border,
   },
   detailSection: {
     marginBottom: SPACING.md,
   },
   detailText: {
-    color: COLORS.text,
+    color: c.text,
     lineHeight: 24,
   },
   duaSection: {
-    backgroundColor: COLORS.surfaceAlt,
+    backgroundColor: c.surfaceAlt,
     padding: SPACING.md,
     borderRadius: BORDER_RADIUS.md,
     marginBottom: SPACING.md,
@@ -321,16 +340,16 @@ const styles = StyleSheet.create({
   },
   duaLabel: {
     fontWeight: '600',
-    color: COLORS.primary,
+    color: c.primary,
     marginLeft: SPACING.xs,
   },
   duaText: {
-    color: COLORS.text,
+    color: c.text,
     lineHeight: 24,
     fontWeight: '500',
   },
   duaArabic: {
-    color: COLORS.primaryDark,
+    color: c.primaryDark,
     lineHeight: 30,
     textAlign: 'right',
     writingDirection: 'rtl',
@@ -340,14 +359,14 @@ const styles = StyleSheet.create({
     marginTop: SPACING.md,
     paddingTop: SPACING.md,
     borderTopWidth: 1,
-    borderTopColor: COLORS.border,
+    borderTopColor: c.border,
   },
   notesSection: {
-    backgroundColor: '#FFF9E6',
+    backgroundColor: c.goldBg,
     padding: SPACING.md,
     borderRadius: BORDER_RADIUS.md,
     borderLeftWidth: 3,
-    borderLeftColor: COLORS.goldDark,
+    borderLeftColor: c.goldDark,
   },
   notesHeader: {
     flexDirection: 'row',
@@ -356,12 +375,26 @@ const styles = StyleSheet.create({
   },
   notesLabel: {
     fontWeight: '600',
-    color: COLORS.goldDark,
+    color: c.goldDark,
     marginLeft: SPACING.xs,
   },
   notesText: {
-    color: COLORS.text,
+    color: c.text,
     lineHeight: 20,
+  },
+  counterButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: SPACING.xs,
+    padding: SPACING.sm,
+    borderRadius: BORDER_RADIUS.md,
+    backgroundColor: c.gold,
+    marginTop: SPACING.sm,
+  },
+  counterButtonText: {
+    color: c.onGold,
+    fontWeight: '700',
   },
   completeButton: {
     flexDirection: 'row',
@@ -370,33 +403,33 @@ const styles = StyleSheet.create({
     padding: SPACING.sm,
     borderRadius: BORDER_RADIUS.md,
     borderWidth: 1,
-    borderColor: COLORS.primary,
+    borderColor: c.primary,
     marginTop: SPACING.sm,
   },
   completeButtonActive: {
-    backgroundColor: COLORS.primary,
-    borderColor: COLORS.primary,
+    backgroundColor: c.primary,
+    borderColor: c.primary,
   },
   completeButtonText: {
     marginLeft: SPACING.xs,
-    color: COLORS.primary,
+    color: c.primary,
     fontWeight: '600',
   },
   completeButtonTextActive: {
-    color: COLORS.textLight,
+    color: c.textLight,
   },
   disclaimerCard: {
     flexDirection: 'row',
-    backgroundColor: COLORS.surfaceAlt,
+    backgroundColor: c.surfaceAlt,
     borderRadius: BORDER_RADIUS.md,
     padding: SPACING.md,
     marginTop: SPACING.lg,
     borderLeftWidth: 4,
-    borderLeftColor: COLORS.primary,
+    borderLeftColor: c.primary,
   },
   disclaimerText: {
     flex: 1,
-    color: COLORS.textSecondary,
+    color: c.textSecondary,
     marginLeft: SPACING.sm,
     lineHeight: 20,
   },

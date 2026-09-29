@@ -6,10 +6,10 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY server.py database.py admin_auth.py ratelimit.py analytics.py admin.html ./
+COPY server.py database.py admin_auth.py ratelimit.py analytics.py messages.py audio.py audio_catalog.json admin.html ./
 COPY site ./site
 
-RUN useradd --create-home --uid 10001 app
+RUN useradd --create-home --uid 10001 app && mkdir -p /app/media/audio && chown -R app /app/media
 USER app
 
 EXPOSE 8001

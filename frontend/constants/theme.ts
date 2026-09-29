@@ -1,38 +1,94 @@
-export const COLORS = {
-  // Islamic Green shades
-  primary: '#2E7D32',
-  primaryDark: '#1B5E20',
-  primaryLight: '#4CAF50',
-  
+/**
+ * Colour tokens. Screens never hard-code colours: they read the active palette
+ * from ThemeContext (useTheme / useThemedStyles), so light and dark modes stay in sync.
+ */
+export const LIGHT_COLORS = {
+  // Brand greens
+  primary: '#0E6B4A',
+  primaryDark: '#0A4F37',
+  primaryLight: '#3C9A73',
+
   // Gold accents
-  gold: '#FFD700',
-  goldDark: '#FFC107',
-  goldLight: '#FFECB3',
-  
-  // Background colors
-  background: '#FAFAFA',
+  gold: '#D4AF37',
+  goldDark: '#9A7516',
+  goldLight: '#F4E7C0',
+
+  // Backgrounds
+  background: '#F6F5F0',
   surface: '#FFFFFF',
-  surfaceAlt: '#F5F5F5',
-  
-  // Text colors
-  text: '#212121',
-  textSecondary: '#757575',
+  surfaceAlt: '#EFEDE6',
+
+  // Text
+  text: '#1B1C1A',
+  textSecondary: '#5E625C',
   textLight: '#FFFFFF',
-  
-  // Status colors
-  success: '#4CAF50',
-  warning: '#FF9800',
-  error: '#F44336',
-  info: '#2196F3',
-  
-  // Borders and dividers
-  border: '#E0E0E0',
-  divider: '#BDBDBD',
-  
+  /** Text drawn on gold fills (identical in both modes). */
+  onGold: '#1B1C1A',
+  /** Secondary text on the green primary fill (headers, hero cards). */
+  onPrimaryMuted: '#F4E7C0',
+  /** Text on goldLight tinted backgrounds. */
+  onGoldLight: '#0A4F37',
+
+  // Status
+  success: '#2E7D32',
+  warning: '#B26A00',
+  error: '#C62828',
+  info: '#1565C0',
+
+  // Tinted backgrounds for status / highlighted cards
+  successBg: '#E8F5E9',
+  warningBg: '#FFF3E0',
+  goldBg: '#FFF8E6',
+
+  // Lines
+  border: '#E3E1D9',
+  divider: '#CFCCC2',
+
   // Shadows
   shadow: 'rgba(0, 0, 0, 0.1)',
   shadowDark: 'rgba(0, 0, 0, 0.2)',
 };
+
+export type Palette = typeof LIGHT_COLORS;
+
+export const DARK_COLORS: Palette = {
+  primary: '#2E9A6E',
+  primaryDark: '#1F6E4F',
+  primaryLight: '#5FC49B',
+
+  gold: '#D9B65C',
+  goldDark: '#E3C27A',
+  goldLight: '#3A3222',
+
+  background: '#101311',
+  surface: '#1A1E1B',
+  surfaceAlt: '#242925',
+
+  text: '#EEF0EC',
+  textSecondary: '#A9AFA8',
+  textLight: '#FFFFFF',
+  onGold: '#1B1C1A',
+  onPrimaryMuted: '#F4E7C0',
+  onGoldLight: '#E3C27A',
+
+  success: '#66BB6A',
+  warning: '#FFB74D',
+  error: '#EF5350',
+  info: '#64B5F6',
+
+  successBg: '#173222',
+  warningBg: '#3A2A12',
+  goldBg: '#2A2616',
+
+  border: '#2E3430',
+  divider: '#3D443F',
+
+  shadow: 'rgba(0, 0, 0, 0.4)',
+  shadowDark: 'rgba(0, 0, 0, 0.6)',
+};
+
+/** @deprecated Static light palette, kept for non-React code. Use useTheme() in components. */
+export const COLORS = LIGHT_COLORS;
 
 export const SPACING = {
   xs: 4,
@@ -74,10 +130,10 @@ export const FONT_SIZES = {
 };
 
 export const BORDER_RADIUS = {
-  sm: 4,
-  md: 8,
-  lg: 12,
-  xl: 16,
+  sm: 6,
+  md: 10,
+  lg: 16,
+  xl: 22,
   round: 999,
 };
 
