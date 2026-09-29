@@ -47,32 +47,23 @@ export const SettingsProvider: React.FC<{ children: ReactNode }> = ({ children }
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    loadSettings();
+    Promise.all([
+      AsyncStorage.getItem('font_size'),
+      AsyncStorage.getItem('completed_steps'),
+      AsyncStorage.getItem('detailed_view'),
+    ])
+      .then(([savedFontSize, savedSteps, savedView]) => {
+        if (savedFontSize && (FONT_SIZE_VALUES as string[]).includes(savedFontSize)) {
+          setFontSizeState(savedFontSize as FontSize);
+        }
+        setCompletedSteps(parseSteps(savedSteps));
+        if (savedView) {
+          setDetailedView(savedView === 'true');
+        }
+      })
+      .catch((error) => console.error('Error loading settings:', error))
+      .finally(() => setLoaded(true));
   }, []);
-
-  const loadSettings = async () => {
-    try {
-      const [savedFontSize, savedSteps, savedView] = await Promise.all([
-        AsyncStorage.getItem('font_size'),
-        AsyncStorage.getItem('completed_steps'),
-        AsyncStorage.getItem('detailed_view'),
-      ]);
-
-      if (savedFontSize && (FONT_SIZE_VALUES as string[]).includes(savedFontSize)) {
-        setFontSizeState(savedFontSize as FontSize);
-      }
-
-      setCompletedSteps(parseSteps(savedSteps));
-
-      if (savedView) {
-        setDetailedView(savedView === 'true');
-      }
-    } catch (error) {
-      console.error('Error loading settings:', error);
-    } finally {
-      setLoaded(true);
-    }
-  };
 
   const setFontSize = useCallback(async (size: FontSize) => {
     setFontSizeState(size);

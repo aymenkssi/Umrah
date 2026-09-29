@@ -2,12 +2,11 @@
   "expo": {
     "name": "Umrah Companion",
     "slug": "umrah-companion",
-    "version": "1.1.0",
+    "version": "1.2.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "umrah-companion",
     "userInterfaceStyle": "light",
-    "newArchEnabled": true,
     "ios": {
       "bundleIdentifier": "com.aymen.umrahcompanion",
       "supportsTablet": true,
@@ -17,7 +16,7 @@
     },
     "android": {
       "package": "com.aymen.umrahcompanion",
-      "versionCode": 2,
+      "versionCode": 3,
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#2E7D32"
@@ -61,7 +60,9 @@
           "delayAppMeasurementInit": true,
           "userTrackingUsageDescription": "Your data will be used to show you more relevant ads. Ads help keep Umrah Companion free."
         }
-      ]
+      ],
+      "expo-image",
+      "expo-status-bar"
     ],
     "experiments": {
       "typedRoutes": true

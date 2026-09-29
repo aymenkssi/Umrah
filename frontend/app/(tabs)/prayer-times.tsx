@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import {
   View,
   Text,
@@ -15,10 +15,8 @@ import { useSettings } from '../../contexts/SettingsContext';
 import { COLORS, SPACING, BORDER_RADIUS, SHADOWS, FONT_SIZES } from '../../constants/theme';
 import { AdBanner } from '../../components/AdBanner';
 import { formatTimeRemaining } from '../../utils/calculations';
-import { getCurrentCoords, Coords } from '../../utils/location';
+import { useCoords } from '../../hooks/useCoords';
 import { computePrayerTimes, getNextPrayer, PRAYER_NAMES, PrayerName } from '../../utils/prayer';
-
-type Status = 'loading' | 'ready' | 'denied' | 'error';
 
 const PRAYER_ICONS: Record<PrayerName, keyof typeof Ionicons.glyphMap> = {
   fajr: 'moon-outline',
@@ -35,43 +33,18 @@ export default function PrayerTimesScreen() {
   const { t, language } = useLanguage();
   const { fontSize } = useSettings();
   const fonts = FONT_SIZES[fontSize];
-  const [status, setStatus] = useState<Status>('loading');
-  const [coords, setCoords] = useState<Coords | null>(null);
+  const { status, coords, retry } = useCoords();
   const [now, setNow] = useState(new Date());
-  const [refreshing, setRefreshing] = useState(false);
-
-  const loadLocation = useCallback(async () => {
-    try {
-      const result = await getCurrentCoords();
-      if (!result) {
-        setStatus('denied');
-        return;
-      }
-      setCoords(result);
-      setStatus('ready');
-    } catch (error) {
-      console.error('Error getting location for prayer times:', error);
-      setStatus('error');
-    }
-  }, []);
 
   useEffect(() => {
-    loadLocation();
     // Refresh every 30s so the countdown and the highlighted prayer stay accurate.
     const timer = setInterval(() => setNow(new Date()), 30 * 1000);
     return () => clearInterval(timer);
-  }, [loadLocation]);
+  }, []);
 
-  const onRefresh = async () => {
-    setRefreshing(true);
-    await loadLocation();
+  const onRefresh = () => {
+    retry();
     setNow(new Date());
-    setRefreshing(false);
-  };
-
-  const retry = () => {
-    setStatus('loading');
-    loadLocation();
   };
 
   // Recomputed when the day changes, not on every tick.
@@ -134,7 +107,7 @@ export default function PrayerTimesScreen() {
       <ScrollView
         style={styles.scroll}
         contentContainerStyle={{ padding: SPACING.md }}
-        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor={COLORS.primary} />}
+        refreshControl={<RefreshControl refreshing={false} onRefresh={onRefresh} tintColor={COLORS.primary} />}
       >
         <View style={styles.nextCard}>
           <Text style={[styles.nextLabel, { fontSize: fonts.sm }]}>{t('next_prayer')}</Text>

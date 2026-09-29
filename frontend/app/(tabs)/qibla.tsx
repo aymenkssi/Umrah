@@ -1,15 +1,13 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useMemo } from 'react';
 import { View, Text, StyleSheet, ActivityIndicator, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
-import * as Location from 'expo-location';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { useSettings } from '../../contexts/SettingsContext';
 import { COLORS, SPACING, BORDER_RADIUS, FONT_SIZES } from '../../constants/theme';
 import { calculateQiblaDirection, normalizeAngle } from '../../utils/calculations';
-import { getCurrentCoords } from '../../utils/location';
-
-type Status = 'loading' | 'ready' | 'denied' | 'error';
+import { useCoords } from '../../hooks/useCoords';
+import { useHeading } from '../../hooks/useHeading';
 
 const ALIGNMENT_TOLERANCE = 5; // degrees
 const DIAL_SIZE = 260;
@@ -18,50 +16,17 @@ export default function QiblaScreen() {
   const { t } = useLanguage();
   const { fontSize } = useSettings();
   const fonts = FONT_SIZES[fontSize];
-  const [status, setStatus] = useState<Status>('loading');
-  const [qiblaDirection, setQiblaDirection] = useState<number | null>(null);
-  const [distance, setDistance] = useState<number | null>(null);
-  const [heading, setHeading] = useState(0);
-  const [lowAccuracy, setLowAccuracy] = useState(false);
-  const headingSubscription = useRef<Location.LocationSubscription | null>(null);
-
-  const setupQibla = useCallback(async () => {
-    try {
-      const coords = await getCurrentCoords();
-      if (!coords) {
-        setStatus('denied');
-        return;
-      }
-      const { bearing, distance: dist } = calculateQiblaDirection(coords.latitude, coords.longitude);
-      setQiblaDirection(bearing);
-      setDistance(dist);
-
-      headingSubscription.current?.remove();
-      // True heading already accounts for magnetic declination and device orientation.
-      headingSubscription.current = await Location.watchHeadingAsync((data) => {
-        const value = data.trueHeading >= 0 ? data.trueHeading : data.magHeading;
-        setHeading(value);
-        setLowAccuracy(data.accuracy > 0 && data.accuracy < 2);
-      });
-      setStatus('ready');
-    } catch (error) {
-      console.error('Error setting up Qibla:', error);
-      setStatus('error');
-    }
-  }, []);
-
-  useEffect(() => {
-    setupQibla();
-    return () => {
-      headingSubscription.current?.remove();
-      headingSubscription.current = null;
-    };
-  }, [setupQibla]);
-
-  const retry = () => {
-    setStatus('loading');
-    setupQibla();
-  };
+  const { status: locationStatus, coords, retry } = useCoords();
+  const compass = useHeading(locationStatus === 'ready');
+  const qibla = useMemo(
+    () => (coords ? calculateQiblaDirection(coords.latitude, coords.longitude) : null),
+    [coords]
+  );
+  const qiblaDirection = qibla?.bearing ?? null;
+  const distance = qibla?.distance ?? null;
+  const heading = compass.heading ?? 0;
+  const lowAccuracy = compass.accuracy > 0 && compass.accuracy < 2;
+  const status: 'loading' | 'ready' | 'denied' | 'error' = compass.error ? 'error' : locationStatus;
 
   if (status === 'loading') {
     return (

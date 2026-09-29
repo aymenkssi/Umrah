@@ -378,21 +378,16 @@ export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }
   );
 
   useEffect(() => {
-    loadLanguage();
+    AsyncStorage.getItem('app_language')
+      .then((savedLanguage) => {
+        if (isLanguage(savedLanguage)) {
+          setLanguageState(savedLanguage);
+        } else if (Platform.OS === 'web') {
+          setLanguageState(getDeviceLanguage());
+        }
+      })
+      .catch((error) => console.error('Error loading language:', error));
   }, []);
-
-  const loadLanguage = async () => {
-    try {
-      const savedLanguage = await AsyncStorage.getItem('app_language');
-      if (isLanguage(savedLanguage)) {
-        setLanguageState(savedLanguage);
-      } else if (Platform.OS === 'web') {
-        setLanguageState(getDeviceLanguage());
-      }
-    } catch (error) {
-      console.error('Error loading language:', error);
-    }
-  };
 
   const setLanguage = useCallback(async (lang: Language) => {
     setLanguageState(lang);

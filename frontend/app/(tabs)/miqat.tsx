@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import {
   View,
   Text,
@@ -17,7 +17,7 @@ import { useSettings } from '../../contexts/SettingsContext';
 import { COLORS, SPACING, BORDER_RADIUS, SHADOWS, FONT_SIZES } from '../../constants/theme';
 import { AdBanner } from '../../components/AdBanner';
 import { calculateDistance } from '../../utils/calculations';
-import { getCurrentCoords } from '../../utils/location';
+import { useCoords } from '../../hooks/useCoords';
 import miqatData from '../../data/miqat.json';
 
 type LocalizedText = Record<Language, string>;
@@ -46,40 +46,26 @@ export default function MiqatScreen() {
   const { fontSize } = useSettings();
   const fonts = FONT_SIZES[fontSize];
 
-  const [hasLocation, setHasLocation] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const { status, coords } = useCoords();
   const [searchQuery, setSearchQuery] = useState('');
-  const [miqatList, setMiqatList] = useState<Miqat[]>(() =>
-    (miqatData as Omit<Miqat, 'distance'>[]).map((m) => ({ ...m, distance: null }))
-  );
+  const loading = status === 'loading';
+  const hasLocation = status === 'ready';
 
-  const loadDistances = useCallback(async () => {
-    setLoading(true);
-    try {
-      const coords = await getCurrentCoords();
-      if (!coords) {
-        Alert.alert(t('permission_denied'), t('permission_denied_desc'));
-        return;
-      }
-      const withDistance = (miqatData as Omit<Miqat, 'distance'>[])
-        .map((miqat) => ({
-          ...miqat,
-          distance: calculateDistance(coords.latitude, coords.longitude, miqat.lat, miqat.lng),
-        }))
-        .sort((a, b) => a.distance - b.distance);
-      setMiqatList(withDistance);
-      setHasLocation(true);
-    } catch (error) {
-      console.error('Error getting location:', error);
-    } finally {
-      setLoading(false);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const miqatList = useMemo<Miqat[]>(() => {
+    const all = miqatData as Omit<Miqat, 'distance'>[];
+    if (!coords) return all.map((m) => ({ ...m, distance: null }));
+    return all
+      .map((m) => ({ ...m, distance: calculateDistance(coords.latitude, coords.longitude, m.lat, m.lng) }))
+      .sort((a, b) => a.distance - b.distance);
+  }, [coords]);
 
+  const deniedShown = useRef(false);
   useEffect(() => {
-    loadDistances();
-  }, [loadDistances]);
+    if (status === 'denied' && !deniedShown.current) {
+      deniedShown.current = true;
+      Alert.alert(t('permission_denied'), t('permission_denied_desc'));
+    }
+  }, [status, t]);
 
   const handleNavigate = (miqat: Miqat) => {
     const url = `https://www.google.com/maps/dir/?api=1&destination=${miqat.lat},${miqat.lng}`;

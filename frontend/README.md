@@ -1,6 +1,6 @@
 # Umrah Companion — application mobile
 
-Application Expo (SDK 54) avec expo-router. Voir le [README principal](../README.md).
+Application Expo (SDK 57) avec expo-router. Voir le [README principal](../README.md).
 
 ```bash
 yarn install
