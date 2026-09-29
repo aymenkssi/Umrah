@@ -6,6 +6,7 @@ import { LanguageProvider } from '../contexts/LanguageContext';
 import { SettingsProvider } from '../contexts/SettingsContext';
 import { AdsProvider } from '../contexts/AdsContext';
 import { NotificationsProvider } from '../contexts/NotificationsContext';
+import { AudioProvider } from '../contexts/AudioContext';
 import { ThemeProvider, useTheme } from '../contexts/ThemeContext';
 
 function ThemedStack() {
@@ -45,7 +46,9 @@ export default function RootLayout() {
           <SettingsProvider>
             <NotificationsProvider>
               <AdsProvider>
-                <ThemedStack />
+                <AudioProvider>
+                  <ThemedStack />
+                </AudioProvider>
               </AdsProvider>
             </NotificationsProvider>
           </SettingsProvider>

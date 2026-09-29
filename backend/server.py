@@ -12,6 +12,7 @@ from fastapi.responses import FileResponse, HTMLResponse, PlainTextResponse
 from starlette.middleware.cors import CORSMiddleware
 
 import analytics
+import audio
 import messages
 from database import client
 
@@ -35,6 +36,7 @@ async def lifespan(_app: FastAPI):
     try:
         await analytics.setup()
         await messages.setup()
+        await audio.setup()
     except Exception:
         logging.getLogger("umrah").exception("Could not create MongoDB indexes")
     maintenance = asyncio.create_task(daily_maintenance())
@@ -64,6 +66,8 @@ app.include_router(analytics.public)
 app.include_router(analytics.admin)
 app.include_router(messages.public)
 app.include_router(messages.admin)
+app.include_router(audio.public)
+app.include_router(audio.admin)
 
 # ------------------------ Website ------------------------
 NO_FRAME = {"X-Frame-Options": "DENY", "X-Content-Type-Options": "nosniff"}

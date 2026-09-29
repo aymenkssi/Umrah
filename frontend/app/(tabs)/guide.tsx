@@ -8,6 +8,8 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { router } from 'expo-router';
+import { DuaAudioButton } from '../../components/DuaAudioButton';
+import { stepDuaKey, stepExtraDuaKey } from '../../utils/audioKeys';
 import { Ionicons } from '@expo/vector-icons';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { useSettings } from '../../contexts/SettingsContext';
@@ -128,6 +130,7 @@ export default function GuideScreen() {
                         <Text style={[styles.duaText, { fontSize: fonts.md }]}>
                           {step.dua[language]}
                         </Text>
+                        <DuaAudioButton audioKey={stepDuaKey(step.id)} />
                       </View>
                     )}
 
@@ -145,6 +148,7 @@ export default function GuideScreen() {
                               <Text style={[styles.duaArabic, { fontSize: fonts.lg }]}>{extra.ar}</Text>
                             )}
                             <Text style={[styles.duaText, { fontSize: fonts.md }]}>{extra[language]}</Text>
+                            <DuaAudioButton audioKey={stepExtraDuaKey(step.id, index)} />
                           </View>
                         ))}
                       </View>

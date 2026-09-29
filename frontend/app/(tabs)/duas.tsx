@@ -14,6 +14,8 @@ import { useSettings } from '../../contexts/SettingsContext';
 import { SPACING, BORDER_RADIUS, SHADOWS, FONT_SIZES, Palette } from '../../constants/theme';
 import duasData from '../../data/general-duas.json';
 import { useTheme, useThemedStyles } from '../../contexts/ThemeContext';
+import { DuaAudioButton } from '../../components/DuaAudioButton';
+import { generalDuaKey } from '../../utils/audioKeys';
 
 export default function DuasScreen() {
   const { colors } = useTheme();
@@ -124,7 +126,7 @@ export default function DuasScreen() {
               <TouchableOpacity
                 key={index}
                 style={styles.duaCard}
-                onPress={() => handleDuaPress(dua)}
+                onPress={() => handleDuaPress({ ...dua, audioKey: generalDuaKey(selectedCategory.id, index) })}
                 activeOpacity={0.8}
               >
                 <Text style={[styles.duaArabic, { fontSize: fonts.xl }]}>
@@ -140,6 +142,9 @@ export default function DuasScreen() {
                   <Text style={[styles.viewMore, { fontSize: fonts.sm }]}>
                     {t('tap_for_details')}
                   </Text>
+                  <View style={styles.footerAudio}>
+                    <DuaAudioButton audioKey={generalDuaKey(selectedCategory.id, index)} compact />
+                  </View>
                 </View>
               </TouchableOpacity>
             ))}
@@ -176,6 +181,11 @@ export default function DuasScreen() {
               <Text style={[styles.duaArabicLarge, { fontSize: fonts.xxl }]}>
                 {selectedDua?.arabic}
               </Text>
+              {selectedDua?.audioKey && (
+                <View style={styles.detailAudio}>
+                  <DuaAudioButton audioKey={selectedDua.audioKey} />
+                </View>
+              )}
             </View>
 
             {/* Transliteration */}
@@ -311,6 +321,8 @@ const makeStyles = (c: Palette) =>
     lineHeight: 20,
     marginBottom: SPACING.sm,
   },
+  footerAudio: { marginLeft: 'auto' },
+  detailAudio: { alignItems: 'center', marginTop: SPACING.md },
   duaFooter: {
     flexDirection: 'row',
     alignItems: 'center',

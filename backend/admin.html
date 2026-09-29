@@ -81,6 +81,14 @@
   .pill { font-size: 12px; font-weight: 700; border-radius: 999px; padding: 1px 8px; background: var(--panel2); color: var(--muted); }
   .pill.live { background: var(--accent); color: var(--on-accent); }
   button.danger { color: var(--err); }
+  .audio-section { font-size: 14px; color: var(--accent); margin: 18px 0 6px; }
+  .audio-row { display: flex; gap: 16px; align-items: center; justify-content: space-between; flex-wrap: wrap; border-top: 1px solid var(--line); padding: 10px 0; }
+  .audio-text { flex: 1 1 360px; min-width: 0; }
+  .audio-text .arabic { font-size: 18px; line-height: 1.8; }
+  .audio-text .muted { font-size: 13px; }
+  .audio-actions { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+  .audio-actions audio { height: 36px; max-width: 260px; }
+  label.upload { cursor: pointer; font-weight: 600; font-size: 15px; color: var(--on-accent); background: var(--accent); border-radius: 8px; padding: 7px 12px; }
 </style>
 </head>
 <body>
@@ -104,6 +112,7 @@
     <nav class="tabs" role="tablist">
       <button role="tab" aria-selected="true" data-tab="stats">Statistiques</button>
       <button role="tab" aria-selected="false" data-tab="messages">Messages</button>
+      <button role="tab" aria-selected="false" data-tab="audio">Audio</button>
     </nav>
 
     <div id="tab-stats">
@@ -154,6 +163,26 @@
         </div>
       </div>
       <p class="muted" style="margin-top:24px;font-size:12px">Pays déduits de l'adresse IP avec <a href="https://db-ip.com" style="color:inherit">IP Geolocation by DB-IP</a> (CC BY 4.0). Aucune adresse IP n'est enregistrée.</p>
+    </div>
+
+    <div id="tab-audio" hidden>
+      <div class="panel">
+        <h2>Enregistrements des invocations</h2>
+        <p class="hint">Envoyez un fichier MP3 ou M4A (5 Mo au plus) pour chaque invocation. L'application affiche un bouton ▶ dès qu'un enregistrement existe, le télécharge une fois et le garde hors ligne. Remplacer un fichier met à jour tous les téléphones. N'utilisez que des enregistrements dont vous avez les droits.</p>
+        <div class="toolbar">
+          <label>Afficher
+            <select id="audio-filter">
+              <option value="all">Toutes</option>
+              <option value="guide">Guide de la 'Omra</option>
+              <option value="duas">Page Invocations</option>
+              <option value="missing">Sans enregistrement</option>
+            </select>
+          </label>
+          <span id="audio-summary" class="muted"></span>
+          <span id="audio-status" role="status"></span>
+        </div>
+        <div id="audio-list"></div>
+      </div>
     </div>
 
     <div id="tab-messages" hidden>
@@ -234,8 +263,63 @@
     document.querySelectorAll('nav.tabs button').forEach((b) => b.setAttribute('aria-selected', String(b === btn)));
     $('tab-stats').hidden = btn.dataset.tab !== 'stats';
     $('tab-messages').hidden = btn.dataset.tab !== 'messages';
+    $('tab-audio').hidden = btn.dataset.tab !== 'audio';
     if (btn.dataset.tab === 'messages') loadMessages().catch((e) => { $('msg-status').textContent = e.message; });
+    if (btn.dataset.tab === 'audio') loadAudio().catch((e) => { $('audio-status').textContent = e.message; });
   }));
+
+  // ------------------------ Audio ------------------------
+  let audioItems = [];
+  const kb = (n) => `${Math.round(n / 1024)} Ko`;
+
+  function renderAudio() {
+    const filter = $('audio-filter').value;
+    const rows = audioItems.filter((a) => filter === 'all' || a.group === filter || (filter === 'missing' && !a.audio));
+    const done = audioItems.filter((a) => a.audio).length;
+    $('audio-summary').textContent = `${done} / ${audioItems.length} enregistrées`;
+    let section = '';
+    $('audio-list').innerHTML = rows.map((a) => {
+      const head = a.section !== section ? `<h3 class="audio-section">${esc(a.group === 'guide' ? 'Guide · ' : 'Invocations · ')}${esc(a.section)}</h3>` : '';
+      section = a.section;
+      return `${head}<div class="audio-row">
+        <div class="audio-text"><div class="arabic" dir="rtl">${esc(a.arabic)}</div><div class="muted">${esc(a.label)}</div>
+          <code class="muted">${esc(a.key)}</code></div>
+        <div class="audio-actions">
+          ${a.audio ? `<audio controls preload="none" src="${esc(a.audio.url)}"></audio>
+            <span class="muted">${kb(a.audio.size)} · ${esc(new Date(a.audio.updated_at).toLocaleDateString('fr-FR'))}</span>` : '<span class="pill">Pas d\'enregistrement</span>'}
+          <label class="upload">${a.audio ? 'Remplacer' : 'Envoyer'}<input type="file" accept=".mp3,.m4a,audio/mpeg,audio/mp4" data-upload="${esc(a.key)}" hidden></label>
+          ${a.audio ? `<button type="button" class="danger" data-remove="${esc(a.key)}">Supprimer</button>` : ''}
+        </div>
+      </div>`;
+    }).join('') || '<p class="empty">Rien à afficher.</p>';
+  }
+
+  async function loadAudio() {
+    audioItems = await api('/api/admin/audio');
+    renderAudio();
+  }
+  $('audio-filter').addEventListener('change', renderAudio);
+
+  $('audio-list').addEventListener('change', async (e) => {
+    const key = e.target.dataset.upload;
+    const file = e.target.files && e.target.files[0];
+    if (!key || !file) return;
+    if (file.size > 5 * 1024 * 1024) { $('audio-status').textContent = 'Fichier trop lourd (5 Mo au plus).'; return; }
+    $('audio-status').textContent = 'Envoi…';
+    const body = new FormData();
+    body.append('file', file);
+    const res = await fetch(`/api/admin/audio/${encodeURIComponent(key)}`, { method: 'POST', headers: { Authorization: `Bearer ${token}` }, body });
+    if (res.status === 401) return logout('Jeton invalide.');
+    $('audio-status').textContent = res.ok ? 'Enregistrement envoyé.' : ((await res.json().catch(() => ({}))).detail || `Erreur ${res.status}`);
+    await loadAudio();
+  });
+
+  $('audio-list').addEventListener('click', async (e) => {
+    const key = e.target.dataset.remove;
+    if (!key || !confirm('Supprimer cet enregistrement ?')) return;
+    await api(`/api/admin/audio/${encodeURIComponent(key)}`, { method: 'DELETE' }).catch((err) => { $('audio-status').textContent = err.message; });
+    await loadAudio();
+  });
 
   // ------------------------ Messages ------------------------
   const KINDS = { info: 'Information', tip: 'Conseil', warning: 'Alerte' };
