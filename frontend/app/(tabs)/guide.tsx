@@ -5,7 +5,6 @@ import {
   StyleSheet,
   ScrollView,
   TouchableOpacity,
-  Alert,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
@@ -13,6 +12,9 @@ import { useLanguage } from '../../contexts/LanguageContext';
 import { useSettings } from '../../contexts/SettingsContext';
 import { COLORS, SPACING, BORDER_RADIUS, SHADOWS, FONT_SIZES } from '../../constants/theme';
 import umrahSteps from '../../data/umrah-steps.json';
+
+// Sorted once, without mutating the imported JSON module.
+const STEPS = [...umrahSteps].sort((a, b) => a.order - b.order);
 
 export default function GuideScreen() {
   const { t, language } = useLanguage();
@@ -50,9 +52,7 @@ export default function GuideScreen() {
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}
       >
-        {umrahSteps
-          .sort((a, b) => a.order - b.order)
-          .map((step: any) => {
+        {STEPS.map((step: any) => {
             const isCompleted = completedSteps.includes(step.id);
             const isExpanded = expandedStep === step.id;
             const isSpecial = step.isSpecial;
@@ -119,11 +119,30 @@ export default function GuideScreen() {
                       <View style={styles.duaSection}>
                         <View style={styles.duaHeader}>
                           <Ionicons name="book-outline" size={20} color={COLORS.primary} />
-                          <Text style={[styles.duaLabel, { fontSize: fonts.sm }]}>Du'a:</Text>
+                          <Text style={[styles.duaLabel, { fontSize: fonts.sm }]}>{t('dua')}</Text>
                         </View>
                         <Text style={[styles.duaText, { fontSize: fonts.md }]}>
                           {step.dua[language]}
                         </Text>
+                      </View>
+                    )}
+
+                    {step.additionalDuas?.length > 0 && (
+                      <View style={styles.duaSection}>
+                        <View style={styles.duaHeader}>
+                          <Ionicons name="bookmarks-outline" size={20} color={COLORS.primary} />
+                          <Text style={[styles.duaLabel, { fontSize: fonts.sm }]}>
+                            {t('additional_duas')}
+                          </Text>
+                        </View>
+                        {step.additionalDuas.map((extra: any, index: number) => (
+                          <View key={index} style={index > 0 ? styles.additionalDua : undefined}>
+                            {language !== 'ar' && extra.ar && (
+                              <Text style={[styles.duaArabic, { fontSize: fonts.lg }]}>{extra.ar}</Text>
+                            )}
+                            <Text style={[styles.duaText, { fontSize: fonts.md }]}>{extra[language]}</Text>
+                          </View>
+                        ))}
                       </View>
                     )}
 
@@ -309,6 +328,19 @@ const styles = StyleSheet.create({
     color: COLORS.text,
     lineHeight: 24,
     fontWeight: '500',
+  },
+  duaArabic: {
+    color: COLORS.primaryDark,
+    lineHeight: 30,
+    textAlign: 'right',
+    writingDirection: 'rtl',
+    marginBottom: SPACING.xs,
+  },
+  additionalDua: {
+    marginTop: SPACING.md,
+    paddingTop: SPACING.md,
+    borderTopWidth: 1,
+    borderTopColor: COLORS.border,
   },
   notesSection: {
     backgroundColor: '#FFF9E6',

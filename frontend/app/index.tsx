@@ -1,15 +1,15 @@
 import React, { useEffect } from 'react';
-import { View, Text, StyleSheet, Image, ActivityIndicator } from 'react-native';
+import { View, Text, StyleSheet, ActivityIndicator } from 'react-native';
 import { router } from 'expo-router';
 import { COLORS, SPACING } from '../constants/theme';
 import { IslamicPattern } from '../components/IslamicPattern';
 
 export default function SplashScreen() {
   useEffect(() => {
-    // Navigate to home after 2 seconds
+    // Short branded splash, then go to the home tab
     const timer = setTimeout(() => {
       router.replace('/(tabs)/home');
-    }, 2000);
+    }, 1200);
 
     return () => clearTimeout(timer);
   }, []);
@@ -23,7 +23,7 @@ export default function SplashScreen() {
       <View style={styles.content}>
         <Text style={styles.arabicTitle}>رفيق العمرة</Text>
         <Text style={styles.englishTitle}>Umrah Companion</Text>
-        <Text style={styles.frenchTitle}>Compagnon de la 'Omra</Text>
+        <Text style={styles.frenchTitle}>{"Compagnon de la 'Omra"}</Text>
         
         <ActivityIndicator
           size="large"

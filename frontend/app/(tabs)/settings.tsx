@@ -9,10 +9,13 @@ import {
   Linking,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import Constants from 'expo-constants';
 import { Ionicons } from '@expo/vector-icons';
 import { useLanguage, Language } from '../../contexts/LanguageContext';
 import { useSettings, FontSize } from '../../contexts/SettingsContext';
 import { COLORS, SPACING, BORDER_RADIUS, SHADOWS, FONT_SIZES } from '../../constants/theme';
+
+const APP_VERSION = Constants.expoConfig?.version ?? '1.0.0';
 
 export default function SettingsScreen() {
   const { t, language, setLanguage } = useLanguage();
@@ -38,7 +41,7 @@ export default function SettingsScreen() {
           style: 'destructive',
           onPress: async () => {
             await resetProgress();
-            Alert.alert(t('success'), 'Progress reset successfully');
+            Alert.alert(t('success'), t('progress_reset_done'));
           },
         },
       ]
@@ -128,7 +131,9 @@ export default function SettingsScreen() {
             <TouchableOpacity
               style={styles.donateButton}
               onPress={() => {
-                Linking.openURL('https://www.paypal.com/paypalme/WalkingInTunisia');
+                Linking.openURL('https://www.paypal.com/paypalme/WalkingInTunisia').catch((error) =>
+                  console.error('Error opening PayPal:', error)
+                );
               }}
             >
               <Ionicons name="logo-paypal" size={20} color={COLORS.textLight} />
@@ -182,7 +187,7 @@ export default function SettingsScreen() {
 
           <View style={styles.versionCard}>
             <Text style={[styles.versionText, { fontSize: fonts.sm }]}>
-              {t('app_version')}: 1.0.0
+              {t('app_version')}: {APP_VERSION}
             </Text>
           </View>
         </View>
