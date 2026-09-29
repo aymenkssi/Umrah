@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Linking, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
@@ -10,19 +10,23 @@ import { SPACING, BORDER_RADIUS, FONT_SIZES, Palette } from '../constants/theme'
 import { useCoords } from '../hooks/useCoords';
 import { calculateDistance } from '../utils/calculations';
 import { City, EMERGENCY_NUMBERS, PLACES, Place, directionsUrl, nearestCity } from '../data/places';
+import { PlacesMap } from '../components/PlacesMap';
+import { MapMessage, buildMapHtml } from '../utils/mapHtml';
 
 const open = (url: string) => Linking.openURL(url).catch((error) => console.error('Cannot open link:', error));
 
 const formatDistance = (km: number) => (km < 1 ? `${Math.round(km * 1000)} m` : `${km.toFixed(km < 10 ? 1 : 0)} km`);
 
 export default function PlacesScreen() {
-  const { colors } = useTheme();
+  const { colors, isDark } = useTheme();
   const styles = useThemedStyles(makeStyles);
   const { t, language, isRTL } = useLanguage();
   const { fontSize } = useSettings();
   const fonts = FONT_SIZES[fontSize];
   const { coords } = useCoords();
   const [chosenCity, setChosenCity] = useState<City | null>(null);
+  const [mode, setMode] = useState<'map' | 'list'>('map');
+  const [mapOffline, setMapOffline] = useState(false);
   // Until the user picks a city, show the one they are closest to.
   const city = chosenCity ?? (coords ? nearestCity(coords.latitude, coords.longitude) : 'makkah');
 
@@ -38,13 +42,56 @@ export default function PlacesScreen() {
     return list.sort((a, b) => (a.distance ?? Infinity) - (b.distance ?? Infinity));
   }, [city, coords]);
 
+  const mapHtml = useMemo(
+    () =>
+      buildMapHtml({
+        places: PLACES.filter((p) => p.city === city),
+        language,
+        user: coords,
+        dark: isDark,
+        colors: {
+          primary: colors.primary,
+          ritual: colors.goldDark,
+          history: colors.info,
+          user: colors.error,
+          text: colors.text,
+          surface: colors.surface,
+        },
+        labels: { directions: t('directions'), you: t('you_are_here') },
+      }),
+    [city, coords, language, isDark, colors, t]
+  );
+
+  const onMapMessage = useCallback((message: MapMessage) => {
+    if (message.type === 'offline') {
+      setMapOffline(true);
+      return;
+    }
+    const place = PLACES.find((p) => p.id === message.id);
+    if (place) open(directionsUrl(place));
+  }, []);
+
   const iconColor = (kind: Place['kind']) =>
     kind === 'health' ? colors.error : kind === 'ritual' ? colors.goldDark : colors.primary;
 
   return (
     <SafeAreaView style={styles.container} edges={['top', 'bottom']}>
-      <SubScreenHeader title={t('places')} />
-      <ScrollView contentContainerStyle={styles.content}>
+      <SubScreenHeader
+        title={t('places')}
+        right={
+          <TouchableOpacity
+            onPress={() => {
+              setMapOffline(false);
+              setMode(mode === 'map' ? 'list' : 'map');
+            }}
+            accessibilityRole="button"
+            accessibilityLabel={t(mode === 'map' ? 'show_list' : 'show_map')}
+          >
+            <Ionicons name={mode === 'map' ? 'list' : 'map'} size={24} color={colors.primary} />
+          </TouchableOpacity>
+        }
+      />
+      <View style={styles.cityBar}>
         <View style={styles.segmented} accessibilityRole="tablist">
           {(['makkah', 'madinah'] as City[]).map((c) => {
             const active = city === c;
@@ -63,53 +110,69 @@ export default function PlacesScreen() {
             );
           })}
         </View>
-
-        {places.map(({ place, distance }) => (
-          <View key={place.id} style={styles.card}>
-            <View style={[styles.icon, { backgroundColor: colors.surfaceAlt }]}>
-              <Ionicons name={place.icon as keyof typeof Ionicons.glyphMap} size={24} color={iconColor(place.kind)} />
-            </View>
-            <View style={styles.body}>
-              <View style={styles.titleRow}>
-                <Text style={[styles.name, { fontSize: fonts.md, textAlign: isRTL ? 'right' : 'left' }]}>
-                  {place.name[language]}
-                </Text>
-                {distance !== null && (
-                  <Text style={[styles.distance, { fontSize: fonts.xs }]}>{formatDistance(distance)}</Text>
-                )}
-              </View>
-              <Text style={[styles.description, { fontSize: fonts.sm, textAlign: isRTL ? 'right' : 'left' }]}>
-                {place.description[language]}
-              </Text>
-              <TouchableOpacity style={styles.directions} onPress={() => open(directionsUrl(place))}>
-                <Ionicons name="navigate" size={16} color={colors.textLight} />
-                <Text style={[styles.directionsText, { fontSize: fonts.sm }]}>{t('directions')}</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        ))}
-
-        <Text style={[styles.sectionTitle, { fontSize: fonts.lg }]}>{t('emergency_numbers')}</Text>
-        <View style={styles.emergencyRow}>
-          {EMERGENCY_NUMBERS.map((e) => (
-            <TouchableOpacity
-              key={e.id}
-              style={styles.emergency}
-              onPress={() => open(`tel:${e.number}`)}
-              accessibilityRole="button"
-              accessibilityLabel={`${e.label[language]} ${e.number}`}
-            >
-              <Ionicons name="call" size={20} color={colors.textLight} />
-              <View>
-                <Text style={[styles.emergencyNumber, { fontSize: fonts.xl }]}>{e.number}</Text>
-                <Text style={[styles.emergencyLabel, { fontSize: fonts.xs }]}>{e.label[language]}</Text>
-              </View>
+      </View>
+      {mode === 'map' ? (
+        mapOffline ? (
+          <View style={styles.offline}>
+            <Ionicons name="cloud-offline-outline" size={48} color={colors.textSecondary} />
+            <Text style={[styles.offlineText, { fontSize: fonts.md }]}>{t('map_offline')}</Text>
+            <TouchableOpacity style={styles.directions} onPress={() => setMode('list')}>
+              <Ionicons name="list" size={16} color={colors.textLight} />
+              <Text style={[styles.directionsText, { fontSize: fonts.sm }]}>{t('show_list')}</Text>
             </TouchableOpacity>
+          </View>
+        ) : (
+          <PlacesMap key={city} html={mapHtml} onMessage={onMapMessage} style={styles.map} />
+        )
+      ) : (
+        <ScrollView contentContainerStyle={styles.content}>
+          {places.map(({ place, distance }) => (
+            <View key={place.id} style={styles.card}>
+              <View style={[styles.icon, { backgroundColor: colors.surfaceAlt }]}>
+                <Ionicons name={place.icon as keyof typeof Ionicons.glyphMap} size={24} color={iconColor(place.kind)} />
+              </View>
+              <View style={styles.body}>
+                <View style={styles.titleRow}>
+                  <Text style={[styles.name, { fontSize: fonts.md, textAlign: isRTL ? 'right' : 'left' }]}>
+                    {place.name[language]}
+                  </Text>
+                  {distance !== null && (
+                    <Text style={[styles.distance, { fontSize: fonts.xs }]}>{formatDistance(distance)}</Text>
+                  )}
+                </View>
+                <Text style={[styles.description, { fontSize: fonts.sm, textAlign: isRTL ? 'right' : 'left' }]}>
+                  {place.description[language]}
+                </Text>
+                <TouchableOpacity style={styles.directions} onPress={() => open(directionsUrl(place))}>
+                  <Ionicons name="navigate" size={16} color={colors.textLight} />
+                  <Text style={[styles.directionsText, { fontSize: fonts.sm }]}>{t('directions')}</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
           ))}
-        </View>
 
-        <Text style={[styles.hint, { fontSize: fonts.xs }]}>{t('places_hint')}</Text>
-      </ScrollView>
+          <Text style={[styles.sectionTitle, { fontSize: fonts.lg }]}>{t('emergency_numbers')}</Text>
+          <View style={styles.emergencyRow}>
+            {EMERGENCY_NUMBERS.map((e) => (
+              <TouchableOpacity
+                key={e.id}
+                style={styles.emergency}
+                onPress={() => open(`tel:${e.number}`)}
+                accessibilityRole="button"
+                accessibilityLabel={`${e.label[language]} ${e.number}`}
+              >
+                <Ionicons name="call" size={20} color={colors.textLight} />
+                <View>
+                  <Text style={[styles.emergencyNumber, { fontSize: fonts.xl }]}>{e.number}</Text>
+                  <Text style={[styles.emergencyLabel, { fontSize: fonts.xs }]}>{e.label[language]}</Text>
+                </View>
+              </TouchableOpacity>
+            ))}
+          </View>
+
+          <Text style={[styles.hint, { fontSize: fonts.xs }]}>{t('places_hint')}</Text>
+        </ScrollView>
+      )}
     </SafeAreaView>
   );
 }
@@ -118,12 +181,15 @@ const makeStyles = (c: Palette) =>
   StyleSheet.create({
     container: { flex: 1, backgroundColor: c.background },
     content: { padding: SPACING.md, paddingBottom: SPACING.xxl },
+    cityBar: { paddingHorizontal: SPACING.md, paddingBottom: SPACING.sm },
+    map: { flex: 1 },
+    offline: { flex: 1, alignItems: 'center', justifyContent: 'center', gap: SPACING.md, padding: SPACING.xl },
+    offlineText: { color: c.textSecondary, textAlign: 'center', lineHeight: 22 },
     segmented: {
       flexDirection: 'row',
       backgroundColor: c.surfaceAlt,
       borderRadius: BORDER_RADIUS.round,
       padding: 4,
-      marginBottom: SPACING.md,
     },
     segment: { flex: 1, paddingVertical: SPACING.sm, borderRadius: BORDER_RADIUS.round, alignItems: 'center' },
     segmentActive: { backgroundColor: c.primary },
