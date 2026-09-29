@@ -19,7 +19,7 @@
       "versionCode": 4,
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#2E7D32"
+        "backgroundColor": "#0E6B4A"
       },
       "edgeToEdgeEnabled": true,
       "permissions": [
@@ -53,7 +53,7 @@
           "image": "./assets/images/splash-icon.png",
           "imageWidth": 200,
           "resizeMode": "contain",
-          "backgroundColor": "#2E7D32"
+          "backgroundColor": "#0E6B4A"
         }
       ],
       "expo-font",
