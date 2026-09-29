@@ -2,208 +2,468 @@
   {
     "id": "ihram",
     "order": 1,
+    "icon": "person-outline",
     "title": {
       "ar": "الإحرام والنية",
       "en": "Ihram & Intention",
-      "fr": "Ihram & Intention"
+      "fr": "Ihram et intention"
     },
     "summary": {
-      "ar": "اغتسل وتطيّب قبل الإحرام (للرجال دون الثوب)، ارتدِ ملابس الإحرام وحدِّد النية.",
-      "en": "Perform ghusl, apply fragrance before ihram (men, not on cloth), wear ihram and form intention.",
-      "fr": "Ghusl et parfum avant l'ihram (hommes, pas sur le vêtement), porter l'ihram et avoir l'intention."
+      "ar": "اغتسل وتطهّر، والبس ثياب الإحرام، ثم انوِ العمرة عند الميقات.",
+      "en": "Perform ghusl, put on the ihram garments, then make the intention for Umrah at the miqat.",
+      "fr": "Faites le ghusl, revêtez l'ihram, puis formulez l'intention de la Omra au miqat."
     },
     "details": {
-      "ar": "الإحرام هو نية الدخول في النُسك. يُستحب الاغتسال والتطيب قبل الإحرام للرجال (في البدن لا في الثوب). يرتدي الرجل إزاراً ورداءً أبيضين، والمرأة تلبس ما شاءت من الثياب الساترة. بعد الإحرام تحرم الأمور المحظورة كالطيب وتقليم الأظافر والجماع. يُصلي المحرم ركعتين بعد الاغتسال إن لم يكن وقت فريضة.",
-      "en": "Ihram is the intention to enter the state of consecration. It is recommended to perform ghusl and apply fragrance (for men, on the body not the garment). Men wear two white unstitched cloths (izar and rida), women wear modest covering clothes. After ihram, certain acts become prohibited including perfume, nail clipping, and intercourse. The person in ihram may pray two rak'ahs after ghusl if it's not prayer time.",
-      "fr": "L'Ihram est l'intention d'entrer dans l'état de sacralisation. Il est recommandé de faire le ghusl et d'appliquer du parfum (pour les hommes, sur le corps pas sur le vêtement). Les hommes portent deux draps blancs non cousus, les femmes des vêtements modestes et couvrants. Après l'ihram, certains actes deviennent interdits dont le parfum, se couper les ongles et les rapports intimes. La personne en ihram peut prier deux rak'ahs après le ghusl si ce n'est pas l'heure de prière."
+      "ar": "نبدأ بالاغتسال والتطهّر، ثم نلبس ثياب الإحرام: الإزار والرداء للرجال، خالية من الزينة والمخيط، ويُكشف الكتف الأيمن أثناء الطواف فقط. تلبس المرأة ما شاءت من الثياب الساترة. ليس للعمرة ركعتا إحرام خاصتان، ولكن إن كنت في مسجد الميقات فصلِّ ركعتين تحية المسجد. من مرّ بالميقات برّاً أحرم منه، ومن مرّ به جوّاً أو بالقطار أحرم عند محاذاته. وإن كانت هذه أول عمرة لك فلتكن عن نفسك، فلا يعتمر أحد عن غيره قبل أن يعتمر عن نفسه.",
+      "en": "Start with ghusl and purification, then put on the ihram: for men, two unstitched cloths (izar and rida) with no adornment; the right shoulder is uncovered during Tawaf only. Women wear any modest clothing. Umrah has no specific ihram prayer, but if you are in the miqat mosque, pray two rak'ahs to greet the mosque. Travelling by land, enter ihram at the miqat itself; by plane or train, when you are level with it. If this is your first Umrah, it must be for yourself: you cannot perform Umrah for someone else before doing it for yourself.",
+      "fr": "Commencez par le ghusl et la purification, puis revêtez l'ihram : pour les hommes, deux draps non cousus (izar et rida) sans ornement ; l'épaule droite n'est découverte que pendant le Tawaf. Les femmes portent des vêtements couvrants de leur choix. La Omra n'a pas de prière d'ihram particulière, mais si vous êtes dans la mosquée du miqat, priez deux rak'ahs de salutation de la mosquée. Par la route, on entre en ihram au miqat même ; en avion ou en train, au moment où l'on passe à sa hauteur. Si c'est votre première Omra, elle doit être faite pour vous-même : on ne peut pas faire la Omra pour autrui avant de l'avoir faite pour soi."
     },
-    "dua": {
-      "ar": "لَبَّيْكَ عُمْرَةً",
-      "en": "Labbayka 'Umrah",
-      "fr": "Labbayka 'Umrah"
-    },
-    "additionalDuas": [
-      {
-        "ar": "اللهم إيماناً بك، وتصديقاً بكتابك، ووفاءً بعهدك، واتباعاً لسُنة نبيك محمد صلى الله عليه وسلم",
-        "en": "O Allah, with faith in You, belief in Your Book, fulfillment of Your covenant, and following the Sunnah of Your Prophet Muhammad ﷺ",
-        "fr": "Ô Allah, avec foi en Toi, croyance en Ton Livre, accomplissement de Ton alliance, et suivant la Sunnah de Ton Prophète Muhammad ﷺ"
-      }
-    ],
     "notes": {
-      "ar": "يُستحب رفع الصوت بالتلبية بعد عقد النية (للرجال). المرأة تقولها بقدر ما يسمع من بجوارها فقط.",
-      "en": "It is recommended to recite Talbiyah aloud after forming intention (for men). Women recite it quietly, audible only to those nearby.",
-      "fr": "Il est recommandé de réciter la Talbiyah à voix haute après l'intention (pour les hommes). Les femmes la récitent doucement, audible seulement pour ceux à proximité."
+      "ar": "بعد النية تحرم محظورات الإحرام: الطيب، وقصّ الشعر والأظافر، وتغطية الرأس للرجل، والجماع.",
+      "en": "After the intention, the ihram prohibitions apply: perfume, cutting hair or nails, covering the head (men), and intimate relations.",
+      "fr": "Après l'intention, les interdits de l'ihram s'appliquent : parfum, couper cheveux ou ongles, se couvrir la tête (hommes) et rapports intimes."
     },
-    "icon": "person-outline"
+    "duas": [
+      {
+        "id": "niyyah",
+        "when": {
+          "ar": "عند الميقات (أو عند محاذاته في الطائرة)",
+          "en": "At the miqat (or when level with it on a plane)",
+          "fr": "Au miqat (ou à sa hauteur en avion)"
+        },
+        "arabic": "لَبَّيْكَ اللَّهُمَّ عُمْرَةً عَنْ نَفْسِي، لَا سُمْعَةَ فِيهَا وَلَا رِيَاءَ، فَإِنْ حَبَسَنِي حَابِسٌ فَمَحِلِّي حَيْثُ حَبَسْتَنِي",
+        "transliteration": "Labbayka Allāhumma ʿumratan ʿan nafsī, lā sumʿata fīhā wa lā riyāʾ, fa-in ḥabasanī ḥābisun fa-maḥillī ḥaythu ḥabastanī",
+        "translation": {
+          "en": "Here I am, O Allah, for Umrah on my own behalf, without seeking fame or showing off. If something prevents me, my place of release is wherever You hold me back.",
+          "fr": "Me voici, ô Allah, pour une Omra pour moi-même, sans recherche de renommée ni ostentation. Si un empêchement me retient, je me désacraliserai là où Tu me retiens."
+        }
+      }
+    ]
   },
   {
     "id": "talbiyah",
     "order": 2,
+    "icon": "musical-notes-outline",
+    "isSpecial": true,
     "title": {
       "ar": "التلبية",
       "en": "Talbiyah",
-      "fr": "Talbiyah"
+      "fr": "Talbiya"
     },
     "summary": {
-      "ar": "تلفظ بالتلبية بصوت عالٍ (للرجال) من الإحرام حتى بدء الطواف.",
-      "en": "Recite Talbiyah aloud (for men) from ihram until starting Tawaf.",
-      "fr": "Récitez la Talbiyah à voix haute (pour les hommes) depuis l'ihram jusqu'au début du Tawaf."
+      "ar": "ردّد التلبية من الإحرام حتى بداية الطواف.",
+      "en": "Repeat the Talbiyah from ihram until the start of Tawaf.",
+      "fr": "Répétez la Talbiya depuis l'ihram jusqu'au début du Tawaf."
     },
     "details": {
-      "ar": "التلبية من شعائر الإحرام، يُستحب الإكثار منها خاصة عند تغير الأحوال والأماكن. يرفع الرجل صوته بها، أما المرأة فتقولها بصوت تسمع نفسها فقط. تُقال من الإحرام إلى بدء الطواف.",
-      "en": "Talbiyah is one of the rites of ihram. It is recommended to recite it frequently, especially when changing locations or circumstances. Men raise their voice with it, while women recite it quietly (audible only to themselves). It is recited from ihram until beginning Tawaf.",
-      "fr": "La Talbiyah est l'un des rites de l'ihram. Il est recommandé de la réciter fréquemment, surtout lors de changements de lieux ou de circonstances. Les hommes élèvent leur voix, tandis que les femmes la récitent doucement (audible seulement pour elles-mêmes). Elle est récitée depuis l'ihram jusqu'au début du Tawaf."
-    },
-    "dua": {
-      "ar": "لَبَّيْكَ اللَّهُمَّ لَبَّيْكَ، لَبَّيْكَ لا شَرِيكَ لَكَ لَبَّيْكَ، إِنَّ الْحَمْدَ وَالنِّعْمَةَ لَكَ وَالْمُلْكَ، لا شَرِيكَ لَكَ",
-      "en": "Labbayka Allāhumma Labbayk, Labbayka lā sharīka laka Labbayk, innal-ḥamda wan-ni'mata laka wal-mulk, lā sharīka lak",
-      "fr": "Labbayka Allāhumma Labbayk, Labbayka lā sharīka laka Labbayk, innal-ḥamda wan-ni'mata laka wal-mulk, lā sharīka lak"
+      "ar": "تبدأ التلبية بعد النية مباشرة، ويُكثر منها المعتمر في طريقه إلى مكة، خاصة عند تغيّر الأحوال. يرفع الرجال أصواتهم بها، وتخفضها النساء. وتنتهي التلبية عند بدء الطواف.",
+      "en": "The Talbiyah begins right after the intention. Repeat it often on the way to Makkah, especially when circumstances change. Men raise their voices; women say it quietly. It stops when Tawaf begins.",
+      "fr": "La Talbiya commence juste après l'intention. Répétez-la souvent sur la route de La Mecque, surtout lorsque la situation change. Les hommes élèvent la voix, les femmes la disent à voix basse. Elle s'arrête au début du Tawaf."
     },
     "notes": {
-      "ar": "المعنى: لبيك اللهم لبيك، لبيك لا شريك لك لبيك، إن الحمد والنعمة لك والملك، لا شريك لك.",
-      "en": "Meaning: Here I am at Your service, O Allah, here I am. Here I am, You have no partner, here I am. Verily all praise, grace and sovereignty belong to You. You have no partner.",
-      "fr": "Signification : Me voici à Ton service, Ô Allah, me voici. Me voici, Tu n'as pas d'associé, me voici. En vérité, toute louange, grâce et souveraineté T'appartiennent. Tu n'as pas d'associé."
+      "ar": "لا تُقطع التلبية إلا عند بدء الطواف.",
+      "en": "The Talbiyah continues until you start Tawaf.",
+      "fr": "La Talbiya se poursuit jusqu'au début du Tawaf."
     },
-    "icon": "musical-notes-outline",
-    "isSpecial": true
+    "duas": [
+      {
+        "id": "talbiyah",
+        "when": {
+          "ar": "بعد النية وطوال الطريق",
+          "en": "After the intention and all along the way",
+          "fr": "Après l'intention et tout au long du trajet"
+        },
+        "arabic": "لَبَّيْكَ اللَّهُمَّ لَبَّيْكَ، لَبَّيْكَ لَا شَرِيكَ لَكَ لَبَّيْكَ، إِنَّ الْحَمْدَ وَالنِّعْمَةَ لَكَ وَالْمُلْكَ، لَا شَرِيكَ لَكَ",
+        "transliteration": "Labbayka Allāhumma labbayk, labbayka lā sharīka laka labbayk, inna l-ḥamda wa n-niʿmata laka wa l-mulk, lā sharīka lak",
+        "translation": {
+          "en": "Here I am, O Allah, here I am. Here I am, You have no partner, here I am. Truly all praise, grace and sovereignty belong to You. You have no partner.",
+          "fr": "Me voici, ô Allah, me voici. Me voici, Tu n'as pas d'associé, me voici. Certes, la louange, la grâce et la royauté T'appartiennent. Tu n'as pas d'associé."
+        }
+      }
+    ]
+  },
+  {
+    "id": "haram_entry",
+    "order": 3,
+    "icon": "enter-outline",
+    "title": {
+      "ar": "دخول المسجد الحرام ورؤية الكعبة",
+      "en": "Entering the Haram & seeing the Kaaba",
+      "fr": "Entrée au Haram et vue de la Kaaba"
+    },
+    "summary": {
+      "ar": "ادخل المسجد الحرام برجلك اليمنى، وادعُ بأدعية الدخول وعند رؤية الكعبة.",
+      "en": "Enter Masjid al-Haram with your right foot and say the du'as for entering and for seeing the Kaaba.",
+      "fr": "Entrez à Masjid al-Haram du pied droit et dites les invocations de l'entrée et de la vue de la Kaaba."
+    },
+    "details": {
+      "ar": "تدخل المسجد الحرام بالرجل اليمنى متواضعاً خاشعاً، وتقول أدعية دخول المسجد. فإذا رأيت الكعبة المشرفة رفعت يديك ودعوت بما تيسّر.",
+      "en": "Enter Masjid al-Haram with your right foot, humbly, and say the du'as for entering the mosque. When you see the Kaaba, raise your hands and make du'a.",
+      "fr": "Entrez à Masjid al-Haram du pied droit, avec humilité, et dites les invocations de l'entrée à la mosquée. Quand vous voyez la Kaaba, levez les mains et invoquez Allah."
+    },
+    "notes": {
+      "ar": "لا تُصلَّ تحية المسجد إذا بدأت بالطواف مباشرة، فالطواف تحية المسجد الحرام.",
+      "en": "If you start Tawaf right away, there is no need for the prayer greeting the mosque: Tawaf is the greeting of Masjid al-Haram.",
+      "fr": "Si vous commencez directement le Tawaf, pas besoin de la prière de salutation : le Tawaf est la salutation de Masjid al-Haram."
+    },
+    "duas": [
+      {
+        "id": "enter_refuge",
+        "when": {
+          "ar": "عند الدخول بالرجل اليمنى",
+          "en": "When entering with the right foot",
+          "fr": "En entrant du pied droit"
+        },
+        "arabic": "أَعُوذُ بِاللَّهِ الْعَظِيمِ، وَبِوَجْهِهِ الْكَرِيمِ، وَسُلْطَانِهِ الْقَدِيمِ، مِنَ الشَّيْطَانِ الرَّجِيمِ",
+        "transliteration": "Aʿūdhu billāhi l-ʿaẓīm, wa bi-wajhihi l-karīm, wa sulṭānihi l-qadīm, mina sh-shayṭāni r-rajīm",
+        "translation": {
+          "en": "I seek refuge in Allah the Almighty, in His noble Face and His eternal authority, from Satan the outcast.",
+          "fr": "Je cherche refuge auprès d'Allah l'Immense, de Son noble Visage et de Son autorité éternelle, contre Satan le banni."
+        }
+      },
+      {
+        "id": "enter_mercy",
+        "when": {
+          "ar": "عند الدخول",
+          "en": "When entering",
+          "fr": "En entrant"
+        },
+        "arabic": "بِسْمِ اللَّهِ، وَالصَّلَاةُ وَالسَّلَامُ عَلَى رَسُولِ اللَّهِ، اللَّهُمَّ افْتَحْ لِي أَبْوَابَ رَحْمَتِكَ",
+        "transliteration": "Bismillāh, wa ṣ-ṣalātu wa s-salāmu ʿalā rasūlillāh, Allāhumma ftaḥ lī abwāba raḥmatik",
+        "translation": {
+          "en": "In the name of Allah, and peace and blessings upon the Messenger of Allah. O Allah, open for me the doors of Your mercy.",
+          "fr": "Au nom d'Allah, que la prière et la paix soient sur le Messager d'Allah. Ô Allah, ouvre-moi les portes de Ta miséricorde."
+        }
+      },
+      {
+        "id": "salam",
+        "when": {
+          "ar": "عند الدخول",
+          "en": "When entering",
+          "fr": "En entrant"
+        },
+        "arabic": "اللَّهُمَّ أَنْتَ السَّلَامُ، وَمِنْكَ السَّلَامُ، فَحَيِّنَا رَبَّنَا بِالسَّلَامِ",
+        "transliteration": "Allāhumma anta s-salām, wa minka s-salām, fa-ḥayyinā rabbanā bi-s-salām",
+        "translation": {
+          "en": "O Allah, You are Peace and from You comes peace; so greet us, our Lord, with peace.",
+          "fr": "Ô Allah, Tu es la Paix et de Toi vient la paix ; accueille-nous, notre Seigneur, avec la paix."
+        }
+      },
+      {
+        "id": "kaaba",
+        "when": {
+          "ar": "عند رؤية الكعبة",
+          "en": "On seeing the Kaaba",
+          "fr": "En voyant la Kaaba"
+        },
+        "arabic": "اللَّهُمَّ رَبَّ هَذَا الْبَيْتِ، زِدْهُ تَشْرِيفًا وَتَعْظِيمًا وَمَهَابَةً وَرِفْعَةً وَبِرًّا، وَزِدْ مَنْ حَجَّهُ أَوِ اعْتَمَرَهُ تَشْرِيفًا وَتَعْظِيمًا وَمَهَابَةً وَرِفْعَةً وَبِرًّا",
+        "translation": {
+          "en": "O Allah, Lord of this House, increase it in honour, esteem, awe, rank and goodness, and increase whoever performs Hajj or Umrah to it in honour, esteem, awe, rank and goodness.",
+          "fr": "Ô Allah, Seigneur de cette Maison, accrois son honneur, sa grandeur, la crainte révérencielle qu'elle inspire, son élévation et sa bonté, et accrois de même quiconque y fait le Hajj ou la Omra."
+        }
+      }
+    ]
   },
   {
     "id": "tawaf",
-    "order": 3,
+    "order": 4,
+    "icon": "ellipse-outline",
     "title": {
       "ar": "الطواف",
       "en": "Tawaf",
       "fr": "Tawaf"
     },
     "summary": {
-      "ar": "طُف سبعة أشواط مبتدئًا من الحجر الأسود، مستلِمًا إن تيسر دون أذى.",
-      "en": "Make seven circuits starting at the Black Stone; touch/gesture if possible without harm.",
-      "fr": "Sept tours à partir de la Pierre Noire; toucher/faire signe si possible sans nuisance."
+      "ar": "سبعة أشواط تبدأ من الحجر الأسود، والكعبة عن يسارك.",
+      "en": "Seven rounds starting at the Black Stone, with the Kaaba on your left.",
+      "fr": "Sept tours à partir de la Pierre noire, la Kaaba à votre gauche."
     },
     "details": {
-      "ar": "الطواف سبعة أشواط حول الكعبة، تبدأ من الحجر الأسود وتنتهي به. يُستحب استلام الحجر الأسود وتقبيله إن أمكن دون أذى، وإلا فالإشارة إليه. يجعل البيت عن يساره. يُستحب الرمل (الإسراع في المشي) في الأشواط الثلاثة الأولى للرجال مع الاضطباع (جعل وسط الرداء تحت الإبط الأيمن وطرفيه على الكتف الأيسر). يستلم الركن اليماني إن تيسر دون مزاحمة. لا يوجد دعاء مخصص لكل شوط، فإنما جُعل الطواف لإقامة ذكر الله.",
-      "en": "Tawaf consists of seven circuits around the Kaaba, starting and ending at the Black Stone. It is recommended to touch and kiss the Black Stone if possible without causing harm, otherwise gesture toward it. Keep the House on your left. Men are recommended to walk briskly (ramal) in the first three circuits with idtiba' (placing the middle of the rida under the right armpit with both ends over the left shoulder). Touch the Yemeni Corner if easy without crowding. There is no specific du'a for each circuit; Tawaf is made for establishing the remembrance of Allah.",
-      "fr": "Le Tawaf consiste en sept tours autour de la Kaaba, commençant et se terminant à la Pierre Noire. Il est recommandé de toucher et embrasser la Pierre Noire si possible sans causer de tort, sinon faire un geste vers elle. Gardez la Maison sur votre gauche. Les hommes sont recommandés de marcher rapidement (ramal) dans les trois premiers tours avec idtiba' (placer le milieu du rida sous l'aisselle droite avec les deux extrémités sur l'épaule gauche). Touchez le Coin Yéménite si c'est facile sans bousculade. Il n'y a pas d'invocation spécifique pour chaque tour; le Tawaf est fait pour établir le rappel d'Allah."
+      "ar": "يبدأ الطواف من محاذاة الحجر الأسود عند الضوء الأخضر، مع جعل الكعبة عن يسارك. يُسنّ للرجل كشف الكتف الأيمن طوال الطواف (الاضطباع)، والإسراع في الأشواط الثلاثة الأولى (الرَّمَل). وعند محاذاة الحجر الأسود في كل شوط تشير إليه بيدك اليمنى من بعيد وتكبّر. ليس لكل شوط دعاء مخصوص، إلا ما ورد بين الركن اليماني والحجر الأسود، ويُستحب الدعاء بأدعية القرآن والسنة، وأن تدعو لمن أوصاك بالدعاء.",
+      "en": "Tawaf starts level with the Black Stone, at the green light, with the Kaaba on your left. Men uncover the right shoulder for the whole Tawaf (idtiba') and walk briskly in the first three rounds (raml). Each time you pass the Black Stone, point to it with your right hand from a distance and say Allahu Akbar. No du'a is specific to each round, except between the Yemeni corner and the Black Stone; make du'a from the Quran and Sunnah, and pray for those who asked you to.",
+      "fr": "Le Tawaf commence à hauteur de la Pierre noire, à la lumière verte, la Kaaba à votre gauche. Les hommes découvrent l'épaule droite pendant tout le Tawaf (idtiba') et pressent le pas lors des trois premiers tours (raml). À chaque passage devant la Pierre noire, faites-lui signe de la main droite de loin en disant Allahu Akbar. Aucune invocation n'est propre à chaque tour, sauf entre le coin yéménite et la Pierre noire ; invoquez avec les du'as du Coran et de la Sunna, et priez pour ceux qui vous l'ont demandé."
     },
-    "dua": {
-      "ar": "بسم الله والله أكبر. بين الركنين: رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ",
-      "en": "Bismillah, Allahu Akbar. Between the corners: Rabbana atina fid-dunya hasanatan wa fil-akhirati hasanatan wa qina 'adhaban-nar",
-      "fr": "Bismillah, Allahu Akbar. Entre les coins: Rabbana atina fid-dunya hasanatan wa fil-akhirati hasanatan wa qina 'adhaban-nar"
+    "notes": {
+      "ar": "يجب أن يكون الطواف على طهارة كالصلاة.",
+      "en": "You must be in a state of ritual purity for Tawaf, as for prayer.",
+      "fr": "Le Tawaf exige l'état de pureté rituelle, comme la prière."
     },
-    "additionalDuas": [
+    "duas": [
       {
-        "ar": "عند دخول المسجد الحرام: بسم الله والصلاة والسلام على رسول الله، اللهم اغفر لي ذنوبي، وافتح لي أبواب رحمتك",
-        "en": "Upon entering the Haram: Bismillah, peace and blessings upon the Messenger of Allah. O Allah, forgive my sins and open for me the doors of Your mercy",
-        "fr": "En entrant dans le Haram: Bismillah, paix et bénédictions sur le Messager d'Allah. Ô Allah, pardonne mes péchés et ouvre-moi les portes de Ta miséricorde"
+        "id": "start",
+        "when": {
+          "ar": "عند الحجر الأسود في بداية الطواف",
+          "en": "At the Black Stone, when starting Tawaf",
+          "fr": "À la Pierre noire, au début du Tawaf"
+        },
+        "arabic": "بِسْمِ اللَّهِ وَاللَّهُ أَكْبَرُ، اللَّهُمَّ إِيمَانًا بِكَ، وَتَصْدِيقًا بِكِتَابِكَ، وَوَفَاءً بِعَهْدِكَ، وَاتِّبَاعًا لِسُنَّةِ نَبِيِّكَ مُحَمَّدٍ ﷺ",
+        "transliteration": "Bismillāhi wa llāhu akbar, Allāhumma īmānan bika, wa taṣdīqan bi-kitābik, wa wafāʾan bi-ʿahdik, wa ttibāʿan li-sunnati nabiyyika Muḥammad ﷺ",
+        "translation": {
+          "en": "In the name of Allah, Allah is the Greatest. O Allah, out of faith in You, belief in Your Book, fulfilment of Your covenant and following the Sunnah of Your Prophet Muhammad ﷺ.",
+          "fr": "Au nom d'Allah, Allah est le plus Grand. Ô Allah, par foi en Toi, par confiance en Ton Livre, par fidélité à Ton pacte et en suivant la Sunna de Ton Prophète Muhammad ﷺ."
+        }
       },
       {
-        "ar": "بعد الطواف عند مقام إبراهيم: وَاتَّخِذُوا مِن مَّقَامِ إِبْرَاهِيمَ مُصَلًّى",
-        "en": "After Tawaf at Maqam Ibrahim: And take the standing place of Ibrahim as a place of prayer",
-        "fr": "Après le Tawaf à Maqam Ibrahim: Et prenez la station d'Ibrahim comme lieu de prière"
+        "id": "black_stone",
+        "when": {
+          "ar": "عند محاذاة الحجر الأسود في كل شوط",
+          "en": "Each time you pass the Black Stone",
+          "fr": "À chaque passage devant la Pierre noire"
+        },
+        "arabic": "بِسْمِ اللَّهِ وَاللَّهُ أَكْبَرُ",
+        "transliteration": "Bismillāhi wa llāhu akbar",
+        "translation": {
+          "en": "In the name of Allah, Allah is the Greatest.",
+          "fr": "Au nom d'Allah, Allah est le plus Grand."
+        }
+      },
+      {
+        "id": "yemeni_corner",
+        "when": {
+          "ar": "بين الركن اليماني والحجر الأسود",
+          "en": "Between the Yemeni corner and the Black Stone",
+          "fr": "Entre le coin yéménite et la Pierre noire"
+        },
+        "arabic": "رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ",
+        "transliteration": "Rabbanā ātinā fi d-dunyā ḥasanatan wa fi l-ākhirati ḥasanatan wa qinā ʿadhāba n-nār",
+        "translation": {
+          "en": "Our Lord, give us good in this world and good in the Hereafter, and protect us from the punishment of the Fire.",
+          "fr": "Notre Seigneur, accorde-nous une belle part ici-bas et une belle part dans l'au-delà, et préserve-nous du châtiment du Feu."
+        }
+      },
+      {
+        "id": "paradise",
+        "when": {
+          "ar": "أثناء الطواف (دعاء مستحب)",
+          "en": "During Tawaf (recommended)",
+          "fr": "Pendant le Tawaf (recommandé)"
+        },
+        "arabic": "اللَّهُمَّ إِنِّي أَسْأَلُكَ الْجَنَّةَ وَمَا قَرَّبَ إِلَيْهَا مِنْ قَوْلٍ أَوْ عَمَلٍ، وَأَعُوذُ بِكَ مِنَ النَّارِ وَمَا قَرَّبَ إِلَيْهَا مِنْ قَوْلٍ أَوْ عَمَلٍ",
+        "translation": {
+          "en": "O Allah, I ask You for Paradise and for whatever words or deeds bring one closer to it, and I seek refuge in You from the Fire and from whatever words or deeds bring one closer to it.",
+          "fr": "Ô Allah, je Te demande le Paradis et toute parole ou action qui en rapproche, et je cherche refuge auprès de Toi contre le Feu et toute parole ou action qui en rapproche."
+        }
+      },
+      {
+        "id": "best_asked",
+        "when": {
+          "ar": "أثناء الطواف (دعاء مستحب)",
+          "en": "During Tawaf (recommended)",
+          "fr": "Pendant le Tawaf (recommandé)"
+        },
+        "arabic": "اللَّهُمَّ إِنِّي أَسْأَلُكَ مِنْ خَيْرِ مَا سَأَلَكَ مِنْهُ عَبْدُكَ وَنَبِيُّكَ مُحَمَّدٌ ﷺ، وَأَعُوذُ بِكَ مِنْ شَرِّ مَا اسْتَعَاذَكَ مِنْهُ عَبْدُكَ وَنَبِيُّكَ مُحَمَّدٌ ﷺ",
+        "translation": {
+          "en": "O Allah, I ask You for the good that Your servant and Prophet Muhammad ﷺ asked You for, and I seek refuge in You from the evil that Your servant and Prophet Muhammad ﷺ sought refuge from.",
+          "fr": "Ô Allah, je Te demande le bien que T'a demandé Ton serviteur et Prophète Muhammad ﷺ, et je cherche refuge auprès de Toi contre le mal dont s'est protégé Ton serviteur et Prophète Muhammad ﷺ."
+        }
+      },
+      {
+        "id": "for_others",
+        "when": {
+          "ar": "لمن أوصاك بالدعاء",
+          "en": "For those who asked you to pray for them",
+          "fr": "Pour ceux qui vous ont demandé de prier pour eux"
+        },
+        "arabic": "اللَّهُمَّ مَنْ وَصَّانَا بِالدُّعَاءِ، فَآتِهِ سُؤْلَهُ يَا رَبَّ الْعَالَمِينَ",
+        "translation": {
+          "en": "O Allah, grant everyone who asked us to pray for them what they asked for, O Lord of the worlds.",
+          "fr": "Ô Allah, accorde à quiconque nous a recommandé de prier pour lui ce qu'il demande, ô Seigneur des mondes."
+        }
       }
-    ],
-    "notes": {
-      "ar": "الطهارة شرط لصحة الطواف. يُصلى ركعتان خلف مقام إبراهيم بعد الطواف (يقرأ في الأولى الكافرون وفي الثانية الإخلاص). يُسن الشرب من ماء زمزم والدعاء عنده.",
-      "en": "Ritual purity is a condition for valid Tawaf. Pray two rak'ahs behind Maqam Ibrahim after Tawaf (recite Al-Kafirun in the first and Al-Ikhlas in the second). It is Sunnah to drink Zamzam water and make du'a.",
-      "fr": "La pureté rituelle est une condition pour un Tawaf valide. Priez deux rak'ahs derrière Maqam Ibrahim après le Tawaf (récitez Al-Kafirun dans la première et Al-Ikhlas dans la seconde). C'est Sunnah de boire l'eau de Zamzam et de faire du'a."
+    ]
+  },
+  {
+    "id": "maqam",
+    "order": 5,
+    "icon": "footsteps-outline",
+    "title": {
+      "ar": "مقام إبراهيم وماء زمزم",
+      "en": "Maqam Ibrahim & Zamzam",
+      "fr": "Maqam Ibrahim et Zamzam"
     },
-    "icon": "ellipse-outline"
+    "summary": {
+      "ar": "بعد الأشواط السبعة: ركعتان خلف مقام إبراهيم، ثم الشرب من زمزم.",
+      "en": "After the seven rounds: two rak'ahs behind Maqam Ibrahim, then drink Zamzam water.",
+      "fr": "Après les sept tours : deux rak'ahs derrière le Maqam Ibrahim, puis boire l'eau de Zamzam."
+    },
+    "details": {
+      "ar": "بعد إتمام الأشواط السبعة نذهب إلى مقام إبراهيم ونقرأ الآية، ثم نصلي ركعتين: الأولى بالفاتحة وسورة الكافرون، والثانية بالفاتحة وسورة الإخلاص، وندعو الله خلف المقام دون مزاحمة. ثم نرجع إلى الحجر الأسود فنستلمه إن تيسّر وإلا أشرنا إليه. ويُستحب شرب ماء زمزم والإكثار منه (التضلّع)، ثم استقبال القبلة والدعاء.",
+      "en": "After the seven rounds, go to Maqam Ibrahim and recite the verse, then pray two rak'ahs: Al-Fatiha and Al-Kafirun in the first, Al-Fatiha and Al-Ikhlas in the second, and make du'a behind the Maqam without pushing. Then return to the Black Stone and touch it if easy, otherwise point to it. It is recommended to drink plenty of Zamzam water, then face the Qibla and make du'a.",
+      "fr": "Après les sept tours, rendez-vous au Maqam Ibrahim et récitez le verset, puis priez deux rak'ahs : Al-Fatiha et Al-Kafirun dans la première, Al-Fatiha et Al-Ikhlas dans la seconde, et invoquez Allah derrière le Maqam sans bousculer. Revenez ensuite à la Pierre noire pour la toucher si c'est facile, sinon faites-lui signe. Il est recommandé de boire abondamment l'eau de Zamzam, puis de se tourner vers la Qibla et d'invoquer."
+    },
+    "notes": {
+      "ar": "إن كان الزحام شديداً فصلِّ الركعتين في أي مكان من المسجد.",
+      "en": "If it is very crowded, pray the two rak'ahs anywhere in the mosque.",
+      "fr": "S'il y a trop de monde, priez les deux rak'ahs n'importe où dans la mosquée."
+    },
+    "duas": [
+      {
+        "id": "maqam_verse",
+        "when": {
+          "ar": "عند التوجه إلى مقام إبراهيم",
+          "en": "When going to Maqam Ibrahim",
+          "fr": "En allant au Maqam Ibrahim"
+        },
+        "arabic": "وَاتَّخِذُوا مِنْ مَقَامِ إِبْرَاهِيمَ مُصَلًّى",
+        "transliteration": "Wa ttakhidhū min maqāmi Ibrāhīma muṣallā",
+        "translation": {
+          "en": "And take the standing place of Ibrahim as a place of prayer. (Al-Baqarah 2:125)",
+          "fr": "Et prenez la station d'Ibrahim comme lieu de prière. (Al-Baqara 2:125)"
+        }
+      }
+    ]
   },
   {
     "id": "sai",
-    "order": 4,
+    "order": 6,
+    "icon": "swap-horizontal-outline",
     "title": {
       "ar": "السعي بين الصفا والمروة",
-      "en": "Sa'i (Ṣafā ↔ Marwah)",
-      "fr": "Sa'i (Ṣafā ↔ Marwah)"
+      "en": "Sa'i between Safa and Marwa",
+      "fr": "Sa'i entre Safa et Marwa"
     },
     "summary": {
-      "ar": "اسعَ سبعة أشواط بين الصفا والمروة، بدءًا من الصفا وختامًا بالمروة.",
-      "en": "Perform seven laps between Ṣafā and Marwah, starting at Ṣafā and ending at Marwah.",
-      "fr": "Effectuez sept parcours entre Ṣafā et Marwah, en commençant par Ṣafā et en terminant à Marwah."
+      "ar": "سبعة أشواط تبدأ من الصفا وتنتهي عند المروة.",
+      "en": "Seven laps starting at Safa and ending at Marwa.",
+      "fr": "Sept parcours, de Safa jusqu'à Marwa."
     },
     "details": {
-      "ar": "السعي سبعة أشواط بين الصفا والمروة، يبدأ من الصفا وينتهي بالمروة. الذهاب من الصفا للمروة شوط، والرجوع من المروة إلى الصفا شوط آخر. يُستحب الصعود على الصفا والمروة والدعاء عليهما مستقبل القبلة، ويرفع يديه كرفعهما في الدعاء. يُسرع الرجل بين العلَمين الأخضرين (الهرولة)، أما المرأة فتمشي بشكل عادي. يدعو بما شاء أثناء السعي فإنما جُعل السعي لإقامة ذكر الله.",
-      "en": "Sa'i consists of seven laps between Safa and Marwah, starting at Safa and ending at Marwah. Going from Safa to Marwah is one lap, returning is another. It is recommended to ascend Safa and Marwah and supplicate while facing the Qibla, raising hands as in du'a. Men walk briskly between the green markers (jogging), while women walk normally. Supplicate as you wish during Sa'i, as it is made for establishing the remembrance of Allah.",
-      "fr": "Le Sa'i consiste en sept parcours entre Safa et Marwah, commençant à Safa et se terminant à Marwah. Aller de Safa à Marwah est un parcours, le retour en est un autre. Il est recommandé de monter sur Safa et Marwah et d'invoquer en faisant face à la Qibla, levant les mains comme dans le du'a. Les hommes marchent rapidement entre les marqueurs verts (jogging), tandis que les femmes marchent normalement. Invoquez comme vous le souhaitez pendant le Sa'i, car il est fait pour établir le rappel d'Allah."
+      "ar": "عند الصعود على الصفا تقرأ الآية وتقول: أبدأ بما بدأ الله به، ثم تستقبل الكعبة فتكبّر وتهلّل وتدعو، تكرر الذكر ثلاث مرات وتدعو بينها بما شئت كما كان النبي ﷺ يفعل. ثم تتجه إلى المروة، ويُسنّ للرجال الإسراع بين العلمين الأخضرين. وعلى المروة تستقبل القبلة وتقول ما قلته على الصفا. الذهاب من الصفا إلى المروة شوط، والرجوع شوط آخر، وبإتمام الأشواط السبعة عند المروة ينتهي السعي.",
+      "en": "When climbing Safa, recite the verse and say: I begin with what Allah began with. Then face the Kaaba, say Allahu Akbar and La ilaha illallah, and make du'a: repeat the dhikr three times with your own du'as in between, as the Prophet ﷺ did. Then head to Marwa; men hasten between the two green lights. On Marwa, face the Qibla and say what you said on Safa. Safa to Marwa is one lap, the way back another; Sa'i ends at Marwa after the seventh lap.",
+      "fr": "En montant sur Safa, récitez le verset et dites : Je commence par ce par quoi Allah a commencé. Tournez-vous ensuite vers la Kaaba, dites Allahu Akbar et La ilaha illallah, et invoquez : répétez le dhikr trois fois en faisant vos invocations entre chaque, comme le faisait le Prophète ﷺ. Dirigez-vous ensuite vers Marwa ; les hommes pressent le pas entre les deux lumières vertes. Sur Marwa, tournez-vous vers la Qibla et dites ce que vous avez dit sur Safa. De Safa à Marwa compte pour un parcours, le retour pour un autre ; le Sa'i se termine à Marwa après le septième."
     },
-    "dua": {
-      "ar": "عند الصفا والمروة: إِنَّ الصَّفَا وَالْمَرْوَةَ مِن شَعَائِرِ اللَّهِ. أَبْدَأُ بِمَا بَدَأَ اللهُ بِهِ. لَا إِلَهَ إِلَّا اللهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ. لَا إِلَهَ إِلَّا اللهُ وَحْدَهُ، أَنْجَزَ وَعْدَهُ، وَنَصَرَ عَبْدَهُ، وَهَزَمَ الْأَحْزَابَ وَحْدَهُ",
-      "en": "At Safa and Marwah: Indeed Safa and Marwah are among the signs of Allah. I begin with what Allah began with. There is no god but Allah alone, with no partner. His is the dominion and His is the praise, and He has power over all things. There is no god but Allah alone, He fulfilled His promise, aided His servant, and defeated the confederates alone",
-      "fr": "À Safa et Marwah : En vérité, Safa et Marwah sont parmi les signes d'Allah. Je commence par ce par quoi Allah a commencé. Il n'y a de dieu qu'Allah seul, sans associé. À Lui la royauté et à Lui la louange, et Il a pouvoir sur toute chose. Il n'y a de dieu qu'Allah seul, Il a accompli Sa promesse, secouru Son serviteur et vaincu les coalisés seul"
-    },
-    "additionalDuas": [
-      {
-        "ar": "اللهم اجعله حجاً مبروراً وسعياً مشكوراً وذنباً مغفوراً",
-        "en": "O Allah, make it an accepted Hajj, an appreciated Sa'i, and forgiven sins",
-        "fr": "Ô Allah, fais-en un Hajj accepté, un Sa'i apprécié et des péchés pardonnés"
-      }
-    ],
     "notes": {
-      "ar": "الطهارة ليست شرطاً للسعي لكنها مستحبة. يجوز السعي في الدور العلوي. يُكرر الذكر والدعاء ثلاث مرات على الصفا والمروة.",
-      "en": "Ritual purity is not a condition for Sa'i but is recommended. Sa'i may be performed on the upper level. Repeat the dhikr and du'a three times on Safa and Marwah.",
-      "fr": "La pureté rituelle n'est pas une condition pour le Sa'i mais est recommandée. Le Sa'i peut être effectué au niveau supérieur. Répétez le dhikr et le du'a trois fois sur Safa et Marwah."
+      "ar": "الطهارة في السعي مستحبة وليست شرطاً. لا تُقرأ الآية إلا عند الصعود على الصفا أول مرة.",
+      "en": "Ritual purity is recommended for Sa'i but not required. The verse is recited only when first climbing Safa.",
+      "fr": "La pureté rituelle est recommandée pour le Sa'i mais pas obligatoire. Le verset n'est récité qu'à la première montée sur Safa."
     },
-    "icon": "swap-horizontal-outline"
+    "duas": [
+      {
+        "id": "safa_verse",
+        "when": {
+          "ar": "عند الصعود على الصفا أول مرة",
+          "en": "When first climbing Safa",
+          "fr": "À la première montée sur Safa"
+        },
+        "arabic": "إِنَّ الصَّفَا وَالْمَرْوَةَ مِنْ شَعَائِرِ اللَّهِ ۖ فَمَنْ حَجَّ الْبَيْتَ أَوِ اعْتَمَرَ فَلَا جُنَاحَ عَلَيْهِ أَنْ يَطَّوَّفَ بِهِمَا ۚ وَمَنْ تَطَوَّعَ خَيْرًا فَإِنَّ اللَّهَ شَاكِرٌ عَلِيمٌ. أَبْدَأُ بِمَا بَدَأَ اللَّهُ بِهِ",
+        "transliteration": "Inna ṣ-Ṣafā wa l-Marwata min shaʿāʾiri llāh… Abdaʾu bimā badaʾa llāhu bih",
+        "translation": {
+          "en": "Indeed Safa and Marwa are among the symbols of Allah. So whoever performs Hajj or Umrah to the House, there is no blame on him for walking between them. And whoever does good voluntarily, Allah is Appreciative and Knowing. (Al-Baqarah 2:158) I begin with what Allah began with.",
+          "fr": "Safa et Marwa sont vraiment parmi les lieux sacrés d'Allah. Quiconque fait le Hajj ou la Omra à la Maison ne commet pas de péché en faisant le va-et-vient entre elles. Et quiconque fait volontairement une bonne œuvre, Allah est Reconnaissant et Omniscient. (Al-Baqara 2:158) Je commence par ce par quoi Allah a commencé."
+        }
+      },
+      {
+        "id": "safa_dhikr",
+        "when": {
+          "ar": "على الصفا وعلى المروة، مستقبلاً الكعبة",
+          "en": "On Safa and on Marwa, facing the Kaaba",
+          "fr": "Sur Safa et sur Marwa, face à la Kaaba"
+        },
+        "arabic": "اللَّهُ أَكْبَرُ، اللَّهُ أَكْبَرُ، اللَّهُ أَكْبَرُ. لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ، يُحْيِي وَيُمِيتُ، وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ. لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ، أَنْجَزَ وَعْدَهُ، وَنَصَرَ عَبْدَهُ، وَهَزَمَ الْأَحْزَابَ وَحْدَهُ",
+        "translation": {
+          "en": "Allah is the Greatest (three times). There is no god but Allah alone, without partner. His is the dominion and His is the praise; He gives life and causes death, and He has power over all things. There is no god but Allah alone; He fulfilled His promise, supported His servant and defeated the confederates alone.",
+          "fr": "Allah est le plus Grand (trois fois). Il n'y a de divinité qu'Allah, Seul, sans associé. À Lui la royauté et la louange ; Il donne la vie et la mort, et Il est capable de toute chose. Il n'y a de divinité qu'Allah, Seul ; Il a tenu Sa promesse, secouru Son serviteur et vaincu seul les coalisés."
+        },
+        "repeat": {
+          "ar": "ثلاث مرات، مع الدعاء بينها",
+          "en": "Three times, with your own du'as in between",
+          "fr": "Trois fois, en invoquant librement entre chaque"
+        }
+      },
+      {
+        "id": "safa_tahlil",
+        "when": {
+          "ar": "على الصفا وعلى المروة",
+          "en": "On Safa and on Marwa",
+          "fr": "Sur Safa et sur Marwa"
+        },
+        "arabic": "لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ، صَدَقَ وَعْدَهُ، وَنَصَرَ عَبْدَهُ، وَأَعَزَّ جُنْدَهُ، وَهَزَمَ الْأَحْزَابَ وَحْدَهُ، لَا إِلَهَ إِلَّا اللَّهُ، وَلَا نَعْبُدُ إِلَّا إِيَّاهُ، مُخْلِصِينَ لَهُ الدِّينَ وَلَوْ كَرِهَ الْكَافِرُونَ",
+        "translation": {
+          "en": "There is no god but Allah alone; He kept His promise, supported His servant, strengthened His army and defeated the confederates alone. There is no god but Allah and we worship none but Him, devoting our religion to Him, even if the disbelievers dislike it.",
+          "fr": "Il n'y a de divinité qu'Allah, Seul ; Il a tenu Sa promesse, secouru Son serviteur, fortifié Son armée et vaincu seul les coalisés. Il n'y a de divinité qu'Allah et nous n'adorons que Lui, Lui vouant un culte exclusif, dussent les mécréants en éprouver de la répulsion."
+        }
+      },
+      {
+        "id": "green_lights",
+        "when": {
+          "ar": "بين العلمين الأخضرين",
+          "en": "Between the two green lights",
+          "fr": "Entre les deux lumières vertes"
+        },
+        "arabic": "رَبِّ اغْفِرْ وَارْحَمْ، وَتَجَاوَزْ عَمَّا تَعْلَمُ، إِنَّكَ أَنْتَ الْأَعَزُّ الْأَكْرَمُ",
+        "transliteration": "Rabbi ghfir wa rḥam, wa tajāwaz ʿammā taʿlam, innaka anta l-aʿazzu l-akram",
+        "translation": {
+          "en": "My Lord, forgive and have mercy, and pass over what You know; You are truly the Most Mighty, the Most Generous.",
+          "fr": "Seigneur, pardonne et fais miséricorde, et efface ce que Tu sais ; Tu es certes le Plus Puissant, le Plus Généreux."
+        }
+      }
+    ]
   },
   {
     "id": "taqsir",
-    "order": 5,
+    "order": 7,
+    "icon": "cut-outline",
     "title": {
-      "ar": "التقصير أو الحلق",
-      "en": "Trim or Shave",
-      "fr": "Raccourcissement ou Rasage"
+      "ar": "الحلق أو التقصير",
+      "en": "Shaving or shortening the hair",
+      "fr": "Rasage ou raccourcissement"
     },
     "summary": {
-      "ar": "للرجل: الحلق أو التقصير (والحلق أفضل). للمرأة: تقصير قدر أنملة من أطراف الشعر.",
-      "en": "For men: shave or trim (shaving is better). For women: trim a fingertip's length from the ends of hair.",
-      "fr": "Pour les hommes : raser ou couper (le rasage est meilleur). Pour les femmes : couper la longueur d'un bout de doigt des extrémités des cheveux."
+      "ar": "الرجل يحلق أو يقصّر (والحلق أفضل)، والمرأة تقصّ قدر أنملة.",
+      "en": "Men shave or shorten their hair (shaving is better); women cut a fingertip's length.",
+      "fr": "Les hommes se rasent ou raccourcissent les cheveux (le rasage est meilleur) ; les femmes coupent la longueur d'un bout de doigt."
     },
     "details": {
-      "ar": "بعد إتمام السعي، يحلق الرجل رأسه أو يقصره، والحلق أفضل. أما المرأة فتقص من أطراف شعرها قدر أنملة (طول رأس الإصبع). بهذا يتحلل من الإحرام وتحل له جميع محظورات الإحرام.",
-      "en": "After completing Sa'i, men shave or trim their head, with shaving being better. Women trim a fingertip's length from the ends of their hair. With this, one exits the state of ihram and all prohibitions of ihram become permissible again.",
-      "fr": "Après avoir terminé le Sa'i, les hommes se rasent ou coupent la tête, le rasage étant meilleur. Les femmes coupent la longueur d'un bout de doigt des extrémités de leurs cheveux. Avec cela, on sort de l'état d'ihram et toutes les interdictions de l'ihram redeviennent permises."
-    },
-    "dua": {
-      "ar": "لا دعاء مخصوص",
-      "en": "No specific du'a",
-      "fr": "Pas d'invocation spécifique"
+      "ar": "بعد السعي يبقى الحلق أو التقصير. وقد دعا النبي ﷺ للمحلّقين ثلاثاً وللمقصّرين مرة. تقصّ المرأة من أطراف شعرها قدر أنملة، في مكان خاص بعيداً عن الرجال.",
+      "en": "After Sa'i, what remains is shaving or shortening the hair. The Prophet ﷺ prayed three times for those who shave and once for those who shorten. Women cut a fingertip's length from the ends of their hair, in a private place away from men.",
+      "fr": "Après le Sa'i, il reste à se raser ou à raccourcir les cheveux. Le Prophète ﷺ a invoqué trois fois pour ceux qui se rasent et une fois pour ceux qui raccourcissent. Les femmes coupent la longueur d'un bout de doigt à l'extrémité de leurs cheveux, dans un endroit à l'abri des regards des hommes."
     },
     "notes": {
-      "ar": "يُستحب الحلق للرجل لأنه أكمل. التقصير يجزئ لكن الحلق أفضل.",
-      "en": "Shaving is recommended for men as it is more complete. Trimming suffices but shaving is better.",
-      "fr": "Le rasage est recommandé pour les hommes car il est plus complet. La coupe suffit mais le rasage est meilleur."
+      "ar": "بالحلق أو التقصير يتحلّل المعتمر من إحرامه.",
+      "en": "Shaving or shortening releases you from the state of ihram.",
+      "fr": "Le rasage ou le raccourcissement vous fait sortir de l'état d'ihram."
     },
-    "icon": "cut-outline"
+    "duas": []
   },
   {
     "id": "end",
-    "order": 6,
+    "order": 8,
+    "icon": "checkmark-circle-outline",
     "title": {
-      "ar": "التحلّل ونهاية العمرة",
-      "en": "Tahallul & Completion",
-      "fr": "Tahallul & Fin"
+      "ar": "التحلل وتمام العمرة",
+      "en": "Release from ihram & completion",
+      "fr": "Désacralisation et fin de la Omra"
     },
     "summary": {
-      "ar": "بعد التقصير أو الحلق، تخرج من الإحرام وتنتهي عمرتك. تقبل الله منك.",
-      "en": "After trimming or shaving, you exit ihram and your 'Umrah is complete. May Allah accept from you.",
-      "fr": "Après la coupe ou le rasage, vous sortez de l'ihram et votre 'Umrah est terminée. Qu'Allah accepte de vous."
+      "ar": "تمّت عمرتك، تقبّل الله منك.",
+      "en": "Your Umrah is complete. May Allah accept it from you.",
+      "fr": "Votre Omra est terminée. Qu'Allah l'accepte de vous."
     },
     "details": {
-      "ar": "بإتمام الحلق أو التقصير تكون العمرة قد اكتملت، وتحل جميع محظورات الإحرام. يُستحب الإكثار من الدعاء والذكر والصلاة في الحرم المكي. احرص على زيارة المسجد النبوي إن تيسر. تقبل الله عمرتك وجعلها في ميزان حسناتك.",
-      "en": "With the completion of shaving or trimming, your 'Umrah is complete, and all prohibitions of ihram become permissible. It is recommended to frequently make du'a, dhikr, and pray in the Haram. Try to visit the Prophet's Mosque if possible. May Allah accept your 'Umrah and place it in your scale of good deeds.",
-      "fr": "Avec l'achèvement du rasage ou de la coupe, votre 'Umrah est terminée, et toutes les interdictions de l'ihram deviennent permises. Il est recommandé de faire fréquemment du'a, du dhikr et de prier dans le Haram. Essayez de visiter la Mosquée du Prophète si possible. Qu'Allah accepte votre 'Umrah et la place dans votre balance de bonnes actions."
-    },
-    "dua": {
-      "ar": "تقبل الله منا ومنكم",
-      "en": "May Allah accept from us and from you",
-      "fr": "Qu'Allah accepte de nous et de vous"
+      "ar": "بإتمام الحلق أو التقصير تكون قد أكملت مناسك العمرة، وتحلّ لك محظورات الإحرام. أكثِر من الدعاء والذكر والصلاة في الحرم، وازُر المسجد النبوي إن تيسّر.",
+      "en": "Once you have shaved or shortened your hair, the rites of Umrah are complete and the ihram prohibitions are lifted. Make plenty of du'a, dhikr and prayer in the Haram, and visit the Prophet's Mosque if you can.",
+      "fr": "Une fois rasé ou les cheveux raccourcis, les rites de la Omra sont accomplis et les interdits de l'ihram sont levés. Multipliez les invocations, le dhikr et la prière au Haram, et visitez la mosquée du Prophète si vous le pouvez."
     },
     "notes": {
-      "ar": "استشر العلماء المحليين في أي أمر تشك فيه. هذا التطبيق دليل إرشادي فقط.",
-      "en": "Consult local scholars for any matter you are unsure about. This app is a guidance tool only.",
-      "fr": "Consultez les érudits locaux pour toute question dont vous n'êtes pas sûr. Cette application n'est qu'un outil d'orientation."
+      "ar": "هذا التطبيق دليل إرشادي فقط، فاسأل أهل العلم فيما أشكل عليك.",
+      "en": "This app is a guide only: ask qualified scholars about anything you are unsure of.",
+      "fr": "Cette application n'est qu'un guide : interrogez des savants qualifiés en cas de doute."
     },
-    "icon": "checkmark-circle-outline"
+    "duas": [
+      {
+        "id": "acceptance",
+        "when": {
+          "ar": "بعد الانتهاء",
+          "en": "Once finished",
+          "fr": "Une fois terminé"
+        },
+        "arabic": "تَقَبَّلَ اللَّهُ مِنَّا وَمِنْكُمْ",
+        "transliteration": "Taqabbala llāhu minnā wa minkum",
+        "translation": {
+          "en": "May Allah accept it from us and from you.",
+          "fr": "Qu'Allah l'accepte de nous et de vous."
+        }
+      }
+    ]
   }
 ]

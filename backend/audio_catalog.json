@@ -1,73 +1,129 @@
 [
  {
-  "key": "step-ihram",
+  "key": "step-ihram-niyyah",
   "group": "guide",
-  "section": "Ihram & Intention",
-  "arabic": "لَبَّيْكَ عُمْرَةً",
-  "label": "Labbayka 'Umrah"
+  "section": "Ihram et intention",
+  "arabic": "لَبَّيْكَ اللَّهُمَّ عُمْرَةً عَنْ نَفْسِي، لَا سُمْعَةَ فِيهَا وَلَا رِيَاءَ، فَإِنْ حَبَسَنِي حَابِسٌ فَمَحِلِّي حَيْثُ حَبَسْتَنِي",
+  "label": "Me voici, ô Allah, pour une Omra pour moi-même, sans recherche de renommée ni ostentation. Si un empêchement me retient, je me désacraliserai là où Tu me retiens."
  },
  {
-  "key": "step-ihram-extra-0",
+  "key": "step-talbiyah-talbiyah",
   "group": "guide",
-  "section": "Ihram & Intention",
-  "arabic": "اللهم إيماناً بك، وتصديقاً بكتابك، ووفاءً بعهدك، واتباعاً لسُنة نبيك محمد صلى الله عليه وسلم",
-  "label": "Ô Allah, avec foi en Toi, croyance en Ton Livre, accomplissement de Ton alliance, et suivant la Sunnah de Ton Prophète Muhammad ﷺ"
+  "section": "Talbiya",
+  "arabic": "لَبَّيْكَ اللَّهُمَّ لَبَّيْكَ، لَبَّيْكَ لَا شَرِيكَ لَكَ لَبَّيْكَ، إِنَّ الْحَمْدَ وَالنِّعْمَةَ لَكَ وَالْمُلْكَ، لَا شَرِيكَ لَكَ",
+  "label": "Me voici, ô Allah, me voici. Me voici, Tu n'as pas d'associé, me voici. Certes, la louange, la grâce et la royauté T'appartiennent. Tu n'as pas d'associé."
  },
  {
-  "key": "step-talbiyah",
+  "key": "step-haram_entry-enter_refuge",
   "group": "guide",
-  "section": "Talbiyah",
-  "arabic": "لَبَّيْكَ اللَّهُمَّ لَبَّيْكَ، لَبَّيْكَ لا شَرِيكَ لَكَ لَبَّيْكَ، إِنَّ الْحَمْدَ وَالنِّعْمَةَ لَكَ وَالْمُلْكَ، لا شَرِيكَ لَكَ",
-  "label": "Labbayka Allāhumma Labbayk, Labbayka lā sharīka laka Labbayk, innal-ḥamda wan-ni'mata laka wal-mulk, lā sharīka lak"
+  "section": "Entrée au Haram et vue de la Kaaba",
+  "arabic": "أَعُوذُ بِاللَّهِ الْعَظِيمِ، وَبِوَجْهِهِ الْكَرِيمِ، وَسُلْطَانِهِ الْقَدِيمِ، مِنَ الشَّيْطَانِ الرَّجِيمِ",
+  "label": "Je cherche refuge auprès d'Allah l'Immense, de Son noble Visage et de Son autorité éternelle, contre Satan le banni."
  },
  {
-  "key": "step-tawaf",
+  "key": "step-haram_entry-enter_mercy",
+  "group": "guide",
+  "section": "Entrée au Haram et vue de la Kaaba",
+  "arabic": "بِسْمِ اللَّهِ، وَالصَّلَاةُ وَالسَّلَامُ عَلَى رَسُولِ اللَّهِ، اللَّهُمَّ افْتَحْ لِي أَبْوَابَ رَحْمَتِكَ",
+  "label": "Au nom d'Allah, que la prière et la paix soient sur le Messager d'Allah. Ô Allah, ouvre-moi les portes de Ta miséricorde."
+ },
+ {
+  "key": "step-haram_entry-salam",
+  "group": "guide",
+  "section": "Entrée au Haram et vue de la Kaaba",
+  "arabic": "اللَّهُمَّ أَنْتَ السَّلَامُ، وَمِنْكَ السَّلَامُ، فَحَيِّنَا رَبَّنَا بِالسَّلَامِ",
+  "label": "Ô Allah, Tu es la Paix et de Toi vient la paix ; accueille-nous, notre Seigneur, avec la paix."
+ },
+ {
+  "key": "step-haram_entry-kaaba",
+  "group": "guide",
+  "section": "Entrée au Haram et vue de la Kaaba",
+  "arabic": "اللَّهُمَّ رَبَّ هَذَا الْبَيْتِ، زِدْهُ تَشْرِيفًا وَتَعْظِيمًا وَمَهَابَةً وَرِفْعَةً وَبِرًّا، وَزِدْ مَنْ حَجَّهُ أَوِ اعْتَمَرَهُ تَشْرِيفًا وَتَعْظِيمًا وَمَهَابَةً وَرِفْعَةً وَبِرًّا",
+  "label": "Ô Allah, Seigneur de cette Maison, accrois son honneur, sa grandeur, la crainte révérencielle qu'elle inspire, son élévation et sa bonté, et accrois de même quiconque y fait le Hajj ou la Omra."
+ },
+ {
+  "key": "step-tawaf-start",
   "group": "guide",
   "section": "Tawaf",
-  "arabic": "بسم الله والله أكبر. بين الركنين: رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ",
-  "label": "Bismillah, Allahu Akbar. Entre les coins: Rabbana atina fid-dunya hasanatan wa fil-akhirati hasanatan wa qina 'adhaban-nar"
+  "arabic": "بِسْمِ اللَّهِ وَاللَّهُ أَكْبَرُ، اللَّهُمَّ إِيمَانًا بِكَ، وَتَصْدِيقًا بِكِتَابِكَ، وَوَفَاءً بِعَهْدِكَ، وَاتِّبَاعًا لِسُنَّةِ نَبِيِّكَ مُحَمَّدٍ ﷺ",
+  "label": "Au nom d'Allah, Allah est le plus Grand. Ô Allah, par foi en Toi, par confiance en Ton Livre, par fidélité à Ton pacte et en suivant la Sunna de Ton Prophète Muhammad ﷺ."
  },
  {
-  "key": "step-tawaf-extra-0",
+  "key": "step-tawaf-black_stone",
   "group": "guide",
   "section": "Tawaf",
-  "arabic": "عند دخول المسجد الحرام: بسم الله والصلاة والسلام على رسول الله، اللهم اغفر لي ذنوبي، وافتح لي أبواب رحمتك",
-  "label": "En entrant dans le Haram: Bismillah, paix et bénédictions sur le Messager d'Allah. Ô Allah, pardonne mes péchés et ouvre-moi les portes de Ta miséricorde"
+  "arabic": "بِسْمِ اللَّهِ وَاللَّهُ أَكْبَرُ",
+  "label": "Au nom d'Allah, Allah est le plus Grand."
  },
  {
-  "key": "step-tawaf-extra-1",
+  "key": "step-tawaf-yemeni_corner",
   "group": "guide",
   "section": "Tawaf",
-  "arabic": "بعد الطواف عند مقام إبراهيم: وَاتَّخِذُوا مِن مَّقَامِ إِبْرَاهِيمَ مُصَلًّى",
-  "label": "Après le Tawaf à Maqam Ibrahim: Et prenez la station d'Ibrahim comme lieu de prière"
+  "arabic": "رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ",
+  "label": "Notre Seigneur, accorde-nous une belle part ici-bas et une belle part dans l'au-delà, et préserve-nous du châtiment du Feu."
  },
  {
-  "key": "step-sai",
+  "key": "step-tawaf-paradise",
   "group": "guide",
-  "section": "Sa'i (Ṣafā ↔ Marwah)",
-  "arabic": "عند الصفا والمروة: إِنَّ الصَّفَا وَالْمَرْوَةَ مِن شَعَائِرِ اللَّهِ. أَبْدَأُ بِمَا بَدَأَ اللهُ بِهِ. لَا إِلَهَ إِلَّا اللهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ. لَا إِلَهَ إِلَّا اللهُ وَحْدَهُ، أَنْجَزَ وَعْدَهُ، وَنَصَرَ عَبْدَهُ، وَهَزَمَ الْأَحْزَابَ وَحْدَهُ",
-  "label": "À Safa et Marwah : En vérité, Safa et Marwah sont parmi les signes d'Allah. Je commence par ce par quoi Allah a commencé. Il n'y a de dieu qu'Allah seul, sans associé. À Lui la royauté et à Lui la louange, et Il a pouvoir sur toute chose. Il n'y a de dieu qu'Allah seul, Il a accompli Sa promesse, secouru Son serviteur et vaincu les coalisés seul"
+  "section": "Tawaf",
+  "arabic": "اللَّهُمَّ إِنِّي أَسْأَلُكَ الْجَنَّةَ وَمَا قَرَّبَ إِلَيْهَا مِنْ قَوْلٍ أَوْ عَمَلٍ، وَأَعُوذُ بِكَ مِنَ النَّارِ وَمَا قَرَّبَ إِلَيْهَا مِنْ قَوْلٍ أَوْ عَمَلٍ",
+  "label": "Ô Allah, je Te demande le Paradis et toute parole ou action qui en rapproche, et je cherche refuge auprès de Toi contre le Feu et toute parole ou action qui en rapproche."
  },
  {
-  "key": "step-sai-extra-0",
+  "key": "step-tawaf-best_asked",
   "group": "guide",
-  "section": "Sa'i (Ṣafā ↔ Marwah)",
-  "arabic": "اللهم اجعله حجاً مبروراً وسعياً مشكوراً وذنباً مغفوراً",
-  "label": "Ô Allah, fais-en un Hajj accepté, un Sa'i apprécié et des péchés pardonnés"
+  "section": "Tawaf",
+  "arabic": "اللَّهُمَّ إِنِّي أَسْأَلُكَ مِنْ خَيْرِ مَا سَأَلَكَ مِنْهُ عَبْدُكَ وَنَبِيُّكَ مُحَمَّدٌ ﷺ، وَأَعُوذُ بِكَ مِنْ شَرِّ مَا اسْتَعَاذَكَ مِنْهُ عَبْدُكَ وَنَبِيُّكَ مُحَمَّدٌ ﷺ",
+  "label": "Ô Allah, je Te demande le bien que T'a demandé Ton serviteur et Prophète Muhammad ﷺ, et je cherche refuge auprès de Toi contre le mal dont s'est protégé Ton serviteur et Prophète Muhammad ﷺ."
  },
  {
-  "key": "step-taqsir",
+  "key": "step-tawaf-for_others",
   "group": "guide",
-  "section": "Raccourcissement ou Rasage",
-  "arabic": "لا دعاء مخصوص",
-  "label": "Pas d'invocation spécifique"
+  "section": "Tawaf",
+  "arabic": "اللَّهُمَّ مَنْ وَصَّانَا بِالدُّعَاءِ، فَآتِهِ سُؤْلَهُ يَا رَبَّ الْعَالَمِينَ",
+  "label": "Ô Allah, accorde à quiconque nous a recommandé de prier pour lui ce qu'il demande, ô Seigneur des mondes."
  },
  {
-  "key": "step-end",
+  "key": "step-maqam-maqam_verse",
   "group": "guide",
-  "section": "Tahallul & Fin",
-  "arabic": "تقبل الله منا ومنكم",
-  "label": "Qu'Allah accepte de nous et de vous"
+  "section": "Maqam Ibrahim et Zamzam",
+  "arabic": "وَاتَّخِذُوا مِنْ مَقَامِ إِبْرَاهِيمَ مُصَلًّى",
+  "label": "Et prenez la station d'Ibrahim comme lieu de prière. (Al-Baqara 2:125)"
+ },
+ {
+  "key": "step-sai-safa_verse",
+  "group": "guide",
+  "section": "Sa'i entre Safa et Marwa",
+  "arabic": "إِنَّ الصَّفَا وَالْمَرْوَةَ مِنْ شَعَائِرِ اللَّهِ ۖ فَمَنْ حَجَّ الْبَيْتَ أَوِ اعْتَمَرَ فَلَا جُنَاحَ عَلَيْهِ أَنْ يَطَّوَّفَ بِهِمَا ۚ وَمَنْ تَطَوَّعَ خَيْرًا فَإِنَّ اللَّهَ شَاكِرٌ عَلِيمٌ. أَبْدَأُ بِمَا بَدَأَ اللَّهُ بِهِ",
+  "label": "Safa et Marwa sont vraiment parmi les lieux sacrés d'Allah. Quiconque fait le Hajj ou la Omra à la Maison ne commet pas de péché en faisant le va-et-vient entre elles. Et quiconque fait volontairement une bonne œuvre, Allah est Reconnaissant et Omniscient. (Al-Baqara 2:158) Je commence par ce par quoi Allah a commencé."
+ },
+ {
+  "key": "step-sai-safa_dhikr",
+  "group": "guide",
+  "section": "Sa'i entre Safa et Marwa",
+  "arabic": "اللَّهُ أَكْبَرُ، اللَّهُ أَكْبَرُ، اللَّهُ أَكْبَرُ. لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ، يُحْيِي وَيُمِيتُ، وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ. لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ، أَنْجَزَ وَعْدَهُ، وَنَصَرَ عَبْدَهُ، وَهَزَمَ الْأَحْزَابَ وَحْدَهُ",
+  "label": "Allah est le plus Grand (trois fois). Il n'y a de divinité qu'Allah, Seul, sans associé. À Lui la royauté et la louange ; Il donne la vie et la mort, et Il est capable de toute chose. Il n'y a de divinité qu'Allah, Seul ; Il a tenu Sa promesse, secouru Son serviteur et vaincu seul les coalisés."
+ },
+ {
+  "key": "step-sai-safa_tahlil",
+  "group": "guide",
+  "section": "Sa'i entre Safa et Marwa",
+  "arabic": "لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ، صَدَقَ وَعْدَهُ، وَنَصَرَ عَبْدَهُ، وَأَعَزَّ جُنْدَهُ، وَهَزَمَ الْأَحْزَابَ وَحْدَهُ، لَا إِلَهَ إِلَّا اللَّهُ، وَلَا نَعْبُدُ إِلَّا إِيَّاهُ، مُخْلِصِينَ لَهُ الدِّينَ وَلَوْ كَرِهَ الْكَافِرُونَ",
+  "label": "Il n'y a de divinité qu'Allah, Seul ; Il a tenu Sa promesse, secouru Son serviteur, fortifié Son armée et vaincu seul les coalisés. Il n'y a de divinité qu'Allah et nous n'adorons que Lui, Lui vouant un culte exclusif, dussent les mécréants en éprouver de la répulsion."
+ },
+ {
+  "key": "step-sai-green_lights",
+  "group": "guide",
+  "section": "Sa'i entre Safa et Marwa",
+  "arabic": "رَبِّ اغْفِرْ وَارْحَمْ، وَتَجَاوَزْ عَمَّا تَعْلَمُ، إِنَّكَ أَنْتَ الْأَعَزُّ الْأَكْرَمُ",
+  "label": "Seigneur, pardonne et fais miséricorde, et efface ce que Tu sais ; Tu es certes le Plus Puissant, le Plus Généreux."
+ },
+ {
+  "key": "step-end-acceptance",
+  "group": "guide",
+  "section": "Désacralisation et fin de la Omra",
+  "arabic": "تَقَبَّلَ اللَّهُ مِنَّا وَمِنْكُمْ",
+  "label": "Qu'Allah l'accepte de nous et de vous."
  },
  {
   "key": "dua-comprehensive-0",

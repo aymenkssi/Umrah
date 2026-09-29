@@ -39,44 +39,47 @@ def test_catalog_is_up_to_date():
 
 def test_admin_requires_token(client):
     assert client.get("/api/admin/audio").status_code == 401
-    assert client.post("/api/admin/audio/step-talbiyah", files={"file": ("a.mp3", MP3)}).status_code == 401
+    assert (
+        client.post("/api/admin/audio/step-talbiyah-talbiyah", files={"file": ("a.mp3", MP3)}).status_code
+        == 401
+    )
 
 
 def test_upload_serve_replace_delete(client, tmp_path):
-    first = upload(client, "step-talbiyah", MP3)
+    first = upload(client, "step-talbiyah-talbiyah", MP3)
     assert first.status_code == 200
     url = first.json()["url"]
 
     manifest = client.get("/api/audio").json()["items"]
-    assert manifest["step-talbiyah"]["url"] == url
+    assert manifest["step-talbiyah-talbiyah"]["url"] == url
     served = client.get(url)
     assert served.status_code == 200
     assert served.content == MP3
     assert "immutable" in served.headers["cache-control"]
 
     # Replacing creates a new versioned file and removes the old one.
-    second = upload(client, "step-talbiyah", M4A, "dua.m4a")
+    second = upload(client, "step-talbiyah-talbiyah", M4A, "dua.m4a")
     assert second.json()["url"] != url
     assert second.json()["format"] == "m4a"
     assert client.get(url).status_code == 404
     assert len(list(tmp_path.iterdir())) == 1
 
     listing = {e["key"]: e for e in client.get("/api/admin/audio", headers=ADMIN).json()}
-    assert listing["step-talbiyah"]["audio"]["size"] == len(M4A)
-    assert listing["step-ihram"]["audio"] is None
+    assert listing["step-talbiyah-talbiyah"]["audio"]["size"] == len(M4A)
+    assert listing["step-ihram-niyyah"]["audio"] is None
 
-    assert client.delete("/api/admin/audio/step-talbiyah", headers=ADMIN).status_code == 204
+    assert client.delete("/api/admin/audio/step-talbiyah-talbiyah", headers=ADMIN).status_code == 204
     assert client.get("/api/audio").json()["items"] == {}
     assert list(tmp_path.iterdir()) == []
 
 
 def test_rejects_unknown_keys_bad_formats_and_big_files(client, monkeypatch):
     assert upload(client, "not-a-dua", MP3).status_code == 404
-    assert upload(client, "step-talbiyah", b"<html>not audio</html>").status_code == 415
+    assert upload(client, "step-talbiyah-talbiyah", b"<html>not audio</html>").status_code == 415
     monkeypatch.setattr(audio, "MAX_BYTES", 100)
-    assert upload(client, "step-talbiyah", MP3).status_code == 413
+    assert upload(client, "step-talbiyah-talbiyah", MP3).status_code == 413
 
 
 def test_file_names_are_validated(client):
     assert client.get("/api/audio/files/..%2F..%2Fetc%2Fpasswd").status_code == 404
-    assert client.get("/api/audio/files/step-talbiyah-000000000000.mp3").status_code == 404
+    assert client.get("/api/audio/files/step-talbiyah-talbiyah-000000000000.mp3").status_code == 404

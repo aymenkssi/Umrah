@@ -33,12 +33,27 @@ describe('umrah-steps.json', () => {
 
   it('is translated in all languages', () => {
     for (const step of umrahSteps as any[]) {
-      for (const field of ['title', 'summary', 'details', 'dua', 'notes']) {
+      for (const field of ['title', 'summary', 'details', 'notes']) {
         if (step[field]) expectLocalized(step[field], `${step.id}.${field}`);
       }
-      (step.additionalDuas ?? []).forEach((dua: unknown, i: number) =>
-        expectLocalized(dua, `${step.id}.additionalDuas[${i}]`)
-      );
+    }
+  });
+
+  it('has complete du\'as with unique ids in each step', () => {
+    const total = (umrahSteps as any[]).reduce((sum, step) => sum + step.duas.length, 0);
+    expect(total).toBeGreaterThanOrEqual(15);
+    for (const step of umrahSteps as any[]) {
+      const ids = step.duas.map((dua: any) => dua.id);
+      expect(new Set(ids).size).toBe(ids.length);
+      for (const dua of step.duas) {
+        const where = `${step.id}.duas.${dua.id}`;
+        expect(dua.id).toMatch(/^[a-z_]+$/);
+        expectLocalized(dua.when, `${where}.when`);
+        expect(dua.arabic?.trim()).toBeTruthy();
+        expect(dua.translation?.en?.trim()).toBeTruthy();
+        expect(dua.translation?.fr?.trim()).toBeTruthy();
+        if (dua.repeat) expectLocalized(dua.repeat, `${where}.repeat`);
+      }
     }
   });
 });

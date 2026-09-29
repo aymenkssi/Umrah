@@ -9,7 +9,7 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { router } from 'expo-router';
 import { DuaAudioButton } from '../../components/DuaAudioButton';
-import { stepDuaKey, stepExtraDuaKey } from '../../utils/audioKeys';
+import { stepDuaKey } from '../../utils/audioKeys';
 import { Ionicons } from '@expo/vector-icons';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { useSettings } from '../../contexts/SettingsContext';
@@ -121,34 +121,37 @@ export default function GuideScreen() {
                       </View>
                     )}
 
-                    {step.dua && (
+                    {step.duas?.length > 0 && (
                       <View style={styles.duaSection}>
                         <View style={styles.duaHeader}>
                           <Ionicons name="book-outline" size={20} color={colors.primary} />
-                          <Text style={[styles.duaLabel, { fontSize: fonts.sm }]}>{t('dua')}</Text>
-                        </View>
-                        <Text style={[styles.duaText, { fontSize: fonts.md }]}>
-                          {step.dua[language]}
-                        </Text>
-                        <DuaAudioButton audioKey={stepDuaKey(step.id)} />
-                      </View>
-                    )}
-
-                    {step.additionalDuas?.length > 0 && (
-                      <View style={styles.duaSection}>
-                        <View style={styles.duaHeader}>
-                          <Ionicons name="bookmarks-outline" size={20} color={colors.primary} />
                           <Text style={[styles.duaLabel, { fontSize: fonts.sm }]}>
-                            {t('additional_duas')}
+                            {t(step.duas.length > 1 ? 'step_duas' : 'dua')}
                           </Text>
                         </View>
-                        {step.additionalDuas.map((extra: any, index: number) => (
-                          <View key={index} style={index > 0 ? styles.additionalDua : undefined}>
-                            {language !== 'ar' && extra.ar && (
-                              <Text style={[styles.duaArabic, { fontSize: fonts.lg }]}>{extra.ar}</Text>
+                        {step.duas.map((dua: any, index: number) => (
+                          <View key={dua.id} style={index > 0 ? styles.additionalDua : undefined}>
+                            <Text style={[styles.duaWhen, { fontSize: fonts.sm }]}>{dua.when[language]}</Text>
+                            <Text style={[styles.duaArabic, { fontSize: fonts.lg }]}>{dua.arabic}</Text>
+                            {language !== 'ar' && dua.transliteration && (
+                              <Text style={[styles.duaTransliteration, { fontSize: fonts.sm }]}>
+                                {dua.transliteration}
+                              </Text>
                             )}
-                            <Text style={[styles.duaText, { fontSize: fonts.md }]}>{extra[language]}</Text>
-                            <DuaAudioButton audioKey={stepExtraDuaKey(step.id, index)} />
+                            {language !== 'ar' && (
+                              <Text style={[styles.duaText, { fontSize: fonts.md }]}>
+                                {dua.translation[language]}
+                              </Text>
+                            )}
+                            {dua.repeat && (
+                              <View style={styles.duaRepeat}>
+                                <Ionicons name="repeat" size={14} color={colors.goldDark} />
+                                <Text style={[styles.duaRepeatText, { fontSize: fonts.sm }]}>
+                                  {dua.repeat[language]}
+                                </Text>
+                              </View>
+                            )}
+                            <DuaAudioButton audioKey={stepDuaKey(step.id, dua.id)} />
                           </View>
                         ))}
                       </View>
@@ -354,6 +357,27 @@ const makeStyles = (c: Palette) =>
     textAlign: 'right',
     writingDirection: 'rtl',
     marginBottom: SPACING.xs,
+  },
+  duaWhen: {
+    color: c.goldDark,
+    fontWeight: '600',
+    marginBottom: SPACING.xs,
+  },
+  duaTransliteration: {
+    color: c.textSecondary,
+    fontStyle: 'italic',
+    lineHeight: 20,
+    marginBottom: SPACING.xs,
+  },
+  duaRepeat: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: SPACING.xs,
+    marginTop: SPACING.xs,
+  },
+  duaRepeatText: {
+    color: c.goldDark,
+    fontWeight: '600',
   },
   additionalDua: {
     marginTop: SPACING.md,
