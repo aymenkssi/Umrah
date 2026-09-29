@@ -1,4 +1,4 @@
-# Umrah Companion — application mobile
+# Umrah & Hajj Companion (رفيق العمرة والحج) — application mobile
 
 Application Expo (SDK 57) avec expo-router. Voir le [README principal](../README.md).
 

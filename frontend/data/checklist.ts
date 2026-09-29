@@ -74,8 +74,22 @@ export const CHECKLIST: ChecklistCategory[] = [
     items: [
       { id: 'quran', label: { ar: 'مصحف صغير', en: 'Pocket Quran', fr: 'Coran de poche' } },
       { id: 'duas_list', label: { ar: 'قائمة الأدعية وأسماء من أوصوك بالدعاء', en: 'List of du‘as and people who asked you to pray for them', fr: "Liste d'invocations et des proches qui vous ont demandé de prier pour eux" } },
-      { id: 'learn_rites', label: { ar: 'مراجعة مناسك العمرة في التطبيق', en: 'Review the Umrah rites in the app', fr: "Revoir les étapes de la Omra dans l'application" } },
+      { id: 'learn_rites', label: { ar: 'مراجعة مناسك العمرة والحج في التطبيق', en: 'Review the Umrah and Hajj rites in the app', fr: "Revoir les étapes de la Omra et du Hajj dans l'application" } },
       { id: 'forgiveness', label: { ar: 'طلب المسامحة من الأهل وردّ الحقوق', en: 'Ask family for forgiveness and settle debts', fr: 'Demander pardon à ses proches et régler ses dettes' } },
+    ],
+  },
+  {
+    id: 'hajj',
+    icon: 'sunny-outline',
+    title: { ar: 'للحج فقط', en: 'Hajj only', fr: 'Pour le Hajj uniquement' },
+    items: [
+      { id: 'hajj_permit', label: { ar: 'تأشيرة الحج وتصريح الحج (نسك)', en: 'Hajj visa and Hajj permit (Nusuk)', fr: 'Visa et permis de Hajj (Nusuk)' } },
+      { id: 'hajj_group', label: { ar: 'بطاقة الحملة ورقم المخيم في منى وعرفة', en: 'Group card and camp number in Mina and Arafat', fr: 'Carte du groupe et numéro du camp à Mina et à Arafat' } },
+      { id: 'hady_voucher', label: { ar: 'صك الهدي (للمتمتع والقارن)', en: 'Hady voucher (Tamattu\' and Qiran)', fr: "Bon de sacrifice (Tamattou' et Qiran)" } },
+      { id: 'pebble_bag', label: { ar: 'كيس صغير لحصى الجمار', en: 'Small bag for the pebbles', fr: 'Petit sac pour les cailloux' } },
+      { id: 'sleeping_mat', label: { ar: 'حصير خفيف للمبيت بمزدلفة', en: 'Light mat for the night at Muzdalifah', fr: 'Tapis léger pour la nuit à Mouzdalifa' } },
+      { id: 'spray_fan', label: { ar: 'بخاخ ماء ومروحة صغيرة', en: 'Water spray and small fan', fr: "Brumisateur et petit ventilateur" } },
+      { id: 'extra_ihram', label: { ar: 'طقم إحرام إضافي لأيام الحج', en: 'Extra ihram set for the days of Hajj', fr: "Jeu d'ihram supplémentaire pour les jours du Hajj" } },
     ],
   },
 ];

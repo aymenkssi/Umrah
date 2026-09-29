@@ -13,23 +13,25 @@ DATA = ROOT / "frontend" / "data"
 OUT = Path(__file__).resolve().parent / "audio_catalog.json"
 
 
+def step_duas(group: str, steps: list) -> list:
+    return [
+        {
+            "key": f"step-{step['id']}-{dua['id']}",
+            "group": group,
+            "section": step["title"]["fr"],
+            "arabic": dua["arabic"],
+            "label": dua["translation"]["fr"],
+        }
+        for step in steps
+        for dua in step["duas"]
+    ]
+
+
 def build() -> list:
     catalog = []
-    steps = sorted(
-        json.loads((DATA / "umrah-steps.json").read_text(encoding="utf-8")), key=lambda s: s["order"]
-    )
-    for step in steps:
-        title = step["title"]
-        for dua in step["duas"]:
-            catalog.append(
-                {
-                    "key": f"step-{step['id']}-{dua['id']}",
-                    "group": "guide",
-                    "section": title["fr"],
-                    "arabic": dua["arabic"],
-                    "label": dua["translation"]["fr"],
-                }
-            )
+    for group, name in (("guide", "umrah-steps.json"), ("hajj", "hajj-steps.json")):
+        steps = sorted(json.loads((DATA / name).read_text(encoding="utf-8")), key=lambda s: s["order"])
+        catalog += step_duas(group, steps)
     for category in json.loads((DATA / "general-duas.json").read_text(encoding="utf-8")):
         for i, dua in enumerate(category["duas"]):
             catalog.append(

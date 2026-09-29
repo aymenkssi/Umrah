@@ -1,0 +1,578 @@
+[
+  {
+    "id": "hajj_types",
+    "order": 1,
+    "icon": "layers-outline",
+    "title": {
+      "ar": "أنواع النسك",
+      "en": "The three types of Hajj",
+      "fr": "Les trois types de Hajj"
+    },
+    "summary": {
+      "ar": "اختر نسكك قبل الإحرام: التمتع أو القران أو الإفراد.",
+      "en": "Choose your rite before ihram: Tamattu', Qiran or Ifrad.",
+      "fr": "Choisissez votre rite avant l'ihram : Tamattou', Qiran ou Ifrad."
+    },
+    "details": {
+      "ar": "التمتع: تُحرم بالعمرة في أشهر الحج (شوال وذو القعدة وأول ذي الحجة) وتؤديها ثم تتحلل، ثم تُحرم بالحج يوم الثامن من ذي الحجة، وعليك الهدي. القران: تُحرم بالعمرة والحج معاً وتبقى محرماً حتى يوم النحر، ويكفيك طواف واحد وسعي واحد، وعليك الهدي. الإفراد: تُحرم بالحج وحده، ولا هدي عليك. يتبع هذا الدليل حج التمتع، وهو الأكثر شيوعاً لمن يأتي من خارج مكة، ويشير إلى الفروق عند الحاجة.",
+      "en": "Tamattu': enter ihram for Umrah during the months of Hajj (Shawwal, Dhul Qa'dah and early Dhul Hijjah), complete it and leave ihram, then enter ihram for Hajj on 8 Dhul Hijjah; an animal sacrifice (hady) is required. Qiran: enter ihram for Umrah and Hajj together and stay in ihram until the Day of Sacrifice; one Tawaf and one Sa'i are enough, and hady is required. Ifrad: enter ihram for Hajj alone, with no hady. This guide follows Tamattu', the most common rite for pilgrims coming from outside Makkah, and points out the differences where needed.",
+      "fr": "Tamattou' : on entre en ihram pour la Omra pendant les mois du Hajj (Chawwal, Dhoul Qa'da et début de Dhoul Hijja), on l'accomplit puis on quitte l'ihram, et on entre à nouveau en ihram pour le Hajj le 8 Dhoul Hijja ; un sacrifice (hady) est dû. Qiran : on entre en ihram pour la Omra et le Hajj ensemble et on reste en ihram jusqu'au jour du Sacrifice ; un seul Tawaf et un seul Sa'i suffisent, et le hady est dû. Ifrad : on entre en ihram pour le Hajj seul, sans hady. Ce guide suit le Tamattou', le plus courant pour les pèlerins venant de l'extérieur de La Mecque, et signale les différences quand il le faut."
+    },
+    "notes": {
+      "ar": "لا يصح الحج إلا بتصريح رسمي من الجهات السعودية. اتبع دائماً تعليمات حملتك ومرشدك وأهل العلم.",
+      "en": "Hajj requires an official permit from the Saudi authorities. Always follow the instructions of your group, guide and scholars.",
+      "fr": "Le Hajj nécessite un permis officiel des autorités saoudiennes. Suivez toujours les consignes de votre groupe, de votre guide et des savants."
+    },
+    "duas": []
+  },
+  {
+    "id": "hajj_ihram",
+    "order": 2,
+    "icon": "person-outline",
+    "isSpecial": true,
+    "day": {
+      "ar": "٨ ذو الحجة · يوم التروية",
+      "en": "8 Dhul Hijjah · Day of Tarwiyah",
+      "fr": "8 Dhoul Hijja · jour de Tarwiya"
+    },
+    "title": {
+      "ar": "الإحرام بالحج",
+      "en": "Ihram for Hajj",
+      "fr": "Ihram du Hajj"
+    },
+    "summary": {
+      "ar": "اغتسل والبس الإحرام من مكانك في مكة، وانوِ الحج ولبِّ.",
+      "en": "Perform ghusl, put on ihram where you are staying in Makkah, make the intention for Hajj and recite the Talbiyah.",
+      "fr": "Faites le ghusl, revêtez l'ihram là où vous logez à La Mecque, formulez l'intention du Hajj et récitez la Talbiya."
+    },
+    "details": {
+      "ar": "في ضحى اليوم الثامن يغتسل المتمتع ويتطيب في بدنه ويلبس الإحرام من مكانه الذي هو فيه، ثم ينوي الحج ويقول: لبيك اللهم حجاً. أما القارن والمفرد فهما باقيان على إحرامهما من الميقات. ثم يكثر من التلبية.",
+      "en": "On the morning of the 8th, the Tamattu' pilgrim performs ghusl, perfumes the body, puts on ihram where they are staying, then makes the intention for Hajj, saying: Labbayka Allāhumma ḥajjan. Pilgrims doing Qiran or Ifrad are still in the ihram they entered at the miqat. Then recite the Talbiyah often.",
+      "fr": "Le matin du 8, le pèlerin en Tamattou' fait le ghusl, se parfume le corps, revêt l'ihram là où il loge, puis formule l'intention du Hajj en disant : Labbayka Allâhoumma hajjan. Les pèlerins en Qiran ou en Ifrad sont toujours dans l'ihram pris au miqat. Puis on récite abondamment la Talbiya."
+    },
+    "notes": {
+      "ar": "تعود محظورات الإحرام من جديد بعد النية.",
+      "en": "The ihram prohibitions apply again after the intention.",
+      "fr": "Les interdits de l'ihram s'appliquent à nouveau après l'intention."
+    },
+    "duas": [
+      {
+        "id": "niyyah",
+        "when": {
+          "ar": "عند نية الحج",
+          "en": "When making the intention for Hajj",
+          "fr": "Au moment de l'intention du Hajj"
+        },
+        "arabic": "لَبَّيْكَ اللَّهُمَّ حَجًّا",
+        "transliteration": "Labbayka Allāhumma ḥajjan",
+        "translation": {
+          "en": "Here I am, O Allah, for Hajj.",
+          "fr": "Me voici, ô Allah, pour le Hajj."
+        }
+      },
+      {
+        "id": "talbiyah",
+        "when": {
+          "ar": "بعد النية حتى رمي جمرة العقبة يوم النحر",
+          "en": "From the intention until stoning Jamrat al-Aqabah on the Day of Sacrifice",
+          "fr": "De l'intention jusqu'à la lapidation de Jamrat al-Aqaba le jour du Sacrifice"
+        },
+        "arabic": "لَبَّيْكَ اللَّهُمَّ لَبَّيْكَ، لَبَّيْكَ لَا شَرِيكَ لَكَ لَبَّيْكَ، إِنَّ الْحَمْدَ وَالنِّعْمَةَ لَكَ وَالْمُلْكَ، لَا شَرِيكَ لَكَ",
+        "transliteration": "Labbayka Allāhumma labbayk, labbayka lā sharīka laka labbayk, inna l-ḥamda wa n-niʿmata laka wa l-mulk, lā sharīka lak",
+        "translation": {
+          "en": "Here I am, O Allah, here I am. Here I am, You have no partner, here I am. Truly all praise, grace and sovereignty belong to You. You have no partner.",
+          "fr": "Me voici, ô Allah, me voici. Me voici, Tu n'as pas d'associé, me voici. Certes, la louange, la grâce et la royauté T'appartiennent. Tu n'as pas d'associé."
+        }
+      }
+    ]
+  },
+  {
+    "id": "hajj_mina",
+    "order": 3,
+    "icon": "bonfire-outline",
+    "day": {
+      "ar": "٨ ذو الحجة",
+      "en": "8 Dhul Hijjah",
+      "fr": "8 Dhoul Hijja"
+    },
+    "title": {
+      "ar": "المبيت بمنى",
+      "en": "Night in Mina",
+      "fr": "La nuit à Mina"
+    },
+    "summary": {
+      "ar": "اتجه إلى منى وصلِّ فيها الظهر والعصر والمغرب والعشاء والفجر.",
+      "en": "Go to Mina and pray Dhuhr, Asr, Maghrib, Isha and Fajr there.",
+      "fr": "Rendez-vous à Mina et priez-y Dhouhr, 'Asr, Maghrib, 'Icha et Fajr."
+    },
+    "details": {
+      "ar": "تصلي في منى الظهر والعصر والمغرب والعشاء وفجر اليوم التاسع، كل صلاة في وقتها، وتقصر الرباعية ركعتين دون جمع، كما فعل النبي ﷺ. ويُستحب قضاء هذا اليوم في الذكر والتلبية وقراءة القرآن والدعاء.",
+      "en": "In Mina you pray Dhuhr, Asr, Maghrib, Isha and the Fajr of the 9th, each at its own time, shortening the four-rak'ah prayers to two without combining them, as the Prophet ﷺ did. Spend the day in dhikr, Talbiyah, Qur'an recitation and du'a.",
+      "fr": "À Mina, on prie Dhouhr, 'Asr, Maghrib, 'Icha et le Fajr du 9, chaque prière à son heure, en raccourcissant les prières de quatre rak'ahs à deux, sans les regrouper, comme l'a fait le Prophète ﷺ. On passe la journée en dhikr, Talbiya, lecture du Coran et invocations."
+    },
+    "notes": {
+      "ar": "المبيت بمنى ليلة التاسع سنة. احفظ رقم خيمتك ومخيمك.",
+      "en": "Spending the night of the 9th in Mina is a Sunnah. Note your tent and camp number.",
+      "fr": "Passer la nuit du 9 à Mina est une Sunna. Notez le numéro de votre tente et de votre camp."
+    },
+    "duas": []
+  },
+  {
+    "id": "hajj_arafat",
+    "order": 4,
+    "icon": "sunny-outline",
+    "isSpecial": true,
+    "day": {
+      "ar": "٩ ذو الحجة · يوم عرفة",
+      "en": "9 Dhul Hijjah · Day of Arafah",
+      "fr": "9 Dhoul Hijja · jour de 'Arafat"
+    },
+    "title": {
+      "ar": "الوقوف بعرفة",
+      "en": "Standing at Arafat",
+      "fr": "La station à 'Arafat"
+    },
+    "summary": {
+      "ar": "الحج عرفة: ابقَ داخل حدود عرفة من الظهر إلى غروب الشمس في الدعاء.",
+      "en": "Hajj is Arafah: stay within its boundaries from noon until sunset, in du'a.",
+      "fr": "Le Hajj, c'est 'Arafat : restez dans ses limites de midi au coucher du soleil, en invocations."
+    },
+    "details": {
+      "ar": "بعد طلوع شمس اليوم التاسع تسير إلى عرفة، وتصلي الظهر والعصر جمعاً وقصراً في وقت الظهر. ثم تتفرغ للذكر والدعاء مستقبلاً القبلة رافعاً يديك حتى غروب الشمس. الوقوف بعرفة ركن الحج الأعظم، فمن فاته فاته الحج. تأكد أنك داخل حدود عرفة (اللوحات الإرشادية)، ولا يلزم صعود جبل الرحمة.",
+      "en": "After sunrise on the 9th, go to Arafat and pray Dhuhr and Asr combined and shortened at the time of Dhuhr. Then devote yourself to dhikr and du'a, facing the qiblah with raised hands, until sunset. Standing at Arafat is the greatest pillar of Hajj: whoever misses it has missed the Hajj. Make sure you are inside the boundaries of Arafat (marked by signs); climbing Jabal al-Rahmah is not required.",
+      "fr": "Après le lever du soleil le 9, on se rend à 'Arafat et on prie Dhouhr et 'Asr regroupées et raccourcies à l'heure de Dhouhr. Puis on se consacre au dhikr et aux invocations, face à la qibla, les mains levées, jusqu'au coucher du soleil. La station à 'Arafat est le pilier majeur du Hajj : celui qui la manque a manqué son Hajj. Vérifiez que vous êtes à l'intérieur des limites de 'Arafat (panneaux) ; il n'est pas nécessaire de gravir le mont de la Miséricorde."
+    },
+    "notes": {
+      "ar": "لا تغادر عرفة قبل غروب الشمس. اشرب الماء كثيراً واحتمِ من الشمس.",
+      "en": "Do not leave Arafat before sunset. Drink plenty of water and protect yourself from the sun.",
+      "fr": "Ne quittez pas 'Arafat avant le coucher du soleil. Buvez beaucoup d'eau et protégez-vous du soleil."
+    },
+    "duas": [
+      {
+        "id": "best_dua",
+        "when": {
+          "ar": "خير الدعاء دعاء يوم عرفة، فأكثر منه",
+          "en": "The best du'a is the du'a of the Day of Arafah: say it often",
+          "fr": "La meilleure invocation est celle du jour de 'Arafat : répétez-la souvent"
+        },
+        "arabic": "لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ، وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ",
+        "transliteration": "Lā ilāha illā llāhu waḥdahu lā sharīka lah, lahu l-mulku wa lahu l-ḥamd, wa huwa ʿalā kulli shayʾin qadīr",
+        "translation": {
+          "en": "There is no god but Allah alone, without partner. His is the dominion and His is the praise, and He has power over all things.",
+          "fr": "Il n'y a de divinité qu'Allah, Seul, sans associé. À Lui la royauté et la louange, et Il est capable de toute chose."
+        },
+        "repeat": {
+          "ar": "أكثر منه حتى الغروب",
+          "en": "As often as you can until sunset",
+          "fr": "Aussi souvent que possible jusqu'au coucher du soleil"
+        }
+      },
+      {
+        "id": "rabbana",
+        "when": {
+          "ar": "وادعُ بما شئت من خيري الدنيا والآخرة",
+          "en": "Then ask for whatever you wish of the good of this world and the next",
+          "fr": "Puis demandez ce que vous voulez des biens d'ici-bas et de l'au-delà"
+        },
+        "arabic": "رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ",
+        "transliteration": "Rabbanā ātinā fi d-dunyā ḥasanatan wa fi l-ākhirati ḥasanatan wa qinā ʿadhāba n-nār",
+        "translation": {
+          "en": "Our Lord, give us good in this world and good in the Hereafter, and protect us from the punishment of the Fire.",
+          "fr": "Notre Seigneur, accorde-nous une belle part ici-bas et une belle part dans l'au-delà, et protège-nous du châtiment du Feu."
+        }
+      },
+      {
+        "id": "forgiveness",
+        "when": {
+          "ar": "في الاستغفار",
+          "en": "Seeking forgiveness",
+          "fr": "Pour demander pardon"
+        },
+        "arabic": "رَبِّ اغْفِرْ لِي وَتُبْ عَلَيَّ إِنَّكَ أَنْتَ التَّوَّابُ الرَّحِيمُ",
+        "transliteration": "Rabbi ghfir lī wa tub ʿalayya innaka anta t-tawwābu r-raḥīm",
+        "translation": {
+          "en": "My Lord, forgive me and accept my repentance: You are the Accepter of repentance, the Most Merciful.",
+          "fr": "Seigneur, pardonne-moi et accepte mon repentir : Tu es Celui qui accepte le repentir, le Très Miséricordieux."
+        }
+      }
+    ]
+  },
+  {
+    "id": "hajj_muzdalifah",
+    "order": 5,
+    "icon": "moon-outline",
+    "day": {
+      "ar": "ليلة ١٠ ذو الحجة",
+      "en": "Night of 10 Dhul Hijjah",
+      "fr": "Nuit du 10 Dhoul Hijja"
+    },
+    "title": {
+      "ar": "المبيت بمزدلفة",
+      "en": "Night at Muzdalifah",
+      "fr": "La nuit à Mouzdalifa"
+    },
+    "summary": {
+      "ar": "بعد الغروب انفر بسكينة إلى مزدلفة، واجمع المغرب والعشاء، وبت فيها.",
+      "en": "After sunset, move calmly to Muzdalifah, combine Maghrib and Isha, and spend the night there.",
+      "fr": "Après le coucher du soleil, rejoignez calmement Mouzdalifa, regroupez Maghrib et 'Icha et passez-y la nuit."
+    },
+    "details": {
+      "ar": "إذا وصلت مزدلفة صليت المغرب ثلاثاً والعشاء ركعتين جمعاً بأذان وإقامتين، ثم تنام حتى الفجر. بعد صلاة الفجر تقف للذكر والدعاء مستقبلاً القبلة حتى يشتد الإسفار، ثم تنصرف إلى منى قبل طلوع الشمس. يجوز للضعفاء والنساء ومن معهم الانصراف بعد منتصف الليل. التقط حصى الجمار (سبع حصيات لجمرة العقبة، أو ٤٩ لكل الأيام) بحجم حبة الحمص، من مزدلفة أو من أي مكان.",
+      "en": "On reaching Muzdalifah, pray Maghrib (three rak'ahs) and Isha (two) combined, with one adhan and two iqamahs, then sleep until Fajr. After the Fajr prayer, stand facing the qiblah in dhikr and du'a until the sky is bright, then leave for Mina before sunrise. The weak, women and those accompanying them may leave after midnight. Pick up the pebbles (7 for Jamrat al-Aqabah, or 49 for all the days), the size of a chickpea, at Muzdalifah or anywhere else.",
+      "fr": "À Mouzdalifa, on prie Maghrib (trois rak'ahs) et 'Icha (deux) regroupées, avec un adhan et deux iqamas, puis on dort jusqu'au Fajr. Après la prière du Fajr, on se tient face à la qibla en dhikr et en invocations jusqu'à ce que le ciel soit bien clair, puis on part pour Mina avant le lever du soleil. Les personnes faibles, les femmes et leurs accompagnateurs peuvent partir après minuit. Ramassez les cailloux (7 pour Jamrat al-Aqaba, ou 49 pour tous les jours), de la taille d'un pois chiche, à Mouzdalifa ou ailleurs."
+    },
+    "notes": {
+      "ar": "لا تغسل الحصى ولا تأخذ حصى كبيرة. خذ معك حصيراً أو فراشاً خفيفاً للمبيت.",
+      "en": "There is no need to wash the pebbles; do not take large stones. Bring a mat or light bedding for the night.",
+      "fr": "Inutile de laver les cailloux ; ne prenez pas de grosses pierres. Prévoyez un tapis ou un couchage léger pour la nuit."
+    },
+    "duas": [
+      {
+        "id": "mashar_verse",
+        "when": {
+          "ar": "عند المشعر الحرام",
+          "en": "At al-Mash'ar al-Haram",
+          "fr": "À al-Mach'ar al-Haram"
+        },
+        "arabic": "فَإِذَا أَفَضْتُم مِّنْ عَرَفَاتٍ فَاذْكُرُوا اللَّهَ عِندَ الْمَشْعَرِ الْحَرَامِ ۖ وَاذْكُرُوهُ كَمَا هَدَاكُمْ وَإِن كُنتُم مِّن قَبْلِهِ لَمِنَ الضَّالِّينَ",
+        "transliteration": "Fa-idhā afaḍtum min ʿArafātin fa-dhkurū llāha ʿinda l-mashʿari l-ḥarām, wa-dhkurūhu kamā hadākum wa in kuntum min qablihi la-mina ḍ-ḍāllīn",
+        "translation": {
+          "en": "When you depart from Arafat, remember Allah at al-Mash'ar al-Haram, and remember Him as He has guided you, for before that you were among those astray. (Al-Baqarah 2:198)",
+          "fr": "Quand vous déferlez depuis 'Arafat, invoquez Allah auprès du Mach'ar al-Haram, et invoquez-Le comme Il vous a guidés, alors qu'auparavant vous étiez parmi les égarés. (Al-Baqara 2:198)"
+        }
+      },
+      {
+        "id": "dhikr",
+        "when": {
+          "ar": "بعد صلاة الفجر مستقبلاً القبلة",
+          "en": "After the Fajr prayer, facing the qiblah",
+          "fr": "Après la prière du Fajr, face à la qibla"
+        },
+        "arabic": "اللَّهُ أَكْبَرُ، اللَّهُ أَكْبَرُ، اللَّهُ أَكْبَرُ، لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ، وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ",
+        "transliteration": "Allāhu akbar, Allāhu akbar, Allāhu akbar, lā ilāha illā llāhu waḥdahu lā sharīka lah, lahu l-mulku wa lahu l-ḥamd, wa huwa ʿalā kulli shayʾin qadīr",
+        "translation": {
+          "en": "Allah is the Greatest (three times). There is no god but Allah alone, without partner. His is the dominion and His is the praise, and He has power over all things.",
+          "fr": "Allah est le plus Grand (trois fois). Il n'y a de divinité qu'Allah, Seul, sans associé. À Lui la royauté et la louange, et Il est capable de toute chose."
+        },
+        "repeat": {
+          "ar": "حتى يشتد الإسفار",
+          "en": "Until the sky is bright",
+          "fr": "Jusqu'à ce que le ciel soit bien clair"
+        }
+      }
+    ]
+  },
+  {
+    "id": "hajj_aqabah",
+    "order": 6,
+    "icon": "ellipse-outline",
+    "day": {
+      "ar": "١٠ ذو الحجة · يوم النحر",
+      "en": "10 Dhul Hijjah · Day of Sacrifice",
+      "fr": "10 Dhoul Hijja · jour du Sacrifice"
+    },
+    "title": {
+      "ar": "رمي جمرة العقبة",
+      "en": "Stoning Jamrat al-Aqabah",
+      "fr": "Lapidation de Jamrat al-Aqaba"
+    },
+    "summary": {
+      "ar": "ارمِ جمرة العقبة الكبرى بسبع حصيات متعاقبات، مكبّراً مع كل حصاة.",
+      "en": "Throw seven pebbles, one after another, at the large Jamrat al-Aqabah, saying Allahu akbar with each.",
+      "fr": "Lancez sept cailloux, l'un après l'autre, sur la grande stèle de Jamrat al-Aqaba, en disant Allahou akbar à chacun."
+    },
+    "details": {
+      "ar": "عند وصولك إلى منى يوم العيد ترمي جمرة العقبة وحدها (وهي الأقرب إلى مكة) بسبع حصيات، ترفع يدك مع كل حصاة وتكبّر، ويجب أن تقع الحصاة في الحوض. وتقطع التلبية مع بدء الرمي. وقت الرمي من بعد منتصف ليلة النحر للضعفاء، والأفضل بعد طلوع الشمس، ويمتد إلى فجر اليوم الحادي عشر.",
+      "en": "On reaching Mina on the day of Eid, stone only Jamrat al-Aqabah (the one closest to Makkah) with seven pebbles, raising your hand and saying Allahu akbar with each one; each pebble must fall into the basin. Stop the Talbiyah when you start stoning. Stoning is allowed after midnight for the weak, is best after sunrise, and remains valid until the Fajr of the 11th.",
+      "fr": "En arrivant à Mina le jour de l'Aïd, on lapide uniquement Jamrat al-Aqaba (la plus proche de La Mecque) avec sept cailloux, en levant la main et en disant Allahou akbar à chacun ; chaque caillou doit tomber dans le bassin. On arrête la Talbiya en commençant la lapidation. On peut lapider dès minuit pour les personnes faibles ; le mieux est après le lever du soleil, et c'est possible jusqu'au Fajr du 11."
+    },
+    "notes": {
+      "ar": "تجنب أوقات الزحام واتبع مسارات الذهاب والعودة. يجوز للعاجز أن يوكّل من يرمي عنه.",
+      "en": "Avoid peak times and follow the one-way paths. Someone unable to stone may appoint a proxy.",
+      "fr": "Évitez les heures de pointe et suivez les sens de circulation. Une personne qui ne peut pas lapider peut mandater quelqu'un."
+    },
+    "duas": [
+      {
+        "id": "takbir",
+        "when": {
+          "ar": "مع كل حصاة",
+          "en": "With each pebble",
+          "fr": "À chaque caillou"
+        },
+        "arabic": "اللَّهُ أَكْبَرُ",
+        "transliteration": "Allāhu akbar",
+        "translation": {
+          "en": "Allah is the Greatest.",
+          "fr": "Allah est le plus Grand."
+        },
+        "repeat": {
+          "ar": "٧ مرات",
+          "en": "7 times",
+          "fr": "7 fois"
+        }
+      }
+    ]
+  },
+  {
+    "id": "hajj_sacrifice",
+    "order": 7,
+    "icon": "heart-outline",
+    "day": {
+      "ar": "١٠ ذو الحجة",
+      "en": "10 Dhul Hijjah",
+      "fr": "10 Dhoul Hijja"
+    },
+    "title": {
+      "ar": "الهدي",
+      "en": "The sacrifice (hady)",
+      "fr": "Le sacrifice (hady)"
+    },
+    "summary": {
+      "ar": "اذبح هديك أو تأكد من ذبحه إن كنت متمتعاً أو قارناً.",
+      "en": "Slaughter your hady, or make sure it is done, if you perform Tamattu' or Qiran.",
+      "fr": "Sacrifiez votre bête, ou assurez-vous que c'est fait, si vous êtes en Tamattou' ou en Qiran."
+    },
+    "details": {
+      "ar": "يجب الهدي على المتمتع والقارن: شاة أو سُبع بدنة أو سُبع بقرة. يُذبح يوم النحر أو أيام التشريق الثلاثة، وأكثر الحجاج اليوم يشترون صك الهدي من الجهات الرسمية (مشروع الإفادة من الهدي والأضاحي) فيُذبح عنهم. ومن لم يجد الهدي صام ثلاثة أيام في الحج وسبعة إذا رجع إلى أهله.",
+      "en": "Hady is required for Tamattu' and Qiran: a sheep or goat, or a seventh share of a camel or cow. It is slaughtered on the Day of Sacrifice or during the three days of Tashriq. Most pilgrims today buy an official hady voucher (Adahi project) so that it is slaughtered on their behalf. Whoever cannot offer a hady fasts three days during Hajj and seven on returning home.",
+      "fr": "Le hady est dû en Tamattou' et en Qiran : un mouton ou une chèvre, ou un septième de chameau ou de vache. Il est sacrifié le jour du Sacrifice ou pendant les trois jours de Tachriq. Aujourd'hui, la plupart des pèlerins achètent un bon de sacrifice officiel (projet Adahi) pour qu'il soit fait en leur nom. Celui qui ne peut pas offrir de hady jeûne trois jours pendant le Hajj et sept de retour chez lui."
+    },
+    "notes": {
+      "ar": "لا هدي واجب على المفرد، ويستحب له.",
+      "en": "No hady is required for Ifrad, but it is recommended.",
+      "fr": "Le hady n'est pas obligatoire en Ifrad, mais il est recommandé."
+    },
+    "duas": [
+      {
+        "id": "slaughter",
+        "when": {
+          "ar": "عند الذبح (إن ذبحت بنفسك)",
+          "en": "When slaughtering (if you do it yourself)",
+          "fr": "Au moment du sacrifice (si vous le faites vous-même)"
+        },
+        "arabic": "بِسْمِ اللَّهِ وَاللَّهُ أَكْبَرُ، اللَّهُمَّ هَذَا مِنْكَ وَلَكَ، اللَّهُمَّ تَقَبَّلْ مِنِّي",
+        "transliteration": "Bismillāhi wa llāhu akbar, Allāhumma hādhā minka wa lak, Allāhumma taqabbal minnī",
+        "translation": {
+          "en": "In the name of Allah, Allah is the Greatest. O Allah, this is from You and for You. O Allah, accept it from me.",
+          "fr": "Au nom d'Allah, Allah est le plus Grand. Ô Allah, ceci vient de Toi et est pour Toi. Ô Allah, accepte-le de moi."
+        }
+      }
+    ]
+  },
+  {
+    "id": "hajj_halq",
+    "order": 8,
+    "icon": "cut-outline",
+    "day": {
+      "ar": "١٠ ذو الحجة",
+      "en": "10 Dhul Hijjah",
+      "fr": "10 Dhoul Hijja"
+    },
+    "title": {
+      "ar": "الحلق أو التقصير",
+      "en": "Shaving or trimming",
+      "fr": "Rasage ou raccourcissement"
+    },
+    "summary": {
+      "ar": "احلق رأسك أو قصّر، ثم تحلل التحلل الأول.",
+      "en": "Shave or trim your hair, then leave ihram partially (first release).",
+      "fr": "Rasez-vous la tête ou raccourcissez vos cheveux : c'est la première désacralisation."
+    },
+    "details": {
+      "ar": "يحلق الرجل رأسه كله، وهو الأفضل، أو يقصّر من جميعه. وتقصّر المرأة من أطراف شعرها قدر أنملة. السنة أن ترتب أعمال يوم النحر: الرمي ثم النحر ثم الحلق ثم الطواف، ولا حرج إن قدّمت بعضها على بعض. إذا رميت وحلقت حلّ لك كل شيء إلا النساء (التحلل الأول)، فتلبس ثيابك وتتطيب.",
+      "en": "Men shave the whole head, which is best, or trim hair from all over it. Women trim a fingertip's length from the ends of their hair. The Sunnah order for the Day of Sacrifice is: stoning, sacrifice, shaving, then Tawaf, but there is no harm in changing the order. Once you have stoned and shaved, everything becomes permitted except intimate relations (first release): you may wear normal clothes and perfume.",
+      "fr": "Les hommes se rasent toute la tête, ce qui est préférable, ou raccourcissent l'ensemble des cheveux. Les femmes coupent l'équivalent d'une phalange au bout de leurs cheveux. L'ordre de la Sunna le jour du Sacrifice est : lapidation, sacrifice, rasage puis Tawaf, mais il n'y a pas de mal à changer l'ordre. Après la lapidation et le rasage, tout redevient permis sauf les rapports intimes (première désacralisation) : on remet ses vêtements et on peut se parfumer."
+    },
+    "notes": {
+      "ar": "دعا النبي ﷺ للمحلّقين ثلاثاً وللمقصّرين مرة.",
+      "en": "The Prophet ﷺ prayed for those who shave three times, and once for those who trim.",
+      "fr": "Le Prophète ﷺ a invoqué trois fois pour ceux qui se rasent, et une fois pour ceux qui raccourcissent."
+    },
+    "duas": []
+  },
+  {
+    "id": "hajj_ifadah",
+    "order": 9,
+    "icon": "sync-outline",
+    "day": {
+      "ar": "١٠ ذو الحجة أو بعده",
+      "en": "10 Dhul Hijjah or later",
+      "fr": "10 Dhoul Hijja ou après"
+    },
+    "title": {
+      "ar": "طواف الإفاضة والسعي",
+      "en": "Tawaf al-Ifadah and Sa'i",
+      "fr": "Tawaf al-Ifada et Sa'i"
+    },
+    "summary": {
+      "ar": "طف بالكعبة سبعة أشواط طواف الإفاضة، ثم اسعَ بين الصفا والمروة.",
+      "en": "Circle the Kaaba seven times for Tawaf al-Ifadah, then perform Sa'i between Safa and Marwa.",
+      "fr": "Faites les sept tours du Tawaf al-Ifada, puis le Sa'i entre Safa et Marwa."
+    },
+    "details": {
+      "ar": "طواف الإفاضة ركن من أركان الحج، ويؤدى كطواف العمرة دون اضطباع ولا رمل. ثم يسعى المتمتع سعي الحج. أما القارن والمفرد فإن كانا سعيا بعد طواف القدوم فلا سعي عليهما. الأفضل أداؤه يوم النحر، ويجوز تأخيره إلى أيام التشريق أو بعدها. بعد الطواف والسعي يحل لك كل شيء (التحلل الثاني).",
+      "en": "Tawaf al-Ifadah is a pillar of Hajj, performed like the Tawaf of Umrah but without uncovering the shoulder or hastening. The Tamattu' pilgrim then performs the Sa'i of Hajj. Pilgrims doing Qiran or Ifrad who already performed Sa'i after their arrival Tawaf do not repeat it. It is best done on the Day of Sacrifice but may be delayed to the days of Tashriq or later. After this Tawaf and Sa'i, everything becomes permitted (second release).",
+      "fr": "Le Tawaf al-Ifada est un pilier du Hajj ; il se fait comme le Tawaf de la Omra, sans découvrir l'épaule ni presser le pas. Le pèlerin en Tamattou' fait ensuite le Sa'i du Hajj. En Qiran ou en Ifrad, celui qui a déjà fait le Sa'i après le Tawaf d'arrivée ne le refait pas. Le mieux est de le faire le jour du Sacrifice, mais on peut le repousser aux jours de Tachriq ou après. Après ce Tawaf et ce Sa'i, tout redevient permis (seconde désacralisation)."
+    },
+    "notes": {
+      "ar": "استعمل عدّاد الأشواط في التطبيق. المرأة الحائض تنتظر حتى تطهر لتطوف.",
+      "en": "Use the lap counter in the app. A woman who is menstruating waits until she is pure to perform Tawaf.",
+      "fr": "Utilisez le compteur de tours de l'application. La femme en période de menstrues attend d'être pure pour faire le Tawaf."
+    },
+    "duas": [
+      {
+        "id": "start",
+        "when": {
+          "ar": "عند الحجر الأسود في بداية كل شوط",
+          "en": "At the Black Stone, at the start of each lap",
+          "fr": "À la Pierre noire, au début de chaque tour"
+        },
+        "arabic": "بِسْمِ اللَّهِ وَاللَّهُ أَكْبَرُ",
+        "transliteration": "Bismillāhi wa llāhu akbar",
+        "translation": {
+          "en": "In the name of Allah, Allah is the Greatest.",
+          "fr": "Au nom d'Allah, Allah est le plus Grand."
+        }
+      },
+      {
+        "id": "rabbana",
+        "when": {
+          "ar": "بين الركن اليماني والحجر الأسود",
+          "en": "Between the Yemeni Corner and the Black Stone",
+          "fr": "Entre le coin yéménite et la Pierre noire"
+        },
+        "arabic": "رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ",
+        "transliteration": "Rabbanā ātinā fi d-dunyā ḥasanatan wa fi l-ākhirati ḥasanatan wa qinā ʿadhāba n-nār",
+        "translation": {
+          "en": "Our Lord, give us good in this world and good in the Hereafter, and protect us from the punishment of the Fire.",
+          "fr": "Notre Seigneur, accorde-nous une belle part ici-bas et une belle part dans l'au-delà, et protège-nous du châtiment du Feu."
+        }
+      },
+      {
+        "id": "safa_verse",
+        "when": {
+          "ar": "عند الاقتراب من الصفا في بداية السعي",
+          "en": "Approaching Safa at the start of Sa'i",
+          "fr": "En approchant de Safa au début du Sa'i"
+        },
+        "arabic": "إِنَّ الصَّفَا وَالْمَرْوَةَ مِن شَعَائِرِ اللَّهِ",
+        "transliteration": "Inna ṣ-Ṣafā wa l-Marwata min shaʿāʾiri llāh",
+        "translation": {
+          "en": "Indeed, Safa and Marwa are among the symbols of Allah. (Al-Baqarah 2:158)",
+          "fr": "Certes, Safa et Marwa font partie des rites sacrés d'Allah. (Al-Baqara 2:158)"
+        }
+      }
+    ]
+  },
+  {
+    "id": "hajj_tashriq",
+    "order": 10,
+    "icon": "calendar-outline",
+    "day": {
+      "ar": "١١ – ١٣ ذو الحجة · أيام التشريق",
+      "en": "11–13 Dhul Hijjah · Days of Tashriq",
+      "fr": "11–13 Dhoul Hijja · jours de Tachriq"
+    },
+    "title": {
+      "ar": "أيام التشريق ورمي الجمرات الثلاث",
+      "en": "Days of Tashriq: stoning the three Jamarat",
+      "fr": "Jours de Tachriq : lapidation des trois stèles"
+    },
+    "summary": {
+      "ar": "بت في منى، وارمِ كل يوم بعد الزوال الجمرات الثلاث بالترتيب.",
+      "en": "Spend the nights in Mina and, each day after noon, stone the three Jamarat in order.",
+      "fr": "Passez les nuits à Mina et, chaque jour après midi, lapidez les trois stèles dans l'ordre."
+    },
+    "details": {
+      "ar": "تبيت في منى ليالي الحادي عشر والثاني عشر (والثالث عشر لمن تأخر). وفي كل يوم بعد الزوال ترمي الجمرة الصغرى ثم الوسطى ثم الكبرى (العقبة)، كل واحدة بسبع حصيات مع التكبير. بعد الصغرى والوسطى تتقدم قليلاً وتستقبل القبلة وتدعو طويلاً رافعاً يديك، ولا تقف بعد جمرة العقبة. من أراد التعجل خرج من منى يوم الثاني عشر قبل غروب الشمس بعد الرمي، ومن تأخر رمى يوم الثالث عشر.",
+      "en": "Spend the nights of the 11th and 12th in Mina (and the 13th if you stay on). Each day after noon, stone the small Jamrah, then the middle one, then the large one (al-Aqabah), each with seven pebbles and Allahu akbar. After the small and middle Jamarat, move aside, face the qiblah and make a long du'a with raised hands; do not stop after Jamrat al-Aqabah. Whoever wishes to leave early departs Mina on the 12th, after stoning and before sunset; otherwise stone again on the 13th.",
+      "fr": "On passe à Mina les nuits du 11 et du 12 (et du 13 si l'on reste). Chaque jour après midi, on lapide la petite stèle, puis la moyenne, puis la grande (al-Aqaba), chacune avec sept cailloux en disant Allahou akbar. Après la petite et la moyenne, on s'écarte un peu, on se tourne vers la qibla et on invoque longuement, les mains levées ; on ne s'arrête pas après Jamrat al-Aqaba. Celui qui veut partir tôt quitte Mina le 12, après la lapidation et avant le coucher du soleil ; sinon on lapide encore le 13."
+    },
+    "notes": {
+      "ar": "هذه الأيام أيام أكل وشرب وذكر لله، فأكثر من التكبير.",
+      "en": "These are days of eating, drinking and remembrance of Allah: say takbir often.",
+      "fr": "Ce sont des jours où l'on mange, boit et se souvient d'Allah : multipliez les takbirs."
+    },
+    "duas": [
+      {
+        "id": "takbir",
+        "when": {
+          "ar": "مع كل حصاة على كل جمرة",
+          "en": "With each pebble at each Jamrah",
+          "fr": "À chaque caillou, sur chaque stèle"
+        },
+        "arabic": "اللَّهُ أَكْبَرُ",
+        "transliteration": "Allāhu akbar",
+        "translation": {
+          "en": "Allah is the Greatest.",
+          "fr": "Allah est le plus Grand."
+        },
+        "repeat": {
+          "ar": "٧ مرات لكل جمرة (٢١ في اليوم)",
+          "en": "7 times per Jamrah (21 per day)",
+          "fr": "7 fois par stèle (21 par jour)"
+        }
+      },
+      {
+        "id": "tashriq_takbir",
+        "when": {
+          "ar": "التكبير في أيام التشريق",
+          "en": "Takbir during the days of Tashriq",
+          "fr": "Le takbir des jours de Tachriq"
+        },
+        "arabic": "اللَّهُ أَكْبَرُ، اللَّهُ أَكْبَرُ، لَا إِلَهَ إِلَّا اللَّهُ، وَاللَّهُ أَكْبَرُ، اللَّهُ أَكْبَرُ، وَلِلَّهِ الْحَمْدُ",
+        "transliteration": "Allāhu akbar, Allāhu akbar, lā ilāha illā llāh, wa llāhu akbar, Allāhu akbar, wa lillāhi l-ḥamd",
+        "translation": {
+          "en": "Allah is the Greatest, Allah is the Greatest. There is no god but Allah. Allah is the Greatest, Allah is the Greatest, and to Allah belongs all praise.",
+          "fr": "Allah est le plus Grand, Allah est le plus Grand. Il n'y a de divinité qu'Allah. Allah est le plus Grand, Allah est le plus Grand, et à Allah la louange."
+        }
+      }
+    ]
+  },
+  {
+    "id": "hajj_wada",
+    "order": 11,
+    "icon": "hand-left-outline",
+    "day": {
+      "ar": "قبل مغادرة مكة",
+      "en": "Before leaving Makkah",
+      "fr": "Avant de quitter La Mecque"
+    },
+    "title": {
+      "ar": "طواف الوداع",
+      "en": "Farewell Tawaf",
+      "fr": "Tawaf d'adieu"
+    },
+    "summary": {
+      "ar": "اجعل آخر عهدك بالبيت: طف سبعة أشواط قبل السفر مباشرة.",
+      "en": "Let your last act be at the House: perform seven laps just before you travel.",
+      "fr": "Que votre dernier acte soit auprès de la Maison : faites sept tours juste avant de partir."
+    },
+    "details": {
+      "ar": "طواف الوداع واجب على الحاج إذا أراد الخروج من مكة، ويكون آخر أعماله فيها، ولا سعي بعده. تسقط عن الحائض والنفساء. إذا أخّرت طواف الإفاضة إلى وقت سفرك أجزأ عن طواف الوداع. تقبّل الله حجك وجعله حجاً مبروراً.",
+      "en": "The farewell Tawaf is required of pilgrims leaving Makkah and should be their last act there; there is no Sa'i after it. Women who are menstruating or in post-natal bleeding are exempt. If you delay Tawaf al-Ifadah until you leave, it also counts as the farewell Tawaf. May Allah accept your Hajj and make it a Hajj mabrur.",
+      "fr": "Le Tawaf d'adieu est obligatoire pour le pèlerin qui quitte La Mecque et doit être son dernier acte sur place ; il n'est pas suivi d'un Sa'i. Les femmes en période de menstrues ou de lochies en sont dispensées. Si vous repoussez le Tawaf al-Ifada jusqu'à votre départ, il compte aussi comme Tawaf d'adieu. Qu'Allah accepte votre Hajj et en fasse un Hajj mabrour."
+    },
+    "notes": {
+      "ar": "الحج المبرور ليس له جزاء إلا الجنة.",
+      "en": "An accepted Hajj (mabrur) has no reward other than Paradise.",
+      "fr": "Le Hajj agréé (mabrour) n'a pas d'autre récompense que le Paradis."
+    },
+    "duas": [
+      {
+        "id": "acceptance",
+        "when": {
+          "ar": "في ختام الحج",
+          "en": "At the end of Hajj",
+          "fr": "À la fin du Hajj"
+        },
+        "arabic": "رَبَّنَا تَقَبَّلْ مِنَّا ۖ إِنَّكَ أَنتَ السَّمِيعُ الْعَلِيمُ",
+        "transliteration": "Rabbanā taqabbal minnā, innaka anta s-samīʿu l-ʿalīm",
+        "translation": {
+          "en": "Our Lord, accept this from us: You are the All-Hearing, the All-Knowing. (Al-Baqarah 2:127)",
+          "fr": "Notre Seigneur, accepte ceci de notre part : c'est Toi l'Audient, l'Omniscient. (Al-Baqara 2:127)"
+        }
+      }
+    ]
+  }
+]

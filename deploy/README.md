@@ -1,4 +1,4 @@
-# Déployer le backend Umrah Companion sur le VPS
+# Déployer le backend Umrah & Hajj Companion sur le VPS
 
 Même installation que Neon Strike, sur le **même VPS**, derrière le **Traefik déjà en place** (`/opt/apps/proxy`). Deux conteneurs :
 
@@ -94,7 +94,7 @@ Ouvrez **https://pelerinage.creationapp.academy/admin** et collez le `ADMIN_TOKE
 
 L'onglet **Messages** publie des annonces sur l'accueil de l'application (affluence, horaires spéciaux, conseils) : titre et texte en français, anglais et/ou arabe, type, dates de début et de fin optionnelles. L'app les affiche dans la langue de l'utilisateur, les garde en cache hors ligne, et chaque utilisateur peut masquer un message (il réapparaît si vous le modifiez). Au plus 5 messages sont en ligne à la fois.
 
-L'onglet **Audio** liste les 53 invocations de l'application (guide et page Invocations). Pour chacune, envoyez un fichier MP3 ou M4A (5 Mo au plus), écoutez-le, remplacez-le ou supprimez-le. L'application affiche un bouton ▶ dès qu'un enregistrement existe, le télécharge une seule fois et le garde hors ligne. Les fichiers sont stockés dans le volume Docker `media` et sauvegardés par `backup.sh`. N'utilisez que des enregistrements dont vous avez les droits.
+L'onglet **Audio** liste les 68 invocations de l'application (guides de la Omra et du Hajj, page Invocations). Pour chacune, envoyez un fichier MP3 ou M4A (5 Mo au plus), écoutez-le, remplacez-le ou supprimez-le. L'application affiche un bouton ▶ dès qu'un enregistrement existe, le télécharge une seule fois et le garde hors ligne. Les fichiers sont stockés dans le volume Docker `media` et sauvegardés par `backup.sh`. N'utilisez que des enregistrements dont vous avez les droits.
 
 > Si vous modifiez les invocations de l'application (textes ou ordre), régénérez la liste de l'onglet Audio avec `python backend/build_audio_catalog.py`. Un test échoue tant que ce n'est pas fait.
 

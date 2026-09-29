@@ -51,7 +51,7 @@ def test_health_and_root(client):
 
 
 def test_public_pages(client):
-    assert "Umrah Companion" in client.get("/").text
+    assert "Umrah &amp; Hajj Companion" in client.get("/").text
     privacy = client.get("/privacy")
     assert privacy.status_code == 200
     assert "AdMob" in privacy.text and 'lang="ar"' in privacy.text
