@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import * as Location from 'expo-location';
+import { smoothHeading } from '../utils/calculations';
 
 export interface HeadingState {
   /** Degrees from true north (falls back to magnetic north), or null before the first reading. */
@@ -17,10 +18,13 @@ export function useHeading(enabled: boolean): HeadingState {
     if (!enabled) return;
     let subscription: Location.LocationSubscription | null = null;
     let cancelled = false;
+    let smoothed: number | null = null;
     Location.watchHeadingAsync((data) => {
       // True heading already accounts for magnetic declination and device orientation.
-      const heading = data.trueHeading >= 0 ? data.trueHeading : data.magHeading;
-      setState({ heading, accuracy: data.accuracy, error: false });
+      const raw = data.trueHeading >= 0 ? data.trueHeading : data.magHeading;
+      // Smooth out sensor jitter so the needle does not tremble.
+      smoothed = smoothHeading(smoothed, raw);
+      setState({ heading: smoothed, accuracy: data.accuracy, error: false });
     })
       .then((sub) => {
         if (cancelled) sub.remove();
