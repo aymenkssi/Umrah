@@ -5,6 +5,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { LanguageProvider } from '../contexts/LanguageContext';
 import { SettingsProvider } from '../contexts/SettingsContext';
 import { AdsProvider } from '../contexts/AdsContext';
+import { NotificationsProvider } from '../contexts/NotificationsContext';
 import { ThemeProvider, useTheme } from '../contexts/ThemeContext';
 
 function ThemedStack() {
@@ -40,9 +41,11 @@ export default function RootLayout() {
       <ThemeProvider>
         <LanguageProvider>
           <SettingsProvider>
-            <AdsProvider>
-              <ThemedStack />
-            </AdsProvider>
+            <NotificationsProvider>
+              <AdsProvider>
+                <ThemedStack />
+              </AdsProvider>
+            </NotificationsProvider>
           </SettingsProvider>
         </LanguageProvider>
       </ThemeProvider>
