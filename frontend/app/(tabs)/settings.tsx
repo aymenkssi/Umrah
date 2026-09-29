@@ -14,6 +14,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useLanguage, Language } from '../../contexts/LanguageContext';
 import { useSettings, FontSize } from '../../contexts/SettingsContext';
 import { useAds } from '../../contexts/AdsContext';
+import { PRIVACY_POLICY_URL } from '../../constants/ads';
 import { COLORS, SPACING, BORDER_RADIUS, SHADOWS, FONT_SIZES } from '../../constants/theme';
 import { AdBanner } from '../../components/AdBanner';
 
@@ -174,6 +175,17 @@ export default function SettingsScreen() {
                 </Text>
               </View>
             </View>
+            <TouchableOpacity
+              style={styles.linkButton}
+              onPress={() =>
+                Linking.openURL(PRIVACY_POLICY_URL).catch((error) =>
+                  console.error('Error opening privacy policy:', error)
+                )
+              }
+            >
+              <Ionicons name="document-text-outline" size={18} color={COLORS.primary} />
+              <Text style={[styles.linkButtonText, { fontSize: fonts.sm }]}>{t('privacy_policy')}</Text>
+            </TouchableOpacity>
             {privacyOptionsRequired && (
               <TouchableOpacity style={styles.linkButton} onPress={showPrivacyOptions}>
                 <Ionicons name="options-outline" size={18} color={COLORS.primary} />

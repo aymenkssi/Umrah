@@ -61,7 +61,7 @@ Variables d'environnement : `MONGO_URL`, `DB_NAME`, `CORS_ORIGINS` (liste sépar
 Une bannière AdMob s'affiche en bas des écrans **Accueil, Miqat, Horaires et Réglages**. Elle n'apparaît jamais pendant les rites (Guide, Invocations, Qibla).
 Le formulaire de consentement de Google (UMP, obligatoire pour l'UE, le Royaume-Uni et la Suisse) s'affiche automatiquement quand il est requis. Les Réglages proposent ensuite un lien « Confidentialité des publicités ».
 
-Par défaut, ce sont les **publicités de test de Google** qui s'affichent. Pour passer en réel :
+Les identifiants **Android** réels sont configurés (package `com.aymen.umrahcompanion`). iOS affiche encore les **publicités de test de Google**, et les builds de développement aussi. Pour ajouter ou changer des identifiants :
 
 1. Sur [apps.admob.com](https://apps.admob.com), crée une app Android et une app iOS, puis un bloc d'annonces **Bannière** pour chacune.
 2. Dans `frontend/app.json` (plugin `react-native-google-mobile-ads`), remplace `androidAppId` et `iosAppId` (format `ca-app-pub-…~…`).

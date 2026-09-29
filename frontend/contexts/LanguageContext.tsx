@@ -127,6 +127,7 @@ export const translations: Record<Language, Record<string, string>> = {
     tab_settings: 'الإعدادات',
     tab_duas: 'الأدعية',
     ad_privacy_options: 'خيارات خصوصية الإعلانات',
+    privacy_policy: 'سياسة الخصوصية',
   },
   en: {
     app_name: 'Umrah Companion',
@@ -232,6 +233,7 @@ export const translations: Record<Language, Record<string, string>> = {
     tab_settings: 'Settings',
     tab_duas: "Du'a",
     ad_privacy_options: 'Ad privacy options',
+    privacy_policy: 'Privacy policy',
   },
   fr: {
     app_name: 'Compagnon de la \'Omra',
@@ -337,6 +339,7 @@ export const translations: Record<Language, Record<string, string>> = {
     tab_settings: 'Réglages',
     tab_duas: "Du'a",
     ad_privacy_options: 'Confidentialité des publicités',
+    privacy_policy: 'Politique de confidentialité',
   },
 };
 

@@ -10,9 +10,12 @@
  * Never click your own real ads: it can get the AdMob account suspended.
  */
 export const BANNER_AD_UNIT_IDS = {
-  android: '',
-  ios: '',
+  android: 'ca-app-pub-7488746561313974/5332962502',
+  ios: '', // iOS app not configured in AdMob yet: test ads until filled in
 };
 
 /** Set to false to turn every ad off without touching the screens. */
 export const ADS_ENABLED = true;
+
+/** Public privacy policy, linked from the Settings screen and required by AdMob / Google Play. */
+export const PRIVACY_POLICY_URL = 'https://github.com/aymenkssi/Privacy-policy/blob/main/index.html';
