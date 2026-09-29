@@ -15,7 +15,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useLanguage, Language } from '../../contexts/LanguageContext';
 import { useSettings, FontSize } from '../../contexts/SettingsContext';
 import { useAds } from '../../contexts/AdsContext';
-import { PRIVACY_POLICY_URL } from '../../constants/api';
+import { DONATION_URL, PRIVACY_POLICY_URL } from '../../constants/api';
 import { loadAnalyticsEnabled, setAnalyticsEnabled } from '../../utils/analytics';
 import { SPACING, BORDER_RADIUS, SHADOWS, FONT_SIZES, Palette } from '../../constants/theme';
 import { AdBanner } from '../../components/AdBanner';
@@ -180,7 +180,7 @@ export default function SettingsScreen() {
             <TouchableOpacity
               style={styles.donateButton}
               onPress={() => {
-                Linking.openURL('https://www.paypal.com/paypalme/WalkingInTunisia').catch((error) =>
+                Linking.openURL(DONATION_URL).catch((error) =>
                   console.error('Error opening PayPal:', error)
                 );
               }}
