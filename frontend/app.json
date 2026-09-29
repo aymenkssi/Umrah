@@ -49,7 +49,16 @@
       ],
       "expo-font",
       "expo-web-browser",
-      "expo-localization"
+      "expo-localization",
+      [
+        "react-native-google-mobile-ads",
+        {
+          "androidAppId": "ca-app-pub-3940256099942544~3347511713",
+          "iosAppId": "ca-app-pub-3940256099942544~1458002511",
+          "delayAppMeasurementInit": true,
+          "userTrackingUsageDescription": "Your data will be used to show you more relevant ads. Ads help keep Umrah Companion free."
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true

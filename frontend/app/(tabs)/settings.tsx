@@ -13,13 +13,16 @@ import Constants from 'expo-constants';
 import { Ionicons } from '@expo/vector-icons';
 import { useLanguage, Language } from '../../contexts/LanguageContext';
 import { useSettings, FontSize } from '../../contexts/SettingsContext';
+import { useAds } from '../../contexts/AdsContext';
 import { COLORS, SPACING, BORDER_RADIUS, SHADOWS, FONT_SIZES } from '../../constants/theme';
+import { AdBanner } from '../../components/AdBanner';
 
 const APP_VERSION = Constants.expoConfig?.version ?? '1.0.0';
 
 export default function SettingsScreen() {
   const { t, language, setLanguage } = useLanguage();
   const { fontSize, setFontSize, resetProgress } = useSettings();
+  const { privacyOptionsRequired, showPrivacyOptions } = useAds();
   const fonts = FONT_SIZES[fontSize];
 
   const handleLanguageChange = async (lang: Language) => {
@@ -171,6 +174,14 @@ export default function SettingsScreen() {
                 </Text>
               </View>
             </View>
+            {privacyOptionsRequired && (
+              <TouchableOpacity style={styles.linkButton} onPress={showPrivacyOptions}>
+                <Ionicons name="options-outline" size={18} color={COLORS.primary} />
+                <Text style={[styles.linkButtonText, { fontSize: fonts.sm }]}>
+                  {t('ad_privacy_options')}
+                </Text>
+              </TouchableOpacity>
+            )}
           </View>
 
           <View style={styles.infoCard}>
@@ -192,6 +203,7 @@ export default function SettingsScreen() {
           </View>
         </View>
       </ScrollView>
+      <AdBanner />
     </SafeAreaView>
   );
 }
@@ -292,6 +304,19 @@ const styles = StyleSheet.create({
   infoText: {
     color: COLORS.textSecondary,
     lineHeight: 20,
+  },
+  linkButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    alignSelf: 'flex-start',
+    marginTop: SPACING.sm,
+    marginLeft: SPACING.lg + SPACING.xs,
+    paddingVertical: SPACING.xs,
+  },
+  linkButtonText: {
+    color: COLORS.primary,
+    fontWeight: '600',
+    marginLeft: SPACING.xs,
   },
   versionCard: {
     padding: SPACING.md,

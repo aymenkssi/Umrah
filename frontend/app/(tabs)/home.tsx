@@ -12,6 +12,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { useSettings } from '../../contexts/SettingsContext';
 import { COLORS, SPACING, BORDER_RADIUS, SHADOWS, FONT_SIZES } from '../../constants/theme';
+import { AdBanner } from '../../components/AdBanner';
 import { IslamicPattern, IslamicBorder } from '../../components/IslamicPattern';
 import umrahSteps from '../../data/umrah-steps.json';
 
@@ -143,6 +144,7 @@ export default function HomeScreen() {
           </Text>
         </View>
       </ScrollView>
+      <AdBanner />
     </SafeAreaView>
   );
 }

@@ -61,7 +61,7 @@ export const translations: Record<Language, Record<string, string>> = {
     large: 'كبير',
     about: 'حول',
     privacy: 'الخصوصية',
-    privacy_desc: 'هذا التطبيق لا يجمع أي بيانات شخصية. جميع البيانات مخزنة محلياً على جهازك.',
+    privacy_desc: 'لا يطلب هذا التطبيق أي حساب، وتقدّمك وإعداداتك محفوظة محلياً على جهازك. تُعرض إعلانات Google AdMob لتمويل التطبيق، وقد تستخدم معرّفات الجهاز وفق اختياراتك في الموافقة.',
     disclaimer: 'إخلاء المسؤولية',
     disclaimer_desc: 'هذا التطبيق دليل إرشادي فقط. يُرجى استشارة العلماء المحليين في أي أمر تشك فيه.',
     app_version: 'إصدار التطبيق',
@@ -126,6 +126,7 @@ export const translations: Record<Language, Record<string, string>> = {
     tab_prayers: 'الصلاة',
     tab_settings: 'الإعدادات',
     tab_duas: 'الأدعية',
+    ad_privacy_options: 'خيارات خصوصية الإعلانات',
   },
   en: {
     app_name: 'Umrah Companion',
@@ -165,7 +166,7 @@ export const translations: Record<Language, Record<string, string>> = {
     large: 'Large',
     about: 'About',
     privacy: 'Privacy',
-    privacy_desc: 'This app does not collect any personal data. All data is stored locally on your device.',
+    privacy_desc: 'This app requires no account, and your progress and settings stay on your device. Google AdMob ads help fund the app and may use device identifiers according to your consent choices.',
     disclaimer: 'Disclaimer',
     disclaimer_desc: 'This app is a guidance tool only. Please consult local scholars for any matter you are unsure about.',
     app_version: 'App Version',
@@ -230,6 +231,7 @@ export const translations: Record<Language, Record<string, string>> = {
     tab_prayers: 'Prayers',
     tab_settings: 'Settings',
     tab_duas: "Du'a",
+    ad_privacy_options: 'Ad privacy options',
   },
   fr: {
     app_name: 'Compagnon de la \'Omra',
@@ -269,7 +271,7 @@ export const translations: Record<Language, Record<string, string>> = {
     large: 'Grand',
     about: 'À Propos',
     privacy: 'Confidentialité',
-    privacy_desc: 'Cette application ne collecte aucune donnée personnelle. Toutes les données sont stockées localement sur votre appareil.',
+    privacy_desc: 'Cette application ne demande aucun compte, et votre progression et vos réglages restent sur votre appareil. Des publicités Google AdMob financent l\'application et peuvent utiliser des identifiants de l\'appareil selon vos choix de consentement.',
     disclaimer: 'Avertissement',
     disclaimer_desc: 'Cette application n\'est qu\'un outil d\'orientation. Veuillez consulter les érudits locaux pour toute question dont vous n\'êtes pas sûr.',
     app_version: 'Version de l\'Application',
@@ -334,6 +336,7 @@ export const translations: Record<Language, Record<string, string>> = {
     tab_prayers: 'Prières',
     tab_settings: 'Réglages',
     tab_duas: "Du'a",
+    ad_privacy_options: 'Confidentialité des publicités',
   },
 };
 

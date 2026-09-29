@@ -12,7 +12,7 @@ en **arabe**, **français** et **anglais**.
 - **Invocations** : des du'as classées par thème (arabe, translittération, traduction).
 - **Réglages** : langue (par défaut celle du téléphone), taille du texte et réinitialisation de la progression.
 
-Aucune donnée personnelle n'est collectée : tout est stocké localement sur l'appareil.
+Aucun compte n'est nécessaire : la progression et les réglages restent sur l'appareil. Des bannières Google AdMob financent l'application (voir plus bas).
 
 ## Structure
 
@@ -55,6 +55,29 @@ pytest tests
 ```
 
 Variables d'environnement : `MONGO_URL`, `DB_NAME`, `CORS_ORIGINS` (liste séparée par des virgules).
+
+## Publicités (AdMob)
+
+Une bannière AdMob s'affiche en bas des écrans **Accueil, Miqat, Horaires et Réglages**. Elle n'apparaît jamais pendant les rites (Guide, Invocations, Qibla).
+Le formulaire de consentement de Google (UMP, obligatoire pour l'UE, le Royaume-Uni et la Suisse) s'affiche automatiquement quand il est requis. Les Réglages proposent ensuite un lien « Confidentialité des publicités ».
+
+Par défaut, ce sont les **publicités de test de Google** qui s'affichent. Pour passer en réel :
+
+1. Sur [apps.admob.com](https://apps.admob.com), crée une app Android et une app iOS, puis un bloc d'annonces **Bannière** pour chacune.
+2. Dans `frontend/app.json` (plugin `react-native-google-mobile-ads`), remplace `androidAppId` et `iosAppId` (format `ca-app-pub-…~…`).
+3. Dans `frontend/constants/ads.ts`, renseigne `BANNER_AD_UNIT_IDS` (format `ca-app-pub-…/…`). Pour couper toutes les pubs, passe `ADS_ENABLED` à `false`.
+4. Dans AdMob > Confidentialité et messages, crée un message **RGPD** (et, pour iOS, un message **IDFA / ATT**).
+5. Sur le Play Console, déclare « Mon application contient des annonces ». Publie aussi un fichier `app-ads.txt` sur le site du développeur.
+
+Les pubs ne fonctionnent pas dans **Expo Go**, qui ne contient pas le module natif ; l'application tourne alors normalement, sans pub. Pour les voir, il faut un build :
+
+```bash
+cd frontend
+eas build --profile development --platform android   # build de test avec expo-dev-client
+yarn start --dev-client
+```
+
+Les builds de développement affichent toujours des pubs de test. Ne clique jamais sur tes propres pubs réelles, sinon le compte AdMob peut être suspendu.
 
 ## Publication
 
