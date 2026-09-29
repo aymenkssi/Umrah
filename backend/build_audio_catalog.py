@@ -20,24 +20,14 @@ def build() -> list:
     )
     for step in steps:
         title = step["title"]
-        if step.get("dua"):
+        for dua in step["duas"]:
             catalog.append(
                 {
-                    "key": f"step-{step['id']}",
+                    "key": f"step-{step['id']}-{dua['id']}",
                     "group": "guide",
                     "section": title["fr"],
-                    "arabic": step["dua"]["ar"],
-                    "label": step["dua"]["fr"],
-                }
-            )
-        for i, extra in enumerate(step.get("additionalDuas", [])):
-            catalog.append(
-                {
-                    "key": f"step-{step['id']}-extra-{i}",
-                    "group": "guide",
-                    "section": title["fr"],
-                    "arabic": extra["ar"],
-                    "label": extra["fr"],
+                    "arabic": dua["arabic"],
+                    "label": dua["translation"]["fr"],
                 }
             )
     for category in json.loads((DATA / "general-duas.json").read_text(encoding="utf-8")):
