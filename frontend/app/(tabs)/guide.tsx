@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { router } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { useSettings } from '../../contexts/SettingsContext';
@@ -163,6 +164,16 @@ export default function GuideScreen() {
                       </View>
                     )}
                   </View>
+                )}
+
+                {(step.id === 'tawaf' || step.id === 'sai') && (
+                  <TouchableOpacity
+                    style={styles.counterButton}
+                    onPress={() => router.push({ pathname: '/counter', params: { kind: step.id } })}
+                  >
+                    <Ionicons name="repeat" size={20} color={colors.onGold} />
+                    <Text style={[styles.counterButtonText, { fontSize: fonts.sm }]}>{t('open_counter')}</Text>
+                  </TouchableOpacity>
                 )}
 
                 <TouchableOpacity
@@ -366,6 +377,20 @@ const makeStyles = (c: Palette) =>
   notesText: {
     color: c.text,
     lineHeight: 20,
+  },
+  counterButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: SPACING.xs,
+    padding: SPACING.sm,
+    borderRadius: BORDER_RADIUS.md,
+    backgroundColor: c.gold,
+    marginTop: SPACING.sm,
+  },
+  counterButtonText: {
+    color: c.onGold,
+    fontWeight: '700',
   },
   completeButton: {
     flexDirection: 'row',

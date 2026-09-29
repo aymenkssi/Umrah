@@ -28,6 +28,7 @@ function ThemedStack() {
       <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: colors.background } }}>
         <Stack.Screen name="index" />
         <Stack.Screen name="(tabs)" />
+        <Stack.Screen name="counter" options={{ animation: 'slide_from_right' }} />
       </Stack>
     </NavigationThemeProvider>
   );
