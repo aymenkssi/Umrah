@@ -20,3 +20,9 @@ flake8 --max-line-length 110 backend tests && pytest tests
 - Textes : clés de traduction dans `contexts/LanguageContext.tsx`, en arabe, anglais et français.
 - Si les invocations changent (`frontend/data/*.json`), régénérer `python backend/build_audio_catalog.py`.
 - Déploiement du backend : voir `deploy/README.md` (VPS avec Traefik, sous-domaine `pelerinage.creationapp.academy`).
+
+## Liens du développeur (réutilisables dans les autres projets)
+
+- Don PayPal : https://www.paypal.com/paypalme/WalkingInTunisia (constante `DONATION_URL` dans `frontend/constants/api.ts`)
+- Compte AdMob (éditeur) : `pub-7488746561313974` — ligne app-ads.txt : `google.com, pub-7488746561313974, DIRECT, f08c47fec0942fa0`
+- Contact : aymenkssi@gmail.com
