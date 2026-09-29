@@ -31,6 +31,7 @@ function ThemedStack() {
         <Stack.Screen name="(tabs)" />
         <Stack.Screen name="counter" options={{ animation: 'slide_from_right' }} />
         <Stack.Screen name="checklist" options={{ animation: 'slide_from_right' }} />
+        <Stack.Screen name="places" options={{ animation: 'slide_from_right' }} />
       </Stack>
     </NavigationThemeProvider>
   );
