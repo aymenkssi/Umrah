@@ -92,6 +92,8 @@ Ouvrez **https://pelerinage.creationapp.academy/admin** et collez le `ADMIN_TOKE
 - la courbe des installations actives par jour, avec un tableau détaillé ;
 - les **pays** (installations et actives sur 30 jours), les écrans les plus consultés, les langues, les versions et les plateformes.
 
+L'onglet **Messages** publie des annonces sur l'accueil de l'application (affluence, horaires spéciaux, conseils) : titre et texte en français, anglais et/ou arabe, type, dates de début et de fin optionnelles. L'app les affiche dans la langue de l'utilisateur, les garde en cache hors ligne, et chaque utilisateur peut masquer un message (il réapparaît si vous le modifiez). Au plus 5 messages sont en ligne à la fois.
+
 D'autres onglets pourront s'ajouter (messages aux utilisateurs, contenu du guide…) : chaque fonctionnalité est un module Python de `backend/` avec ses routes `/api/admin/…` protégées par `require_admin`.
 
 ## Ce que fait l'API
@@ -101,7 +103,9 @@ D'autres onglets pourront s'ajouter (messages aux utilisateurs, contenu du guide
 | `POST /api/sessions` | Appelé à chaque lancement : identifiant d'installation aléatoire, langue, version, plateforme, région du téléphone. Pays déduit de l'IP (non stockée). |
 | `POST /api/events` | Écrans ouverts, comptés par jour et par écran, sans identifiant. |
 | `DELETE /api/installs/{id}` | L'utilisateur désactive les statistiques : ses données sont effacées. |
+| `GET /api/messages?lang=fr` | Messages en ligne pour l'accueil de l'app (5 au plus, dans la langue demandée, sinon anglais, sinon français). |
 | `GET /api/admin/stats` | Statistiques de la page d'administration (jeton obligatoire). |
+| `GET/POST /api/admin/messages` · `PUT/DELETE /api/admin/messages/{id}` | Onglet « Messages » : annonces en 3 langues, type (information, conseil, alerte), dates de début et de fin. |
 | `GET /api/health` | Contrôle de santé (utilisé par Docker). |
 
 Limites : 600 requêtes par heure et par adresse IP, car beaucoup de pèlerins partagent la même IP (Wi-Fi du Haram, opérateurs mobiles) ; corps de requête limité à 16 Ko par Traefik. Les installations inactives depuis 24 mois sont supprimées automatiquement, comme l'annonce la politique de confidentialité.

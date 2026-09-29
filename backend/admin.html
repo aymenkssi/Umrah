@@ -66,6 +66,21 @@
   .scroll { max-height: 420px; overflow: auto; }
   details summary { cursor: pointer; color: var(--muted); font-size: 13px; margin-top: 8px; }
   .empty { color: var(--muted); padding: 12px 0; }
+  .grid3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin-bottom: 12px; }
+  textarea { font: inherit; width: 100%; min-height: 80px; resize: vertical; background: var(--panel2); color: var(--text); border: 1px solid var(--line); border-radius: 8px; padding: 7px 9px; margin-top: 4px; }
+  .grid3 input, .grid3 select { margin-top: 4px; width: 100%; }
+  .lang-col { display: grid; gap: 8px; align-content: start; }
+  label.check { display: flex; align-items: center; gap: 8px; color: var(--text); margin-bottom: 12px; }
+  label.check input { width: auto; }
+  .msg { border: 1px solid var(--line); border-radius: 10px; padding: 12px; margin-top: 10px; display: grid; gap: 6px; }
+  .msg.kind-info { border-left: 4px solid #1565c0; } .msg.kind-tip { border-left: 4px solid var(--accent); } .msg.kind-warning { border-left: 4px solid var(--err); }
+  .msg h3 { margin: 0; font-size: 15px; }
+  .msg .meta { color: var(--muted); font-size: 13px; display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+  .msg .body { white-space: pre-wrap; font-size: 14px; }
+  .msg .actions { display: flex; gap: 8px; }
+  .pill { font-size: 12px; font-weight: 700; border-radius: 999px; padding: 1px 8px; background: var(--panel2); color: var(--muted); }
+  .pill.live { background: var(--accent); color: var(--on-accent); }
+  button.danger { color: var(--err); }
 </style>
 </head>
 <body>
@@ -88,6 +103,7 @@
     </header>
     <nav class="tabs" role="tablist">
       <button role="tab" aria-selected="true" data-tab="stats">Statistiques</button>
+      <button role="tab" aria-selected="false" data-tab="messages">Messages</button>
     </nav>
 
     <div id="tab-stats">
@@ -139,6 +155,50 @@
       </div>
       <p class="muted" style="margin-top:24px;font-size:12px">Pays déduits de l'adresse IP avec <a href="https://db-ip.com" style="color:inherit">IP Geolocation by DB-IP</a> (CC BY 4.0). Aucune adresse IP n'est enregistrée.</p>
     </div>
+
+    <div id="tab-messages" hidden>
+      <div class="panel">
+        <h2 id="msg-form-title">Nouveau message</h2>
+        <p class="hint">Affiché sur l'accueil de l'application (5 messages en ligne au plus). Remplissez au moins une langue : l'app utilise la langue de l'utilisateur, sinon l'anglais, sinon le français.</p>
+        <form id="msg-form" class="msg-form">
+          <div class="grid3">
+            <div class="lang-col">
+              <label>Titre (français)<input name="title_fr" maxlength="600"></label>
+              <label>Texte (français)<textarea name="body_fr" maxlength="600"></textarea></label>
+            </div>
+            <div class="lang-col">
+              <label>Titre (anglais)<input name="title_en" maxlength="600"></label>
+              <label>Texte (anglais)<textarea name="body_en" maxlength="600"></textarea></label>
+            </div>
+            <div class="lang-col" dir="rtl">
+              <label>العنوان (arabe)<input name="title_ar" maxlength="600"></label>
+              <label>النص (arabe)<textarea name="body_ar" maxlength="600"></textarea></label>
+            </div>
+          </div>
+          <div class="grid3">
+            <label>Type
+              <select name="kind">
+                <option value="info">Information</option>
+                <option value="tip">Conseil</option>
+                <option value="warning">Alerte</option>
+              </select>
+            </label>
+            <label>Début (optionnel)<input type="datetime-local" name="starts_at"></label>
+            <label>Fin (optionnelle)<input type="datetime-local" name="ends_at"></label>
+          </div>
+          <label class="check"><input type="checkbox" name="active" checked> En ligne</label>
+          <div class="toolbar">
+            <button class="primary" type="submit" id="msg-save">Publier</button>
+            <button type="button" id="msg-cancel" hidden>Annuler la modification</button>
+            <span id="msg-status" role="status"></span>
+          </div>
+        </form>
+      </div>
+      <div class="panel" style="margin-top:16px">
+        <h2>Messages</h2>
+        <div id="msg-list"></div>
+      </div>
+    </div>
   </section>
 </main>
 
@@ -157,12 +217,100 @@
 
   const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
-  async function api(path) {
-    const res = await fetch(path, { headers: { Authorization: `Bearer ${token}` } });
+  async function api(path, options = {}) {
+    const headers = { Authorization: `Bearer ${token}` };
+    if (options.body) headers['Content-Type'] = 'application/json';
+    const res = await fetch(path, { ...options, headers, body: options.body ? JSON.stringify(options.body) : undefined });
     if (res.status === 401) { logout('Jeton invalide.'); throw new Error('unauthorized'); }
-    if (!res.ok) throw new Error((await res.json().catch(() => ({}))).detail || `Erreur ${res.status}`);
-    return res.json();
+    if (!res.ok) {
+      const detail = (await res.json().catch(() => ({}))).detail;
+      throw new Error(Array.isArray(detail) ? detail.map((d) => d.msg).join(' · ') : detail || `Erreur ${res.status}`);
+    }
+    return res.status === 204 ? null : res.json();
   }
+
+  // ------------------------ Tabs ------------------------
+  document.querySelectorAll('nav.tabs button').forEach((btn) => btn.addEventListener('click', () => {
+    document.querySelectorAll('nav.tabs button').forEach((b) => b.setAttribute('aria-selected', String(b === btn)));
+    $('tab-stats').hidden = btn.dataset.tab !== 'stats';
+    $('tab-messages').hidden = btn.dataset.tab !== 'messages';
+    if (btn.dataset.tab === 'messages') loadMessages().catch((e) => { $('msg-status').textContent = e.message; });
+  }));
+
+  // ------------------------ Messages ------------------------
+  const KINDS = { info: 'Information', tip: 'Conseil', warning: 'Alerte' };
+  let messages = [];
+  let editing = null;
+  const form = $('msg-form');
+  const toLocalInput = (iso) => {
+    if (!iso) return '';
+    const d = new Date(iso);
+    return new Date(d.getTime() - d.getTimezoneOffset() * 60000).toISOString().slice(0, 16);
+  };
+  const fmtDate = (iso) => iso ? new Date(iso).toLocaleString('fr-FR', { dateStyle: 'short', timeStyle: 'short' }) : '';
+
+  async function loadMessages() {
+    messages = await api('/api/admin/messages');
+    $('msg-list').innerHTML = messages.length ? messages.map((m) => {
+      const title = m.title.fr || m.title.en || m.title.ar;
+      const body = m.body.fr || m.body.en || m.body.ar;
+      const dates = [m.starts_at && `du ${fmtDate(m.starts_at)}`, m.ends_at && `au ${fmtDate(m.ends_at)}`].filter(Boolean).join(' ');
+      return `<div class="msg kind-${esc(m.kind)}">
+        <h3>${esc(title)}</h3>
+        <div class="meta"><span class="pill ${m.live ? 'live' : ''}">${m.live ? 'En ligne' : m.queued ? 'En attente (5 messages au plus)' : m.active ? 'Programmé ou expiré' : 'Hors ligne'}</span>
+          <span>${esc(KINDS[m.kind] || m.kind)}</span><span>${esc(dates)}</span>
+          <span>${['fr', 'en', 'ar'].filter((l) => m.title[l]).map((l) => l.toUpperCase()).join(' · ')}</span></div>
+        ${body ? `<div class="body">${esc(body)}</div>` : ''}
+        <div class="actions"><button type="button" data-edit="${esc(m.id)}">Modifier</button>
+          <button type="button" class="danger" data-delete="${esc(m.id)}">Supprimer</button></div>
+      </div>`;
+    }).join('') : '<p class="empty">Aucun message pour l\'instant.</p>';
+  }
+
+  function resetForm() {
+    editing = null;
+    form.reset();
+    $('msg-form-title').textContent = 'Nouveau message';
+    $('msg-save').textContent = 'Publier';
+    $('msg-cancel').hidden = true;
+  }
+
+  $('msg-list').addEventListener('click', async (e) => {
+    const editId = e.target.dataset.edit, deleteId = e.target.dataset.delete;
+    if (editId) {
+      const m = messages.find((x) => x.id === editId);
+      editing = editId;
+      for (const l of ['fr', 'en', 'ar']) { form[`title_${l}`].value = m.title[l] || ''; form[`body_${l}`].value = m.body[l] || ''; }
+      form.kind.value = m.kind; form.active.checked = m.active;
+      form.starts_at.value = toLocalInput(m.starts_at); form.ends_at.value = toLocalInput(m.ends_at);
+      $('msg-form-title').textContent = 'Modifier le message';
+      $('msg-save').textContent = 'Enregistrer';
+      $('msg-cancel').hidden = false;
+      form.scrollIntoView({ behavior: 'smooth' });
+    } else if (deleteId && confirm('Supprimer ce message ?')) {
+      await api(`/api/admin/messages/${deleteId}`, { method: 'DELETE' }).catch((err) => { $('msg-status').textContent = err.message; });
+      if (editing === deleteId) resetForm();
+      await loadMessages();
+    }
+  });
+  $('msg-cancel').addEventListener('click', resetForm);
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const loc = (prefix) => ({ fr: form[`${prefix}_fr`].value.trim(), en: form[`${prefix}_en`].value.trim(), ar: form[`${prefix}_ar`].value.trim() });
+    const date = (v) => v ? new Date(v).toISOString() : null;
+    const body = { title: loc('title'), body: loc('body'), kind: form.kind.value, active: form.active.checked,
+      starts_at: date(form.starts_at.value), ends_at: date(form.ends_at.value) };
+    $('msg-status').textContent = 'Enregistrement…';
+    try {
+      await api(editing ? `/api/admin/messages/${editing}` : '/api/admin/messages', { method: editing ? 'PUT' : 'POST', body });
+      $('msg-status').textContent = editing ? 'Message modifié.' : 'Message publié.';
+      resetForm();
+      await loadMessages();
+    } catch (err) {
+      if (err.message !== 'unauthorized') $('msg-status').textContent = err.message;
+    }
+  });
 
   function showApp(visible) { $('app').hidden = !visible; $('login').hidden = visible; }
 

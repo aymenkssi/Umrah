@@ -13,6 +13,7 @@ import { useLanguage } from '../../contexts/LanguageContext';
 import { useSettings } from '../../contexts/SettingsContext';
 import { SPACING, BORDER_RADIUS, SHADOWS, FONT_SIZES, Palette } from '../../constants/theme';
 import { AdBanner } from '../../components/AdBanner';
+import { AppMessages } from '../../components/AppMessages';
 import { IslamicPattern, IslamicBorder } from '../../components/IslamicPattern';
 import umrahSteps from '../../data/umrah-steps.json';
 import { useTheme, useThemedStyles } from '../../contexts/ThemeContext';
@@ -51,6 +52,8 @@ export default function HomeScreen() {
           </Text>
           <IslamicBorder style={{ marginTop: SPACING.lg }} />
         </View>
+
+        <AppMessages />
 
         {/* Progress Card */}
         {doneCount > 0 && (

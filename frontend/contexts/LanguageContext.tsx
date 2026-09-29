@@ -173,6 +173,7 @@ export const translations: Record<Language, Record<string, string>> = {
     items_ready: 'جاهز',
     uncheck_all: 'إلغاء كل التحديدات',
     uncheck_all_confirm: 'إلغاء تحديد كل العناصر؟',
+    close: 'إغلاق',
   },
   en: {
     app_name: 'Umrah Companion',
@@ -324,6 +325,7 @@ export const translations: Record<Language, Record<string, string>> = {
     items_ready: 'ready',
     uncheck_all: 'Uncheck all',
     uncheck_all_confirm: 'Uncheck every item?',
+    close: 'Close',
   },
   fr: {
     app_name: 'Compagnon de la \'Omra',
@@ -475,6 +477,7 @@ export const translations: Record<Language, Record<string, string>> = {
     items_ready: 'prêts',
     uncheck_all: 'Tout décocher',
     uncheck_all_confirm: 'Décocher tous les éléments ?',
+    close: 'Fermer',
   },
 };
 

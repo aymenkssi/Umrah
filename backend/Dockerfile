@@ -6,7 +6,7 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY server.py database.py admin_auth.py ratelimit.py analytics.py admin.html ./
+COPY server.py database.py admin_auth.py ratelimit.py analytics.py messages.py admin.html ./
 COPY site ./site
 
 RUN useradd --create-home --uid 10001 app
