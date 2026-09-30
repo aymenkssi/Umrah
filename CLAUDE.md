@@ -19,6 +19,7 @@ flake8 --max-line-length 110 backend tests && pytest tests
 - Couleurs : toujours via `useTheme()` / `useThemedStyles()` (mode sombre), jamais de couleur codée en dur.
 - Textes : clés de traduction dans `contexts/LanguageContext.tsx`, en arabe, anglais et français.
 - Si les invocations changent (`frontend/data/*.json`), régénérer `python backend/build_audio_catalog.py`.
+- Publication Google Play (textes, images, déclarations, AdMob) : voir `play-store/README.md`.
 - Déploiement du backend : voir `deploy/README.md` (VPS avec Traefik, sous-domaine `pelerinage.creationapp.academy`).
 
 ## Liens du développeur (réutilisables dans les autres projets)
